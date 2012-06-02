@@ -1,4 +1,4 @@
-package de.yetanothercalendar.model.user;
+package de.yetanothercalendar.model.database;
 
 import javax.servlet.http.HttpSession;
 
