@@ -14,7 +14,8 @@ public interface CalendarController {
 
 	/**
 	 * Gibt ein {@link Year} zurück, welches die Strukture von Monaten, Wochen,
-	 * Tagen und letztendlich dem {@link CalendarEntry} enthält
+	 * Tagen und letztendlich dem
+	 * {@link de.yetanothercalendar.model.calendar.CalendarEntry} enthält
 	 * 
 	 * @param year
 	 *            Das Jahr für das das {@link Year} generiert werden soll
@@ -22,32 +23,37 @@ public interface CalendarController {
 	 *            Der Monat für das das {@link Year} generiert werden soll
 	 * @param week
 	 *            Die Woche für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
-	 *         s enthält
+	 * @return Ein {@link Year} welches die Strukture mit
+	 *         {@link de.yetanothercalendar.model.calendar.CalendarEntry} s
+	 *         enthält
 	 */
 	Year getEntriesByWeek(int year, int month, int week);
 
 	/**
 	 * Gibt ein {@link Year} zurück, welches die Strukture von Monaten, Wochen,
-	 * Tagen und letztendlich dem {@link CalendarEntry} enthält
+	 * Tagen und letztendlich dem
+	 * {@link de.yetanothercalendar.model.calendar.CalendarEntry} enthält
 	 * 
 	 * @param year
 	 *            Das Jahr für das das {@link Year} generiert werden soll
 	 * @param month
 	 *            Der Monat für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
-	 *         s enthält
+	 * @return Ein {@link Year} welches die Strukture mit
+	 *         {@link de.yetanothercalendar.model.calendar.CalendarEntry} s
+	 *         enthält
 	 */
 	Year getEntriesByMonth(int year, int month);
 
 	/**
 	 * Gibt ein {@link Year} zurück, welches die Strukture von Monaten, Wochen,
-	 * Tagen und letztendlich dem {@link CalendarEntry} enthält
+	 * Tagen und letztendlich dem
+	 * {@link de.yetanothercalendar.model.calendar.CalendarEntry} enthält
 	 * 
 	 * @param year
 	 *            Das Jahr für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
-	 *         s enthält
+	 * @return Ein {@link Year} welches die Strukture mit
+	 *         {@link de.yetanothercalendar.model.calendar.CalendarEntry}s
+	 *         enthält
 	 */
 	Year getEntriesByYear(int year);
 }
