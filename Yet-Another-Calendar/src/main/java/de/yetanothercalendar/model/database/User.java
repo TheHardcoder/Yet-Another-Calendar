@@ -3,8 +3,8 @@ package de.yetanothercalendar.model.database;
 import javax.servlet.http.HttpSession;
 
 /**
- * Repräsentiert einen Benutzer im System. Instanzen diese Klasse {@link User}
- * werden in der {@link HttpSession} gespeichert.
+ * Repraesentiert einen Benutzer im System. Instanzen diese Klasse {@link User}
+ * werden in der {@link HttpSession} zur loginverwaltung gespeichert.
  */
 public class User {
 	private Long id;
