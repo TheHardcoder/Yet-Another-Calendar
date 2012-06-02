@@ -11,10 +11,10 @@ public class User {
 	private String email;
 	private String forename;
 	private String lastname;
-	private byte[] passwordSHA1;
+	private String passwordSHA1;
 
 	public User(String email, String forename, String lastname,
-			byte[] passwordSHA1) {
+			String passwordSHA1) {
 		super();
 		this.email = email;
 		this.forename = forename;
@@ -54,12 +54,11 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public byte[] getPasswordSHA1() {
+	public String getPasswordSHA1() {
 		return passwordSHA1;
 	}
 
-	public void setPasswordSHA1(byte[] passwordSHA1) {
+	public void setPasswordSHA1(String passwordSHA1) {
 		this.passwordSHA1 = passwordSHA1;
 	}
-
 }
