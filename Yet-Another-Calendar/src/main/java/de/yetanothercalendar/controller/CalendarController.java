@@ -13,6 +13,12 @@ public interface CalendarController {
 	User getUser();
 
 	/**
+	 * @param user
+	 *            Setzt den gerade eingeloggten User
+	 */
+	void getUser(User user);
+
+	/**
 	 * Gibt ein {@link Year} zurück, welches die Strukture von Monaten, Wochen,
 	 * Tagen und letztendlich dem
 	 * {@link de.yetanothercalendar.model.calendar.CalendarEntry} enthält

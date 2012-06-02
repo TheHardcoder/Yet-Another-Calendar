@@ -17,6 +17,10 @@ public class CalendarControllerImpl implements CalendarController {
 		return user;
 	}
 
+	public void getUser(User user) {
+		this.user = user;
+	}
+
 	public Year getEntriesByWeek(int year, int month, int week) {
 		// TODO Auto-generated method stub
 		return null;
@@ -31,5 +35,4 @@ public class CalendarControllerImpl implements CalendarController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
