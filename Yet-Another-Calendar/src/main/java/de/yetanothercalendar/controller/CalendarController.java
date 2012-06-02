@@ -22,7 +22,7 @@ public interface CalendarController {
 	 *            Der Monat für das das {@link Year} generiert werden soll
 	 * @param week
 	 *            Die Woche für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntriy}
+	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
 	 *         s enthält
 	 */
 	Year getEntriesByWeek(int year, int month, int week);
@@ -35,7 +35,7 @@ public interface CalendarController {
 	 *            Das Jahr für das das {@link Year} generiert werden soll
 	 * @param month
 	 *            Der Monat für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntriy}
+	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
 	 *         s enthält
 	 */
 	Year getEntriesByMonth(int year, int month);
@@ -46,7 +46,7 @@ public interface CalendarController {
 	 * 
 	 * @param year
 	 *            Das Jahr für das das {@link Year} generiert werden soll
-	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntriy}
+	 * @return Ein {@link Year} welches die Strukture mit {@link CalendarEntry}
 	 *         s enthält
 	 */
 	Year getEntriesByYear(int year);
