@@ -14,7 +14,7 @@ public class Event {
 	private Date dtstart;
 	private Date created;
 	private String description;
-	private String lastmod;
+	private Date lastmod;
 	private String location;
 	private String priority;
 	private String summary;
@@ -32,7 +32,7 @@ public class Event {
 	}
 
 	public Event(Long id, User user, Date dtstamp, String uid, Date dtstart,
-			Date created, String description, String lastmod, String location,
+			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
 			String comment, Date exdate, Date rdate) {
@@ -115,11 +115,11 @@ public class Event {
 		this.description = description;
 	}
 
-	public String getLastmod() {
+	public Date getLastmod() {
 		return lastmod;
 	}
 
-	public void setLastmod(String lastmod) {
+	public void setLastmod(Date lastmod) {
 		this.lastmod = lastmod;
 	}
 
