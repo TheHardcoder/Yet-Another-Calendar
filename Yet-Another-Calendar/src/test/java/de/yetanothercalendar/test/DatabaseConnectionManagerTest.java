@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
-public class DatabaseConnectionManaterTest extends TestCase {
+public class DatabaseConnectionManagerTest extends TestCase {
 
 	@Test
 	public void testManager() throws SQLException {
