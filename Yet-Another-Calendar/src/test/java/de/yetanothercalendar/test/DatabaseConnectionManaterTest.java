@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import de.yetanothercalendar.db.helper.DatabaseConnectionManager;
+import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 public class DatabaseConnectionManaterTest extends TestCase {
 

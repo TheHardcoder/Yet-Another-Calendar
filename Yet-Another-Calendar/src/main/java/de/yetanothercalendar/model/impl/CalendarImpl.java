@@ -1,20 +1,20 @@
-package de.yetanothercalendar.controller.impl;
+package de.yetanothercalendar.model.impl;
 
-import de.yetanothercalendar.controller.Calendar;
-import de.yetanothercalendar.db.dao.EventDAO;
-import de.yetanothercalendar.db.helper.DatabaseConnectionManager;
+import de.yetanothercalendar.model.Calendar;
 import de.yetanothercalendar.model.calendar.Year;
+import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
 import de.yetanothercalendar.model.database.User;
+import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 public class CalendarImpl implements Calendar {
 
 	/** Gerade eingeloggter Benutzer aus der Session */
 	private User user;
-	private EventDAO eventDAO;
+	private EventDAOImpl eventDAO;
 
 	public CalendarImpl(User user) {
 		this.user = user;
-		eventDAO = new EventDAO(new DatabaseConnectionManager());
+		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
 	}
 
 	public User getUser() {

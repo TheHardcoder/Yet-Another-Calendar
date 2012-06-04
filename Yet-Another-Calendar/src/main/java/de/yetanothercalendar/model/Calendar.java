@@ -1,4 +1,4 @@
-package de.yetanothercalendar.controller;
+package de.yetanothercalendar.model;
 
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.database.User;
