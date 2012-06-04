@@ -1,0 +1,29 @@
+<!ELEMENT calendar (year)+>
+<!ELEMENT year (month)+>
+<!ELEMENT month (week)+>
+<!ELEMENT week (day)+>
+<!ELEMENT day (entry)*>
+<!ELEMENT entry (summary, starttime, endtime, duration, location, description, created, modified, comment, categories)>
+<!ELEMENT summary (#PCDATA)>
+<!ELEMENT starttime (#PCDATA)>
+<!ELEMENT endtime (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT created (#PCDATA)>
+<!ELEMENT modified (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT categories (category)*>
+<!ELEMENT category (#PCDATA)>
+
+<!ATTLIST calendar selection NMTOKEN #REQUIRED>
+<!ATTLIST year number NMTOKEN #REQUIRED>
+<!ATTLIST month number NMTOKEN #REQUIRED name NMTOKEN #REQUIRED>
+<!ATTLIST week number NMTOKEN #REQUIRED>
+<!ATTLIST day number NMTOKEN #REQUIRED name NMTOKEN #REQUIRED>
+<!ATTLIST entry id NMTOKEN #REQUIRED priority NMTOKEN #IMPLIED color CDATA #IMPLIED daycount NMTOKEN #IMPLIED>
+<!ATTLIST starttime hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST endtime hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST duration hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST created day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST modified day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
