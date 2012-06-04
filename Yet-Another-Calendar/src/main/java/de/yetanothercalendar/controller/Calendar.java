@@ -6,7 +6,7 @@ import de.yetanothercalendar.model.database.User;
 /**
  * Gibt {@link Year}s zurück, einem bestimmten Zeitraum entsprechen
  */
-public interface CalendarController {
+public interface Calendar {
 	/**
 	 * @return den {@link User}, welcher gerade eingeloggt ist
 	 */

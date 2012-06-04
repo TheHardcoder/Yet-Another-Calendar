@@ -1,15 +1,15 @@
 package de.yetanothercalendar.controller.impl;
 
-import de.yetanothercalendar.controller.CalendarController;
+import de.yetanothercalendar.controller.Calendar;
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.database.User;
 
-public class CalendarControllerImpl implements CalendarController {
+public class CalendarImpl implements Calendar {
 
 	/** Gerade eingeloggter Benutzer aus der Session */
 	private User user;
 
-	public CalendarControllerImpl(User user) {
+	public CalendarImpl(User user) {
 		this.user = user;
 	}
 
