@@ -14,129 +14,206 @@ Secondary Color B:
 FF4F00	BF5D30	A63400	FF7B40	FF9E73
 */
 #main {
-height: 600px;
-background-color: #FFC273;
-margin: 0px;
-padding: 10px;
-min-width: 1000px;
+	height: 600px;
+	background-color: #FFC273;
+	margin: 0px;
+	padding: 10px;
+	min-width: 1000px;
+}
+
+#login {
+	width: 300px;
+	height: 140px;
+	position: absolute;
+	top: 100px;
+	left: 350px;
+	background-color: #FFAC40;
+	border: 2px solid #A65E00;
+	margin-top: 150px;
+	padding: 1.5em;
+}
+
+#login legend {
+	background-color: #FF9000;
+	border: 2px solid #A65E00;
+	border-radius: 13px;
+	-moz-border-radius: 13px;
+	box-shadow: 0px 0px 6px #A65E00;
+	padding-left: 6px;
+	padding-right: 6px;
+	font-size: 20pt;
+}
+
+#login input {
+	background-color: #FF9000;
+	border: 2px inset #FF9000;
+	float: right;
+	margin-bottom: 10px;
+}
+#login a {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
 #logo {
-float: left;
-width: 100px;
-height: 100px;
+	float: left;
+	width: 100px;
+	height: 100px;
 }
+
+#loginyac {
+	width: 500px;
+	height: 500px;
+	margin: 0px auto;
+	position: absolute;
+	padding: 0px;
+	left: 10%;
+	top: 50px;
+}
+
+#yacimage {
+	width: 600px;
+	height: 500px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
 #title {
-margin-left: 110px;
-margin-right: 180px;
-margin-top: 0px;
-padding-top: 5px;
-height: 45px;
-background-color: #BF8130;
-text-align: center;
+	margin-left: 110px;
+	margin-right: 180px;
+	margin-top: 0px;
+	padding-top: 5px;
+	height: 45px;
+	background-color: #BF8130;
+	text-align: center;
+	font-size: 28pt;
 }
+
 #menubar {
-height: 40px;
-margin: 10px;
-margin-left: 110px;
-margin-right: 180px;
-background-color: #A65E00;
--ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffac40, endColorstr=#a65e00)";
--moz-border-radius: 15px; 
-border-radius: 15px;
-background-image: linear-gradient(bottom, rgb(166,94,0) 10%, rgb(255,172,64) 90%);
-background-image: -o-linear-gradient(bottom, rgb(166,94,0) 10%, rgb(255,172,64) 90%);
-background-image: -moz-linear-gradient(bottom, rgb(166,94,0) 10%, rgb(255,172,64) 90%);
-background-image: -webkit-linear-gradient(bottom, rgb(166,94,0) 10%, rgb(255,172,64) 90%);
-background-image: -ms-linear-gradient(bottom, rgb(166,94,0) 10%, rgb(255,172,64) 90%); 
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.1, rgb(166,94,0)),
-	color-stop(0.9, rgb(255,172,64))
-);
+	height: 40px;
+	margin: 10px;
+	margin-left: 110px;
+	margin-right: 180px;
+	background-color: #A65E00;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffac40, endColorstr=#a65e00)";
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-image: linear-gradient(bottom, rgb(166, 94, 0) 10%,
+		rgb(255, 172, 64) 90% );
+	background-image: -o-linear-gradient(bottom, rgb(166, 94, 0) 10%,
+		rgb(255, 172, 64) 90% );
+	background-image: -moz-linear-gradient(bottom, rgb(166, 94, 0) 10%,
+		rgb(255, 172, 64) 90% );
+	background-image: -webkit-linear-gradient(bottom, rgb(166, 94, 0) 10%,
+		rgb(255, 172, 64) 90% );
+	background-image: -ms-linear-gradient(bottom, rgb(166, 94, 0) 10%,
+		rgb(255, 172, 64) 90% );
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1, rgb(166,
+		94, 0) ), color-stop(0.9, rgb(255, 172, 64) ) );
 }
+
 #info {
-float: right;
-width: 170px;
-height: 600px;
-background-color: #A65E00;
+	float: right;
+	width: 170px;
+	height: 600px;
+	background-color: #A65E00;
 }
+
 #calendar {
-height: 490px;
-margin: 5px;
-margin-right: 180px;
-margin-left: 0px;
-background-color: #FFAC40;
+	height: 490px;
+	margin: 5px;
+	margin-right: 180px;
+	margin-left: 0px;
+	background-color: #FFAC40;
 }
+
 #analog_clock {
-margin: 10px;
+	margin: 10px;
 }
+
 #year {
-list-style-type: none;
-padding: 5px;
-margin: 0px auto;
+	list-style-type: none;
+	padding: 5px;
+	margin: 0px auto;
 }
+
 #footer {
-margin-top: 10px;
-height: 20px;
-background-color: #FF9000;
+	position: fixed;
+	margin-top: 10px;
+	right: 10px;
+	top: 610px;
+	left: 10px;
+	height: 20px;
+	background-color: #FFAC40;
 }
+
 .month {
-width: 8.33%;
-height: 482px;
-float:left;
-background-color: #FFBA00;
-margin: 0px;
-padding: 0px;
+	width: 8.33%;
+	height: 482px;
+	float: left;
+	background-color: #FFBA00;
+	margin: 0px;
+	padding: 0px;
 }
+
 .daylist {
-list-style-type: none;
-padding: 0px;
+	list-style-type: none;
+	padding: 0px;
 }
+
 .monthtitle {
-background-color: #FFD973;
-margin: 1px;
-margin-left: 2px;
-margin-right: 2px;
-height: 14px;
-padding: 0px;
-font-size: 8pt;
-text-align: center;
-font-weight: bold;
+	background-color: #FFD973;
+	margin: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	height: 14px;
+	padding: 0px;
+	font-size: 8pt;
+	text-align: center;
+	font-weight: bold;
 }
+
 .day {
-background-color: #FFD973;
-margin: 1px;
-margin-left: 2px;
-margin-right: 2px;
-height: 14px;
-padding: 0px;
-font-size: 8pt;
+	background-color: #FFD973;
+	margin: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	height: 14px;
+	padding: 0px;
+	font-size: 8pt;
 }
+
 .daylabel {
-width: 32px;
-float: left;
+	width: 32px;
+	float: left;
 }
+
 .entry {
-margin: 0px;
-margin-top: 0px;
-margin-left: 32px;
-height: 14px;
-text-decoration: none;
-background-color: #BF8130;
-color: white;
-z-index: 0;
-cursor: pointer;
+	margin: 0px;
+	margin-top: 0px;
+	margin-left: 32px;
+	height: 14px;
+	text-decoration: none;
+	background-color: #BF8130;
+	color: white;
+	z-index: 0;
+	cursor: pointer;
 }
+
 h1 {
-padding: 0px;
-margin: 0px;
+	padding: 0px;
+	margin: 0px;
 }
+
 body {
-margin: 0px;
-background-color: #FFC273;
+	margin: 0px;
+	background-color: #FFC273;
 }
+
 html {
-padding: 0px;
+	padding: 0px;
+	text-shadow: 0px 0px 4px #FF9000;
+	
 }
