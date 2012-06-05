@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import de.yetanothercalendar.model.dao.EventDAO;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
  * Über die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
  * Datenbank (Tabelle events).
  */
-public class EventDAOImpl {
+public class EventDAOImpl implements EventDAO {
 	private DatabaseConnectionManager manager;
 
 	public EventDAOImpl(DatabaseConnectionManager manager) {
