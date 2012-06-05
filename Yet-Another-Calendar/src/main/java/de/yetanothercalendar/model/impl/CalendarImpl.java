@@ -55,7 +55,7 @@ public class CalendarImpl implements Calendar {
 						.getMaximum(java.util.Calendar.DAY_OF_WEEK);
 				String string = dateFormatSymbols.getWeekdays()[calendar
 						.get(maximum)];
-				System.out.println(string);
+//				System.out.println(string);
 			}
 			result.getMonths().add(month);
 		}
