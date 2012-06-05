@@ -1,4 +1,4 @@
-package de.yetanothercalendar.db.helper;
+package de.yetanothercalendar.model.database.helper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

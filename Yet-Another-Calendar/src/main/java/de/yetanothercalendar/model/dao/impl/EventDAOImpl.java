@@ -1,27 +1,22 @@
-package de.yetanothercalendar.db.dao;
+package de.yetanothercalendar.model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import de.yetanothercalendar.db.helper.DatabaseConnectionManager;
-import de.yetanothercalendar.model.database.Event;
+import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
- * Über die Klasse {@link EventDAO} erfolgt der Zugriff auf auf die Datenbank
- * (Tabelle events).
+ * Über die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
+ * Datenbank (Tabelle events).
  */
-public class EventDAO {
+public class EventDAOImpl {
 	private DatabaseConnectionManager manager;
 
-	public EventDAO(DatabaseConnectionManager manager) {
+	public EventDAOImpl(DatabaseConnectionManager manager) {
 		this.manager = manager;
 	}
 
-	/**
-	 * Erstellt die Tabelle EVENTS in der die Benutzer ({@link Event})
-	 * abgespeichert werden sollen.
-	 */
 	public void createUserTable() {
 		try {
 			Connection con = manager.getConnection();
