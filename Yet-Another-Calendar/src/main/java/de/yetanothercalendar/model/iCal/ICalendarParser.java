@@ -4,8 +4,6 @@ import java.awt.Event;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.yetanothercalendar.model.calendar.CalendarEntry;
-
 public class ICalendarParser {
 
 	private static final String EVENT_END = "END:VEVENT";
