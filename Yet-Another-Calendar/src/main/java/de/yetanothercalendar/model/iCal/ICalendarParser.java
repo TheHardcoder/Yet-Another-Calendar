@@ -94,24 +94,6 @@ public class ICalendarParser {
 		ListIterator<String> it = events.listIterator(events.size());
 		while(it.hasNext()){
 			dtstamp = parseIcsDate(getEventItem("DTSTAMP:", DATE_LENGTH, it.next()));
-				
-//			uid;
-//			dtstart;
-//			created;
-//			description;
-//			lastmod;
-//			location;
-//			priority;
-//			summary;
-//			recurid;
-//			rrule;
-//			dtend;
-//			duration;
-//			color;
-//			List<String> categories;
-//			comment;
-//			exdate;
-//			rdate;
 		}
 		
 		return eventList;
