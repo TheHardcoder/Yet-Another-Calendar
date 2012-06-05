@@ -1,8 +1,11 @@
-package de.yetanothercalendar.model.iCal;
+package de.yetanothercalendar.test;
 
 import java.util.List;
 
 import org.junit.Test;
+
+import de.yetanothercalendar.model.iCal.ICalendarParser;
+
 
 import junit.framework.TestCase;
 
