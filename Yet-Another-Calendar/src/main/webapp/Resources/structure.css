@@ -90,6 +90,13 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	font-size: 28pt;
 }
 
+#tabbar {
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+	height: 30px;
+	background-color: #FFC273;
+}
 #menubar {
 	height: 40px;
 	margin: 10px;
@@ -117,12 +124,12 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 #info {
 	float: right;
 	width: 170px;
-	height: 600px;
+	height: 640px;
 	background-color: #A65E00;
 }
 
 #calendar {
-	height: 490px;
+	height: 530px;
 	margin: 5px;
 	margin-right: 180px;
 	margin-left: 0px;
@@ -143,7 +150,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	position: fixed;
 	margin-top: 10px;
 	right: 10px;
-	top: 610px;
+	top: 650px;
 	left: 10px;
 	height: 20px;
 	background-color: #FFAC40;
@@ -201,7 +208,19 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	z-index: 0;
 	cursor: pointer;
 }
-
+.tab {
+	float: left;
+	width: 120px;
+	height: 18px;
+	margin-right: 1px;
+	padding: 6px;
+	background-color: #FF9000;
+	text-align: center;
+	cursor: pointer;
+}
+.selected {
+	background-color: #FFAC40;
+}
 h1 {
 	padding: 0px;
 	margin: 0px;
