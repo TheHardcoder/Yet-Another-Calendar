@@ -10,7 +10,7 @@
 		<div id="main">
 			<div id="info"><canvas width="150" height="150" id="analog_clock"></canvas></div>
 			<div id="title" style="margin-left: 0px;">Yet Another Calendar</div>
-			<form action="calendar_monthview.xml" method="post"  id="loginyac">
+			<form action="calendar_yearview.xml" method="post"  id="loginyac">
 			<img id="yacimage" src="Resources/BabyGnu.png"/>
 				<fieldset id="login">
 					<legend>Login</legend>
