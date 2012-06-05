@@ -3,8 +3,12 @@ package de.yetanothercalendar.model.dao.impl;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.List;
 
 import de.yetanothercalendar.model.dao.EventDAO;
+import de.yetanothercalendar.model.database.Event;
+import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
@@ -37,5 +41,10 @@ public class EventDAOImpl implements EventDAO {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
