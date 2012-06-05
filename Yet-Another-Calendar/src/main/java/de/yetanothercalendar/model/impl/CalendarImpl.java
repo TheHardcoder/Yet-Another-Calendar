@@ -1,9 +1,12 @@
 package de.yetanothercalendar.model.impl;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import de.yetanothercalendar.model.Calendar;
+import de.yetanothercalendar.model.calendar.Day;
 import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
@@ -39,27 +42,97 @@ public class CalendarImpl implements Calendar {
 
 	public Year getEntriesByYear(int year) {
 		Year result = new Year(year);
+		List<Month> monthlist = getMonthList(year);
+		for (Month month : monthlist) {
+			List<Week> weekList = getWeekListWithDays(year,
+					month.getNumber() - 1);
+			month.setWeeks(weekList);
+		}
+		result.setMonths(monthlist);
+		return result;
+	}
+
+	/**
+	 * Git eine Liste von Monaten fue das gegebenen Jahr zurueck.
+	 * 
+	 * @param year
+	 *            Das Jahr
+	 * @return Eine Liste den Monaten des gegebenen Jahres
+	 */
+	protected List<Month> getMonthList(int year) {
+		List<Month> result = new ArrayList<Month>();
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
+		calendar.clear();
 		calendar.set(java.util.Calendar.YEAR, year);
 		int maximumMonthCount = calendar.getMaximum(java.util.Calendar.MONTH);
-		for (int monthindex = 0; monthindex < maximumMonthCount; monthindex++) {
-			Month month = new Month(dateFormatSymbols.getMonths()[monthindex],
-					monthindex);
-			calendar.set(java.util.Calendar.MONTH, monthindex);
-			// Die Zahl der Wochen in einem Monat ist immer 4
-			int weekcount = 4;
-			for (int weekindex = 0; weekindex < weekcount; weekindex++) {
-				Week week = new Week(weekindex);
-				calendar.set(java.util.Calendar.WEEK_OF_MONTH, weekindex);
-				int maximum = calendar
-						.getMaximum(java.util.Calendar.DAY_OF_WEEK);
-				String string = dateFormatSymbols.getWeekdays()[calendar
-						.get(maximum)];
-//				System.out.println(string);
-			}
-			result.getMonths().add(month);
+		for (int monthindex = 0; monthindex <= maximumMonthCount; monthindex++) {
+			result.add(new Month(dateFormatSymbols.getMonths()[monthindex],
+					monthindex + 1));
 		}
-		return null;
+		return result;
+	}
+
+	/**
+	 * Gibt die XML aehnliche Struktur aus {@link Week}s und den dazugehoerigen
+	 * {@link Day}s zurueck
+	 * 
+	 * @param year
+	 *            Das Jahr fuer welches die WochenListe erstellt werden soll
+	 * @param monthToSearch
+	 *            Der Monat fuer welches die WochenListe erstellt werden soll
+	 * @return eine Liste aus {@link Week}s (welche Tage enthaelt) im
+	 *         angegebenen Zeitraum
+	 */
+	protected List<Week> getWeekListWithDays(int year, int monthToSearch) {
+		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
+		calendar.clear();
+		calendar.set(java.util.Calendar.YEAR, year);
+		calendar.set(java.util.Calendar.MONTH, monthToSearch);
+		List<Week> weeks = new ArrayList<Week>();
+		// Den aktuellen monat sichern
+		int month = calendar.get(java.util.Calendar.MONTH);
+		// Der Tag des Kalenders wird auf den ersten des monats gesetzt
+		calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);
+		// Zwischenvariablen initialisieren
+		List<Day> weekDays = new ArrayList<Day>();
+		int weekOfYear = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+		// Fussgesteuertes while(true) funktioniert nicht, da bei
+		// nichteinhaltung der bedingung (nächste Monat erreicht) noch die
+		// "resttage" in der zwischenvariable weekDays zum Monat (als woche
+		// "verpackt") hinzugefügt werden müssen.
+		while (true) {
+			// Der aktuelle monatstag
+			int dayOfMonth = calendar.get(java.util.Calendar.MONTH);
+			// Der name des aktuellen tages
+			String dayname = dateFormatSymbols.getWeekdays()[calendar
+					.get(java.util.Calendar.DAY_OF_WEEK)];
+			Day day = new Day(dayname, dayOfMonth);
+			// Die Woche des jetztigen Tags im calendar.
+			int currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+			// Wenn die nächste woche erreicht wird, werden die temporaer
+			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
+			// Monat gespeichert.
+			if (!(weekOfYear == currentWeek)) {
+				Week week = new Week(currentWeek);
+				week.setDays(weekDays);
+				weeks.add(week);
+				// Zurücksetzung der attribute
+				weekDays = new ArrayList<Day>();
+				weekOfYear = currentWeek;
+			}
+			weekDays.add(day);
+			// TODO termine in den tag einbauen
+			// Setzten des naechsten Tags
+			calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
+			// Ueberpruefung, ob wir noch im Monat sind.
+			if (!(calendar.get(java.util.Calendar.MONTH) == month)) {
+				Week week = new Week(currentWeek);
+				week.setDays(weekDays);
+				weeks.add(week);
+				break;
+			}
+		}
+		return weeks;
 	}
 
 	public User getUser() {

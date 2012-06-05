@@ -11,6 +11,12 @@ import de.yetanothercalendar.model.dao.EventDAO;
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 
+/**
+ * Mock fue das EventDAO, um testdaten zu generieren
+ * 
+ * @author D056995
+ * 
+ */
 public class EventDAOMock implements EventDAO {
 
 	public void createUserTable() {
