@@ -134,7 +134,7 @@ public class CalendarImpl implements Calendar {
 		}
 		return weeks;
 	}
-
+	
 	public User getUser() {
 		return user;
 	}

@@ -31,7 +31,7 @@ public class EventDAOMock implements EventDAO {
 		Calendar start = new GregorianCalendar(Locale.GERMANY);
 		start.set(2012, 03, 06, 11, 00);
 		Calendar end = new GregorianCalendar(Locale.GERMANY);
-		start.set(2012, 03, 06, 13, 00);
+		end.set(2012, 03, 06, 13, 00);
 		eventList.add(new Event(null, null, null, null, start.getTime(),
 				created.getTime(), null, null, null, null, null, null, null,
 				end.getTime(), 0, null, null, null, null, null));
