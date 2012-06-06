@@ -100,7 +100,8 @@ public class CalendarImpl implements Calendar {
 		// nichteinhaltung der bedingung (nächste Monat erreicht) noch die
 		// "resttage" in der zwischenvariable weekDays zum Monat (als woche
 		// "verpackt") hinzugefügt werden müssen.
-		while (true) {
+		int currentWeek = -1;
+		while (calendar.get(java.util.Calendar.MONTH) == month) {
 			// Der aktuelle monatstag
 			int dayOfMonth = calendar.get(java.util.Calendar.MONTH);
 			// Der name des aktuellen tages
@@ -108,7 +109,7 @@ public class CalendarImpl implements Calendar {
 					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
 			// Die Woche des jetztigen Tags im calendar.
-			int currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+			currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
 			// Wenn die nächste woche erreicht wird, werden die temporaer
 			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
 			// Monat gespeichert.
@@ -124,13 +125,12 @@ public class CalendarImpl implements Calendar {
 			// TODO termine in den tag einbauen
 			// Setzten des naechsten Tags
 			calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
-			// Ueberpruefung, ob wir noch im Monat sind.
-			if (!(calendar.get(java.util.Calendar.MONTH) == month)) {
-				Week week = new Week(currentWeek);
-				week.setDays(weekDays);
-				weeks.add(week);
-				break;
-			}
+		}
+		// Ueberpruefung, ob wir noch im Monat sind.
+		if (weekDays.size() > 0) {
+			Week week = new Week(currentWeek);
+			week.setDays(weekDays);
+			weeks.add(week);
 		}
 		return weeks;
 	}
