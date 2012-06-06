@@ -96,22 +96,22 @@ public class EventToCalendarEntryWrapper {
 	 * 
 	 * @param event
 	 *            der event fuer den die {@link CalendarEntry}s erstellt werden.
-	 * @param startdate
+	 * @param currentdate
 	 *            das startdatum (erster Moment des ersten zu fuellenden Tages)
 	 * @param enddate
 	 *            das enddateum (letzter Moment des ersten zu fuellenden Tages)
 	 * @return
 	 */
 	private List<CalendarEntry> fillFullDaysWithCalendarEntries(Event event,
-			Calendar startdate, Calendar enddate) {
+			Calendar currentdate, Calendar enddate) {
 		List<CalendarEntry> result = new ArrayList<CalendarEntry>();
-		while (startdate.before(enddate)) {
+		while (currentdate.before(enddate)) {
 			result.add(createCalendarEntryFromEvent(event,
-					createFirstPossibleMomentOfDayReturningCalendar(startdate)
+					createFirstPossibleMomentOfDayReturningCalendar(currentdate)
 							.getTime(),
-					createLastPossibleMomentOfDayReturningCalendar(enddate)
+					createLastPossibleMomentOfDayReturningCalendar(currentdate)
 							.getTime()));
-			startdate.add(Calendar.DAY_OF_YEAR, 1);
+			currentdate.add(Calendar.DAY_OF_YEAR, 1);
 		}
 		return result;
 	}
