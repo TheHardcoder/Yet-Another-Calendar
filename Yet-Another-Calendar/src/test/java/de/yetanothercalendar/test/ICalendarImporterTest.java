@@ -19,7 +19,7 @@ public class ICalendarImporterTest extends TestCase {
 
 	 @Test
 	 public void TesParseIcal4JToEventList(){
-			File f = new File("resources/simple.ics");
+			File f = new File("simple/simple.ics");
 			InputStream in = null;
 			try {
 				in = new FileInputStream(f);

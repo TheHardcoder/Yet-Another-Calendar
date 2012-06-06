@@ -63,7 +63,7 @@ public class ICalendarImporter {
 					event.setDuration(duration);
 				} catch (Exception e) {
 					duration = null;
-					System.out.println("Error Parsing Event Duration: "+durationStr);
+					System.out.println("Error Parsing Event Duration: '"+durationStr+"'");
 				}
 
 				List<String> categories = new ArrayList();
@@ -105,6 +105,8 @@ public class ICalendarImporter {
 				event.setSummary(summary);
 				event.setUid(uid);
 				event.setUser(user);
+				
+				System.out.println(event.toString());
 			}
 		}
 		return new ArrayList<Event>();
@@ -112,7 +114,8 @@ public class ICalendarImporter {
 
 	public static Date setDateProperty(String Propertyname, Component comp) {
 		try {
-			Date d = parseIcsDate(comp.getProperty(Propertyname).toString());
+			String dateStr = comp.getProperty(Propertyname).toString();
+			Date d = parseIcsDate(dateStr);
 			return d;
 		} catch (Exception e) {
 			return null;
@@ -120,9 +123,18 @@ public class ICalendarImporter {
 	}
 
 	public static Date parseIcsDate(String dateString) throws ParseException {
+		StringBuffer dateBuf = new StringBuffer(dateString);
+		//Delete Object Description: e.g. "DTSTAMP:" from  "DTSTAMP:20120508T201446Z\r\n" works until year 3999 ;-)
+		//TODO: replace by something smoother
+		while (!(dateBuf.charAt(0) =='0'||dateBuf.charAt(0) =='1'||dateBuf.charAt(0) =='2'||dateBuf.charAt(0) =='3')) {
+			dateBuf.deleteCharAt(0);
+		}
+		//Delete the T in Date 20120508T201446Z\r\n
+		dateString = dateBuf.toString();
 		dateString = dateString.replace('T', ' ');
+
 		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
-		Date date = df.parse(dateString);
+		Date date = df.parse(dateString.toString());
 		System.out.println(date.toString());
 		return date;
 	}

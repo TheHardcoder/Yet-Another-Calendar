@@ -7,12 +7,19 @@ import javax.servlet.http.HttpSession;
  * werden in der {@link HttpSession} zur loginverwaltung gespeichert.
  */
 public class User {
+
+
 	private Long id;
 	private String email;
 	private String forename;
 	private String lastname;
 	private String passwordSHA1;
 
+	@Override
+	public String toString() {
+		return "User ID: "+id+" email: "+email+" forename: "+forename+" lastname: "+lastname+" passwordSHA1: "+passwordSHA1;
+	}
+	
 	public User(String email, String forename, String lastname,
 			String passwordSHA1) {
 		super();

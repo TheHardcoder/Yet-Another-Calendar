@@ -218,4 +218,32 @@ public class Event {
 	public void setRdate(Date rdate) {
 		this.rdate = rdate;
 	}
+
+	@Override
+	public String toString() {
+		return "Id: " + id + "\n" + " User: " + user.toString() + "\n"
+				+ "dtsatmp: " + parseDate(dtstamp) + " UID: " + uid + " dtstart:"
+				+ parseDate(dtstart) + "\n" + "created:" + parseDate(created) + " Description: "
+				+ description + " Lastmod: " + parseDate(lastmod) + "\n" + "Location: "
+				+ location + " Priority: " + priority + " Summary: " + summary
+				+ "\n" + "Recurid:" + recurid + " RRule: " + rrule
+				+ " dtend: " + parseDate(dtend) + "\n" + "duration: " + Double.toString(duration)
+				+ " color: " + color + " categories: " + categories + "\n"
+				+ "comment: " + comment + " Exdate: " + parseDate(exdate) + " rdate: "
+				+ parseDate(rdate);
+	}
+	
+	/**
+	 * Needed for the toString() method, because Dates can be empty
+	 * @return String representation of the given Date
+	 */
+	private String parseDate(Date d){
+		try {
+			String s = d.toString();
+			return s;
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
 }
