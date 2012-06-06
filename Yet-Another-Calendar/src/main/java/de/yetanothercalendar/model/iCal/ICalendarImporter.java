@@ -125,8 +125,8 @@ public class ICalendarImporter {
 	public static Date parseIcsDate(String dateString) throws ParseException {
 		StringBuffer dateBuf = new StringBuffer(dateString);
 		//Delete Object Description: e.g. "DTSTAMP:" from  "DTSTAMP:20120508T201446Z\r\n" works until year 3999 ;-)
-		//TODO: replace by something smoother
-		while (!(dateBuf.charAt(0) =='0'||dateBuf.charAt(0) =='1'||dateBuf.charAt(0) =='2'||dateBuf.charAt(0) =='3')) {
+
+		while (!(Character.isDigit(dateBuf.charAt(0)))) {
 			dateBuf.deleteCharAt(0);
 		}
 		//Delete the T in Date 20120508T201446Z\r\n
