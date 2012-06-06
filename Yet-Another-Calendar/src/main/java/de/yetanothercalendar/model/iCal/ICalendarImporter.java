@@ -45,8 +45,8 @@ public class ICalendarImporter {
 				// event.setColor(COLOR); can be set to a standard color
 
 				String uid = comp.getProperties(Property.UID).toString();
-				if (uid.startsWith(" UID:")) {
-					uid = uid.substring(" UID:".length());
+				if (uid.startsWith("UID:")) {
+					uid = uid.substring("UID:".length());
 				}
 
 				String description = comp.getProperties(Property.DESCRIPTION)
@@ -58,8 +58,8 @@ public class ICalendarImporter {
 
 				String summary = comp.getProperties(Property.SUMMARY)
 						.toString();
-				if (uid.startsWith(" SUMMARY:")) {
-					uid = uid.substring(" SUMMARY:".length());
+				if (summary.startsWith("SUMMARY:")) {
+					summary = summary.substring("SUMMARY:".length());
 				}
 
 				String recurid = comp.getProperties(Property.RECURRENCE_ID)
