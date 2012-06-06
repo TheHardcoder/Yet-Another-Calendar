@@ -68,7 +68,7 @@ public class CalendarWrapperTest extends TestCase {
 	}
 
 	@Test
-	public void testgetWeekListOCTOBRE() {
+	public void testgetWeekListOCTOBER() {
 		List<Week> weeks = mock.getWeekListWithDays(2012, 9);
 		int count = 0;
 		for (Week week : weeks) {
