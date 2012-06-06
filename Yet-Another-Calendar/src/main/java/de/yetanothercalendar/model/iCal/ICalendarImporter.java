@@ -38,23 +38,33 @@ public class ICalendarImporter {
 			comp = (Component) components.get(i);
 			if (comp.getName() == comp.VEVENT) {
 				Event event = new Event();
-				// Property prop = comp.getProperty(Property.);
-				// prop.
-				Long id = (long) 1337; // What to set here?
+
+				// TODO: Clarify what to set for ID and Color when importing
+				// iCal-Files
+				Long id = (long) 1337;
+				// event.setColor(COLOR); can be set to a standard color
 
 				String uid = comp.getProperties(Property.UID).toString();
+				if (uid.startsWith(" UID:")) {
+					uid = uid.substring(" UID:".length());
+				}
+
 				String description = comp.getProperties(Property.DESCRIPTION)
 						.toString();
 				String location = comp.getProperties(Property.LOCATION)
 						.toString();
 				String priority = comp.getProperties(Property.PRIORITY)
 						.toString();
+
 				String summary = comp.getProperties(Property.SUMMARY)
 						.toString();
+				if (uid.startsWith(" SUMMARY:")) {
+					uid = uid.substring(" SUMMARY:".length());
+				}
+
 				String recurid = comp.getProperties(Property.RECURRENCE_ID)
 						.toString();
 				String rrule = comp.getProperties(Property.RRULE).toString();
-
 				String durationStr = comp.getProperties(Property.DURATION)
 						.toString();
 				Long duration;
@@ -63,7 +73,8 @@ public class ICalendarImporter {
 					event.setDuration(duration);
 				} catch (Exception e) {
 					duration = null;
-					System.out.println("Error Parsing Event Duration: '"+durationStr+"'");
+					System.out.println("Error Parsing Event Duration: '"
+							+ durationStr + "'");
 				}
 
 				List<String> categories = new ArrayList();
@@ -87,7 +98,6 @@ public class ICalendarImporter {
 				Date rdate = setDateProperty(Property.RDATE, comp);
 
 				event.setCategories(categories);
-				//event.setColor(COLOR); can be set to a standard color
 				event.setComment(comment);
 				event.setCreated(created);
 				event.setDescription(description);
@@ -105,7 +115,7 @@ public class ICalendarImporter {
 				event.setSummary(summary);
 				event.setUid(uid);
 				event.setUser(user);
-				
+
 				System.out.println(event.toString());
 			}
 		}
@@ -124,12 +134,13 @@ public class ICalendarImporter {
 
 	public static Date parseIcsDate(String dateString) throws ParseException {
 		StringBuffer dateBuf = new StringBuffer(dateString);
-		//Delete Object Description: e.g. "DTSTAMP:" from  "DTSTAMP:20120508T201446Z\r\n" works until year 3999 ;-)
-		//TODO: replace by something smoother
-		while (!(dateBuf.charAt(0) =='0'||dateBuf.charAt(0) =='1'||dateBuf.charAt(0) =='2'||dateBuf.charAt(0) =='3')) {
+		// Delete Object Description: e.g. "DTSTAMP:" from
+		// "DTSTAMP:20120508T201446Z\r\n"
+
+		while (!(Character.isDigit(dateBuf.charAt(0)))) {
 			dateBuf.deleteCharAt(0);
 		}
-		//Delete the T in Date 20120508T201446Z\r\n
+		// Delete the T in Date 20120508T201446Z\r\n
 		dateString = dateBuf.toString();
 		dateString = dateString.replace('T', ' ');
 

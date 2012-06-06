@@ -19,6 +19,7 @@ public class ICalendarImporterTest extends TestCase {
 
 	@Test
 	public void testImportToIcal4J() {
+		// TODO: more complex Test with _all_ properties set
 		File f = new File("resources/simple.ics");
 		InputStream in = null;
 		try {
