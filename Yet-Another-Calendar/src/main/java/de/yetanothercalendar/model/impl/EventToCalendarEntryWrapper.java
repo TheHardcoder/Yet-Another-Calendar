@@ -13,8 +13,6 @@ import de.yetanothercalendar.model.database.Event;
 /**
  * Wrappt einen gegebenen {@link Event} zu einem {@link CalendarEntry}.
  * 
- * @author D056995
- * 
  */
 public class EventToCalendarEntryWrapper {
 
