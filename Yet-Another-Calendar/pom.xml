@@ -46,6 +46,14 @@
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+		<resources>
+      		<resource>
+        		<directory>${project.basedir}/resources</directory>
+        		<includes>
+          		<include> simple.ics </include>
+        		</includes>
+      			</resource>
+   		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
