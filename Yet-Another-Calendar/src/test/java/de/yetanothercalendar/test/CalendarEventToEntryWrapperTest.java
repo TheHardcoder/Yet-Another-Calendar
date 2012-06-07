@@ -19,10 +19,8 @@ public class CalendarEventToEntryWrapperTest extends TestCase {
 	public void testWrapper() {
 		EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(
 				Locale.GERMANY);
-		// Event startet am 06.06.12 um 12:00 Uhr
 		Calendar start = new GregorianCalendar(Locale.GERMANY);
 		start.set(2011, 11, 30, 12, 00);
-		// Event endet einen Tag Später am 06.06.12 um 12:00 Uhr
 		Calendar end = new GregorianCalendar(Locale.GERMANY);
 		end.set(2013, 0, 4, 18, 00);
 		Event event = new Event(new Long(1), null, null, null, start.getTime(),
@@ -30,15 +28,25 @@ public class CalendarEventToEntryWrapperTest extends TestCase {
 				0, null, null, null, null, null);
 		List<CalendarEntry> wrapEventToCalendar = wrapper
 				.wrapEventToCalendar(event);
+		Calendar assertcalendar = (Calendar) start.clone();
 		for (CalendarEntry calendarEntry : wrapEventToCalendar) {
+			Calendar entry = new GregorianCalendar(Locale.GERMANY);
+			entry.setTime(calendarEntry.getStartTime());
+			assertEquals(assertcalendar.get(Calendar.YEAR),
+					entry.get(Calendar.YEAR));
+			assertEquals(assertcalendar.get(Calendar.MONTH),
+					entry.get(Calendar.MONTH));
+			assertEquals(assertcalendar.get(Calendar.DAY_OF_YEAR),
+					entry.get(Calendar.DAY_OF_YEAR));
+			assertcalendar.add(Calendar.DAY_OF_YEAR, 1);
 			System.out.println(calendarEntry.getStartTime() + " bis "
 					+ calendarEntry.getEndTime());
 		}
 		System.out.println(wrapEventToCalendar.size());
-		// assertEquals(368, wrapEventToCalendar.size());
-		// assertEquals(wrapEventToCalendar.get(0), start);
-		// assertEquals(wrapEventToCalendar.get(wrapEventToCalendar.size() - 1),
-		// end);
+		assertEquals(372, wrapEventToCalendar.size());
+		assertEquals(wrapEventToCalendar.get(0).getStartTime(), start.getTime());
+		assertEquals(wrapEventToCalendar.get(wrapEventToCalendar.size() - 1)
+				.getEndTime(), end.getTime());
 	}
 
 	@Test
