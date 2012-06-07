@@ -49,11 +49,12 @@ public class EventToCalendarEntryWrapper {
 						.get(Calendar.DAY_OF_YEAR);
 		// Untersuche ob die Tage einen Tag abstand haben (daher das enddatum am
 		// naechsten Tag liegt, nicht ob die Differenz 24 Stunden betraegt
-		boolean oneDayDifference = calendarStartDay.get(Calendar.YEAR) == calendarEndDay
-				.get(Calendar.YEAR) - 1
-				// TODO FIXME Error here with 31.12....
-				&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
-						.get(Calendar.DAY_OF_YEAR);
+		boolean oneDayDifference = ((calendarStartDay.get(Calendar.YEAR) == calendarEndDay
+				.get(Calendar.YEAR)
+		// TODO FIXME Error here with 31.12....
+		&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
+				.get(Calendar.DAY_OF_YEAR) - 1));
+
 		if (sameDay) {
 			result.add(createCalendarEntryFromEvent(event));
 		} else {
@@ -104,8 +105,11 @@ public class EventToCalendarEntryWrapper {
 	private List<CalendarEntry> fillFullDaysWithCalendarEntries(Event event,
 			Calendar currentdate, Calendar enddate) {
 		List<CalendarEntry> result = new ArrayList<CalendarEntry>();
+		// FIXME: Bugfix: Last date is forgotten
+		enddate.add(Calendar.DAY_OF_YEAR, 1);
 		while (currentdate.before(enddate)) {
-			result.add(createCalendarEntryFromEvent(event,
+			result.add(createCalendarEntryFromEvent(
+					event,
 					createFirstPossibleMomentOfDayReturningCalendar(currentdate)
 							.getTime(),
 					createLastPossibleMomentOfDayReturningCalendar(currentdate)

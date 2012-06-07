@@ -21,10 +21,10 @@ public class CalendarEventToEntryWrapperTest extends TestCase {
 				Locale.GERMANY);
 		// Event startet am 06.06.12 um 12:00 Uhr
 		Calendar start = new GregorianCalendar(Locale.GERMANY);
-		start.set(2011, 11, 30, 12, 00);
+		start.set(2011, 11, 29, 12, 00);
 		// Event endet einen Tag Später am 06.06.12 um 12:00 Uhr
 		Calendar end = new GregorianCalendar(Locale.GERMANY);
-		end.set(2012, 0, 1, 12, 00);
+		end.set(2015, 0, 1, 18, 00);
 		Event event = new Event(new Long(1), null, null, null, start.getTime(),
 				null, null, null, null, null, null, null, null, end.getTime(),
 				0, null, null, null, null, null);
@@ -35,10 +35,10 @@ public class CalendarEventToEntryWrapperTest extends TestCase {
 					+ calendarEntry.getEndTime());
 		}
 		System.out.println(wrapEventToCalendar.size());
-//		assertEquals(368, wrapEventToCalendar.size());
-//		assertEquals(wrapEventToCalendar.get(0), start);
-//		assertEquals(wrapEventToCalendar.get(wrapEventToCalendar.size() - 1),
-//				end);
+		// assertEquals(368, wrapEventToCalendar.size());
+		// assertEquals(wrapEventToCalendar.get(0), start);
+		// assertEquals(wrapEventToCalendar.get(wrapEventToCalendar.size() - 1),
+		// end);
 	}
 
 	@Test
