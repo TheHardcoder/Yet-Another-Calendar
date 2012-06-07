@@ -75,7 +75,7 @@ public class EventToCalendarEntryWrapper {
 				// Letzter Moment der zu fuellenden "vollen" tagen (also von
 				// 0:00 bis 23:59)
 				Calendar endFullDay = (Calendar) calendarEndDay.clone();
-				endFullDay.add(Calendar.DAY_OF_YEAR, -1);
+				endFullDay = createLastPossibleMomentOfDayReturningCalendar(endFullDay);
 				// Liste mit Einträgen über den Gesamten Tag holen
 				fullDayEntries = fillFullDaysWithCalendarEntries(event,
 						startFullDay, endFullDay);
@@ -105,8 +105,6 @@ public class EventToCalendarEntryWrapper {
 	private List<CalendarEntry> fillFullDaysWithCalendarEntries(Event event,
 			Calendar currentdate, Calendar enddate) {
 		List<CalendarEntry> result = new ArrayList<CalendarEntry>();
-		// FIXME: Bugfix: Last date is forgotten
-		enddate.add(Calendar.DAY_OF_YEAR, 1);
 		while (currentdate.before(enddate)) {
 			result.add(createCalendarEntryFromEvent(
 					event,
