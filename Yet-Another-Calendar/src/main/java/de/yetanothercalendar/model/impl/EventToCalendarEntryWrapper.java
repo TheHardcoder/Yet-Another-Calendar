@@ -51,7 +51,6 @@ public class EventToCalendarEntryWrapper {
 		// naechsten Tag liegt, nicht ob die Differenz 24 Stunden betraegt
 		boolean oneDayDifference = ((calendarStartDay.get(Calendar.YEAR) == calendarEndDay
 				.get(Calendar.YEAR)
-		// TODO FIXME Error here with 31.12....
 		&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
 				.get(Calendar.DAY_OF_YEAR) - 1));
 
