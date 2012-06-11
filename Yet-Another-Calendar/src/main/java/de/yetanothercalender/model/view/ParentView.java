@@ -9,22 +9,26 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 public abstract class ParentView {
 
 	public void readXML() {
 		Document doc = null;
+		File fIn = new File("TestLukas.xml");
+
 		try {
 			SAXBuilder b = new SAXBuilder(true); // validierenden Parser nutzen
-			doc = b.build(new File("TestLukas.xml")); // Zum Test die Testdatei
-														// einlesen
+			doc = b.build(fIn); // Zum Test die Testdatei
+								// einlesen
 		} catch (JDOMException j) {
 			j.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		XMLOutputter outputter = new XMLOutputter();
+		// Auchtung noch eine obsolete Methode
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		FileOutputStream output;
 		try {
 			output = new FileOutputStream("FileInOut.xml");
@@ -32,7 +36,6 @@ public abstract class ParentView {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void createXML() {
@@ -46,7 +49,8 @@ public abstract class ParentView {
 				.addContent(new Comment("Das ist ein Kommentar"))
 				.addContent(new Element("Month").setAttribute("Wert", "8"));
 
-		XMLOutputter outputter = new XMLOutputter();
+		// Auchtung noch eine obsolete Methode
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		FileOutputStream output;
 		try {
 			output = new FileOutputStream("testCreate.xml");
