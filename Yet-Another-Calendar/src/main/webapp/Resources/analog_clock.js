@@ -1,10 +1,12 @@
-function zeichnen() {
+function zeichneUhr() {
 	var objCanvas = document.getElementById('analog_clock');
-	AnalogClock(objCanvas);
+	if (objCanvas != null){
+		AnalogClock(objCanvas);
+	}
 }
 
 window.onload = function() {
-	zeichnen();
+	zeichneUhr();
 }
 
 function AnalogClock(objCanvas) {

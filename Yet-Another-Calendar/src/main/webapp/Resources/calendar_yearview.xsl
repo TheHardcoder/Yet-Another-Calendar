@@ -6,7 +6,6 @@
 <xsl:variable name="no" select='count(//appointment)' />
 
 <xsl:template match="/">
-	<xsl:text disable-output-escaping="yes"> &lt;!DOCTYPE html> </xsl:text>
 	<html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<title>Yet Another Calendar</title>
@@ -50,11 +49,28 @@
 	
 	<xsl:variable name="no" select='count(entry)' />
 	<xsl:variable name="height" select='days * 23 - 3' /> 
+	<xsl:variable name="title">
+		<xsl:for-each select="entry">
+			<xsl:value-of select="summary"/><xsl:text> </xsl:text><xsl:value-of select="starttime/@hours"/><xsl:text>:</xsl:text><xsl:value-of select="starttime/@minutes"/><xsl:text> Uhr&#xD;</xsl:text>
+			<xsl:value-of select="description"/>
+			<xsl:text>&#xD;</xsl:text>
+			<xsl:if test="position() != last()">
+				<xsl:text>&#xD;</xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:variable>
+	<xsl:variable name="link">
+		<xsl:text>Edit.html</xsl:text>
+		<xsl:text>?description=</xsl:text><xsl:value-of select="entry/description"/>
+		<xsl:text>&amp;summary=bb</xsl:text>
+		<xsl:text>&amp;starttime=</xsl:text><xsl:value-of select="entry/starttime/@hours"/><xsl:text>:</xsl:text><xsl:value-of select="entry/starttime/@minutes"/>
+		<xsl:text>&amp;endtime=dd</xsl:text>
+	</xsl:variable>
 	<xsl:if test="$no = 1">
-	<div class="entry" title="{desc}" ><xsl:value-of select="$no"/><xsl:text> Term.</xsl:text></div>
+	<a href="{$link}" class="entry" title="{$title}" ><xsl:value-of select="$no"/><xsl:text> Term.</xsl:text></a>
 	</xsl:if>
 	<xsl:if test="$no &gt; 1">
-	<div class="entry" title="{desc}"><xsl:value-of select="$no"/><xsl:text> Term</xsl:text></div>
+	<a href="{$link}" class="entry" title="{$title}"><xsl:value-of select="$no"/><xsl:text> Term.</xsl:text></a>
 	</xsl:if>
 		
 	</li>

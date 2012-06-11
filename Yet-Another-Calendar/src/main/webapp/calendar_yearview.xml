@@ -21,15 +21,30 @@
 							<category>test1</category>
 						</categories>
 					</entry>
+					<entry id="id2" priority="high" color="#000">
+						<summary>Test3</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>Test3</location>
+						<description>Test3</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test3</category>
+							<category>test3</category>
+						</categories>
+					</entry>
 				</day>
 				<day name="Tu" number="2">
 					<entry id="1" daycount="2">
-					<summary>Test1</summary>
+					<summary>Test2</summary>
 						<starttime hours="16" minutes="00"/>
 						<endtime   hours="20" minutes="00"/>
 						<duration  hours="4"  minutes="0"/>
 						<location>Test1</location>
-						<description>Test1</description>
+						<description>Test2</description>
 						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
 						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
 						<comment>text</comment>
