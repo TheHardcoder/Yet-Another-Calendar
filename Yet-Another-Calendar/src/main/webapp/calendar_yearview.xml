@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE calendar SYSTEM "Resources/calendar.dtd">
+<?xml-stylesheet type="text/xsl" href="Resources/calendar_yearview.xsl" ?>
+<calendar selection="3">
+	<year number="2012">
+		<month name="Jan" number="1">
+			<week number="1">
+				<day name="Mo" number="1">
+					<entry id="id" priority="high" color="#000">
+						<summary>Test1</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>Test1</location>
+						<description>Test1</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test1</category>
+							<category>test1</category>
+						</categories>
+					</entry>
+					<entry id="id2" priority="high" color="#000">
+						<summary>Test3</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>Test3</location>
+						<description>Test3</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test3</category>
+							<category>test3</category>
+						</categories>
+					</entry>
+				</day>
+				<day name="Tu" number="2">
+					<entry id="1" daycount="2">
+					<summary>Test2</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>Test1</location>
+						<description>Test2</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test1</category>
+							<category>test1</category>
+						</categories>
+					</entry>
+				</day>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17">
+				</day>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Feb" number="2">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3">
+				</day>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+		</month>
+		<month name="Mar" number="3">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Apr" number="4">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Mai" number="5">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Jun" number="6">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Jul" number="7">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Aug" number="8">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Sep" number="9">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Okt" number="10">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Nov" number="11">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+		<month name="Dez" number="12">
+			<week number="1">
+				<day name="Mo" number="1"/>
+				<day name="Tu" number="2"/>
+				<day name="We" number="3"/>
+				<day name="Th" number="4"/>
+				<day name="Fr" number="5"/>
+				<day name="Sa" number="6"/>
+				<day name="Su" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="8"/>
+				<day name="Tu" number="9"/>
+				<day name="We" number="10"/>
+				<day name="Th" number="11"/>
+				<day name="Fr" number="12"/>
+				<day name="Sa" number="13"/>
+				<day name="Su" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="15"/>
+				<day name="Tu" number="16"/>
+				<day name="We" number="17"/>
+				<day name="Th" number="18"/>
+				<day name="Fr" number="19"/>
+				<day name="Sa" number="20"/>
+				<day name="Su" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="22"/>
+				<day name="Tu" number="23"/>
+				<day name="We" number="24"/>
+				<day name="Th" number="25"/>
+				<day name="Fr" number="26"/>
+				<day name="Sa" number="27"/>
+				<day name="Su" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Mo" number="29"/>
+				<day name="Tu" number="30"/>
+				<day name="We" number="31"/>
+			</week>
+		</month>
+	</year>
+</calendar>
