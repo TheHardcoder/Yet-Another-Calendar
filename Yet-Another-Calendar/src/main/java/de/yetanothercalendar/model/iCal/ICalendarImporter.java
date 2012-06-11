@@ -30,6 +30,15 @@ public class ICalendarImporter {
 		return iCal4JCal;
 	}
 
+	/**
+	 * 
+	 * @param iCal4j
+	 * 	iCal4J Calendar
+	 * @param user
+	 *  user to set as database property
+	 * @return
+	 * 	Calendar as List of Events in our internal calendar format
+	 */
 	public static List<Event> parseIcal4JToEventList(Calendar iCal4j, User user) {
 		ComponentList components = iCal4j.getComponents();
 		Component comp;
