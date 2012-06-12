@@ -33,11 +33,10 @@ public class ICalendarImporter {
 	/**
 	 * 
 	 * @param iCal4j
-	 * 	iCal4J Calendar
+	 *            iCal4J Calendar
 	 * @param user
-	 *  user to set as database property
-	 * @return
-	 * 	Calendar as List of Events in our internal calendar format
+	 *            user to set as database property
+	 * @return Calendar as List of Events in our internal calendar format
 	 */
 	public static List<Event> parseIcal4JToEventList(Calendar iCal4j, User user) {
 		ComponentList components = iCal4j.getComponents();
@@ -60,10 +59,22 @@ public class ICalendarImporter {
 
 				String description = comp.getProperties(Property.DESCRIPTION)
 						.toString();
+				if (description.startsWith("DESCRIPTION:")) {
+					description = description
+							.substring("DESCRIPTION:".length());
+				}
+
 				String location = comp.getProperties(Property.LOCATION)
 						.toString();
+				if (location.startsWith("LOCATION:")) {
+					location = location.substring("LOCATION:".length());
+				}
+
 				String priority = comp.getProperties(Property.PRIORITY)
 						.toString();
+				if (priority.startsWith("PRIORITY:")) {
+					priority = priority.substring("PRIORITY:".length());
+				}
 
 				String summary = comp.getProperties(Property.SUMMARY)
 						.toString();
@@ -74,17 +85,37 @@ public class ICalendarImporter {
 				String recurid = comp.getProperties(Property.RECURRENCE_ID)
 						.toString();
 				String rrule = comp.getProperties(Property.RRULE).toString();
+				if (rrule.startsWith("RRULE:")) {
+					rrule = rrule.substring("RRULE:".length());
+				}
+				
 				String durationStr = comp.getProperties(Property.DURATION)
 						.toString();
-				Long duration;
-				try {
-					duration = Long.parseLong(durationStr);
-					event.setDuration(duration);
-				} catch (Exception e) {
-					duration = null;
-					System.out.println("Error Parsing Event Duration: '"
-							+ durationStr + "'");
+				if (durationStr.startsWith("DURATION:PT")) {
+					durationStr = durationStr.substring("DURATION:PT".length());
 				}
+
+				long duration = 0;
+				int durH, durM, durS;
+				if (durationStr.indexOf("H")> -1){
+					durH = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("H")));
+					duration =  (60*durH);
+					durationStr = durationStr.substring(durationStr.indexOf("H"));
+				}
+				if (durationStr.indexOf("M")> -1){
+					durM = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("M")));
+					duration +=  (durM);
+					durationStr = durationStr.substring(durationStr.indexOf("M"));
+				}
+				/**
+				 * NOTE: Seconds are ignored so far
+				 */
+				if (durationStr.indexOf("S")> -1){
+					durS = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("S")));
+					//duration = (long) (60*durH);
+					durationStr = durationStr.substring(durationStr.indexOf("S"));
+				}
+
 
 				List<String> categories = new ArrayList();
 
@@ -92,11 +123,19 @@ public class ICalendarImporter {
 						.getProperties(Property.CATEGORIES);
 
 				for (Object category : categoriesList) {
-					categories.add(category.toString());
+					if (category.toString().startsWith("CATEGORIES:")) {
+						categories.add(category.toString().substring(
+								"CATEGORIES:".length()));
+					} else {
+						categories.add(category.toString());
+					}
 				}
 
 				String comment = comp.getProperties(Property.COMMENT)
 						.toString();
+				if (comment.startsWith("COMMENT:")) {
+					comment = comment.substring("COMMENT:".length());
+				}
 
 				Date dtstart = setDateProperty(Property.DTSTART, comp);
 				Date dtstamp = setDateProperty(Property.DTSTAMP, comp);
@@ -113,6 +152,7 @@ public class ICalendarImporter {
 				event.setDtend(dtend);
 				event.setDtstamp(dtstamp);
 				event.setDtstart(dtstart);
+				event.setDuration(duration);
 				event.setExdate(exdate);
 				event.setId(id);
 				event.setLastmod(lastmod);

@@ -21,6 +21,7 @@ public class Event {
 	private String recurid;
 	private String rrule;
 	private Date dtend;
+	//Duration in Minutes, this attribute should only be used, if dtend is not set!
 	private long duration;
 	private String color;
 	private List<String> categories;
