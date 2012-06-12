@@ -2,16 +2,24 @@ package de.yetanothercalendar.model.impl;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
+import de.yetanothercalendar.helper.Pair;
 import de.yetanothercalendar.model.Calendar;
+import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.calendar.Day;
 import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.dao.EventDAO;
 import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
+import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
@@ -23,10 +31,19 @@ public class CalendarImpl implements Calendar {
 
 	/** Gerade eingeloggter Benutzer aus der Session */
 	private User user;
+	/** EventDAO fuer Datenbankzugriff */
 	private EventDAO eventDAO;
+	private DatabaseConnectionManager manager;
+	/** Creator Klasse zum Erstellen von Zeitrandwerten */
+	private MomentCreator momentCreator;
+	/** Wrapper fuer Wrap von Event zu CalendarEntry */
+	private EventToCalendarEntryWrapper wrapper;
 
 	public CalendarImpl(User user) {
 		this.user = user;
+		this.manager = new DatabaseConnectionManager();
+		wrapper = new EventToCalendarEntryWrapper(locale);
+		momentCreator = new MomentCreator(locale);
 		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
 	}
 
@@ -41,11 +58,31 @@ public class CalendarImpl implements Calendar {
 	}
 
 	public Year getEntriesByYear(int year) {
+		// Jetztigen Calendar auf das aktuelle Jahr setzen
+		java.util.Calendar calendar = new GregorianCalendar(locale);
+		calendar.set(java.util.Calendar.YEAR, year);
+		// Die beiden Grenzwerte des Jahres, in dem gesucht werden soll setzten
+		java.util.Calendar firstMomentInYear = momentCreator
+				.createFirstPossibleMomentOfYearReturningCalendar(calendar);
+		java.util.Calendar lastMomentInYear = momentCreator
+				.createLastPossibleMomentOfYearReturningCalendar(calendar);
+		// Alle Events in diesem Zeitraum holen
+		List<Event> eventBetweenDates = eventDAO.getEventBetweenDates(user,
+				firstMomentInYear.getTime(), lastMomentInYear.getTime());
+		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
+		for (Event event : eventBetweenDates) {
+			List<CalendarEntry> wrapEventToCalendar = wrapper
+					.wrapEventToCalendar(event);
+			// fill map for use insertion in CalendaEntry later. Benutzt
+			// Referenzen der Liste und der Map
+			fillCalendarEntryMapForEvent(wrapEventToCalendar,
+					calendarDayOnCalendarEntryMap);
+		}
 		Year result = new Year(year);
 		List<Month> monthlist = getMonthList(year);
 		for (Month month : monthlist) {
 			List<Week> weekList = getWeekListWithDays(year,
-					month.getNumber() - 1);
+					month.getNumber() - 1, calendarDayOnCalendarEntryMap);
 			month.setWeeks(weekList);
 		}
 		result.setMonths(monthlist);
@@ -83,11 +120,15 @@ public class CalendarImpl implements Calendar {
 	 * @return eine Liste aus {@link Week}s (welche Tage enthaelt) im
 	 *         angegebenen Zeitraum
 	 */
-	protected List<Week> getWeekListWithDays(int year, int monthToSearch) {
+	protected List<Week> getWeekListWithDays(
+			int year,
+			int monthToSearch,
+			Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap) {
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
 		calendar.clear();
 		calendar.set(java.util.Calendar.YEAR, year);
 		calendar.set(java.util.Calendar.MONTH, monthToSearch);
+		momentCreator.createFirstPossibleMomentOfDayReturningCalendar(calendar);
 		List<Week> weeks = new ArrayList<Week>();
 		// Den aktuellen monat sichern
 		int month = calendar.get(java.util.Calendar.MONTH);
@@ -121,10 +162,14 @@ public class CalendarImpl implements Calendar {
 				weekDays = new ArrayList<Day>();
 				weekOfYear = currentWeek;
 			}
-			weekDays.add(day);
+
 			// TODO termine in den tag einbauen
-			// Setzten des naechsten Tags
-			calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
+			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap, new Pair(
+					calendar, day));
+			weekDays.add(day);
+			// Setzten des naechsten Tags FIXME!!!!!!!!!!!!!!!
+			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
+			// calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
 		}
 		// Ueberpruefung, ob wir noch im Monat sind.
 		if (weekDays.size() > 0) {
@@ -134,7 +179,41 @@ public class CalendarImpl implements Calendar {
 		}
 		return weeks;
 	}
-	
+
+	private Day insertCalendarEntriesToDay(
+			Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap,
+			Pair<java.util.Calendar, Day> calendarWithDay) {
+		List<CalendarEntry> list = calendarDayOnCalendarEntryMap
+				.get(calendarWithDay.getA());
+		calendarWithDay.getB().getCalendarEntries().addAll(list);
+		return calendarWithDay.getB();
+	}
+
+	private void fillCalendarEntryMapForEvent(
+			List<CalendarEntry> wrapEventToCalendar,
+			Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap) {
+		for (CalendarEntry calendarEntry : wrapEventToCalendar) {
+			java.util.Calendar tmpCalendar = new GregorianCalendar(locale);
+			// Start time muss laut wrapper immer am Tag des Entries sein -
+			// ein CalendarEntry geht ja _nicht_ ueber mehrere Tage!
+			tmpCalendar.setTime(calendarEntry.getStartTime());
+			// Alle Calendars (die Keys) werden auf die erstmögliche Tageuhrzeit
+			// des Tages in dem der CalendarEvent startet, gesetzt.
+			momentCreator
+					.createFirstPossibleMomentOfDayReturningCalendar(tmpCalendar);
+			List<CalendarEntry> calendarEntrylistInMap = calendarDayOnCalendarEntryMap
+					.get(tmpCalendar);
+			if (calendarEntrylistInMap == null) {
+				List<CalendarEntry> newCalendarEntryList = new ArrayList<CalendarEntry>();
+				newCalendarEntryList.add(calendarEntry);
+				calendarDayOnCalendarEntryMap.put(tmpCalendar,
+						newCalendarEntryList);
+			} else {
+				calendarEntrylistInMap.add(calendarEntry);
+			}
+		}
+	}
+
 	public User getUser() {
 		return user;
 	}
