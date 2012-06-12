@@ -5,3 +5,8 @@
 *.war
 *.ear
 Yet-Another-Calendar/target/*
+
+# Eclipse #
+.classpath
+.project
+.settings/

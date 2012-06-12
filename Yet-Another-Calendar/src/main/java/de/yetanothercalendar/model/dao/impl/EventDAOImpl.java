@@ -22,19 +22,19 @@ public class EventDAOImpl implements EventDAO {
 		this.manager = manager;
 	}
 
-	public void createUserTable() {
+	public void createEventTable() {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
 			String tablecreationString = "create table events "
 					+ "(id INT PRIMARY KEY," + "userId INT," + "dtstamp DATE,"
-					+ "uid VARCHAR(500)," + "dtstart DATE," + "created DATE,"
+					+ "uid VARCHAR(100)," + "dtstart DATE," + "created DATE,"
 					+ "description TEXT," + "lastmod DATE,"
-					+ "location VARCHAR(500)," + "priority VARCHAR(500),"
-					+ "summary TEXT," + "recurid VARCHAR(500),"
-					+ "rrule VARCHAR(500)," + "dtend DATE," + "duration INT,"
-					+ "color VARCHAR(500)," + "categories VARCHAR(500),"
-					+ "comment TEXT," + "exdate DATE," + "rdate VARCHAR(500));";
+					+ "location VARCHAR(100)," + "priority VARCHAR(100),"
+					+ "summary TEXT," + "recurid VARCHAR(100),"
+					+ "rrule VARCHAR(100)," + "dtend DATE," + "duration INT,"
+					+ "color VARCHAR(100)," + "categories VARCHAR(100),"
+					+ "comment TEXT," + "exdate DATE," + "rdate VARCHAR(100));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
 			con.close();
