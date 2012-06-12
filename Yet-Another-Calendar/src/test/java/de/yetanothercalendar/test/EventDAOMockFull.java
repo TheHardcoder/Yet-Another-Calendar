@@ -15,6 +15,9 @@ public class EventDAOMockFull implements EventDAO {
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
 		List<Event> eventList = new ArrayList<Event>();
+		// TODO : viele events einfuegen und im CalendarEventToEntryWrapper die
+		// GESAMTE OO Strukture testen. Dabei wird voallem die neu hinzugefuegte
+		// map getestet...
 		Calendar created = new GregorianCalendar(Locale.GERMANY);
 		created.set(2012, 03, 06, 10, 00);
 		Calendar start = new GregorianCalendar(Locale.GERMANY);
