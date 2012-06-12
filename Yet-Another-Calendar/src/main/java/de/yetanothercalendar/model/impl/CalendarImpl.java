@@ -128,7 +128,6 @@ public class CalendarImpl implements Calendar {
 		calendar.clear();
 		calendar.set(java.util.Calendar.YEAR, year);
 		calendar.set(java.util.Calendar.MONTH, monthToSearch);
-		momentCreator.createFirstPossibleMomentOfDayReturningCalendar(calendar);
 		List<Week> weeks = new ArrayList<Week>();
 		// Den aktuellen monat sichern
 		int month = calendar.get(java.util.Calendar.MONTH);
@@ -164,8 +163,8 @@ public class CalendarImpl implements Calendar {
 			}
 
 			// TODO termine in den tag einbauen
-			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap, new Pair(
-					calendar, day));
+			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
+					new Pair<java.util.Calendar, Day>(calendar, day));
 			weekDays.add(day);
 			// Setzten des naechsten Tags FIXME!!!!!!!!!!!!!!!
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
@@ -185,7 +184,9 @@ public class CalendarImpl implements Calendar {
 			Pair<java.util.Calendar, Day> calendarWithDay) {
 		List<CalendarEntry> list = calendarDayOnCalendarEntryMap
 				.get(calendarWithDay.getA());
-		calendarWithDay.getB().getCalendarEntries().addAll(list);
+		if (list != null) {
+			calendarWithDay.getB().getCalendarEntries().addAll(list);
+		}
 		return calendarWithDay.getB();
 	}
 

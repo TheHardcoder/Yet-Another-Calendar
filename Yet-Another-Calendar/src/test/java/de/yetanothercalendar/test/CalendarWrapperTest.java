@@ -11,6 +11,7 @@ import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.dao.EventDAO;
+import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.impl.CalendarImpl;
 
 public class CalendarWrapperTest extends TestCase {
@@ -22,7 +23,8 @@ public class CalendarWrapperTest extends TestCase {
 
 	@Before
 	public void setUp() {
-		mock = new CalendarImplMock(null);
+		mock = new CalendarImplMock(new User("test@dummy.de", "Forename",
+				"lastname", "langeSHA1"));
 	}
 
 	@Test
@@ -54,6 +56,7 @@ public class CalendarWrapperTest extends TestCase {
 		for (Week week : weeks) {
 			count += week.getDays().size();
 		}
+		System.out.println("Tage im Februar: " + count);
 		assertEquals(29, count);
 	}
 

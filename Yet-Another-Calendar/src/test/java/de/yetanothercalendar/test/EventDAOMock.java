@@ -32,9 +32,16 @@ public class EventDAOMock implements EventDAO {
 		start.set(2012, 03, 06, 11, 00);
 		Calendar end = new GregorianCalendar(Locale.GERMANY);
 		end.set(2012, 03, 06, 13, 00);
-		eventList.add(new Event(null, null, null, null, start.getTime(),
-				created.getTime(), null, null, null, null, null, null, null,
-				end.getTime(), 0, null, null, null, null, null));
+		eventList.add(createDummyEvent(user, created, start, end));
 		return eventList;
+	}
+
+	private Event createDummyEvent(User user, Calendar created, Calendar start,
+			Calendar end) {
+		return new Event(new Long(12), user, new Date(), "uuid",
+				start.getTime(), created.getTime(), "description", new Date(),
+				"location", "very high", "what a great summary", "recurrid",
+				"rrule", end.getTime(), 0, "#fff", new ArrayList<String>(),
+				"comment", new Date(), new Date());
 	}
 }
