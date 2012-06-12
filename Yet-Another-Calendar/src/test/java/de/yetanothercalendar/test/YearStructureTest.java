@@ -29,7 +29,7 @@ public class YearStructureTest extends TestCase {
 
 	@Test
 	public void test() {
-		EventDAO eventDAO = new EventDAOMock();
+		EventDAO eventDAO = new EventDAOMockSimple();
 		CalendarImpl calendar = new CalendarImpl(null);
 		calendar.setEventDAO(eventDAO);
 		int count = 0;

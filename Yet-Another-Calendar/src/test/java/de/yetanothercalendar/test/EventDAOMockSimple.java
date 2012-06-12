@@ -17,7 +17,7 @@ import de.yetanothercalendar.model.database.User;
  * @author D056995
  * 
  */
-public class EventDAOMock implements EventDAO {
+public class EventDAOMockSimple implements EventDAO {
 
 	public void createEventTable() {
 		// TODO Auto-generated method stub
