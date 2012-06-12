@@ -14,11 +14,11 @@ import de.yetanothercalendar.model.dao.EventDAO;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.impl.CalendarImpl;
 
-public class CalendarWrapperTest extends TestCase {
+public class YearStructureTest extends TestCase {
 
 	private CalendarImplMock mock;
 
-	public CalendarWrapperTest() {
+	public YearStructureTest() {
 	}
 
 	@Before
