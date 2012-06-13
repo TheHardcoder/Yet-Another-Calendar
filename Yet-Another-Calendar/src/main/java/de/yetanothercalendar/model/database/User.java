@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
  */
 public class User {
 
-
 	private Long id;
 	private String email;
 	private String forename;
@@ -17,9 +16,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User ID: "+id+" email: "+email+" forename: "+forename+" lastname: "+lastname+" passwordSHA1: "+passwordSHA1;
+		return "User ID: " + id + " email: " + email + " forename: " + forename
+				+ " lastname: " + lastname + " passwordSHA1: " + passwordSHA1;
 	}
-	
+
 	public User(String email, String forename, String lastname,
 			String passwordSHA1) {
 		super();

@@ -44,7 +44,7 @@ public class ICalendarImporter {
 
 		for (int i = 0; i < components.size(); i++) {
 			comp = (Component) components.get(i);
-			//Only Events get parsed: TODOs, ... get ignored (so far)
+			// Only Events get parsed: TODOs, ... get ignored (so far)
 			if (comp.getName() == comp.VEVENT) {
 				Event event = new Event();
 
