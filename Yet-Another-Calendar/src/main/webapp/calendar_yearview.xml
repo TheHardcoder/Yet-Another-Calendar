@@ -6,12 +6,12 @@
 		<month name="Jan" number="1">
 			<week number="1">
 				<day name="Mo" number="1">
-					<entry id="id" priority="high" color="#000">
-						<summary>Test1</summary>
+					<entry id="523jhls2" priority="high" color="#000">
+						<summary>Kaffee</summary>
 						<starttime hours="16" minutes="00"/>
 						<endtime   hours="20" minutes="00"/>
 						<duration  hours="4"  minutes="0"/>
-						<location>Test1</location>
+						<location>SAP Coffeecorner</location>
 						<description>Test1</description>
 						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
 						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
@@ -21,12 +21,12 @@
 							<category>test1</category>
 						</categories>
 					</entry>
-					<entry id="id2" priority="high" color="#000">
-						<summary>Test3</summary>
+					<entry id="23kh234" priority="high" color="#000">
+						<summary>Projektbesprechung</summary>
 						<starttime hours="16" minutes="00"/>
 						<endtime   hours="20" minutes="00"/>
 						<duration  hours="4"  minutes="0"/>
-						<location>Test3</location>
+						<location>DHBW</location>
 						<description>Test3</description>
 						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
 						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
