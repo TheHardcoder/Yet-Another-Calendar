@@ -141,9 +141,11 @@ public class CalendarImpl implements Calendar {
 		// "resttage" in der zwischenvariable weekDays zum Monat (als woche
 		// "verpackt") hinzugefügt werden müssen.
 		int currentWeek = -1;
+		// Zaehler fuer number der Woche im XML
+		int weeknumer = 1;
 		while (calendar.get(java.util.Calendar.MONTH) == month) {
 			// Der aktuelle monatstag
-			int dayOfMonth = calendar.get(java.util.Calendar.MONTH);
+			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
 			String dayname = dateFormatSymbols.getWeekdays()[calendar
 					.get(java.util.Calendar.DAY_OF_WEEK)];
@@ -154,25 +156,24 @@ public class CalendarImpl implements Calendar {
 			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
 			// Monat gespeichert.
 			if (!(weekOfYear == currentWeek)) {
-				Week week = new Week(currentWeek);
+				Week week = new Week(weeknumer);
 				week.setDays(weekDays);
 				weeks.add(week);
 				// Zurücksetzung der attribute
 				weekDays = new ArrayList<Day>();
 				weekOfYear = currentWeek;
+				weeknumer++;
 			}
 
 			// TODO termine in den tag einbauen
 			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
 			weekDays.add(day);
-			// Setzten des naechsten Tags FIXME!!!!!!!!!!!!!!!
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
-			// calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
 		}
 		// Ueberpruefung, ob wir noch im Monat sind.
 		if (weekDays.size() > 0) {
-			Week week = new Week(currentWeek);
+			Week week = new Week(weeknumer);
 			week.setDays(weekDays);
 			weeks.add(week);
 		}
