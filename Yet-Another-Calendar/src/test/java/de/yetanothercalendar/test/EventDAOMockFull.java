@@ -19,7 +19,7 @@ public class EventDAOMockFull implements EventDAO {
 		// GESAMTE OO Strukture testen. Dabei wird vorallem die neu
 		// hinzugefuegte
 		// map getestet..
-		// TODO es werden erst alle termine im Jahr gemappt
+		// TODO es werden erst alle termine in einem Jahr gemappt
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
 		calendarCreated.set(2011, 1, 1, 1, 1);
 		Calendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -31,10 +31,13 @@ public class EventDAOMockFull implements EventDAO {
 				for (int j = 0; j < 5; j++) {
 					Event createDummyEvent = createDummyEvent(user,
 							calendarCreated, calendar, calendar2);
+					Event createDummyEvent2 = createDummyEvent(user,
+							calendarCreated, calendar, calendar2);
 					System.out.println(createDummyEvent.getId() + " - "
 							+ createDummyEvent.getDtstart().toString() + " - "
 							+ createDummyEvent.getDtend().toString());
 					eventList.add(createDummyEvent);
+					eventList.add(createDummyEvent2);
 					calendar.add(Calendar.DAY_OF_YEAR, 7);
 					calendar2.add(Calendar.DAY_OF_YEAR, 7);
 				}

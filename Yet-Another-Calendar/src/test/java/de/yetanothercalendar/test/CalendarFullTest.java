@@ -52,7 +52,6 @@ public class CalendarFullTest extends TestCase {
 					}
 				}
 			}
-
 		}
 	}
 }
