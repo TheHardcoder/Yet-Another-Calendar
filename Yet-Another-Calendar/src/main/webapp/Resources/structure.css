@@ -20,7 +20,9 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	padding: 10px;
 	min-width: 1000px;
 }
-
+#edit {
+	padding: 10px;
+}
 #login {
 	width: 300px;
 	height: 140px;
@@ -28,6 +30,19 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	top: 100px;
 	left: 350px;
 	background-color: #FFAC40;
+	background-image: linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
+
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, rgb(255,145,0)),
+	color-stop(1, rgb(255,194,115))
+);
 	border: 2px solid #A65E00;
 	margin-top: 150px;
 	padding: 1.5em;
@@ -46,14 +61,22 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 
 #login input {
 	background-color: #FF9000;
-	border: 2px inset #FF9000;
+	border: 0px;
 	float: right;
 	margin-bottom: 10px;
+	width: 200px;
+	-webkit-box-shadow: 1px -1px 2px 2px #A65E00;
+	box-shadow: 1px -1px 2px 2px #A65E00; 
 }
 #login a {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
+}
+#login div {
+	display: block;
+	height: 25px;
+	margin: 3px;
 }
 #logo {
 	float: left;
@@ -93,7 +116,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 #tabbar {
 	padding: 0px;
 	margin: 0px;
-	margin-bottom: 10px;
 	height: 30px;
 	background-color: #FFC273;
 }
@@ -129,9 +151,9 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 #calendar {
-	height: 530px;
+	height: 520px;
 	margin: 5px;
-	margin-right: 180px;
+	margin-right: 181px;
 	margin-left: 0px;
 	background-color: #FFAC40;
 }
@@ -141,9 +163,12 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 #year {
+	left: 0px;
+	top: 0px;
 	list-style-type: none;
 	padding: 5px;
-	margin: 0px auto;
+	margin: 0px;
+	display: block;
 }
 
 #footer {
@@ -155,7 +180,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	height: 20px;
 	background-color: #FFAC40;
 }
-
 .month {
 	width: 8.33%;
 	height: 482px;
@@ -166,8 +190,10 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 .daylist {
+	margin: 0px;
 	list-style-type: none;
 	padding: 0px;
+	width: 100%;
 }
 
 .monthtitle {
@@ -190,11 +216,15 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	height: 14px;
 	padding: 0px;
 	font-size: 8pt;
+	dsiplay: block;
+	line-height: 9pt;
 }
 
 .daylabel {
 	width: 32px;
 	float: left;
+	margin: 0px;
+	padding: 0px;
 }
 
 .entry {

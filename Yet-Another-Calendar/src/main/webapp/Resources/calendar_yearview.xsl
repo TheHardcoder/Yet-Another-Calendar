@@ -8,6 +8,7 @@
 <xsl:template match="/">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
+			<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 			<title>Yet Another Calendar</title>
 			<link rel="stylesheet" media="screen" href="Resources/structure.css"></link>
 			<script type="text/JavaScript" src="Resources/analog_clock.js"></script> 
@@ -62,9 +63,9 @@
 	<xsl:variable name="link">
 		<xsl:text>Edit.html</xsl:text>
 		<xsl:text>?description=</xsl:text><xsl:value-of select="entry/description"/>
-		<xsl:text>&amp;summary=bb</xsl:text>
+		<xsl:text>&amp;summary=</xsl:text><xsl:value-of select="entry/summary"/>
 		<xsl:text>&amp;starttime=</xsl:text><xsl:value-of select="entry/starttime/@hours"/><xsl:text>:</xsl:text><xsl:value-of select="entry/starttime/@minutes"/>
-		<xsl:text>&amp;endtime=dd</xsl:text>
+		<xsl:text>&amp;endtime=</xsl:text><xsl:value-of select="entry/endtime/@hours"/><xsl:text>:</xsl:text><xsl:value-of select="entry/endtime/@minutes"/>
 	</xsl:variable>
 	<xsl:if test="$no = 1">
 	<a href="{$link}" class="entry" title="{$title}" ><xsl:value-of select="$no"/><xsl:text> Term.</xsl:text></a>
