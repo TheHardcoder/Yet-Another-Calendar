@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import de.yetanothercalendar.model.dao.UserDAO;
+import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
@@ -63,5 +64,15 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public User createUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User isUserDataCorrect(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
