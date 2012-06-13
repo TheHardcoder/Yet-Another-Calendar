@@ -108,6 +108,68 @@ public class MomentCreator {
 		return calendar;
 	}
 
+	/**
+	 * Erstellt den ersten moeglichen Punkt im Monat
+	 * 
+	 * @param date
+	 *            Das {@link Calendar} mit dem gegebenen Monat
+	 * @return eine {@link Calendar} mit dem ersten Moment des Monats ( 00:00:00
+	 *         )
+	 */
+	protected Calendar createFirstPossibleMomentOfMonthReturningCalendar(
+			Calendar calendar) {
+		createFirstPossibleMomentOfDayReturningCalendar(calendar);
+		calendar.set(Calendar.DAY_OF_MONTH, 0);
+		return calendar;
+	}
+
+	/**
+	 * Erstellt den letzt moeglichen Punkt im Monat
+	 * 
+	 * @param date
+	 *            Das {@link Calendar} mit dem gegebenen Monat
+	 * @return eine {@link Calendar} mit dem letzten Moment des Monats (
+	 *         00:00:00 )
+	 */
+	protected Calendar createLastPossibleMomentOfMonthReturningCalendar(
+			Calendar calendar) {
+		createLastPossibleMomentOfDayReturningCalendar(calendar);
+		calendar.set(Calendar.DAY_OF_YEAR,
+				calendar.getMaximum(Calendar.DAY_OF_MONTH));
+		return calendar;
+	}
+
+	/**
+	 * Erstellt den ersten moeglichen Punkt im woche
+	 * 
+	 * @param date
+	 *            Das {@link Calendar} mit dem gegebenen woche
+	 * @return eine {@link Calendar} mit dem ersten Moment des woche ( 00:00:00
+	 *         )
+	 */
+	protected Calendar createFirstPossibleMomentOfWeekReturningCalendar(
+			Calendar calendar) {
+		createFirstPossibleMomentOfDayReturningCalendar(calendar);
+		calendar.set(Calendar.DAY_OF_WEEK, 0);
+		return calendar;
+	}
+
+	/**
+	 * Erstellt den letzt moeglichen Punkt im woche
+	 * 
+	 * @param date
+	 *            Das {@link Calendar} mit dem gegebenen woche
+	 * @return eine {@link Calendar} mit dem letzten Moment des woches (
+	 *         00:00:00 )
+	 */
+	protected Calendar createLastPossibleMomentOfWeekReturningCalendar(
+			Calendar calendar) {
+		createLastPossibleMomentOfDayReturningCalendar(calendar);
+		calendar.set(Calendar.DAY_OF_YEAR,
+				calendar.getMaximum(Calendar.DAY_OF_MONTH));
+		return calendar;
+	}
+
 	protected boolean isSameDay(Calendar calendarStartDay,
 			Calendar calendarEndDay) {
 		return calendarStartDay.get(Calendar.YEAR) == calendarEndDay
