@@ -164,8 +164,6 @@ public class CalendarImpl implements Calendar {
 				weekOfYear = currentWeek;
 				weeknumer++;
 			}
-
-			// TODO termine in den tag einbauen
 			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
 			weekDays.add(day);

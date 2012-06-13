@@ -20,6 +20,7 @@ public class EventDAOMockFull implements EventDAO {
 		// hinzugefuegte
 		// map getestet..
 		// TODO es werden erst alle termine in einem Jahr gemappt
+		// Calendar facts
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
 		calendarCreated.set(2011, 1, 1, 1, 1);
 		Calendar calendar = new GregorianCalendar(Locale.GERMANY);
@@ -27,10 +28,15 @@ public class EventDAOMockFull implements EventDAO {
 		Calendar calendar2 = new GregorianCalendar(Locale.GERMANY);
 		calendar2.set(2012, 0, 05, 10, 00);
 		for (int yearcount = 0; yearcount < 4; yearcount++) {
+			// 4 Jahre
 			for (int i = 0; i < 10; i++) {
+				// 10Monate
 				for (int j = 0; j < 5; j++) {
+					// 5 wochen
 					Event createDummyEvent = createDummyEvent(user,
 							calendarCreated, calendar, calendar2);
+					calendar.add(Calendar.DAY_OF_YEAR, 1);
+					calendar2.add(Calendar.DAY_OF_YEAR, 1);
 					Event createDummyEvent2 = createDummyEvent(user,
 							calendarCreated, calendar, calendar2);
 					System.out.println(createDummyEvent.getId() + " - "
@@ -38,14 +44,17 @@ public class EventDAOMockFull implements EventDAO {
 							+ createDummyEvent.getDtend().toString());
 					eventList.add(createDummyEvent);
 					eventList.add(createDummyEvent2);
-					calendar.add(Calendar.DAY_OF_YEAR, 7);
-					calendar2.add(Calendar.DAY_OF_YEAR, 7);
+					calendar.add(Calendar.DAY_OF_YEAR, 6);
+					calendar2.add(Calendar.DAY_OF_YEAR, 6);
+					// 7 tage dazuaddiert
 				}
 				calendar.add(Calendar.MONTH, 1);
 				calendar2.add(Calendar.MONTH, 1);
+				// einen monat addiert
 			}
 			calendar.add(Calendar.YEAR, 1);
 			calendar2.add(Calendar.YEAR, 1);
+			// ein Jahr addiert
 		}
 		return eventList;
 	}
