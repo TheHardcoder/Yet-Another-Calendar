@@ -1,12 +1,13 @@
 package de.yetanothercalendar.model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import de.yetanothercalendar.model.dao.UserDAO;
+import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
-
 
 /**
  * Über die Klasse {@link UserDAOImpl} erfolgt der Zugriff auf die Datenbank
@@ -19,7 +20,7 @@ public class UserDAOImpl implements UserDAO {
 	public UserDAOImpl(DatabaseConnectionManager manager) {
 		super();
 		this.manager = manager;
-		
+
 	}
 
 	public void createUserTable() {
@@ -38,7 +39,40 @@ public class UserDAOImpl implements UserDAO {
 			ex.printStackTrace();
 		}
 	}
-	
-	
 
+	public boolean createUser(String email, String forename, String lastname,
+			String password) {
+		try {
+			Connection con = manager.getConnection();
+			Statement createStatement = con.createStatement();
+			ResultSet rsUsers = createStatement
+					.executeQuery("SELECT email From users"
+							+ "WHERE email = \" " + email + "\" ;");
+			String dbEmail = rsUsers.getString(0);
+			if (dbEmail.equalsIgnoreCase(email)) {
+				return false;
+			} else {
+				String usercreationString = "INSERT INTO users "
+						+ "(email, forename, lastname, password)"
+						+ "VALUES (\" " + email + "\", \" " + forename
+						+ "\", \" " + lastname + "\", \" " + password + ");";
+				createStatement.executeUpdate(usercreationString);
+				createStatement.close();
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public User createUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User isUserDataCorrect(String email, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

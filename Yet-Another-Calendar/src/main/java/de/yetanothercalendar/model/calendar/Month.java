@@ -1,5 +1,6 @@
 package de.yetanothercalendar.model.calendar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class Month {
 		super();
 		this.name = name;
 		this.number = number;
+		weeks = new ArrayList<Week>();
 	}
 
 	public Month(String name, int number, List<Week> weeks) {

@@ -1,7 +1,9 @@
 package de.yetanothercalendar.test;
 
+import java.util.HashMap;
 import java.util.List;
 
+import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.database.User;
@@ -18,6 +20,7 @@ public class CalendarImplMock extends CalendarImpl {
 	}
 
 	protected List<Week> getWeekListWithDays(int year, int month) {
-		return super.getWeekListWithDays(year, month);
+		return super.getWeekListWithDays(year, month,
+				new HashMap<java.util.Calendar, List<CalendarEntry>>());
 	}
 }

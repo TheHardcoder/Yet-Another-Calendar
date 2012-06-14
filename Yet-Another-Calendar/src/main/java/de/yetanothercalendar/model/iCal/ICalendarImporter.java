@@ -44,6 +44,7 @@ public class ICalendarImporter {
 
 		for (int i = 0; i < components.size(); i++) {
 			comp = (Component) components.get(i);
+			// Only Events get parsed: TODOs, ... get ignored (so far)
 			if (comp.getName() == comp.VEVENT) {
 				Event event = new Event();
 
@@ -51,6 +52,11 @@ public class ICalendarImporter {
 				// iCal-Files
 				Long id = (long) 1337;
 				// event.setColor(COLOR); can be set to a standard color
+
+				/**
+				 * Get the events' properties an delete the propertyname at the
+				 * beginning
+				 */
 
 				String uid = comp.getProperties(Property.UID).toString();
 				if (uid.startsWith("UID:")) {
@@ -88,7 +94,7 @@ public class ICalendarImporter {
 				if (rrule.startsWith("RRULE:")) {
 					rrule = rrule.substring("RRULE:".length());
 				}
-				
+
 				String durationStr = comp.getProperties(Property.DURATION)
 						.toString();
 				if (durationStr.startsWith("DURATION:PT")) {
@@ -97,25 +103,28 @@ public class ICalendarImporter {
 
 				long duration = 0;
 				int durH, durM, durS;
-				if (durationStr.indexOf("H")> -1){
-					durH = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("H")));
-					duration =  (60*durH);
-					durationStr = durationStr.substring(durationStr.indexOf("H"));
+				if (durationStr.indexOf("H") > -1) {
+					durH = Integer.parseInt(durationStr.substring(0,
+							durationStr.indexOf("H")));
+					duration = (60 * durH);
+					durationStr = durationStr.substring(durationStr
+							.indexOf("H"));
 				}
-				if (durationStr.indexOf("M")> -1){
-					durM = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("M")));
-					duration +=  (durM);
-					durationStr = durationStr.substring(durationStr.indexOf("M"));
+				if (durationStr.indexOf("M") > -1) {
+					durM = Integer.parseInt(durationStr.substring(0,
+							durationStr.indexOf("M")));
+					duration += (durM);
+					durationStr = durationStr.substring(durationStr
+							.indexOf("M"));
 				}
 				/**
 				 * NOTE: Seconds are ignored so far
+				 * 
+				 * if (durationStr.indexOf("S")> -1){ durS =
+				 * Integer.parseInt(durationStr.substring(0,
+				 * durationStr.indexOf("S"))); //duration = (long) (60*durH); }
+				 * 
 				 */
-				if (durationStr.indexOf("S")> -1){
-					durS = Integer.parseInt(durationStr.substring(0, durationStr.indexOf("S")));
-					//duration = (long) (60*durH);
-					durationStr = durationStr.substring(durationStr.indexOf("S"));
-				}
-
 
 				List<String> categories = new ArrayList();
 
@@ -171,7 +180,7 @@ public class ICalendarImporter {
 		return new ArrayList<Event>();
 	}
 
-	public static Date setDateProperty(String Propertyname, Component comp) {
+	private static Date setDateProperty(String Propertyname, Component comp) {
 		try {
 			String dateStr = comp.getProperty(Propertyname).toString();
 			Date d = parseIcsDate(dateStr);
@@ -181,6 +190,15 @@ public class ICalendarImporter {
 		}
 	}
 
+	/**
+	 * Parse an icsDateString ("yyyyMMddTHHmmssZ") to a Date
+	 * 
+	 * @param dateString
+	 *            iCal Date String
+	 * @return Date Representation of the iCal dateString
+	 * @throws ParseException
+	 *             is thrown in case something goes wrong :-(
+	 */
 	public static Date parseIcsDate(String dateString) throws ParseException {
 		StringBuffer dateBuf = new StringBuffer(dateString);
 		// Delete Object Description: e.g. "DTSTAMP:" from

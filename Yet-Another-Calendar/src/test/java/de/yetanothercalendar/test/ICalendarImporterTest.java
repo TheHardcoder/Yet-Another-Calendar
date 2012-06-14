@@ -25,7 +25,7 @@ public class ICalendarImporterTest extends TestCase {
 		try {
 			in = new FileInputStream(f);
 			Calendar test = ICalendarImporter.importToIcal4J(in);
-			List<Event> events = new ArrayList();
+			List<Event> events = new ArrayList<Event>();
 			User user = new User("test@test.de", "test", "test", "123456");
 			events = ICalendarImporter.parseIcal4JToEventList(test, user);
 		} catch (Exception e) {

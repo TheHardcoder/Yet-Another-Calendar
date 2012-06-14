@@ -1,5 +1,6 @@
 package de.yetanothercalendar.model.calendar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class Day {
 		super();
 		this.name = name;
 		this.number = number;
+		calendarEntries = new ArrayList<CalendarEntry>();
 	}
 
 	public Day(List<CalendarEntry> calendarEntries, String name, int number) {
