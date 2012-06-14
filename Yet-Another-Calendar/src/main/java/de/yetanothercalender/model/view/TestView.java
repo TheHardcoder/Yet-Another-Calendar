@@ -29,8 +29,11 @@ public class TestView extends ParentView {
 		wTWeek.setDays(lDays);
 		lWeeks.add(wTWeek);
 		Month mTMonth = new Month("Jan", 1);
+		Month mTMonth2 = new Month("Feb", 2);
 		mTMonth.setWeeks(lWeeks);
+		mTMonth2.setWeeks(lWeeks);
 		lMonths.add(mTMonth);
+		lMonths.add(mTMonth2);
 		Year yTest = new Year(2012, lMonths);
 		createXML(yTest);
 	}
