@@ -24,7 +24,7 @@ public class UserDAOTest extends TestCase {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager("admin", "admin", 
 				"localhost", 3306, "yetanothercalendar"));
 		
-		if(user.createUser("zeller6@yahoo.de", "Paull", "Sulzer", "test")==true){
+		if(user.createUser(new User("zeller6@yahoo.de", "Paull", "Sulzer", "test"))==true){
 			System.out.println("Hat funktioniert");
 		}
 		else{

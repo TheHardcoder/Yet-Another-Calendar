@@ -34,7 +34,7 @@ public class EventDAOImpl implements EventDAO {
 					+ "summary TEXT," + "recurid VARCHAR(100),"
 					+ "rrule VARCHAR(150)," + "dtend DATE," + "duration INT,"
 					+ "color VARCHAR(10)," + "categories VARCHAR(250),"
-					+ "comment TEXT," + "exdate DATE," + "rdate DATE" +
+					+ "comment TEXT," + "exdate DATE," + "rdate DATE," +
 							"FOREIGN KEY (userID)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
