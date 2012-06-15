@@ -1,9 +1,8 @@
 package de.yetanothercalendar.model.dao;
 
-<<<<<<< HEAD
+
 import de.yetanothercalendar.model.database.Event;
-=======
->>>>>>> origin/dev
+
 import de.yetanothercalendar.model.database.User;
 
 public interface UserDAO {
@@ -19,7 +18,7 @@ public interface UserDAO {
 	 */
 	public abstract void createUserTable();
 
-<<<<<<< HEAD
+
 	/**
 	 * Speichert die Userdaten in die Tabelle USERS
 	 * 
@@ -51,11 +50,11 @@ public interface UserDAO {
 	 * @param email
 	 * @return
 	 */
-	public abstract User returnUser(String email);
-=======
-	public abstract User createUser(User user);
+	public abstract User returnUser(User user);
 
-	public abstract User isUserDataCorrect(String email, String password);
->>>>>>> origin/dev
+	//public abstract User createUser(User user);
+
+	//public abstract User isUserDataCorrect(String email, String password);
+
 
 }

@@ -46,7 +46,6 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-<<<<<<< HEAD
 			String userSurchString = "select email from users where email = \""
 					+ email + "\";";
 
@@ -61,18 +60,18 @@ public class UserDAOImpl implements UserDAO {
 			if (dbEmail.equalsIgnoreCase(email)) {
 				// Wenn die Mail-Adresse schon existiert wird false
 				// zurückgegeben
-=======
+
 			ResultSet rsUsers = createStatement
 					.executeQuery("SELECT email From users"
 							+ "WHERE email = \" " + email + "\" ;");
 			String dbEmail = rsUsers.getString(0);
 			if (dbEmail.equalsIgnoreCase(email)) {
->>>>>>> origin/dev
+
 				return false;
 			} else {
 				String usercreationString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-<<<<<<< HEAD
+
 						+ "VALUES (\"" + email + "\", \" " + forename
 						+ "\", \" " + lastname + "\", \" " + password + "\");";
 
@@ -116,19 +115,19 @@ public class UserDAOImpl implements UserDAO {
 			con.close();
 			return false;
 
-=======
+
 						+ "VALUES (\" " + email + "\", \" " + forename
 						+ "\", \" " + lastname + "\", \" " + password + ");";
 				createStatement.executeUpdate(usercreationString);
 				createStatement.close();
 				return true;
 			}
->>>>>>> origin/dev
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-<<<<<<< HEAD
+
 
 	}
 
@@ -157,17 +156,9 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 			return null;
 		}
-=======
->>>>>>> origin/dev
+
 	}
 
-	public User createUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public User isUserDataCorrect(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
