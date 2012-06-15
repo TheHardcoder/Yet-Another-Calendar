@@ -19,14 +19,10 @@ public interface UserDAO {
 	/**
 	 * Speichert die Userdaten in die Tabelle USERS
 	 * 
-	 * @param email
-	 * @param forename
-	 * @param lastname
-	 * @param password
+	 * @param user
 	 * @return
 	 */
-	public abstract boolean createUser(String email, String forename,
-			String lastname, String password);
+	public abstract boolean createUser(User user);
 
 	/**
 	 * Überprüft ob die Email-Adresse des Users in der Tabelle USERS vorhanden

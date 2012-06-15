@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-			String tablecreationString = "CREATE TABLE users "
+			String tablecreationString = "CREATE TABLE IF NOT EXISTS users "
 					+ "(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, "
 					+ "email varchar(100) NOT NULL UNIQUE,  "
 					+ "forename varchar(100),  " + "lastname varchar(100), "
@@ -41,11 +41,14 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	public boolean createUser(String email, String forename, String lastname,
-			String password) {
+	public boolean createUser(User user) {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
+			String email = user.getEmail();
+			String forename = user.getForename();
+			String lastname = user.getLastname();
+			String password = user.getPasswordSHA1();
 			String userSurchString = "select email from users where email = \""
 					+ email + "\";";
 
@@ -92,7 +95,7 @@ public class UserDAOImpl implements UserDAO {
 			String dbPassword;
 			while (rsUser.next()) {
 				dbPassword = rsUser.getString(1);
-				System.out.println(dbPassword +"= " + password);
+				System.out.println(dbPassword + "= " + password);
 				if (dbPassword.equals(password)) {
 					createStatement.close();
 					con.close();
