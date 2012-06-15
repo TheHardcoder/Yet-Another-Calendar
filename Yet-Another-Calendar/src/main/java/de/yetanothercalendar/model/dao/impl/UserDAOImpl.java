@@ -60,18 +60,10 @@ public class UserDAOImpl implements UserDAO {
 			if (dbEmail.equalsIgnoreCase(email)) {
 				// Wenn die Mail-Adresse schon existiert wird false
 				// zurückgegeben
-
-			ResultSet rsUsers = createStatement
-					.executeQuery("SELECT email From users"
-							+ "WHERE email = \" " + email + "\" ;");
-			String dbEmail = rsUsers.getString(0);
-			if (dbEmail.equalsIgnoreCase(email)) {
-
 				return false;
 			} else {
 				String usercreationString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-
 						+ "VALUES (\"" + email + "\", \" " + forename
 						+ "\", \" " + lastname + "\", \" " + password + "\");";
 
@@ -115,19 +107,10 @@ public class UserDAOImpl implements UserDAO {
 			con.close();
 			return false;
 
-
-						+ "VALUES (\" " + email + "\", \" " + forename
-						+ "\", \" " + lastname + "\", \" " + password + ");";
-				createStatement.executeUpdate(usercreationString);
-				createStatement.close();
-				return true;
-			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-
 
 	}
 
@@ -156,9 +139,6 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
-
-	}
 }
