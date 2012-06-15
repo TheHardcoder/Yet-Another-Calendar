@@ -1,4 +1,4 @@
-package de.yetanothercalender.model.view;
+package de.yetanothercalendar.model.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import org.jdom.Element;
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.calendar.Day;
 
-public class DayView extends ParentView {
+public class DayViewHelper extends ViewHelper {
 
 	private Day day;
 	private Element eDayElement;
 
-	public DayView(Day pDay) {
+	public DayViewHelper(Day pDay) {
 		this.day = pDay;
 		eDayElement = new Element("day");
 		eDayElement.setAttribute("name", day.getName());
@@ -27,12 +27,12 @@ public class DayView extends ParentView {
 
 	private List<Element> getEntryElements() {
 		List<Element> listOfEntryElements = new ArrayList<Element>();
-		List<EntryView> listOfEntryViews = new ArrayList<EntryView>();
+		List<EntryViewHelper> listOfEntryViews = new ArrayList<EntryViewHelper>();
 		List<CalendarEntry> listofEntries = day.getCalendarEntries();
 		for (CalendarEntry itEntry : listofEntries) {
-			listOfEntryViews.add(new EntryView(itEntry));
+			listOfEntryViews.add(new EntryViewHelper(itEntry));
 		}
-		for (EntryView eView : listOfEntryViews) {
+		for (EntryViewHelper eView : listOfEntryViews) {
 			listOfEntryElements.add(eView.getEntryElement());
 		}
 		return listOfEntryElements;
