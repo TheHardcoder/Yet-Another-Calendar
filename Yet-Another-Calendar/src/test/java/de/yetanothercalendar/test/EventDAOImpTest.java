@@ -1,14 +1,14 @@
 package de.yetanothercalendar.test;
+
 import org.junit.Test;
 
-import junit.framework.TestCase;
 import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
-import de.yetanothercalendar.model.dao.impl.UserDAOImpl;
-import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
+import junit.framework.TestCase;
+
 public class EventDAOImpTest extends TestCase {
-	
+
 	@Test
 	public void testCreateUserTable() {
 
