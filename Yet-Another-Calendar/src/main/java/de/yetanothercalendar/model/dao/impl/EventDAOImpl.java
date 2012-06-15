@@ -26,15 +26,16 @@ public class EventDAOImpl implements EventDAO {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-			String tablecreationString = "create table events "
+			String tablecreationString = "CREATE TABLE IF NOT EXISTS events "
 					+ "(id INT PRIMARY KEY," + "userId INT," + "dtstamp DATE,"
 					+ "uid VARCHAR(100)," + "dtstart DATE," + "created DATE,"
 					+ "description TEXT," + "lastmod DATE,"
 					+ "location VARCHAR(100)," + "priority VARCHAR(100),"
 					+ "summary TEXT," + "recurid VARCHAR(100),"
-					+ "rrule VARCHAR(100)," + "dtend DATE," + "duration INT,"
-					+ "color VARCHAR(100)," + "categories VARCHAR(100),"
-					+ "comment TEXT," + "exdate DATE," + "rdate VARCHAR(100));";
+					+ "rrule VARCHAR(150)," + "dtend DATE," + "duration INT,"
+					+ "color VARCHAR(10)," + "categories VARCHAR(250),"
+					+ "comment TEXT," + "exdate DATE," + "rdate DATE" +
+							"FOREIGN KEY (userID)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
 			con.close();
