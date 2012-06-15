@@ -3,7 +3,6 @@ package de.yetanothercalendar.model.impl;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,10 +16,12 @@ import de.yetanothercalendar.model.database.Event;
 public class EventToCalendarEntryWrapper {
 
 	private Locale locale;
+	private MomentCreator momentCreator;
 
 	public EventToCalendarEntryWrapper(Locale locale) {
 		super();
 		this.locale = locale;
+		momentCreator = new MomentCreator(locale);
 	}
 
 	/**
@@ -43,24 +44,21 @@ public class EventToCalendarEntryWrapper {
 		calendarEndDay.setTime(enddate);
 		// Untersuche, ob das Start und das Enddatum des Termins am gleichen Tag
 		// liegen.
-		boolean sameDay = calendarStartDay.get(Calendar.YEAR) == calendarEndDay
-				.get(Calendar.YEAR)
-				&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
-						.get(Calendar.DAY_OF_YEAR);
+		boolean sameDay = momentCreator.isSameDay(calendarStartDay,
+				calendarEndDay);
 		// Untersuche ob die Tage einen Tag abstand haben (daher das enddatum am
 		// naechsten Tag liegt, nicht ob die Differenz 24 Stunden betraegt
-		boolean oneDayDifference = ((calendarStartDay.get(Calendar.YEAR) == calendarEndDay
-				.get(Calendar.YEAR)
-		&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
-				.get(Calendar.DAY_OF_YEAR) - 1));
-
+		boolean oneDayDifference = momentCreator.isOneDayDifference(
+				calendarStartDay, calendarEndDay);
 		if (sameDay) {
 			result.add(createCalendarEntryFromEvent(event));
 		} else {
 			CalendarEntry firstEntry = createCalendarEntryFromEvent(event,
-					startdate, createLastPossibleMomentOfDay(startdate));
+					startdate,
+					momentCreator.createLastPossibleMomentOfDay(startdate));
 			CalendarEntry lastEntry = createCalendarEntryFromEvent(event,
-					createFirstPossibleMomentOfDay(enddate), enddate);
+					momentCreator.createFirstPossibleMomentOfDay(enddate),
+					enddate);
 			List<CalendarEntry> fullDayEntries = new ArrayList<CalendarEntry>();
 			// Falls nicht ein tag dazwischen liegt (und die Termine auch nicht
 			// am selben tag sind) muss eine CalendarEntry fuer den gesamten tag
@@ -70,11 +68,13 @@ public class EventToCalendarEntryWrapper {
 				// bis 23:59)
 				Calendar startFullDay = (Calendar) calendarStartDay.clone();
 				startFullDay.add(Calendar.DAY_OF_YEAR, 1);
-				startFullDay = createFirstPossibleMomentOfDayReturningCalendar(startFullDay);
+				startFullDay = momentCreator
+						.createFirstPossibleMomentOfDayReturningCalendar(startFullDay);
 				// Letzter Moment der zu fuellenden "vollen" tagen (also von
 				// 0:00 bis 23:59)
 				Calendar endFullDay = (Calendar) calendarEndDay.clone();
-				endFullDay = createLastPossibleMomentOfDayReturningCalendar(endFullDay);
+				endFullDay = momentCreator
+						.createLastPossibleMomentOfDayReturningCalendar(endFullDay);
 				// Liste mit Einträgen über den Gesamten Tag holen
 				fullDayEntries = fillFullDaysWithCalendarEntries(event,
 						startFullDay, endFullDay);
@@ -107,10 +107,12 @@ public class EventToCalendarEntryWrapper {
 		while (currentdate.before(enddate)) {
 			result.add(createCalendarEntryFromEvent(
 					event,
-					createFirstPossibleMomentOfDayReturningCalendar(currentdate)
-							.getTime(),
-					createLastPossibleMomentOfDayReturningCalendar(currentdate)
-							.getTime()));
+					momentCreator
+							.createFirstPossibleMomentOfDayReturningCalendar(
+									currentdate).getTime(),
+					momentCreator
+							.createLastPossibleMomentOfDayReturningCalendar(
+									currentdate).getTime()));
 			currentdate.add(Calendar.DAY_OF_YEAR, 1);
 		}
 		return result;
@@ -152,69 +154,5 @@ public class EventToCalendarEntryWrapper {
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
 				event.getComment(), event.getCategories());
-	}
-
-	/**
-	 * Erstellt den ersten moeglichen Punkt eines events
-	 * 
-	 * @param date
-	 *            Das {@link Date} mit dem gegebenen Tag
-	 * @return eine {@link Date} mit dem ersten Moment des Tages ( 00:00:00 )
-	 */
-	private Date createFirstPossibleMomentOfDay(Date date) {
-		Calendar calendar = new GregorianCalendar(locale);
-		calendar.setTime(date);
-		createFirstPossibleMomentOfDayReturningCalendar(calendar);
-		return calendar.getTime();
-	}
-
-	/**
-	 * Erstellt den letzten moeglichen Punkt eines events
-	 * 
-	 * @param date
-	 *            Das {@link Date} mit dem gegebenen Tag
-	 * @return eine {@link Date} mit dem letzten Moment des Tages ( 23:59:59 )
-	 */
-	private Date createLastPossibleMomentOfDay(Date date) {
-		Calendar calendar = new GregorianCalendar(locale);
-		calendar.setTime(date);
-		createLastPossibleMomentOfDayReturningCalendar(calendar);
-		return calendar.getTime();
-	}
-
-	/**
-	 * Erstellt den ersten moeglichen Punkt eines events
-	 * 
-	 * @param date
-	 *            Das {@link Calendar} mit dem gegebenen Tag
-	 * @return eine {@link Calendar} mit dem ersten Moment des Tages ( 00:00:00
-	 *         )
-	 */
-	private Calendar createFirstPossibleMomentOfDayReturningCalendar(
-			Calendar calendar) {
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		return calendar;
-	}
-
-	/**
-	 * Erstellt den ersten letzt Punkt eines events
-	 * 
-	 * @param date
-	 *            Das {@link Calendar} mit dem gegebenen Tag
-	 * @return eine {@link Calendar} mit dem letzten Moment des Tages ( 23:59:59
-	 *         )
-	 */
-	private Calendar createLastPossibleMomentOfDayReturningCalendar(
-			Calendar calendar) {
-		calendar.set(Calendar.HOUR_OF_DAY,
-				calendar.getMaximum(Calendar.HOUR_OF_DAY));
-		calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
-		calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
-		calendar.set(Calendar.MILLISECOND,
-				calendar.getMaximum(Calendar.MILLISECOND));
-		return calendar;
 	}
 }

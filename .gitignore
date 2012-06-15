@@ -10,3 +10,6 @@ Yet-Another-Calendar/target/*
 .classpath
 .project
 .settings/
+
+# Binary Files #
+Yet-Another-Calendar/bin/*

@@ -21,7 +21,8 @@ public class Event {
 	private String recurid;
 	private String rrule;
 	private Date dtend;
-	//Duration in Minutes, this attribute should only be used, if dtend is not set!
+	// Duration in Minutes, this attribute should only be used, if dtend is not
+	// set!
 	private long duration;
 	private String color;
 	private List<String> categories;
@@ -223,22 +224,25 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Id: " + id + "\n" + " User: " + user.toString() + "\n"
-				+ "dtsatmp: " + parseDate(dtstamp) + " UID: " + uid + " dtstart:"
-				+ parseDate(dtstart) + "\n" + "created:" + parseDate(created) + " Description: "
-				+ description + " Lastmod: " + parseDate(lastmod) + "\n" + "Location: "
+				+ "dtsatmp: " + parseDate(dtstamp) + " UID: " + uid
+				+ " dtstart:" + parseDate(dtstart) + "\n" + "created:"
+				+ parseDate(created) + " Description: " + description
+				+ " Lastmod: " + parseDate(lastmod) + "\n" + "Location: "
 				+ location + " Priority: " + priority + " Summary: " + summary
-				+ "\n" + "Recurid:" + recurid + " RRule: " + rrule
-				+ " dtend: " + parseDate(dtend) + "\n" + "duration: " + Double.toString(duration)
-				+ " color: " + color + " categories: " + categories + "\n"
-				+ "comment: " + comment + " Exdate: " + parseDate(exdate) + " rdate: "
+				+ "\n" + "Recurid:" + recurid + " RRule: " + rrule + " dtend: "
+				+ parseDate(dtend) + "\n" + "duration: "
+				+ Double.toString(duration) + " color: " + color
+				+ " categories: " + categories + "\n" + "comment: " + comment
+				+ " Exdate: " + parseDate(exdate) + " rdate: "
 				+ parseDate(rdate);
 	}
-	
+
 	/**
 	 * Needed for the toString() method, because Dates can be empty
+	 * 
 	 * @return String representation of the given Date
 	 */
-	private String parseDate(Date d){
+	private String parseDate(Date d) {
 		try {
 			String s = d.toString();
 			return s;
