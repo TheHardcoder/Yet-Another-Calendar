@@ -22,9 +22,9 @@ public class UserDAOTest extends TestCase {
 	public void testCreateUser() {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
-		// FIXME - Bitte Signatur korrigieren
-		User userObj = new User("zeller6@yahoo.de", "Paull", "Sulzer", "test");
-		if (user.createUser(userObj)) {
+
+		if (user.createUser(new User("zeller6@yahoo.de", "Paull", "Sulzer",
+				"test"))) {
 			System.out.println("Hat funktioniert");
 		} else {
 			System.out
