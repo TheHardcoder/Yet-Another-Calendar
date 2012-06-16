@@ -1,6 +1,7 @@
 package de.yetanothercalendar.model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
@@ -27,21 +28,77 @@ public class EventDAOImpl implements EventDAO {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
 			String tablecreationString = "CREATE TABLE IF NOT EXISTS events "
-					+ "(id INT PRIMARY KEY," + "userId INT," + "dtstamp DATE,"
+					+ "(id INT PRIMARY KEY," + "dtstamp DATE,"
 					+ "uid VARCHAR(100)," + "dtstart DATE," + "created DATE,"
 					+ "description TEXT," + "lastmod DATE,"
 					+ "location VARCHAR(100)," + "priority VARCHAR(100),"
 					+ "summary TEXT," + "recurid VARCHAR(100),"
 					+ "rrule VARCHAR(150)," + "dtend DATE," + "duration INT,"
 					+ "color VARCHAR(10)," + "categories VARCHAR(250),"
-					+ "comment TEXT," + "exdate DATE," + "rdate DATE," +
-							"FOREIGN KEY (userID)  REFERENCES users (id));";
+					+ "comment TEXT," + "exdate DATE," + "rdate DATE,"
+					+ "FOREIGN KEY (userID)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
 			con.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public boolean createEvents(Event event) {
+		try {
+			Connection con = manager.getConnection();
+			Statement createStatement = con.createStatement();
+			Long id = event.getId();
+			// User user;
+			Date dtstamp = event.getDtstamp();
+			String uid = event.getUid();
+			Date dtstart = event.getDtstart();
+			Date created = event.getCreated();
+			String description = event.getDescription();
+			Date lastmod = event.getLastmod();
+			String location = event.getLocation();
+			String priority = event.getPriority();
+			String summary = event.getSummary();
+			String recurid = event.getRecurid();
+			String rrule = event.getRrule();
+			Date dtend = event.getDtend();
+			long duration = event.getDuration();
+			String color = event.getColor();
+			List<String> categories = event.getCategories();
+			String comment = event.getComment();
+			Date exdate = event.getExdate();
+			Date rdate = event.getRdate();
+
+			String eventCreationString = "INSERT INTO events "
+					+ "(dtstamp, uid, dtstart,"
+					+ " created, description, lastmod, location,"
+					+ " priority, summary, recurid, rrule, dtend,"
+					+ " duration,	color, categories, comment, exdate,"
+					+ " rdate)" + "VALUES (\""+ dtstamp	+ "\", \" "
+					+ uid + "\", \" " + dtstart	+ "\", \" "
+					+ created + "\", " + description + "\", \" "
+					+ lastmod + "\", \" " + location + "\", \" "
+					+ priority + "\", \" " + summary + "\", \" "
+					+ recurid + "\", \" " + rrule + "\", \" "
+					+ dtend	+ "\", \" "	+ duration + "\", \" "
+					+ color	+ "\", \"" + categories	+ "\", \" "
+					+ comment + "\", \"" + exdate + "\", \" " + rdate + "\");";
+
+			
+
+			createStatement.executeUpdate(eventCreationString);
+
+			createStatement.close();
+			con.close();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			return false;
+		}
+
 	}
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
