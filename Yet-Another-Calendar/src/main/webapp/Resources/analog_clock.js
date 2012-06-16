@@ -60,11 +60,11 @@ function AnalogClock(objCanvas) {
 
 	// Stunden
 	objContext.save();
-	// Aktuelle Stunde zzgl. Minutenanteil über Drehung des Koordinatensystems
-	// (kontinuierlicher Übergang zwischen zwei Stunden gewünscht, keine Sprung)
+	// Aktuelle Stunde zzgl. Minutenanteil Ã¼ber Drehung des Koordinatensystems
+	// (kontinuierlicher Ãœbergang zwischen zwei Stunden gewÃ¼nscht, kein Sprung)
 	objContext.rotate(intHours * Math.PI / 6 + intMin * Math.PI / 360);
 	objContext.beginPath(); // Neuen Pfad anlegen
-	objContext.moveTo(0, 10); // Zeiger über Mitte hinaus zeichnen
+	objContext.moveTo(0, 10); // Zeiger ï¿½ber Mitte hinaus zeichnen
 	objContext.lineTo(0, -38); // Stundenzeiger im gedrehten Koord-Sys. um 38
 								// Einheiten nach oben zeichnen
 	// Linienstyle festlegen und zeichnen
