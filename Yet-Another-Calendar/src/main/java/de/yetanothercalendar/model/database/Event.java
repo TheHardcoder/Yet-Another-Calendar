@@ -60,6 +60,35 @@ public class Event {
 		this.exdate = exdate;
 		this.rdate = rdate;
 	}
+	
+	public Event(User user, Date dtstamp, String uid, Date dtstart,
+			Date created, String description, Date lastmod, String location,
+			String priority, String summary, String recurid, String rrule,
+			Date dtend, long duration, String color, List<String> categories,
+			String comment, Date exdate, Date rdate) {
+		super();
+		
+		this.user = user;
+		this.dtstamp = dtstamp;
+		this.uid = uid;
+		this.dtstart = dtstart;
+		this.created = created;
+		this.description = description;
+		this.lastmod = lastmod;
+		this.location = location;
+		this.priority = priority;
+		this.summary = summary;
+		this.recurid = recurid;
+		this.rrule = rrule;
+		this.dtend = dtend;
+		this.duration = duration;
+		this.color = color;
+		this.categories = categories;
+		this.comment = comment;
+		this.exdate = exdate;
+		this.rdate = rdate;
+	}
+
 
 	public int getId() {
 		return id;
