@@ -7,7 +7,7 @@ import de.yetanothercalendar.model.calendar.Day;
 import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
-import de.yetanothercalender.model.view.YearView;
+import de.yetanothercalendar.model.view.YearViewHelper;
 import junit.framework.TestCase;
 
 public class XmlTestCase extends TestCase {
@@ -24,6 +24,6 @@ public class XmlTestCase extends TestCase {
 		Week week = new Week(1);
 		week.getDays().add(day);
 		weeks.add(week);
-		YearView view = new YearView(year);
+		YearViewHelper view = new YearViewHelper(year);
 	}
 }

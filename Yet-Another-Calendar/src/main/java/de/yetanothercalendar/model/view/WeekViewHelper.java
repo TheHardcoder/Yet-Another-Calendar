@@ -1,4 +1,4 @@
-package de.yetanothercalender.model.view;
+package de.yetanothercalendar.model.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import org.jdom.Element;
 import de.yetanothercalendar.model.calendar.Day;
 import de.yetanothercalendar.model.calendar.Week;
 
-public class WeekView extends ParentView {
+public class WeekViewHelper extends ViewHelper {
 
 	private Week week;
 	private Element eWeekElement;
 
-	public WeekView(Week pWeek) {
+	public WeekViewHelper(Week pWeek) {
 		this.week = pWeek;
 		eWeekElement = new Element("week");
 		eWeekElement.setAttribute("number", String.valueOf(week.getNumber()));
@@ -26,12 +26,12 @@ public class WeekView extends ParentView {
 
 	private List<Element> getWeekElements() {
 		List<Element> listOfDayElements = new ArrayList<Element>();
-		List<DayView> listOfDayViews = new ArrayList<DayView>();
+		List<DayViewHelper> listOfDayViews = new ArrayList<DayViewHelper>();
 		List<Day> listofDays = week.getDays();
 		for (Day itDay : listofDays) {
-			listOfDayViews.add(new DayView(itDay));
+			listOfDayViews.add(new DayViewHelper(itDay));
 		}
-		for (DayView dView : listOfDayViews) {
+		for (DayViewHelper dView : listOfDayViews) {
 			listOfDayElements.add(dView.getWeekElement());
 		}
 		return listOfDayElements;

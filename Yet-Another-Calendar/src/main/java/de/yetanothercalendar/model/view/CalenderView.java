@@ -1,4 +1,4 @@
-package de.yetanothercalender.model.view;
+package de.yetanothercalendar.model.view;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,9 +15,9 @@ import org.jdom.output.XMLOutputter;
 
 import de.yetanothercalendar.model.calendar.Year;
 
-public abstract class ParentView {
+public abstract class CalenderView extends View {
 
-	private static File rFile;
+	public Document dXml;
 
 	/**
 	 * Erzeugt ein XML-Dokument aus einem "calender"-Objekt vom Typ Year.
@@ -29,39 +29,38 @@ public abstract class ParentView {
 	 *         :Document) zurückgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public static File createXML(Year pYear) {
+	public CalenderView(Year pYear, String pPathOfXsl) {
 		// XML erstellen
 		Element eRoot = new Element("calender"); // Wurzelelement
-		Document dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
+		dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
 		dXml.setDocType(new DocType("calender", "resources/calender.dtd"));
 		// Stylesheet hinzufügen
 		HashMap<String, String> mapStylesheet = new HashMap<String, String>(2);
 		mapStylesheet.put("type", "text/xsl");
-		mapStylesheet.put("href", "resources/calender_yearview.xsl");
+		mapStylesheet.put("href", pPathOfXsl);
 		ProcessingInstruction piStylesheet = new ProcessingInstruction(
 				"xml-stylesheet", mapStylesheet);
 		dXml.getContent().add(1, piStylesheet);
 
 		// XML-Dokumentstruktur erstellen
-		YearView yView = new YearView(pYear);
+		YearViewHelper yView = new YearViewHelper(pYear);
 		Element eYear = yView.getYearElement();
 
 		// Alles in der Richtigen Reihenfolge anfügen
 		eRoot.addContent(eYear);
+	}
 
+	public void printXml(Document pDoc, String pOutputPath) {
 		// XML tatsächlich auf Festplatte abbilden.
 		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		FileOutputStream output;
 		try {
-			rFile = new File("resources/calender.xml");
+			File rFile = new File(pOutputPath);
 			output = new FileOutputStream(rFile);
-			outputter.output(dXml, output);
+			outputter.output(pDoc, output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// Bei Bedarf kann auch das Document zurückgegeben werden
-		// return dXml;
-		return rFile;
 	}
 
 	public void createtestXML() {
@@ -73,45 +72,6 @@ public abstract class ParentView {
 						new Element("Month").setText("August")))
 				.addContent(new Comment("Das ist ein Kommentar"))
 				.addContent(new Element("Month").setAttribute("Wert", "8"));
-
-		// Auchtung noch eine obsolete Methode
-		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-		FileOutputStream output;
-		try {
-			output = new FileOutputStream("testCreate.xml");
-			outputter.output(doc, output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		printXml(doc, "/resources/testCreate.xml");
 	}
-
-	public void getXML() {
-		// Rückgabetyp noch definieren
-	}
-
-	// public void readtestXML() {
-	// Document doc = null;
-	// File fIn = new File("TestLukas.xml");
-	//
-	// try {
-	// SAXBuilder b = new SAXBuilder(true); // validierenden Parser nutzen
-	// doc = b.build(fIn); // Zum Test die Testdatei
-	// // einlesen
-	// } catch (JDOMException j) {
-	// j.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// // Auchtung noch eine obsolete Methode
-	// XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-	// FileOutputStream output;
-	// try {
-	// output = new FileOutputStream("FileInOut.xml");
-	// outputter.output(doc, output);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-
 }

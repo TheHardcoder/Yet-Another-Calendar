@@ -55,9 +55,8 @@ public class UserServlet extends HttpServlet {
 			String password = (String) req.getAttribute("password");
 			if (email != null && password != null) {
 				// TODO check if hashing works correct
-				User user = dao
-						.isUserDataCorrect(email, hashPassword(password));
-				if (user != null) {
+				if (dao.checkUser(email, hashPassword(password))) {
+					User user = dao.returnUser(email);
 					session.setAttribute("user", user);
 				} else {
 					throw new RuntimeException(
