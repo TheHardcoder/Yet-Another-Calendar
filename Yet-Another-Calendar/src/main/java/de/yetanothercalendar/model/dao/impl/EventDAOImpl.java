@@ -13,7 +13,7 @@ import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
- * Ãœber die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
+ * Über die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
  * Datenbank (Tabelle events).
  */
 public class EventDAOImpl implements EventDAO {
@@ -28,15 +28,16 @@ public class EventDAOImpl implements EventDAO {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
 			String tablecreationString = "CREATE TABLE IF NOT EXISTS events "
-					+ "(id INT PRIMARY KEY," + "dtstamp DATE,"
-					+ "uid VARCHAR(100)," + "dtstart DATE," + "created DATE,"
-					+ "description TEXT," + "lastmod DATE,"
-					+ "location VARCHAR(100)," + "priority VARCHAR(100),"
-					+ "summary TEXT," + "recurid VARCHAR(100),"
-					+ "rrule VARCHAR(150)," + "dtend DATE," + "duration INT,"
-					+ "color VARCHAR(10)," + "categories VARCHAR(250),"
-					+ "comment TEXT," + "exdate DATE," + "rdate DATE,"
-					+ "FOREIGN KEY (userID)  REFERENCES users (id));";
+					+ "(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+					+ "userId INT," + "dtstamp DATE," + "uid VARCHAR(100),"
+					+ "dtstart DATE," + "created DATE," + "description TEXT,"
+					+ "lastmod DATE," + "location VARCHAR(100),"
+					+ "priority VARCHAR(100)," + "summary TEXT,"
+					+ "recurid VARCHAR(100)," + "rrule VARCHAR(150),"
+					+ "dtend DATE," + "duration INT," + "color VARCHAR(10),"
+					+ "categories VARCHAR(250)," + "comment TEXT,"
+					+ "exdate DATE," + "rdate DATE,"
+					+ "FOREIGN KEY (userId)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
 			con.close();
@@ -45,12 +46,14 @@ public class EventDAOImpl implements EventDAO {
 		}
 	}
 
-	public boolean createEvents(Event event) {
+	public boolean createEvents( Event event) {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-			Long id = event.getId();
-			// User user;
+			int id = event.getId();
+			
+			User user = event.getUser();
+			int userId = event.getUser().getId();
 			Date dtstamp = event.getDtstamp();
 			String uid = event.getUid();
 			Date dtstart = event.getDtstart();
@@ -75,17 +78,38 @@ public class EventDAOImpl implements EventDAO {
 					+ " created, description, lastmod, location,"
 					+ " priority, summary, recurid, rrule, dtend,"
 					+ " duration,	color, categories, comment, exdate,"
-					+ " rdate)" + "VALUES (\""+ dtstamp	+ "\", \" "
-					+ uid + "\", \" " + dtstart	+ "\", \" "
-					+ created + "\", " + description + "\", \" "
-					+ lastmod + "\", \" " + location + "\", \" "
-					+ priority + "\", \" " + summary + "\", \" "
-					+ recurid + "\", \" " + rrule + "\", \" "
-					+ dtend	+ "\", \" "	+ duration + "\", \" "
-					+ color	+ "\", \"" + categories	+ "\", \" "
+					+ " rdate)" + "VALUES (\""
+					+ dtstamp
+					+ "\", \" "
+					+ uid
+					+ "\", \" "
+					+ dtstart
+					+ "\", \" "
+					+ created
+					+ "\", "
+					+ description
+					+ "\", \" "
+					+ lastmod
+					+ "\", \" "
+					+ location
+					+ "\", \" "
+					+ priority
+					+ "\", \" "
+					+ summary
+					+ "\", \" "
+					+ recurid
+					+ "\", \" "
+					+ rrule
+					+ "\", \" "
+					+ dtend
+					+ "\", \" "
+					+ duration
+					+ "\", \" "
+					+ color
+					+ "\", \""
+					+ categories
+					+ "\", \" "
 					+ comment + "\", \"" + exdate + "\", \" " + rdate + "\");";
-
-			
 
 			createStatement.executeUpdate(eventCreationString);
 
@@ -95,7 +119,7 @@ public class EventDAOImpl implements EventDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
+
 			return false;
 		}
 

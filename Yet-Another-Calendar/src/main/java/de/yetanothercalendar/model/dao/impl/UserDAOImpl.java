@@ -67,8 +67,8 @@ public class UserDAOImpl implements UserDAO {
 			} else {
 				String usercreationString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-						+ "VALUES (\"" + email + "\", \" " + forename
-						+ "\", \" " + lastname + "\", \" " + password + "\");";
+						+ "VALUES (\"" + email + "\", \"" + forename
+						+ "\", \"" + lastname + "\", \"" + password + "\");";
 
 				createStatement.executeUpdate(usercreationString);
 
@@ -128,7 +128,7 @@ public class UserDAOImpl implements UserDAO {
 
 			rsUsers.next();
 
-			Long dbId = rsUsers.getLong(1);
+			int dbId = rsUsers.getInt(1);
 			String dbEmail = rsUsers.getString(2);
 			String dbForename = rsUsers.getString(3);
 			String dbLastname = rsUsers.getString(4);

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
  */
 public class User {
 
-	private Long id;
+	private int id;
 	private String email;
 	private String forename;
 	private String lastname;
@@ -29,7 +29,7 @@ public class User {
 		this.passwordSHA1 = passwordSHA1;
 	}
 
-	public User(Long id, String email, String forename, String lastname,
+	public User(int id, String email, String forename, String lastname,
 			String passwordSHA1) {
 		super();
 		this.id = id;
@@ -39,11 +39,11 @@ public class User {
 		this.passwordSHA1 = passwordSHA1;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

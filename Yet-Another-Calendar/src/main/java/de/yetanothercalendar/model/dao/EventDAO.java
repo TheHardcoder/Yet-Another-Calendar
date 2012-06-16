@@ -14,6 +14,15 @@ public interface EventDAO {
 	 */
 	public abstract void createEventTable();
 
+	
+	/**
+	 * Speichert Eventdaten in die Tabelle EVENTS
+	 * @param event
+	 * @return
+	 */
+	public abstract boolean createEvents(Event event);
+	
+	
 	/**
 	 * 
 	 * @param from
