@@ -18,6 +18,7 @@
 					href="Resources/structure.css"></link>
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
+				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
 			</head>
 			<body>
 				<div id="main">
@@ -26,7 +27,19 @@
 							alt="logo" />
 					</div>
 					<div id="info">
+						<a href="index.jsp" id="logout">Logout</a>
 						<canvas width="150" height="150" id="analog_clock"></canvas>
+						<table id="smallcalendar">
+						<tr>
+						<td>Mo</td>
+						<td>Di</td>
+						<td>Mi</td>
+						<td>Do</td>
+						<td>Fr</td>
+						<td>Sa</td>
+						<td>So</td>
+						</tr>
+						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
 					<div id="menubar">
@@ -172,18 +185,14 @@
 			</xsl:variable>
 			<xsl:if test="$no = 1">
 				<a href="{$link}" class="entry" title="{$title}">
-					<nobr>
 					<xsl:value-of select="$no" />
 					<xsl:text> Termin</xsl:text>
-					</nobr>
 				</a>
 			</xsl:if>
 			<xsl:if test="$no &gt; 1">
 				<a href="{$link}" class="entry" title="{$title}">
-					<nobr>
 					<xsl:value-of select="$no" />
 					<xsl:text> Termine</xsl:text>
-					</nobr>
 				</a>
 			</xsl:if>
 

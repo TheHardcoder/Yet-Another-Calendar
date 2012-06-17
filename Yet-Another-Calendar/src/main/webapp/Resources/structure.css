@@ -185,10 +185,60 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	-moz-box-shadow: inset 0px 0px 12px #A65E00;
 	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
 	box-shadow: inset 0px 0px 12px #A65E00;
+	min-width: 980px;
 }
 
 #edit {
 	padding: 20px;
+}
+
+#logout {
+	color: black;
+	text-decoration: none;
+	display: block;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	border: 2px outset red;
+	text-align: center;
+	padding:2px;
+	background-color: red;
+	margin: 10px;
+	font-size: 16pt;
+	cursor: pointer;
+}
+
+#logout:active {
+	border: 2px inset red;
+}
+
+#info table {
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #FF9000;
+	margin: 0px auto;
+	border-spacing: 0; 
+	padding: 4px;
+}
+
+#info table tr td {
+	overflow: hidden;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+
+#info table tr td.gray {
+	color: gray;
+}
+
+#info table tr td.selected {
+	border: 1px solid blue;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#info table tr td.even {
+	background-color: #FFC273;
 }
 
 .month {
@@ -236,9 +286,11 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	float: left;
 	margin: 0px;
 	padding: 0px;
+	cursor: pointer;
 }
 
 .entry {
+	white-space: nowrap;
 	margin: 0px;
 	margin-top: 0px;
 	margin-left: 32px;

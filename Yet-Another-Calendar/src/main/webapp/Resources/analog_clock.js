@@ -11,19 +11,16 @@ window.onload = function() {
 
 function AnalogClock(objCanvas) {
 
-	// Neues Datumsobjekt
 	var objDate = new Date();
-	var intSek = objDate.getSeconds(); // Sekunden 0..59
-	var intMin = objDate.getMinutes(); // Minuten 0..59
-	var intHours = objDate.getHours() % 12; // Stunden 0..11
-	// Kontext-Objekt
+	var intSek = objDate.getSeconds(); 
+	var intMin = objDate.getMinutes(); 
+	var intHours = objDate.getHours() % 12; 
 	var objContext = objCanvas.getContext("2d");
 
-	objContext.clearRect(0, 0, 150, 150); // Anzeigebereich leeren
+	objContext.clearRect(0, 0, 150, 150); 
 
-	objContext.save(); // Ausgangszustand speichern
-	objContext.translate(75, 75); // Koordinatensystem in Mittelpkt des
-									// Ziffernblatts verschieben
+	objContext.save(); 
+	objContext.translate(75, 75); 
 
 	objContext.save();
 	objContext.beginPath();
@@ -60,14 +57,10 @@ function AnalogClock(objCanvas) {
 
 	// Stunden
 	objContext.save();
-	// Aktuelle Stunde zzgl. Minutenanteil über Drehung des Koordinatensystems
-	// (kontinuierlicher Übergang zwischen zwei Stunden gewünscht, kein Sprung)
 	objContext.rotate(intHours * Math.PI / 6 + intMin * Math.PI / 360);
-	objContext.beginPath(); // Neuen Pfad anlegen
-	objContext.moveTo(0, 10); // Zeiger �ber Mitte hinaus zeichnen
-	objContext.lineTo(0, -38); // Stundenzeiger im gedrehten Koord-Sys. um 38
-								// Einheiten nach oben zeichnen
-	// Linienstyle festlegen und zeichnen
+	objContext.beginPath(); 
+	objContext.moveTo(0, 10);
+	objContext.lineTo(0, -38); 
 	objContext.lineWidth = 4;
 	objContext.strokeStyle = "#666";
 	objContext.stroke();
