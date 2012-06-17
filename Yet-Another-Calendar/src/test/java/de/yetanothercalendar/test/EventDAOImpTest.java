@@ -36,34 +36,7 @@ public class EventDAOImpTest extends TestCase {
 		}
 	}
 	
-	@Test
-	public void TestgetEventBetweenDates() {
-		try{
-			
-			EventDAOImpl event = new EventDAOImpl(
-					new DatabaseConnectionManager("admin", "admin",
-							"localhost", 3306, "yetanothercalendar"));
-			SimpleDateFormat sdf = new SimpleDateFormat();
-		    sdf.applyPattern( "yyyy-MM-DD hh:mm" );
-		    
-			Date from = sdf.parse("2012-01-01 00:00");
-			Date til = sdf.parse("2012-02-01 01:00");
-			
-			User testUser = new User("zeller@yahoo.de", "Paull", "Sulzer",
-							"test");
-			
-			List<Event> events = event.getEventBetweenDates(testUser, from, til);
-			
-/*			for(int i=0; i<events.size(); i++){
-				
-				System.out.println(events.get(i).getDtstart() + "bis: " + events.get(i).getDtend());
-		}*/
-			
-			
-		}catch(Exception e){
-			e.getMessage();
-		}
-	}
+
 
 
 	@Test
@@ -79,28 +52,28 @@ public class EventDAOImpTest extends TestCase {
 			if(user.checkUser("zeller@yahoo.de", "test")){
 				
 			
-			System.out.println("Email-Adresse und Passwort sind stimmen");
+			System.out.println("Email-Adresse und Passwort stimmen");
 			User testUser = user.returnUser("zeller@yahoo.de");
 
 			SimpleDateFormat sdf = new SimpleDateFormat();
-		    sdf.applyPattern( "yyyy-MM-DD hh:mm:ss" );
+		    sdf.applyPattern( "yyyy-MM-dd HH:mm" );
 		   // DateFormat df = DateFormat.getDateTimeInstance();
 		    
-			Date dtstamp =  Calendar.getInstance().getTime();
+			Date dtstamp = sdf.parse("2012-02-02 12:30"); 
 			System.out.println("Datum: " + dtstamp);		
-			//sdf.parse("2012-02-02 12:30:00");
+			
 			
 			
 			System.out.println(dtstamp);
-			Date dtstart = sdf.parse("2012-01-04 10:30:00");
-			Date created = sdf.parse("2012-01-02 12:35:00");
-			Date lastmod = sdf.parse("2012-01-03 10:45:00");
-			Date dtend = sdf.parse("2012-04-03 10:00:00");
+			Date dtstart = sdf.parse("2012-01-07 15:30");
+			Date created = sdf.parse("2012-01-02 12:35");
+			Date lastmod = sdf.parse("2012-01-03 10:45");
+			Date dtend = sdf.parse("2012-01-06 13:15");
 			long duration = 135;
 			List<String> categories = new ArrayList<String>();
 			categories.add("fhleflöajfö");
-			Date exdate = sdf.parse("2012-01-06 10:45:00");
-			Date rdate = sdf.parse("2012-01-06 14:30:00");
+			Date exdate = sdf.parse("2012-01-06 10:45");
+			Date rdate = sdf.parse("2012-01-06 14:30");
 
 				if(event.createEvents(new Event(testUser, dtstamp, "12340", dtstart,
 					created, "blatest", lastmod, "at Home", "wichtig", "fdsf",

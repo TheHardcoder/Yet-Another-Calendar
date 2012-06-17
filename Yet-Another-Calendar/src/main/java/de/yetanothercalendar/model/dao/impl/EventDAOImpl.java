@@ -33,12 +33,13 @@ public class EventDAOImpl implements EventDAO {
 			Statement createStatement = con.createStatement();
 			String tablecreationString = "CREATE TABLE IF NOT EXISTS events "
 					+ "(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-					+ "userId INT," + "dtstamp DATE," + "uid VARCHAR(100),"
-					+ "dtstart DATETIME," + "created DATETIME," + "description TEXT,"
-					+ "lastmod DATETIME," + "location VARCHAR(100),"
-					+ "priority VARCHAR(100)," + "summary TEXT,"
-					+ "recurid VARCHAR(100)," + "rrule VARCHAR(150),"
-					+ "dtend DATETIME," + "duration INT," + "color VARCHAR(10),"
+					+ "userId INT," + "dtstamp DATETIME," + "uid VARCHAR(100),"
+					+ "dtstart DATETIME," + "created DATETIME,"
+					+ "description TEXT," + "lastmod DATETIME,"
+					+ "location VARCHAR(100)," + "priority VARCHAR(100),"
+					+ "summary TEXT," + "recurid VARCHAR(100),"
+					+ "rrule VARCHAR(150)," + "dtend DATETIME,"
+					+ "duration INT," + "color VARCHAR(10),"
 					+ "categories VARCHAR(250)," + "comment TEXT,"
 					+ "exdate DATETIME," + "rdate DATETIME,"
 					+ "FOREIGN KEY (userId)  REFERENCES users (id));";
@@ -54,22 +55,22 @@ public class EventDAOImpl implements EventDAO {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-			
+
 			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.applyPattern( "yyyy-MM-DD hh:mm:ss" );
-			
-			int id = event.getId();
+			sdf.applyPattern("yyyy-MM-dd HH:mm");
+
+			int id = (int) event.getId();
 
 			User user = event.getUser();
-			int userId = event.getUser().getId();
-			
-			
-			String dtstamp = sdf.format(event.getDtstamp()); System.out.println(dtstamp);
+			int userId = (int) event.getUser().getId();
+
+			String dtstamp = sdf.format(event.getDtstamp());
+			System.out.println(dtstamp);
 			String uid = event.getUid();
 			String dtstart = sdf.format(event.getDtstart());
-			String created = sdf.format(event.getCreated()); 
+			String created = sdf.format(event.getCreated());
 			String description = event.getDescription();
-			String lastmod = sdf.format(event.getLastmod()); 
+			String lastmod = sdf.format(event.getLastmod());
 			String location = event.getLocation();
 			String priority = event.getPriority();
 			String summary = event.getSummary();
@@ -121,10 +122,7 @@ public class EventDAOImpl implements EventDAO {
 					+ "\", \""
 					+ categories
 					+ "\", \""
-					+ comment
-					+ "\", \""
-					+ exdate
-					+ "\", \"" + rdate + "\");";
+					+ comment + "\", \"" + exdate + "\", \"" + rdate + "\");";
 
 			createStatement.executeUpdate(eventCreationString);
 
@@ -139,10 +137,8 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
-	
-	
 
-	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
+	public List<Event> getEventsFromUser(User user) {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
@@ -155,29 +151,30 @@ public class EventDAOImpl implements EventDAO {
 					+ "events.color, events.categories, events.comment, events.exdate,"
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
-					+ "Where users.email = \"" + email
-					+ "\" and events.dtend BETWEEN \"" + from + "\" and \""
-					+ til + "\";";
+					+ "Where users.email = \"" + email + "\";";
 
 			ResultSet rsEvent = createStatement
 					.executeQuery(eventCreationString);
 			List<Event> events = new ArrayList<Event>();
 
+			SimpleDateFormat sdf = new SimpleDateFormat();
+			sdf.applyPattern("yyyy-MM-dd HH:mm");
+
 			while (rsEvent.next()) {
 
-				int id = rsEvent.getInt(1);
-				Date dtstamp = rsEvent.getDate(2);
+				long id = (long) rsEvent.getInt(1);
+				Date dtstamp = sdf.parse(rsEvent.getString(2));
 				String uid = rsEvent.getString(3);
-				Date dtstart = rsEvent.getDate(4);
-				Date created = rsEvent.getDate(5);
+				Date dtstart = sdf.parse(rsEvent.getString(4));
+				Date created = sdf.parse(rsEvent.getString(5));
 				String description = rsEvent.getString(6);
-				Date lastmod = rsEvent.getDate(7);
+				Date lastmod = sdf.parse(rsEvent.getString(7));
 				String location = rsEvent.getString(8);
 				String priority = rsEvent.getString(9);
 				String summary = rsEvent.getString(10);
 				String recurid = rsEvent.getString(11);
 				String rrule = rsEvent.getString(12);
-				Date dtend = rsEvent.getDate(13);
+				Date dtend = sdf.parse(rsEvent.getString(13));
 				long duration = rsEvent.getLong(14);
 				String color = rsEvent.getString(15);
 
@@ -185,8 +182,8 @@ public class EventDAOImpl implements EventDAO {
 				categories.add(rsEvent.getString(16));
 
 				String comment = rsEvent.getString(17);
-				Date exdate = rsEvent.getDate(18);
-				Date rdate = rsEvent.getDate(19);
+				Date exdate = sdf.parse(rsEvent.getString(18));
+				Date rdate = sdf.parse(rsEvent.getString(19));
 
 				events.add(new Event(id, user, dtstamp, uid, dtstart, created,
 						description, lastmod, location, priority, summary,
@@ -194,12 +191,88 @@ public class EventDAOImpl implements EventDAO {
 						comment, exdate, rdate));
 			}
 
+			rsEvent.close();
+			createStatement.close();
+			con.close();
+			return events;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
+		try {
+			Connection con = manager.getConnection();
+			Statement createStatement = con.createStatement();
+			String email = user.getEmail();
+			SimpleDateFormat sdf = new SimpleDateFormat();
+			sdf.applyPattern("yyyy-MM-dd HH:mm");
+			
+			String sFrom = sdf.format(from);
+			
+			String sTil = sdf.format(til);
+			
+			
+			
+
+			String eventCreationString = "SELECT events.id, events.dtstamp,"
+					+ " events.uid, events.dtstart, events.created, events.description,"
+					+ " events.lastmod, events.location, events.priority,	events.summary,"
+					+ " events.recurid,	events.rrule, events.dtend, events.duration,"
+					+ "events.color, events.categories, events.comment, events.exdate,"
+					+ " events.rdate " + "from events INNER JOIN users"
+					+ " ON  (events.userID = users.ID)"
+					+ "Where users.email = \"" + email + "\" and dtstart >= \""
+					+ sFrom + "\" and dtend <= \""+sTil+"\";";
+
+			ResultSet rsEvent = createStatement
+					.executeQuery(eventCreationString);
+			List<Event> events = new ArrayList<Event>();
+
+			while (rsEvent.next()) {
+
+				long id = (long) rsEvent.getInt(1);
+				Date dtstamp = sdf.parse(rsEvent.getString(2));
+				String uid = rsEvent.getString(3);
+				Date dtstart = sdf.parse(rsEvent.getString(4));
+				Date created = sdf.parse(rsEvent.getString(5));
+				String description = rsEvent.getString(6);
+				Date lastmod = sdf.parse(rsEvent.getString(7));
+				String location = rsEvent.getString(8);
+				String priority = rsEvent.getString(9);
+				String summary = rsEvent.getString(10);
+				String recurid = rsEvent.getString(11);
+				String rrule = rsEvent.getString(12);
+				Date dtend = sdf.parse(rsEvent.getString(13));
+				long duration = rsEvent.getLong(14);
+				String color = rsEvent.getString(15);
+
+				List<String> categories = new ArrayList<String>();
+				categories.add(rsEvent.getString(16));
+
+				String comment = rsEvent.getString(17);
+				Date exdate = sdf.parse(rsEvent.getString(18));
+				Date rdate = sdf.parse(rsEvent.getString(19));
+
+				events.add(new Event(id, user, dtstamp, uid, dtstart, created,
+						description, lastmod, location, priority, summary,
+						recurid, rrule, dtend, duration, color, categories,
+						comment, exdate, rdate));
+			}
+			rsEvent.close();
 			createStatement.close();
 			con.close();
 			return events;
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static void main(String[] args) {
+		
 	}
 }
