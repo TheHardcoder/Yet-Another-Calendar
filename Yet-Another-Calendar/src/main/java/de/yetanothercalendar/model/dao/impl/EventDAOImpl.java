@@ -34,13 +34,13 @@ public class EventDAOImpl implements EventDAO {
 			String tablecreationString = "CREATE TABLE IF NOT EXISTS events "
 					+ "(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 					+ "userId INT," + "dtstamp DATE," + "uid VARCHAR(100),"
-					+ "dtstart DATE," + "created DATE," + "description TEXT,"
-					+ "lastmod DATE," + "location VARCHAR(100),"
+					+ "dtstart DATETIME," + "created DATETIME," + "description TEXT,"
+					+ "lastmod DATETIME," + "location VARCHAR(100),"
 					+ "priority VARCHAR(100)," + "summary TEXT,"
 					+ "recurid VARCHAR(100)," + "rrule VARCHAR(150),"
-					+ "dtend DATE," + "duration INT," + "color VARCHAR(10),"
+					+ "dtend DATETIME," + "duration INT," + "color VARCHAR(10),"
 					+ "categories VARCHAR(250)," + "comment TEXT,"
-					+ "exdate DATE," + "rdate DATE,"
+					+ "exdate DATETIME," + "rdate DATETIME,"
 					+ "FOREIGN KEY (userId)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
@@ -56,7 +56,7 @@ public class EventDAOImpl implements EventDAO {
 			Statement createStatement = con.createStatement();
 			
 			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.applyPattern( "yyyy-MM-DD hh:mm" );
+			sdf.applyPattern( "yyyy-MM-DD hh:mm:ss" );
 			
 			int id = event.getId();
 
@@ -139,6 +139,8 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
+	
+	
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
 		try {
