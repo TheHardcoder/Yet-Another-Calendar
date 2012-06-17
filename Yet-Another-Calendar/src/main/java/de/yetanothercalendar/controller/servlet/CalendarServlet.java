@@ -29,10 +29,10 @@ public class CalendarServlet extends HttpServlet {
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
 			// CAlendastruktur holen und in xml parsen
-			String selectedYear = (String) request.getAttribute("selectedyear");
+			String selectedYear = (String) request.getParameter("selectedyear");
 			String selectedMonth = (String) request
-					.getAttribute("selectedmonth");
-			String selectedWeek = (String) request.getAttribute("selectedweek");
+					.getParameter("selectedmonth");
+			String selectedWeek = (String) request.getParameter("selectedweek");
 			if (selectedYear == null) {
 				throw new RuntimeException(
 						"Das gegebene Jahr darf nicht null sein, und muss als parameter 'selectedyear' im GET request uebergeben werden");

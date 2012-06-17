@@ -25,6 +25,10 @@ public class EventDAOImpl implements EventDAO {
 		this.manager = manager;
 	}
 
+	/**
+	 * Erstellt die Tabelle EVENTS in der die Events ({@link Event})
+	 * abgespeichert werden sollen.
+	 */
 	public void createEventTable() {
 		try {
 			Connection con = manager.getConnection();

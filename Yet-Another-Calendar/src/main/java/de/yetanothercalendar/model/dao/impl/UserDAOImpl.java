@@ -1,6 +1,5 @@
 package de.yetanothercalendar.model.dao.impl;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +23,10 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
+	/**
+	 * Erstellt die Tabelle USERS in der die Benutzer ({@link Users})
+	 * abgespeichert werden sollen.
+	 */
 	public void createUserTable() {
 		try {
 			Connection con = manager.getConnection();
@@ -62,13 +65,13 @@ public class UserDAOImpl implements UserDAO {
 			rsUsers.close();
 			if (dbEmail.equalsIgnoreCase(email)) {
 				// Wenn die Mail-Adresse schon existiert wird false
-				// zurückgegeben
+				// zurï¿½ckgegeben
 				return false;
 			} else {
 				String usercreationString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-						+ "VALUES (\"" + email + "\", \"" + forename
-						+ "\", \"" + lastname + "\", \"" + password + "\");";
+						+ "VALUES (\"" + email + "\", \"" + forename + "\", \""
+						+ lastname + "\", \"" + password + "\");";
 
 				createStatement.executeUpdate(usercreationString);
 
