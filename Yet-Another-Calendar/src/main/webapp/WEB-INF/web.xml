@@ -1,21 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
-	<display-name>Archetype Created Web Application</display-name>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/file_not_found.html</location>
-	</error-page>
-
+	<display-name>Yet-AnotherCalendar</display-name>
 	<servlet>
 		<servlet-name>calendarservlet</servlet-name>
 		<servlet-class>de.yetanothercalendar.controller.servlet.CalendarServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>init</servlet-name>
+		<servlet-class>de.yetanothercalendar.controller.servlet.DummyDataCreatorServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>calendarservlet</servlet-name>
 		<url-pattern>/calendarservlet</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>init</servlet-name>
+		<url-pattern>/init</url-pattern>
+	</servlet-mapping>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/file_not_found.html</location>
+	</error-page>
 </web-app>
