@@ -19,7 +19,6 @@ public class RRuleTest extends TestCase {
 	public void testParseRRule() {
 		String rruleTestString = "FREQ=WEEKLY;INTERVAL=2;WKST=MO;COUNT=10;UNTIL=20120131T140000Z;BYMONTH=1;BYWEEKNO=1,2,3,4;BYSECOND=4;BYMONTHDAY=1,2,3,20;BYYEARDAY=3,43,45;BYHOUR=4;BYMINUTE=30;BYSETPOS=2";
 		RRule rrule = new RRule(rruleTestString);
-<<<<<<< HEAD
 		
 		assertEquals(rrule.getByHour().get(0), "4");
 		assertEquals(rrule.getByMinute().get(0), "30");
@@ -41,17 +40,6 @@ public class RRuleTest extends TestCase {
 		
 		assertEquals(rrule.getByWeekNo().get(0), "1");
 		assertEquals(rrule.getBySecond().get(0), "4");
-=======
-
-		assertEquals(rrule.getByHour(), "4");
-		assertEquals(rrule.getByMinute(), "30");
-		assertEquals(rrule.getByMonth(), "1");
-		assertEquals(rrule.getByMonthDay(), "1,2,3,4,5,6,20");
-		assertEquals(rrule.getByYearDay(), "3,43,45");
-		assertEquals(rrule.getBySetPos(), "2");
-		assertEquals(rrule.getByWeekNo(), "1,2,3,4");
-		assertEquals(rrule.getBySecond(), "4");
->>>>>>> 45621f39310351e16c33704dbbadad376bc066e5
 		assertEquals(rrule.getFreq(), "WEEKLY");
 		assertEquals(rrule.getInterval(), 2);
 		assertEquals(rrule.getWkst(), "MO");
