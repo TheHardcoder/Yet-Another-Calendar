@@ -17,8 +17,6 @@ import de.yetanothercalendar.model.dao.impl.UserDAOImpl;
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
-import de.yetanothercalendar.test.EventDAOImpTest;
-import de.yetanothercalendar.test.EventDAOMockFull;
 
 public class DummyDataCreatorServlet extends HttpServlet {
 	@Override
@@ -31,6 +29,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
 		daoEvent.createEventTable();
 		User user = new User("test@test.de", "Vorname", "Nachname", "HashMe");
+		daoUser.createUser(user);
 		req.getSession().setAttribute("user", user);
 
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
