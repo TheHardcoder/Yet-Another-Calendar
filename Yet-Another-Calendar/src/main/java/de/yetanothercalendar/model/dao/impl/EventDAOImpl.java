@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.fortuna.ical4j.model.property.Categories;
-
 import de.yetanothercalendar.model.dao.EventDAO;
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 
 /**
- * Über die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
+ * ï¿½ber die Klasse {@link EventDAOImpl} erfolgt der Zugriff auf auf die
  * Datenbank (Tabelle events).
  */
 public class EventDAOImpl implements EventDAO {
@@ -210,13 +208,10 @@ public class EventDAOImpl implements EventDAO {
 			String email = user.getEmail();
 			SimpleDateFormat sdf = new SimpleDateFormat();
 			sdf.applyPattern("yyyy-MM-dd HH:mm");
-			
+
 			String sFrom = sdf.format(from);
-			
+
 			String sTil = sdf.format(til);
-			
-			
-			
 
 			String eventCreationString = "SELECT events.id, events.dtstamp,"
 					+ " events.uid, events.dtstart, events.created, events.description,"
@@ -226,7 +221,7 @@ public class EventDAOImpl implements EventDAO {
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
 					+ "Where users.email = \"" + email + "\" and dtstart >= \""
-					+ sFrom + "\" and dtend <= \""+sTil+"\";";
+					+ sFrom + "\" and dtend <= \"" + sTil + "\";";
 
 			ResultSet rsEvent = createStatement
 					.executeQuery(eventCreationString);
@@ -273,6 +268,6 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public static void main(String[] args) {
-		
+
 	}
 }

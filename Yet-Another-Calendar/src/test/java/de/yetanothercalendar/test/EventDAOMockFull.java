@@ -70,5 +70,17 @@ public class EventDAOMockFull implements EventDAO {
 	}
 
 	public void createEventTable() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean createEvents(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public List<Event> getEventsFromUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
