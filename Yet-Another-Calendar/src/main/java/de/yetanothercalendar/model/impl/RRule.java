@@ -1,7 +1,9 @@
 package de.yetanothercalendar.model.impl;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.yetanothercalendar.model.iCal.ICalendarImporter;
 
@@ -9,24 +11,16 @@ public class RRule {
 
 	private Date until;
 
-	public String getBySecond() {
-		return bySecond;
-	}
-
-	public void setBySecond(String bySecond) {
-		this.bySecond = bySecond;
-	}
-
-	private String byMonth;
-	private String byWeekNo;
-	private String byMonthDay;
-	private String byYearDay;
-	private String byHour;
-	private String byMinute;
-	private String bySecond;
-	private String bySetPos;
-
-	// Start of the week
+	private List<Integer> byMonth;
+	private List<Integer> byWeekNo;
+	private List<Integer> byMonthDay;
+	private List<Integer> byYearDay;
+	private List<Integer> byHour;
+	private List<Integer> byMinute;
+	private List<Integer> bySecond;
+	private List<Integer> bySetPos;
+	
+	//Start of the week
 	private String wkst;
 	private String freq;
 	private int interval;
@@ -68,20 +62,133 @@ public class RRule {
 			// no until Date set
 			until = null;
 		}
-
-		byMonth = getRRULEProperty("BYMONTH=", rrule);
-		byWeekNo = getRRULEProperty("BYWEEKNO=", rrule);
-		byMonthDay = getRRULEProperty("BYMONTHDAY=", rrule);
-		byYearDay = getRRULEProperty("BYYEARDAY=", rrule);
-		byHour = getRRULEProperty("BYHOUR=", rrule);
-		byMinute = getRRULEProperty("BYMINUTE=", rrule);
-		bySecond = getRRULEProperty("BYSECOND=", rrule);
-		bySetPos = getRRULEProperty("BYSETPOS=", rrule);
-		wkst = getRRULEProperty("WKST=", rrule);
-
+		
+		byMonth = parsePropertyToList(getRRULEProperty("BYMONTH=", rrule));
+		byWeekNo = parsePropertyToList(getRRULEProperty("BYWEEKNO=", rrule));
+		byMonthDay = parsePropertyToList(getRRULEProperty("BYMONTHDAY=", rrule));
+		byYearDay = parsePropertyToList(getRRULEProperty("BYYEARDAY=", rrule));
+		byHour = parsePropertyToList(getRRULEProperty("BYHOUR=", rrule));
+		byMinute = parsePropertyToList(getRRULEProperty("BYMINUTE=", rrule));
+		bySecond = parsePropertyToList(getRRULEProperty("BYSECOND=", rrule));
+		bySetPos = parsePropertyToList(getRRULEProperty("BYSETPOS=", rrule));
+		
+		wkst	= getRRULEProperty("WKST=", rrule);
 		freq = getRRULEProperty("FREQ=", rrule);
 		interval = Integer.parseInt(getRRULEProperty("INTERVAL=", rrule));
 		count = Integer.parseInt(getRRULEProperty("COUNT=", rrule));
+	}
+
+	/**
+	 * gets a specified Property of the RRule from the RRule string
+	 * @param name name of the property
+	 * @param rrule RRULE String
+	 * @return Property as text
+	 */
+	private String getRRULEProperty(String name, String rrule){
+		if (rrule.indexOf(name)>-1){
+			int attrBegin = rrule.indexOf(name)+name.length();
+			int attrEnd = rrule.indexOf(';', attrBegin);
+			//No semicolon found --> is last entry in RRULE-Property
+			if (attrEnd < 0){
+				attrEnd = rrule.length();
+			}
+			return rrule.substring(attrBegin, attrEnd);
+		} else return "";
+	}
+	
+	/**
+	 * function used to determine, whether a specific property contains a given value
+	 * e.g. if byYearDay contains the day 233
+	 * @param s given value
+	 * @param property property
+	 * @return
+	 */
+	public boolean propertyContains(String s, String property){
+		//makes the search much easier, because one might search for ,s,
+		property = ","+property+",";
+		return property.contains(","+s+",");
+	}
+	
+	/**
+	 * Parses a Property into a sorted String List
+	 * used for example for byYearDay to get a sorted List with all of the YearDays specified in RRULE
+	 * @param propertyString
+	 * String representation of the property
+	 * @return
+	 * Property as List (Splited at ;)
+	 */
+	public List<Integer> parsePropertyToList(String propertyString){
+		final String SEPERATOR = ",";
+		List<Integer> propertyList = new ArrayList<Integer>();
+		String[] properties = propertyString.split(SEPERATOR);
+		for (String string : properties) {
+			propertyList.add(Integer.parseInt(string));
+		}
+		return propertyList;
+	}
+	
+	public List<Integer> getByMonth() {
+		return byMonth;
+	}
+
+	public void setByMonth(List<Integer> byMonth) {
+		this.byMonth = byMonth;
+	}
+
+	public List<Integer> getByWeekNo() {
+		return byWeekNo;
+	}
+
+	public void setByWeekNo(List<Integer> byWeekNo) {
+		this.byWeekNo = byWeekNo;
+	}
+
+	public List<Integer> getByMonthDay() {
+		return byMonthDay;
+	}
+
+	public void setByMonthDay(List<Integer> byMonthDay) {
+		this.byMonthDay = byMonthDay;
+	}
+
+	public List<Integer> getByYearDay() {
+		return byYearDay;
+	}
+
+	public void setByYearDay(List<Integer> byYearDay) {
+		this.byYearDay = byYearDay;
+	}
+
+	public List<Integer> getByHour() {
+		return byHour;
+	}
+
+	public void setByHour(List<Integer> byHour) {
+		this.byHour = byHour;
+	}
+
+	public List<Integer> getByMinute() {
+		return byMinute;
+	}
+
+	public void setByMinute(List<Integer> byMinute) {
+		this.byMinute = byMinute;
+	}
+
+	public List<Integer> getBySecond() {
+		return bySecond;
+	}
+
+	public void setBySecond(List<Integer> bySecond) {
+		this.bySecond = bySecond;
+	}
+
+	public List<Integer> getBySetPos() {
+		return bySetPos;
+	}
+
+	public void setBySetPos(List<Integer> bySetPos) {
+		this.bySetPos = bySetPos;
 	}
 
 	public String getWkst() {
@@ -98,62 +205,6 @@ public class RRule {
 
 	public void setUntil(Date until) {
 		this.until = until;
-	}
-
-	public String getByMonth() {
-		return byMonth;
-	}
-
-	public void setByMonth(String byMonth) {
-		this.byMonth = byMonth;
-	}
-
-	public String getByWeekNo() {
-		return byWeekNo;
-	}
-
-	public void setByWeekNo(String byWeekNo) {
-		this.byWeekNo = byWeekNo;
-	}
-
-	public String getByMonthDay() {
-		return byMonthDay;
-	}
-
-	public void setByMonthDay(String byMonthDay) {
-		this.byMonthDay = byMonthDay;
-	}
-
-	public String getByYearDay() {
-		return byYearDay;
-	}
-
-	public void setByYearDay(String byYearDay) {
-		this.byYearDay = byYearDay;
-	}
-
-	public String getByHour() {
-		return byHour;
-	}
-
-	public void setByHour(String byHour) {
-		this.byHour = byHour;
-	}
-
-	public String getByMinute() {
-		return byMinute;
-	}
-
-	public void setByMinute(String byMinute) {
-		this.byMinute = byMinute;
-	}
-
-	public String getBySetPos() {
-		return bySetPos;
-	}
-
-	public void setBySetPos(String bySetPos) {
-		this.bySetPos = bySetPos;
 	}
 
 	public String getFreq() {
@@ -178,43 +229,5 @@ public class RRule {
 
 	public void setCount(int count) {
 		this.count = count;
-	}
-
-	/**
-	 * gets a specified Property of the RRule from the RRule string
-	 * 
-	 * @param name
-	 *            name of the property
-	 * @param rrule
-	 *            RRULE String
-	 * @return Property as text
-	 */
-	private String getRRULEProperty(String name, String rrule) {
-		if (rrule.indexOf(name) > -1) {
-			int attrBegin = rrule.indexOf(name) + name.length();
-			int attrEnd = rrule.indexOf(';', attrBegin);
-			// No semicolon found --> is last entry in RRULE-Property
-			if (attrEnd < 0) {
-				attrEnd = rrule.length();
-			}
-			return rrule.substring(attrBegin, attrEnd);
-		} else
-			return "";
-	}
-
-	/**
-	 * function used to determine, whether a specific property contains a given
-	 * value e.g. if byYearDay contains the day 233
-	 * 
-	 * @param s
-	 *            given value
-	 * @param property
-	 *            property
-	 * @return
-	 */
-	public boolean propertyContains(String s, String property) {
-		// makes the search much easier, because one might search for ,s,
-		property = "," + property + ",";
-		return property.contains("," + s + ",");
 	}
 }

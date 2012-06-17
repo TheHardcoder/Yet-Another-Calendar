@@ -11,19 +11,14 @@ import de.yetanothercalendar.model.calendar.CalendarEntry;
 public class EntryViewHelper extends ViewHelper {
 
 	private CalendarEntry entry;
-	private Element eEntryElement;
 
 	public EntryViewHelper(CalendarEntry pEntry) {
 		this.entry = pEntry;
-		eEntryElement = new Element("entry");
-		eEntryElement.setAttribute("id", String.valueOf(entry.getId()));
-		eEntryElement.setAttribute("priority", entry.getPriority());
-		eEntryElement.setAttribute("color", entry.getColorString());
-		eEntryElement.addContent(this.getEntryAttributes());
-	}
-
-	public Element getEntryElement() {
-		return eEntryElement;
+		element = new Element("entry");
+		element.setAttribute("id", String.valueOf(entry.getId()));
+		element.setAttribute("priority", entry.getPriority());
+		element.setAttribute("color", entry.getColorString());
+		element.addContent(this.getEntryAttributes());
 	}
 
 	private List<Element> getEntryAttributes() {

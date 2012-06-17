@@ -44,7 +44,7 @@ public abstract class CalenderView extends View {
 
 		// XML-Dokumentstruktur erstellen
 		YearViewHelper yView = new YearViewHelper(pYear);
-		Element eYear = yView.getYearElement();
+		Element eYear = yView.getElement();
 
 		// Alles in der Richtigen Reihenfolge anfügen
 		eRoot.addContent(eYear);

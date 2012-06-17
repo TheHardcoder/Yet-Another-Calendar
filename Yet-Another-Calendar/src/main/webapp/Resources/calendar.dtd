@@ -16,7 +16,7 @@
 <!ELEMENT categories (category)*>
 <!ELEMENT category (#PCDATA)>
 
-<!ATTLIST calendar selection NMTOKEN #REQUIRED>
+<!ATTLIST calendar selectedyear NMTOKEN #REQUIRED selectedmonth NMTOKEN #REQUIRED selectedweek NMTOKEN #REQUIRED selectedday NMTOKEN #REQUIRED>
 <!ATTLIST year number NMTOKEN #REQUIRED>
 <!ATTLIST month number NMTOKEN #REQUIRED name NMTOKEN #REQUIRED>
 <!ATTLIST week number NMTOKEN #REQUIRED>
