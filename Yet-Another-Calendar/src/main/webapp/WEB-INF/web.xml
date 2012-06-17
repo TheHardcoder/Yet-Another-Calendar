@@ -8,4 +8,14 @@
 		<error-code>404</error-code>
 		<location>/file_not_found.html</location>
 	</error-page>
+
+	<servlet>
+		<servlet-name>calendarservlet</servlet-name>
+		<servlet-class>de.yetanothercalendar.controller.servlet.CalendarServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>calendarservlet</servlet-name>
+		<url-pattern>/calendarservlet</url-pattern>
+	</servlet-mapping>
 </web-app>
