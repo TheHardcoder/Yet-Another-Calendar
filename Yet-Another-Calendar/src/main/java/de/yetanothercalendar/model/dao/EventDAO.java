@@ -9,7 +9,7 @@ import de.yetanothercalendar.model.database.User;
 public interface EventDAO {
 
 	/**
-	 * Erstellt die Tabelle EVENTS in der die Benutzer ({@link Event})
+	 * Erstellt die Tabelle EVENTS in der die Events ({@link Event})
 	 * abgespeichert werden sollen.
 	 */
 	public abstract void createEventTable();

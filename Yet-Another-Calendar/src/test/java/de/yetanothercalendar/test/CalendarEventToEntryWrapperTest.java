@@ -39,8 +39,8 @@ public class CalendarEventToEntryWrapperTest extends TestCase {
 			assertEquals(assertcalendar.get(Calendar.DAY_OF_YEAR),
 					entry.get(Calendar.DAY_OF_YEAR));
 			assertcalendar.add(Calendar.DAY_OF_YEAR, 1);
-//			System.out.println(calendarEntry.getStartTime() + " bis "
-//					+ calendarEntry.getEndTime());
+			// System.out.println(calendarEntry.getStartTime() + " bis "
+			// + calendarEntry.getEndTime());
 		}
 		System.out.println(wrapEventToCalendar.size());
 		assertEquals(372, wrapEventToCalendar.size());

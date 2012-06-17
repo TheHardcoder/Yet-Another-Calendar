@@ -17,38 +17,36 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	height: 600px;
 	background-color: #FFC273;
 	margin: 0px;
-	padding: 10px;
+	padding: 20px;
 	min-width: 1000px;
 }
-#edit {
-	padding: 10px;
+
+#editfrom {
+	
 }
+
 #login {
 	width: 300px;
-	height: 140px;
+	height: 100px;
 	position: absolute;
 	top: 100px;
 	left: 350px;
 	background-color: #FFAC40;
-	background-image: linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
-	background-image: -o-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
-	background-image: -moz-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
-	background-image: -webkit-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
-	background-image: -ms-linear-gradient(bottom, rgb(255,145,0) 0%, rgb(255,194,115) 100%);
-
-	background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0, rgb(255,145,0)),
-	color-stop(1, rgb(255,194,115))
-);
-	border: 2px solid #A65E00;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 30px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 30px #A65E00;
+	box-shadow: inset 0px 0px 30px #A65E00;
+	border: 0px;
 	margin-top: 150px;
-	padding: 1.5em;
+	padding: 20px;
+	padding-top: 30px;
 }
 
 #login legend {
+	position: absolute;
+	top: -20px;
+	left: 20px;
 	background-color: #FF9000;
 	border: 2px solid #A65E00;
 	border-radius: 13px;
@@ -57,27 +55,38 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	padding-left: 6px;
 	padding-right: 6px;
 	font-size: 20pt;
+	background-color: #FF9000;
 }
 
 #login input {
 	background-color: #FF9000;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
 	border: 0px;
+	padding: 4px;
 	float: right;
 	margin-bottom: 10px;
 	width: 200px;
 	-webkit-box-shadow: 1px -1px 2px 2px #A65E00;
-	box-shadow: 1px -1px 2px 2px #A65E00; 
+	box-shadow: 1px -1px 2px 2px #A65E00;
+	float: right;
 }
+
 #login a {
 	position: absolute;
-	bottom: 5px;
-	right: 5px;
+	bottom: 15px;
+	right: 15px;
 }
+
 #login div {
 	display: block;
-	height: 25px;
-	margin: 3px;
+	height: 27px;
+	margin: 6px;
 }
+
 #logo {
 	float: left;
 	width: 100px;
@@ -104,11 +113,10 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 
 #title {
 	margin-left: 110px;
-	margin-right: 180px;
+	margin-right: 190px;
 	margin-top: 0px;
 	padding-top: 5px;
 	height: 45px;
-	background-color: #BF8130;
 	text-align: center;
 	font-size: 28pt;
 }
@@ -119,41 +127,33 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	height: 30px;
 	background-color: #FFC273;
 }
+
 #menubar {
 	height: 40px;
-	margin: 10px;
+	padding: 0px; 
+	margin : 10px;
 	margin-left: 110px;
-	margin-right: 180px;
-	background-color: #A65E00;
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffac40, endColorstr=#a65e00)";
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	background-image: linear-gradient(bottom, rgb(166, 94, 0) 10%,
-		rgb(255, 172, 64) 90% );
-	background-image: -o-linear-gradient(bottom, rgb(166, 94, 0) 10%,
-		rgb(255, 172, 64) 90% );
-	background-image: -moz-linear-gradient(bottom, rgb(166, 94, 0) 10%,
-		rgb(255, 172, 64) 90% );
-	background-image: -webkit-linear-gradient(bottom, rgb(166, 94, 0) 10%,
-		rgb(255, 172, 64) 90% );
-	background-image: -ms-linear-gradient(bottom, rgb(166, 94, 0) 10%,
-		rgb(255, 172, 64) 90% );
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.1, rgb(166,
-		94, 0) ), color-stop(0.9, rgb(255, 172, 64) ) );
+	margin-right: 190px;
 }
 
 #info {
+	padding: 5px;
 	float: right;
 	width: 170px;
-	height: 640px;
-	background-color: #BF8130;
+	height: 620px;
+	background-color: #FFAC40;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
+	float: right;
 }
 
 #calendar {
 	height: 520px;
 	margin: 5px;
-	margin-right: 181px;
+	margin-right: 191px;
 	margin-left: 0px;
 	background-color: #FFAC40;
 }
@@ -162,7 +162,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	margin: 10px;
 }
 
-#year {
+#cyear {
 	left: 0px;
 	top: 0px;
 	list-style-type: none;
@@ -174,12 +174,23 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 #footer {
 	position: fixed;
 	margin-top: 10px;
-	right: 10px;
+	right: 20px;
 	top: 650px;
-	left: 10px;
+	left: 20px;
 	height: 20px;
 	background-color: #FFAC40;
+	padding: 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
 }
+
+#edit {
+	padding: 20px;
+}
+
 .month {
 	width: 8.33%;
 	height: 482px;
@@ -216,7 +227,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	height: 14px;
 	padding: 0px;
 	font-size: 8pt;
-	dsiplay: block;
+	display: block;
 	line-height: 9pt;
 }
 
@@ -238,7 +249,9 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	z-index: 0;
 	cursor: pointer;
 	display: block;
+	overflow: hidden;
 }
+
 .tab {
 	float: left;
 	width: 120px;
@@ -249,9 +262,80 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	text-align: center;
 	cursor: pointer;
 }
+
 .selected {
 	background-color: #FFAC40;
 }
+
+.menuitem {
+	display:block;
+	border: 0px;
+	height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 31%;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #FFAC40;
+	
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
+}
+
+.menuitem select {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.button {
+	display:block;
+	border: 0px;
+	height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 11.5%;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #FFAC40;
+	
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
+}
+
+.button:first-child {
+	-moz-border-top-left-radius: 20px;
+	border-top-left-radius: 20px;
+	-moz-border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+.button:last-child {
+	-moz-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-bottom-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.button:hover {
+	background-color: #FFFF00;
+	-moz-box-shadow: inset 0px 0px 50px #FF9000;
+	-webkit-box-shadow: inset 0px 0px 50px #FF9000;
+	box-shadow: inset 0px 0px 50px #FF9000;
+}
+
+.button:active {
+	background-color: #A65E00;
+	-moz-box-shadow: inset 0px 0px 18px #FF9000;
+	-webkit-box-shadow: inset 0px 0px 18px #FF9000;
+	box-shadow: inset 0px 0px 18px #FF9000;
+}
+
 h1 {
 	padding: 0px;
 	margin: 0px;
@@ -265,5 +349,4 @@ body {
 html {
 	padding: 0px;
 	text-shadow: 0px 0px 4px #FF9000;
-	
 }

@@ -4,11 +4,9 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import de.yetanothercalendar.helper.Pair;
 import de.yetanothercalendar.model.Calendar;
@@ -48,13 +46,33 @@ public class CalendarImpl implements Calendar {
 	}
 
 	public Year getEntriesByWeek(int year, int month, int week) {
-		// TODO Auto-generated method stub
-		return null;
+		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
+		java.util.Calendar calendar = new GregorianCalendar(locale);
+		calendar.set(java.util.Calendar.YEAR, year);
+		calendar.set(java.util.Calendar.MONTH, month - 1);
+		// TODO check if this uses the correct week
+		calendar.set(java.util.Calendar.DAY_OF_WEEK_IN_MONTH, week + 1);
+		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
+		java.util.Calendar firstMomentInWeek = momentCreator
+				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);
+		java.util.Calendar lastMomentInLast = momentCreator
+				.createLastPossibleMomentOfWeekReturningCalendar(calendar);
+		// Alle Events in diesem Zeitraum holen
+		return createYearInRange(firstMomentInWeek, lastMomentInLast, year);
 	}
 
 	public Year getEntriesByMonth(int year, int month) {
-		// TODO Auto-generated method stub
-		return null;
+		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
+		java.util.Calendar calendar = new GregorianCalendar(locale);
+		calendar.set(java.util.Calendar.YEAR, year);
+		calendar.set(java.util.Calendar.MONTH, month - 1);
+		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
+		java.util.Calendar firstMomentInMonth = momentCreator
+				.createFirstPossibleMomentOfMonthReturningCalendar(calendar);
+		java.util.Calendar lastMomentInMonth = momentCreator
+				.createLastPossibleMomentOfMonthReturningCalendar(calendar);
+		// Alle Events in diesem Zeitraum holen
+		return createYearInRange(firstMomentInMonth, lastMomentInMonth, year);
 	}
 
 	public Year getEntriesByYear(int year) {
@@ -67,17 +85,13 @@ public class CalendarImpl implements Calendar {
 		java.util.Calendar lastMomentInYear = momentCreator
 				.createLastPossibleMomentOfYearReturningCalendar(calendar);
 		// Alle Events in diesem Zeitraum holen
-		List<Event> eventBetweenDates = eventDAO.getEventBetweenDates(user,
-				firstMomentInYear.getTime(), lastMomentInYear.getTime());
-		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
-		for (Event event : eventBetweenDates) {
-			List<CalendarEntry> wrapEventToCalendar = wrapper
-					.wrapEventToCalendar(event);
-			// fill map for use insertion in CalendaEntry later. Benutzt
-			// Referenzen der Liste und der Map
-			fillCalendarEntryMapForEvent(wrapEventToCalendar,
-					calendarDayOnCalendarEntryMap);
-		}
+		return createYearInRange(firstMomentInYear, lastMomentInYear, year);
+	}
+
+	private Year createYearInRange(java.util.Calendar firstMomentInMonth,
+			java.util.Calendar lastMomentInMonth, int year) {
+		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = geteventsBetweenDatesAndFillStrucuture(
+				firstMomentInMonth, lastMomentInMonth);
 		Year result = new Year(year);
 		List<Month> monthlist = getMonthList(year);
 		for (Month month : monthlist) {
@@ -87,6 +101,30 @@ public class CalendarImpl implements Calendar {
 		}
 		result.setMonths(monthlist);
 		return result;
+	}
+
+	/**
+	 * Holt alle evnts des users diese @{link CalendarImpl}s und fuellt diese im
+	 * zwischenraum der gegebenen Daten auf.
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @return eine map die Datum auf Liste von CalendarEntries mappt
+	 */
+	private Map<java.util.Calendar, List<CalendarEntry>> geteventsBetweenDatesAndFillStrucuture(
+			java.util.Calendar startDate, java.util.Calendar endDate) {
+		List<Event> eventBetweenDates = eventDAO.getEventBetweenDates(user,
+				startDate.getTime(), endDate.getTime());
+		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
+		for (Event event : eventBetweenDates) {
+			List<CalendarEntry> wrapEventToCalendar = wrapper
+					.wrapEventToCalendar(event);
+			// fill map for use insertion in CalendaEntry later. Benutzt
+			// Referenzen der Liste und der Map
+			fillCalendarEntryMapForEvent(wrapEventToCalendar,
+					calendarDayOnCalendarEntryMap);
+		}
+		return calendarDayOnCalendarEntryMap;
 	}
 
 	/**
@@ -141,9 +179,11 @@ public class CalendarImpl implements Calendar {
 		// "resttage" in der zwischenvariable weekDays zum Monat (als woche
 		// "verpackt") hinzugefügt werden müssen.
 		int currentWeek = -1;
+		// Zaehler fuer number der Woche im XML
+		int weeknumer = 1;
 		while (calendar.get(java.util.Calendar.MONTH) == month) {
 			// Der aktuelle monatstag
-			int dayOfMonth = calendar.get(java.util.Calendar.MONTH);
+			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
 			String dayname = dateFormatSymbols.getWeekdays()[calendar
 					.get(java.util.Calendar.DAY_OF_WEEK)];
@@ -154,25 +194,22 @@ public class CalendarImpl implements Calendar {
 			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
 			// Monat gespeichert.
 			if (!(weekOfYear == currentWeek)) {
-				Week week = new Week(currentWeek);
+				Week week = new Week(weeknumer);
 				week.setDays(weekDays);
 				weeks.add(week);
 				// Zurücksetzung der attribute
 				weekDays = new ArrayList<Day>();
 				weekOfYear = currentWeek;
+				weeknumer++;
 			}
-
-			// TODO termine in den tag einbauen
 			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
 			weekDays.add(day);
-			// Setzten des naechsten Tags FIXME!!!!!!!!!!!!!!!
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
-			// calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
 		}
 		// Ueberpruefung, ob wir noch im Monat sind.
 		if (weekDays.size() > 0) {
-			Week week = new Week(currentWeek);
+			Week week = new Week(weeknumer);
 			week.setDays(weekDays);
 			weeks.add(week);
 		}

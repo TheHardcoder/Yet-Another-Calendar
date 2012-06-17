@@ -1,4 +1,4 @@
-package de.yetanothercalender.model.view;
+package de.yetanothercalendar.model.view;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,12 +8,12 @@ import org.jdom.Element;
 
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 
-public class EntryView extends ParentView {
+public class EntryViewHelper extends ViewHelper {
 
 	private CalendarEntry entry;
 	private Element eEntryElement;
 
-	public EntryView(CalendarEntry pEntry) {
+	public EntryViewHelper(CalendarEntry pEntry) {
 		this.entry = pEntry;
 		eEntryElement = new Element("entry");
 		eEntryElement.setAttribute("id", String.valueOf(entry.getId()));
@@ -58,9 +58,9 @@ public class EntryView extends ParentView {
 
 	private Element createCategoriesElement() {
 		Element rElement = new Element("categories");
-		List<String> listOfCatagories = new ArrayList<String>();
+		List<String> listOfCatagories = entry.getCategory();
 		for (String itCategory : listOfCatagories) {
-			rElement.addContent("category").setText(itCategory);
+			rElement.addContent(new Element("category").setText(itCategory));
 		}
 		return rElement;
 	}

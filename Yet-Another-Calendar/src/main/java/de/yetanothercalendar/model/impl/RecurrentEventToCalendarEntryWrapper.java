@@ -30,6 +30,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 		} else {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
+<<<<<<< HEAD
 			RRule rrule = new RRule(event.getRrule());
 			boolean endsBeforeStartOfEvent = ((rrule.getUntil() != null) && (rrule
 					.getUntil().compareTo(begin) <= 0));
@@ -46,6 +47,19 @@ public class RecurrentEventToCalendarEntryWrapper {
 			} else {
 				// No event in the given time Frame
 				return null;
+=======
+			String rrule = event.getRrule();
+			if ((event.getDtstart().compareTo(end) <= 0)) {
+				if (getRRULEProperty("BYYEAR", rrule) != "") {
+					String byYear = getRRULEProperty("BYYEAR", rrule);
+					// FIXME: all years in the given time frame have to be
+					// checked, encapsule in Methods, because some have to be
+					// reused on different paths
+					if (byYear.indexOf(begin.getYear()) > -1) {
+
+					}
+				}
+>>>>>>> 45621f39310351e16c33704dbbadad376bc066e5
 			}
 			return new ArrayList<CalendarEntry>();
 		}
@@ -58,6 +72,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 			return rrule.substring(attrBegin, attrEnd);
 		} else
 			return "";
+<<<<<<< HEAD
 	}
 
 	public List<Integer> getMonthsInTimeFrame(Date start, Date end) {
@@ -146,6 +161,8 @@ public class RecurrentEventToCalendarEntryWrapper {
 		}
 
 		return candidates;
+=======
+>>>>>>> 45621f39310351e16c33704dbbadad376bc066e5
 	}
 
 	public List<Date> getByWeekNoCandidates(List<Date> dates, Date start,

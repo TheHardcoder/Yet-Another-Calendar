@@ -25,35 +25,41 @@ public class RRule {
 	private String freq;
 	private int interval;
 	private int count;
+
 	/**
 	 * Standard Constructor
 	 */
-	public RRule(){
-		
+	public RRule() {
+
 	}
-	
+
 	/**
 	 * Parses an RRule-String to an RRule-Object
-	 * @param rrule 
-	 * RRule String
+	 * 
+	 * @param rrule
+	 *            RRule String
 	 */
-	public RRule(String rrule){
+	public RRule(String rrule) {
 		this.parseRRule(rrule);
 	}
-	
+
 	/**
 	 * Parses an RRule-String to an RRule-Object
-	 * @param rrule 
-	 * RRule String
+	 * 
+	 * @param rrule
+	 *            RRule String
 	 */
-	public void parseRRule(String rrule){
-		/* FIXME: Mit JDK 1.7 switch über den substring(0,4) von rrule und dann Elemente direkt setzen --> wesentlich schneller*/
-		
+	public void parseRRule(String rrule) {
+		/*
+		 * FIXME: Mit JDK 1.7 switch ï¿½ber den substring(0,4) von rrule und dann
+		 * Elemente direkt setzen --> wesentlich schneller
+		 */
+
 		String untilStr = getRRULEProperty("UNTIL=", rrule);
 		try {
 			until = ICalendarImporter.parseIcsDate(untilStr);
 		} catch (ParseException e) {
-			//no until Date set
+			// no until Date set
 			until = null;
 		}
 		

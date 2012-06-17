@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE calendar SYSTEM "Resources/calendar.dtd">
 <?xml-stylesheet type="text/xsl" href="Resources/calendar_yearview.xsl" ?>
-<calendar selection="3">
+<calendar selectedyear="2012" selectedmonth="2" selectedweek="6" selectedday="12">
 	<year number="2012">
 		<month name="Jan" number="1">
 			<week number="1">

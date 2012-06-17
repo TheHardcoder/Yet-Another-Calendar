@@ -1,4 +1,4 @@
-package de.yetanothercalender.model.view;
+package de.yetanothercalendar.model.view;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import de.yetanothercalendar.model.calendar.*;
 
-public class TestView extends ParentView {
+public class TestView extends View {
 
 	private List<Month> lMonths = new ArrayList<Month>();
 	private List<Week> lWeeks = new ArrayList<Week>();
@@ -18,6 +18,7 @@ public class TestView extends ParentView {
 	public TestView() {
 		sCate.add("Cate1");
 		sCate.add("Cate2");
+		sCate.add("CateNeu");
 		CalendarEntry cE = new CalendarEntry(1, "high", "#FFFF", "Hammer Job",
 				dt, dt, dt, "KA", "Teeeest", dt, dt, "Hoffentlich klappts",
 				sCate);
@@ -29,10 +30,13 @@ public class TestView extends ParentView {
 		wTWeek.setDays(lDays);
 		lWeeks.add(wTWeek);
 		Month mTMonth = new Month("Jan", 1);
+		Month mTMonth2 = new Month("Feb", 2);
 		mTMonth.setWeeks(lWeeks);
+		mTMonth2.setWeeks(lWeeks);
 		lMonths.add(mTMonth);
+		lMonths.add(mTMonth2);
 		Year yTest = new Year(2012, lMonths);
-		createXML(yTest);
+		new YearView(yTest);
 	}
 
 	public static void main(String[] args) {
