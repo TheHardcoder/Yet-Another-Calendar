@@ -11,18 +11,14 @@ import de.yetanothercalendar.model.calendar.Week;
 public class MonthViewHelper extends ViewHelper {
 
 	private Month month;
-	private Element eMonthElement;
 
 	public MonthViewHelper(Month pMonth) {
 		this.month = pMonth;
-		eMonthElement = new Element("month");
-		eMonthElement.setAttribute("name", month.getName());
-		eMonthElement.setAttribute("number", String.valueOf(month.getNumber()));
-		eMonthElement.addContent(this.getWeekElements());
-	}
-
-	public Element getMonthElement() {
-		return eMonthElement;
+		element = new Element("month");
+		element.setAttribute("name", month.getName());
+		element
+				.setAttribute("number", String.valueOf(month.getNumber()));
+		element.addContent(this.getWeekElements());
 	}
 
 	public List<Element> getWeekElements() {
@@ -33,7 +29,7 @@ public class MonthViewHelper extends ViewHelper {
 			listOfWeekViews.add(new WeekViewHelper(itWeek));
 		}
 		for (WeekViewHelper wView : listOfWeekViews) {
-			listOfWeekElements.add(wView.getWeekElement());
+			listOfWeekElements.add(wView.getElement());
 		}
 		return listOfWeekElements;
 	}

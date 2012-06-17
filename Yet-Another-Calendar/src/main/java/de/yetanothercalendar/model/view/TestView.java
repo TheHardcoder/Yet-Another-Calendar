@@ -18,7 +18,7 @@ public class TestView extends View {
 	public TestView() {
 		sCate.add("Cate1");
 		sCate.add("Cate2");
-		sCate.add("CateNeu");
+		sCate.add("Cate3");
 		CalendarEntry cE = new CalendarEntry(1, "high", "#FFFF", "Hammer Job",
 				dt, dt, dt, "KA", "Teeeest", dt, dt, "Hoffentlich klappts",
 				sCate);
