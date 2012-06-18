@@ -13,10 +13,10 @@ public interface UserDAO {
 	public abstract User createUser(User user);
 
 	/**
-	 * �berpr�ft ob die Email-Adresse des Users in der Tabelle USERS vorhanden
-	 * ist und �berpr�ft anschlie�end ob das eingegeben Passwort mit dem
-	 * Passwort in der Tabelle USERS �bereinstimmt, falls dies der Fall ist wird
-	 * true zur�ckgegeben, ansonsten false
+	 * Ueberprueft ob die Email-Adresse des Users in der Tabelle USERS vorhanden
+	 * ist und ueberprueft anschliessend ob das eingegeben Passwort mit dem
+	 * Passwort in der Tabelle USERS uebereinstimmt, falls dies der Fall ist wird
+	 * true zurueckgegeben, ansonsten false
 	 * 
 	 * @param email
 	 * @param password
@@ -26,7 +26,7 @@ public interface UserDAO {
 
 	/**
 	 * Hollt sich die Userdaten aus der Tabelle USERS und gibt ein Objekt vom
-	 * Typ User zur�ck
+	 * Typ User zurueck
 	 * 
 	 * @param email
 	 * @return

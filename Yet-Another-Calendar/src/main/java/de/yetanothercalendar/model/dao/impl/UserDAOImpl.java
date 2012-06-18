@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.junit.Test;
+
 import de.yetanothercalendar.model.dao.UserDAO;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
@@ -45,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public User createUser(User user) {
-		User result = returnUser(user.getEmail());
+		User result = returnUser (user.getEmail());
 		if (result == null) {
 			try {
 				Connection con = manager.getConnection();
@@ -91,6 +93,7 @@ public class UserDAOImpl implements UserDAO {
 					return false;
 				}
 			}
+			rsUser.close();
 			createStatement.close();
 			con.close();
 			return false;
@@ -110,22 +113,37 @@ public class UserDAOImpl implements UserDAO {
 					+ "\";";
 
 			ResultSet rsUsers = createStatement.executeQuery(userSurch);
-
-			rsUsers.next();
-
-			int dbId = rsUsers.getInt(1);
-			String dbEmail = rsUsers.getString(2);
-			String dbForename = rsUsers.getString(3);
-			String dbLastname = rsUsers.getString(4);
-			String dbPassword = rsUsers.getString(5);
-
-			createStatement.close();
-			con.close();
-			return new User(dbId, dbEmail, dbForename, dbLastname, dbPassword);
+			String dbEmail;
+			String dbForename;
+			String dbLastname;
+			String dbPassword;
+			int dbId;
+			
+			if(rsUsers.next()){
+				dbId = rsUsers.getInt(1);
+				dbEmail = rsUsers.getString(2);
+				dbForename = rsUsers.getString(3);
+				dbLastname = rsUsers.getString(4);
+				dbPassword = rsUsers.getString(5);
+				rsUsers.close();
+				createStatement.close();
+				con.close();
+				return new User(dbId, dbEmail, dbForename, dbLastname, dbPassword);
+			}
+			else{
+				rsUsers.close();
+				createStatement.close();
+				con.close();
+				return null;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+	
+	
+	
+	
 }
