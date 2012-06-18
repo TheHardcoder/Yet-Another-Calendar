@@ -34,7 +34,7 @@ public abstract class CalendarView extends View {
 		Element eRoot = new Element("calendar"); // Wurzelelement
 		eRoot.setAttribute("selection", "0");
 		dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
-		dXml.setDocType(new DocType("calendar", "resources/calendar.dtd"));
+		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
 		// Stylesheet hinzuf�gen
 		HashMap<String, String> mapStylesheet = new HashMap<String, String>(2);
 		mapStylesheet.put("type", "text/xsl");
