@@ -38,7 +38,7 @@ public class RecurrentCalendarEventToEntryWrapperTest extends TestCase {
 			RecurrentEventToCalendarEntryWrapper wrapper = new RecurrentEventToCalendarEntryWrapper(
 					Locale.GERMANY);
 
-			GregorianCalendar startCal = new GregorianCalendar(2012, 05, 04,
+			GregorianCalendar startCal = new GregorianCalendar(1990, 05, 04,
 					13, 00, 00);
 			GregorianCalendar endCal = new GregorianCalendar(2013, 06, 04, 13,
 					00, 00);
