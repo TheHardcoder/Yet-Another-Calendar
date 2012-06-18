@@ -119,15 +119,16 @@ public class CalendarImpl implements Calendar {
 				.getEventsFromUserNotRecurring(user);
 		List<CalendarEntry> notRecurringCalendarEntries = new ArrayList<CalendarEntry>();
 		for (Event event : eventsNotRecurring) {
-			notRecurringCalendarEntries = wrapper.wrapEventToCalendar(event);
+			notRecurringCalendarEntries.addAll(wrapper
+					.wrapEventToCalendar(event));
 		}
 		List<Event> eventsRecurring = eventDAO.getEventsFromUserRecurring(user);
 		List<CalendarEntry> recurringCalendarEntries = new ArrayList<CalendarEntry>();
-		for (Event event : eventsNotRecurring) {
+		for (Event event : eventsRecurring) {
 			try {
-				recurringCalendarEntries = wrapperRecurringEvents
+				recurringCalendarEntries.addAll(wrapperRecurringEvents
 						.wrapEventToCalendar(event, startDate.getTime(),
-								endDate.getTime());
+								endDate.getTime()));
 			} catch (Exception e) {
 				// TODO richtige exception abfangen?
 				e.printStackTrace();
