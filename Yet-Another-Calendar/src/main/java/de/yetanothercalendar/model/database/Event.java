@@ -258,7 +258,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Id: " + id + "\n" + " User: " + user.toString() + "\n"
-				+ "dtsatmp: " + parseDate(dtstamp) + " UID: " + uid
+				+ "dtstamp: " + parseDate(dtstamp) + " UID: " + uid
 				+ " dtstart:" + parseDate(dtstart) + "\n" + "created:"
 				+ parseDate(created) + " Description: " + description
 				+ " Lastmod: " + parseDate(lastmod) + "\n" + "Location: "
