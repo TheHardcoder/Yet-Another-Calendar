@@ -10,21 +10,22 @@ import junit.framework.TestCase;
 
 public class UserDAOTest extends TestCase {
 
-	 @Test 
-	 public void testCreateUserTable(){
-	  
-	 UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager("admin",
-	 "admin", "localhost", 3306, "yetanothercalendar"));
-	 assertNotNull("Anlegen des UserDAOs fehlgeschlagen!", user);
-	 user.createUserTable(); }
-	 
+	@Test
+	public void testCreateUserTable() {
+
+		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
+				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
+		assertNotNull("Anlegen des UserDAOs fehlgeschlagen!", user);
+		user.createUserTable();
+	}
+
 	@Test
 	public void testCreateUser() {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (user.createUser(new User("zeller6@yahoo.de", "Paull", "Sulzer",
-				"test"))) {
+		if (null != user.createUser(new User("zeller6@yahoo.de", "Paull",
+				"Sulzer", "test"))) {
 			System.out.println("Hat funktioniert");
 		} else {
 			System.out
@@ -45,7 +46,7 @@ public class UserDAOTest extends TestCase {
 					+ user.getPasswordSHA1());
 		} else {
 			System.out.println("Email-Adresse oder Passwort sind falsch! "
-					+ "Bitte überprüfen sie beides");
+					+ "Bitte ï¿½berprï¿½fen sie beides");
 		}
 
 	}

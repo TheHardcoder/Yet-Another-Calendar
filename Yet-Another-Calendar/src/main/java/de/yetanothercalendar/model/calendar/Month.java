@@ -49,4 +49,10 @@ public class Month {
 		this.weeks = weeks;
 	}
 
+	@Override
+	public String toString() {
+		return "Month [name=" + name + ", number=" + number + ", weeks="
+				+ weeks + "]";
+	}
+
 }

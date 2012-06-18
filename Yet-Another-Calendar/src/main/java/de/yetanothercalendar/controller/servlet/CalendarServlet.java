@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.yetanothercalendar.model.Calendar;
+import de.yetanothercalendar.model.calendar.CalendarEntry;
+import de.yetanothercalendar.model.calendar.Day;
+import de.yetanothercalendar.model.calendar.Month;
+import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.impl.CalendarImpl;
@@ -41,6 +45,7 @@ public class CalendarServlet extends HttpServlet {
 						Year entriesByYear = calendar.getEntriesByYear(year);
 						YearView yearview = new YearView(entriesByYear);
 						resp.getWriter().write(yearview.getXMLString());
+						printYear(entriesByYear);
 					} else {
 						throw new RuntimeException(
 								"Invalid parameters for view " + viewType);
@@ -80,6 +85,26 @@ public class CalendarServlet extends HttpServlet {
 			// TODO Ben redirection for corect site in frontend
 			throw new RuntimeException("No user is logged in!");
 		}
+	}
 
+	private static void printYear(Year year) {
+		System.out.println("Returned year: ");
+		int termincount = 0;
+		System.out.println(year.toString());
+		for (Month m : year.getMonths()) {
+			System.out.println("\t" + m.toString());
+			for (Week w : m.getWeeks()) {
+				System.out.println("\t\t" + w.toString());
+				for (Day day : w.getDays()) {
+					System.out.println("\t\t\t" + day.toString());
+					for (CalendarEntry e : day.getCalendarEntries()) {
+						termincount++;
+						System.out.println("\t\t\t\t" + e.toString());
+					}
+				}
+			}
+		}
+		System.out.println("Count der Termine " + termincount);
+		System.out.println("End of year\n\n");
 	}
 }
