@@ -1,10 +1,12 @@
 package de.yetanothercalendar.controller.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -41,6 +43,16 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		calendar2.set(2012, 0, 1, 14, 0);
 		daoEvent.createEvents(createEvent(user, calendarCreated, calendar,
 				calendar2, "Meeting", "DHBW"));
+
+		System.out.println("User logged in: " + user.toString());
+		System.out.println("Events in der db:");
+		List<Event> eventlist = daoEvent.getEventsFromUser(user);
+		for (Event event : eventlist) {
+			System.out.println("--");
+			System.out.println(event.toString() + "\n");
+			System.out.println("--");
+		}
+		System.out.println("ENDE listing");
 	}
 
 	private Event createEvent(User user, Calendar created, Calendar start,
