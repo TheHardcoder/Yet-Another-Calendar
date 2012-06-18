@@ -273,8 +273,4 @@ public class EventDAOImpl implements EventDAO {
 			return null;
 		}
 	}
-
-	public static void main(String[] args) {
-
-	}
 }
