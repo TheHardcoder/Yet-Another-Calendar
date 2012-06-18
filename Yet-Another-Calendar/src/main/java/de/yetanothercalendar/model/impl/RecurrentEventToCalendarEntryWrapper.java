@@ -9,19 +9,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import net.fortuna.ical4j.model.DateList;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Dur;
 import net.fortuna.ical4j.model.Period;
 import net.fortuna.ical4j.model.PeriodList;
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.DtEnd;
-import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
-import net.fortuna.ical4j.model.property.RDate;
 
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.database.Event;
@@ -29,7 +25,6 @@ import de.yetanothercalendar.model.database.Event;
 public class RecurrentEventToCalendarEntryWrapper {
 
 	private Locale locale;
-	private RRule rrule;
 
 	public RecurrentEventToCalendarEntryWrapper(Locale locale) {
 		super();
@@ -52,7 +47,10 @@ public class RecurrentEventToCalendarEntryWrapper {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
 
-			GregorianCalendar calBegin = new GregorianCalendar();
+			/**
+			 * FIXME: Change to Calendar.getInstance(locale); Ask Fabian
+			 */
+			Calendar calBegin = new GregorianCalendar();
 			calBegin.setTime(begin);
 
 			// Convert Dates into ICal4J Date format
