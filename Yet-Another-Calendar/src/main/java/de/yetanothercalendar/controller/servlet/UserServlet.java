@@ -35,10 +35,11 @@ public class UserServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		if (action.toLowerCase().equals("register")) {
 			// TODO create user and add it into database and session
-			String email = (String) req.getAttribute("email");
-			String forename = (String) req.getAttribute("forename");
-			String lastname = (String) req.getAttribute("lastname");
-			String password = (String) req.getAttribute("password");
+			String email = (String) req.getParameter("email");
+			String forename = (String) req.getParameter("forename");
+			String lastname = (String) req.getParameter("lastname");
+			String password = (String) req.getParameter("password");
+			System.out.println("DATA: " + email + forename + lastname + password);
 			if (email != null && forename != null && lastname != null
 					&& password != null) {
 				// TODO check if hashing works correct
