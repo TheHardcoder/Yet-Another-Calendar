@@ -83,4 +83,14 @@ public class EventDAOMockFull implements EventDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<Event> getEventsFromUserRecurring(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Event> getEventsFromUserNotRecurring(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

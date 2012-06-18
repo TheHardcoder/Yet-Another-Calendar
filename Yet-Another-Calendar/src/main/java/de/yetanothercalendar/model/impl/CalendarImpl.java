@@ -36,6 +36,7 @@ public class CalendarImpl implements Calendar {
 	private MomentCreator momentCreator;
 	/** Wrapper fuer Wrap von Event zu CalendarEntry */
 	private EventToCalendarEntryWrapper wrapper;
+	private RecurrentEventToCalendarEntryWrapper wrapperRecurringEvents;
 
 	public CalendarImpl(User user) {
 		this.user = user;
@@ -43,6 +44,7 @@ public class CalendarImpl implements Calendar {
 		wrapper = new EventToCalendarEntryWrapper(locale);
 		momentCreator = new MomentCreator(locale);
 		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
+		wrapperRecurringEvents = new RecurrentEventToCalendarEntryWrapper(locale);
 	}
 
 	public Year getEntriesByWeek(int year, int week) {
