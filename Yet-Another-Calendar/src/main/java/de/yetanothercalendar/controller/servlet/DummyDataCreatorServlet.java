@@ -55,6 +55,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		}
 		System.out.println("ENDE listing");
 
+		// FIXME TODO Events nach datum abfragen funktioniert noch nicht!
 		System.out.println("\n\n\n\n---------------------------------------------------------------------------------------------------------------------");
 		Calendar gregcalendar = new GregorianCalendar();
 		gregcalendar.set(Calendar.YEAR, 2010);
