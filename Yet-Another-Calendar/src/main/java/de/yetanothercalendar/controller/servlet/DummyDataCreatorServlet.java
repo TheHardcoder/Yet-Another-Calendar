@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
 import de.yetanothercalendar.model.dao.impl.UserDAOImpl;
 import de.yetanothercalendar.model.database.Event;
@@ -31,7 +33,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		daoUser.createUserTable();
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
 		daoEvent.createEventTable();
-		User user = new User("test@test.de", "Vorname", "Nachname", "HashMe");
+		User user = new User("test@test.de", "Vorname", "Nachname", DigestUtils.shaHex("HashMe"));
 		user = daoUser.createUser(user);
 
 		req.getSession().setAttribute("user", user);

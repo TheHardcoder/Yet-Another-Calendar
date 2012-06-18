@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String action = (String) req.getAttribute("action");
+		String action = (String) req.getParameter("action");
 		HttpSession session = req.getSession();
 		if (action.toLowerCase().equals("register")) {
 			// TODO create user and add it into database and session
@@ -55,8 +55,8 @@ public class UserServlet extends HttpServlet {
 		} else if (action.toLowerCase().equals("login")) {
 			// TODO Beim Fehlschlagen des Logins wäre ein Redirect auf die
 			// Loginseite mit Parameter errordescription="Beschreibung" super.
-			String email = (String) req.getAttribute("email");
-			String password = (String) req.getAttribute("password");
+			String email = (String) req.getParameter("email");
+			String password = (String) req.getParameter("password");
 			if (email != null && password != null) {
 				// TODO check if hashing works correct
 				if (dao.checkUser(email, hashPassword(password))) {
