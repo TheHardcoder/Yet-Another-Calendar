@@ -18,7 +18,7 @@ public class EntryViewHelper extends ViewHelper {
 		this.entry = pEntry;
 		element = new Element("entry");
 		element.setAttribute("id", String.valueOf(entry.getId()));
-		element.setAttribute("priority", entry.getPriority());
+		element.setAttribute("priority", entry.getPriority().trim());
 		element.setAttribute("color", entry.getColorString());
 		element.addContent(this.getEntryAttributes());
 	}
