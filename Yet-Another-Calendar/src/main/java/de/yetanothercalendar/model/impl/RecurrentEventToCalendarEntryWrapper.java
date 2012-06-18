@@ -31,10 +31,6 @@ public class RecurrentEventToCalendarEntryWrapper {
 		this.locale = locale;
 	}
 
-	public RecurrentEventToCalendarEntryWrapper() {
-
-	}
-
 	public List<CalendarEntry> wrapEventToCalendar(Event event, Date begin,
 			Date end) throws IllegalArgumentException, ParseException {
 		// TODO Auto-generated method stub
@@ -46,11 +42,10 @@ public class RecurrentEventToCalendarEntryWrapper {
 		} else {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
-
 			/**
 			 * FIXME: Change to Calendar.getInstance(locale); Ask Fabian
 			 */
-			Calendar calBegin = new GregorianCalendar();
+			Calendar calBegin = new GregorianCalendar(locale);
 			calBegin.setTime(begin);
 
 			// Convert Dates into ICal4J Date format
