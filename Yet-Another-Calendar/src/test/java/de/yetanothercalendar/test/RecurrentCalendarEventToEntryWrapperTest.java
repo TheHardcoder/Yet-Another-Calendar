@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -34,7 +35,8 @@ public class RecurrentCalendarEventToEntryWrapperTest extends TestCase {
 			User user = new User("test@test.de", "test", "test", "123456");
 
 			events = importer.parseIcal4JToEventList(test, user);
-			RecurrentEventToCalendarEntryWrapper wrapper = new RecurrentEventToCalendarEntryWrapper();
+			RecurrentEventToCalendarEntryWrapper wrapper = new RecurrentEventToCalendarEntryWrapper(
+					Locale.GERMANY);
 
 			GregorianCalendar startCal = new GregorianCalendar(2012, 05, 04,
 					13, 00, 00);
