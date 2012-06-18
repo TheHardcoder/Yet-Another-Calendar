@@ -29,6 +29,9 @@ public class CalendarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		resp.setCharacterEncoding("utf-8");
+		
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
