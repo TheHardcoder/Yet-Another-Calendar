@@ -33,7 +33,7 @@ public interface Calendar {
 	 *         {@link de.yetanothercalendar.model.calendar.CalendarEntry} s
 	 *         enthält
 	 */
-	Year getEntriesByWeek(int year, int month, int week);
+	Year getEntriesByWeek(int year, int week);
 
 	/**
 	 * Gibt ein {@link Year} zurück, welches die Strukture von Monaten, Wochen,

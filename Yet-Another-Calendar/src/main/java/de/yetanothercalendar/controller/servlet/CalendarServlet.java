@@ -28,36 +28,47 @@ public class CalendarServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
-			// CAlendastruktur holen und in xml parsen
+			String viewType = (String) request.getParameter("view");
 			String selectedYear = (String) request.getParameter("selectedyear");
 			String selectedMonth = (String) request
 					.getParameter("selectedmonth");
 			String selectedWeek = (String) request.getParameter("selectedweek");
-			if (selectedYear == null) {
-				throw new RuntimeException(
-						"Das gegebene Jahr darf nicht null sein, und muss als parameter 'selectedyear' im GET request uebergeben werden");
-			}
-			// Year view
-			if (selectedMonth == null) {
-				// GET years
-				int year = Integer.parseInt(selectedYear);
-				Year entriesByYear = calendar.getEntriesByYear(year);
-				YearView yearview = new YearView(entriesByYear);
-				resp.getWriter().write(yearview.getXMLString());
-			} else if (selectedWeek == null) {
-				int year = Integer.parseInt(selectedYear);
-				int month = Integer.parseInt(selectedMonth);
-				Year entriesByMonth = calendar.getEntriesByMonth(year, month);
-				MonthView monthview = new MonthView(entriesByMonth);
-				resp.getWriter().write(monthview.getXMLString());
+			if (viewType.toLowerCase().equals("yearview")) {
+				if (selectedYear != null) {
+					// GET years
+					int year = Integer.parseInt(selectedYear);
+					Year entriesByYear = calendar.getEntriesByYear(year);
+					YearView yearview = new YearView(entriesByYear);
+					resp.getWriter().write(yearview.getXMLString());
+				} else {
+					throw new RuntimeException("Invalid parameters for view "
+							+ viewType);
+				}
+			} else if (viewType.toLowerCase().equals("monthview")) {
+				if (selectedYear != null & selectedMonth != null) {
+					int year = Integer.parseInt(selectedYear);
+					int month = Integer.parseInt(selectedMonth);
+					Year entriesByMonth = calendar.getEntriesByMonth(year,
+							month);
+					MonthView monthview = new MonthView(entriesByMonth);
+					resp.getWriter().write(monthview.getXMLString());
+				} else {
+					throw new RuntimeException("Invalid parameters for view "
+							+ viewType);
+				}
+			} else if (viewType.toLowerCase().equals("weekview")) {
+				if (selectedYear != null & selectedWeek != null) {
+					int year = Integer.parseInt(selectedYear);
+					int week = Integer.parseInt(selectedWeek);
+					Year entriesByYear = calendar.getEntriesByWeek(year, week);
+					MonthView monthview = new MonthView(entriesByYear);
+					resp.getWriter().write(monthview.getXMLString());
+				} else {
+					throw new RuntimeException("Invalid parameters for view "
+							+ viewType);
+				}
 			} else {
-				int year = Integer.parseInt(selectedYear);
-				int month = Integer.parseInt(selectedMonth);
-				int week = Integer.parseInt(selectedWeek);
-				Year entriesByYear = calendar.getEntriesByWeek(year, month,
-						week);
-				MonthView monthview = new MonthView(entriesByYear);
-				resp.getWriter().write(monthview.getXMLString());
+				throw new RuntimeException("Invalid View name");
 			}
 		} else {
 			// TODO Ben redirection for corect site in frontend
