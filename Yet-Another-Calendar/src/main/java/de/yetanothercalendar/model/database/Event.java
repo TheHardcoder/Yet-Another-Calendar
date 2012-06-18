@@ -60,14 +60,14 @@ public class Event {
 		this.exdate = exdate;
 		this.rdate = rdate;
 	}
-	
+
 	public Event(User user, Date dtstamp, String uid, Date dtstart,
 			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
 			String comment, Date exdate, Date rdate) {
 		super();
-		
+
 		this.user = user;
 		this.dtstamp = dtstamp;
 		this.uid = uid;
@@ -89,6 +89,11 @@ public class Event {
 		this.rdate = rdate;
 	}
 
+	public Event getCopy() {
+		return new Event(id, user, dtstamp, uid, dtstart, created, description,
+				lastmod, location, priority, summary, recurid, rrule, dtend,
+				duration, color, categories, comment, exdate, rdate);
+	}
 
 	public long getId() {
 		return id;

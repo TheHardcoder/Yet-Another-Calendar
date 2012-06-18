@@ -71,8 +71,13 @@ public class RecurrentEventToCalendarEntryWrapper {
 					event.getDtstart());
 			ve.getProperties().add(new DtStart(d));
 
-			d = new net.fortuna.ical4j.model.DateTime(event.getDtend());
-			ve.getProperties().add(new DtEnd(d));
+			try {
+				d = new net.fortuna.ical4j.model.DateTime(event.getDtend());
+				ve.getProperties().add(new DtEnd(d));
+			} catch (Exception e) {
+				// End time not set
+				System.err.println("Error Parrsing Endtime");
+			}
 
 			Recur recur = new Recur(event.getRrule());
 
@@ -91,7 +96,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 			}
 
 			PeriodList perList = ve.calculateRecurrenceSet(period);
-			perList = perList.normalise();
+			// perList = perList.normalise();
 
 			List<Event> events = new ArrayList<Event>();
 
@@ -99,12 +104,14 @@ public class RecurrentEventToCalendarEntryWrapper {
 				Period per = (Period) iterator.next();
 				// all the original Properties of the Event get reused, only
 				// Start and Enddate get set
-				// TODO: clarify whether RRULE Property has to be set to ""
+				// otherwise it would always the same pointer
+				event = event.getCopy();
+				event.setRrule("");
 				event.setDtstart(per.getStart());
 				event.setDtend(per.getEnd());
 				events.add(event);
-				// System.out.println("Start: " + per.getStart() + " Ende: "
-				// + per.getEnd());
+				System.out.println("Start: " + per.getStart() + " Ende: "
+						+ per.getEnd());
 			}
 
 			EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(
