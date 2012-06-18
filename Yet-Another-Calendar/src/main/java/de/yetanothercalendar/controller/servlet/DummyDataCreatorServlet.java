@@ -29,7 +29,8 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
 		daoEvent.createEventTable();
 		User user = new User("test@test.de", "Vorname", "Nachname", "HashMe");
-		daoUser.createUser(user);
+		user = daoUser.createUser(user);
+
 		req.getSession().setAttribute("user", user);
 
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);

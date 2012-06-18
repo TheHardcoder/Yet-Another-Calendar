@@ -1,6 +1,5 @@
 package de.yetanothercalendar.model.dao;
 
-import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 
 public interface UserDAO {
@@ -11,7 +10,7 @@ public interface UserDAO {
 	 * @param user
 	 * @return
 	 */
-	public abstract boolean createUser(User user);
+	public abstract User createUser(User user);
 
 	/**
 	 * �berpr�ft ob die Email-Adresse des Users in der Tabelle USERS vorhanden
