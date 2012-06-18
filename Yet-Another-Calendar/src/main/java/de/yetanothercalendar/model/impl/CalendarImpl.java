@@ -200,7 +200,7 @@ public class CalendarImpl implements Calendar {
 			// Der aktuelle monatstag
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
-			String dayname = dateFormatSymbols.getWeekdays()[calendar
+			String dayname = dateFormatSymbols.getShortWeekdays()[calendar
 					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
 			// Die Woche des jetztigen Tags im calendar.
