@@ -40,10 +40,10 @@ public class EventDAOImpTest extends TestCase {
 			Date dtstamp = sdf.parse("2012-02-02 12:30");
 			System.out.println("Datum: " + dtstamp);
 			System.out.println(dtstamp);
-			Date dtstart = sdf.parse("2012-01-07 15:30");
-			Date created = sdf.parse("2012-01-02 12:35");
+			Date dtstart = sdf.parse("2012-02-07 15:30");
+			Date created = sdf.parse("2012-02-02 12:35");
 			Date lastmod = sdf.parse("2012-01-03 10:45");
-			Date dtend = sdf.parse("2012-01-06 13:15");
+			Date dtend = sdf.parse("2012-04-06 13:15");
 			long duration = 135;
 			List<String> categories = new ArrayList<String>();
 			categories.add("fhlefl�ajf�");

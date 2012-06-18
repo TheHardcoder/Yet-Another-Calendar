@@ -211,10 +211,15 @@ public class EventDAOImpl implements EventDAO {
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
 		List<Event> evenlist = new ArrayList<Event>();
+		
+		
 		try {
 			String email = user.getEmail();
 			java.sql.Date sFrom = new java.sql.Date(from.getTime());
 			java.sql.Date sTil = new java.sql.Date(til.getTime());
+			
+			System.out.println(sFrom);
+			System.out.println(sTil);
 			evenlist = executeSELECTQuery(
 					user,
 					"SELECT events.id, events.dtstamp,"

@@ -39,7 +39,7 @@ public class UserDAOTest extends TestCase {
 		UserDAOImpl userImp = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (userImp.checkUser("zeller@yahoo.de", "test")) {
+		if (userImp.checkUser("zeller3@yahoo.de", "test")) {
 			User user = userImp.returnUser("zeller@yahoo.de");
 			System.out.println("Email: " + user.getEmail() + " Vorname: "
 					+ user.getForename() + " ID: " + user.getId()
