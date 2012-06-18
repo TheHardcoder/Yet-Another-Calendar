@@ -15,7 +15,7 @@ import org.jdom.output.XMLOutputter;
 
 import de.yetanothercalendar.model.calendar.Year;
 
-public abstract class CalenderView extends View {
+public abstract class CalendarView extends View {
 
 	public Document dXml;
 
@@ -29,7 +29,7 @@ public abstract class CalenderView extends View {
 	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public CalenderView(Year pYear, String pPathOfXsl) {
+	public CalendarView(Year pYear, String pPathOfXsl) {
 		// XML erstellen
 		Element eRoot = new Element("calendar"); // Wurzelelement
 		eRoot.setAttribute("selection", "0");
