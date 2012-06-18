@@ -20,14 +20,15 @@ public class ICalendarImporterTest extends TestCase {
 	@Test
 	public void testImportToIcal4J() {
 		// TODO: more complex Test with _all_ properties set
-		File f = new File("resources/simple.ics");
+		File f = new File("resources/recurrentEvents.ics");
 		InputStream in = null;
 		try {
 			in = new FileInputStream(f);
-			Calendar test = ICalendarImporter.importToIcal4J(in);
+			ICalendarImporter importer = new ICalendarImporter();
+			Calendar test = importer.importToIcal4J(in);
 			List<Event> events = new ArrayList<Event>();
 			User user = new User("test@test.de", "test", "test", "123456");
-			events = ICalendarImporter.parseIcal4JToEventList(test, user);
+			events = importer.parseIcal4JToEventList(test, user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

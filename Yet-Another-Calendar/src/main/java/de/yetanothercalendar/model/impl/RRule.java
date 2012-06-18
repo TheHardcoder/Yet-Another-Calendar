@@ -9,6 +9,41 @@ import de.yetanothercalendar.model.iCal.ICalendarImporter;
 
 public class RRule {
 
+    /**
+     * Second frequency resolution.
+     */
+    public static final String SECONDLY = "SECONDLY";
+
+    /**
+     * Minute frequency resolution.
+     */
+    public static final String MINUTELY = "MINUTELY";
+
+    /**
+     * Hour frequency resolution.
+     */
+    public static final String HOURLY = "HOURLY";
+
+    /**
+     * Day frequency resolution.
+     */
+    public static final String DAILY = "DAILY";
+
+    /**
+     * Week frequency resolution.
+     */
+    public static final String WEEKLY = "WEEKLY";
+
+    /**
+     * Month frequency resolution.
+     */
+    public static final String MONTHLY = "MONTHLY";
+
+    /**
+     * Year frequency resolution.
+     */
+    public static final String YEARLY = "YEARLY";
+
 	private Date until;
 
 	private List<Integer> byMonth;
