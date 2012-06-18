@@ -36,7 +36,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		User user = new User("test@test.de", "Vorname", "Nachname", DigestUtils.shaHex("HashMe"));
 		user = daoUser.createUser(user);
 
-		req.getSession().setAttribute("user", user);
+		//req.getSession().setAttribute("user", user);
 
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
 		calendarCreated.set(2012, 0, 3, 10, 0);
