@@ -44,4 +44,14 @@ public class EventDAOMockSimple implements EventDAO {
 				"rrule", end.getTime(), 0, "#fff", new ArrayList<String>(),
 				"comment", new Date(), new Date());
 	}
+
+	public boolean createEvents(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public List<Event> getEventsFromUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE calender SYSTEM "resources/calender.dtd">
+
+<?xml-stylesheet type="text/xsl" href="resources/calender_yearview.xsl"?>
+<calender>
+  <year number="2012">
+    <month name="Jan" number="1">
+      <week number="1">
+        <day name="Mo" number="1">
+          <entry id="1" priority="high" color="#FFFF">
+            <summery>Hammer Job</summery>
+            <starttime hours="Wert" minutes="Wert" />
+            <endtime hours="Wert" minutes="Wert" />
+            <duration hours="Wert" minutes="Wert" />
+            <location>KA</location>
+            <description>Teeeest</description>
+            <created day="Wert" month="Wert" year="Wert" hours="Wert" minutes="Wert" />
+            <modified day="Wert" month="Wert" year="Wert" hours="Wert" minutes="Wert" />
+            <comment>Hoffentlich klappts</comment>
+            <categories>
+              <category>Cate1</category>
+              <category>Cate2</category>
+              <category>Cate3</category>
+            </categories>
+          </entry>
+        </day>
+      </week>
+    </month>
+    <month name="Feb" number="2">
+      <week number="1">
+        <day name="Mo" number="1">
+          <entry id="1" priority="high" color="#FFFF">
+            <summery>Hammer Job</summery>
+            <starttime hours="Wert" minutes="Wert" />
+            <endtime hours="Wert" minutes="Wert" />
+            <duration hours="Wert" minutes="Wert" />
+            <location>KA</location>
+            <description>Teeeest</description>
+            <created day="Wert" month="Wert" year="Wert" hours="Wert" minutes="Wert" />
+            <modified day="Wert" month="Wert" year="Wert" hours="Wert" minutes="Wert" />
+            <comment>Hoffentlich klappts</comment>
+            <categories>
+              <category>Cate1</category>
+              <category>Cate2</category>
+              <category>Cate3</category>
+            </categories>
+          </entry>
+        </day>
+      </week>
+    </month>
+  </year>
+</calender>
+
