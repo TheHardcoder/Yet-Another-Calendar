@@ -65,7 +65,7 @@ public abstract class CalenderView extends View {
 	}
 
 	public String getXMLString() {
-		XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		String xmlString = outputter.outputString(dXml);
 		return xmlString;
 	}

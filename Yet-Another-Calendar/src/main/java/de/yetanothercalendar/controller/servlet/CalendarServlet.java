@@ -44,7 +44,8 @@ public class CalendarServlet extends HttpServlet {
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
 						YearView yearview = new YearView(entriesByYear);
-						resp.getWriter().write(yearview.getXMLString());
+						String result = yearview.getXMLString();
+						resp.getWriter().write(result);
 						printYear(entriesByYear);
 					} else {
 						throw new RuntimeException(

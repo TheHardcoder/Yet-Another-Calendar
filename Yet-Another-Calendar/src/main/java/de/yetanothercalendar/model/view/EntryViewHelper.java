@@ -18,7 +18,10 @@ public class EntryViewHelper extends ViewHelper {
 		this.entry = pEntry;
 		element = new Element("entry");
 		element.setAttribute("id", String.valueOf(entry.getId()));
-		element.setAttribute("priority", entry.getPriority().trim());
+		// remove all whitespaces
+		String priority = entry.getPriority();
+		priority = priority.replaceAll("\\s", "");
+		element.setAttribute("priority", priority);
 		element.setAttribute("color", entry.getColorString());
 		element.addContent(this.getEntryAttributes());
 	}
