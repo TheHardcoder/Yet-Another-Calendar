@@ -45,13 +45,11 @@ public class CalendarImpl implements Calendar {
 		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
 	}
 
-	public Year getEntriesByWeek(int year, int month, int week) {
+	public Year getEntriesByWeek(int year, int week) {
 		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
 		java.util.Calendar calendar = new GregorianCalendar(locale);
-		calendar.set(java.util.Calendar.YEAR, year);
-		calendar.set(java.util.Calendar.MONTH, month - 1);
 		// TODO check if this uses the correct week
-		calendar.set(java.util.Calendar.DAY_OF_WEEK_IN_MONTH, week + 1);
+		calendar.set(java.util.Calendar.WEEK_OF_YEAR, week);
 		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
 		java.util.Calendar firstMomentInWeek = momentCreator
 				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);

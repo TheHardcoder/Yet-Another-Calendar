@@ -25,6 +25,10 @@ public class EventDAOImpl implements EventDAO {
 		this.manager = manager;
 	}
 
+	/**
+	 * Erstellt die Tabelle EVENTS in der die Events ({@link Event})
+	 * abgespeichert werden sollen.
+	 */
 	public void createEventTable() {
 		try {
 			Connection con = manager.getConnection();
@@ -57,77 +61,80 @@ public class EventDAOImpl implements EventDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat();
 			sdf.applyPattern("yyyy-MM-dd HH:mm");
 
-			int id = (int) event.getId();
-
 			User user = event.getUser();
-			int userId = (int) event.getUser().getId();
+			System.out.println(user.toString());
+			Long userid = event.getUser().getId();
+			if (userid != null) {
+				String dtstamp = sdf.format(event.getDtstamp());
+				System.out.println(dtstamp);
+				String uid = event.getUid();
+				String dtstart = sdf.format(event.getDtstart());
+				String created = sdf.format(event.getCreated());
+				String description = event.getDescription();
+				String lastmod = sdf.format(event.getLastmod());
+				String location = event.getLocation();
+				String priority = event.getPriority();
+				String summary = event.getSummary();
+				String recurid = event.getRecurid();
+				String rrule = event.getRrule();
+				String dtend = sdf.format(event.getDtend());
+				long duration = event.getDuration();
+				String color = event.getColor();
+				List<String> categories = event.getCategories();
+				String comment = event.getComment();
+				String exdate = sdf.format(event.getExdate());
+				String rdate = sdf.format(event.getRdate());
 
-			String dtstamp = sdf.format(event.getDtstamp());
-			System.out.println(dtstamp);
-			String uid = event.getUid();
-			String dtstart = sdf.format(event.getDtstart());
-			String created = sdf.format(event.getCreated());
-			String description = event.getDescription();
-			String lastmod = sdf.format(event.getLastmod());
-			String location = event.getLocation();
-			String priority = event.getPriority();
-			String summary = event.getSummary();
-			String recurid = event.getRecurid();
-			String rrule = event.getRrule();
-			String dtend = sdf.format(event.getDtend());
-			long duration = event.getDuration();
-			String color = event.getColor();
-			List<String> categories = event.getCategories();
-			String comment = event.getComment();
-			String exdate = sdf.format(event.getExdate());
-			String rdate = sdf.format(event.getRdate());
+				String eventCreationString = "INSERT INTO events "
+						+ "(userId, dtstamp, uid, dtstart,"
+						+ " created, description, lastmod, location,"
+						+ " priority, summary, recurid, rrule, dtend,"
+						+ " duration,	color, categories, comment, exdate,"
+						+ " rdate)" + "VALUES (\n\""
+						+ userid
+						+ "\", \""
+						+ dtstamp
+						+ "\", \""
+						+ uid
+						+ "\", \""
+						+ dtstart
+						+ "\", \""
+						+ created
+						+ "\",\n\" "
+						+ description
+						+ "\", \""
+						+ lastmod
+						+ "\", \""
+						+ location
+						+ "\", \""
+						+ priority
+						+ "\", \""
+						+ summary
+						+ "\",\n \""
+						+ recurid
+						+ "\", \""
+						+ rrule
+						+ "\", \""
+						+ dtend
+						+ "\", "
+						+ duration
+						+ ", \""
+						+ color
+						+ "\", \""
+						+ categories
+						+ "\", \""
+						+ comment
+						+ "\", \""
+						+ exdate
+						+ "\", \"" + rdate + "\");";
+				createStatement.executeUpdate(eventCreationString);
 
-			String eventCreationString = "INSERT INTO events "
-					+ "(userId, dtstamp, uid, dtstart,"
-					+ " created, description, lastmod, location,"
-					+ " priority, summary, recurid, rrule, dtend,"
-					+ " duration,	color, categories, comment, exdate,"
-					+ " rdate)" + "VALUES (\n\""
-					+ userId
-					+ "\", \""
-					+ dtstamp
-					+ "\", \""
-					+ uid
-					+ "\", \""
-					+ dtstart
-					+ "\", \""
-					+ created
-					+ "\",\n\" "
-					+ description
-					+ "\", \""
-					+ lastmod
-					+ "\", \""
-					+ location
-					+ "\", \""
-					+ priority
-					+ "\", \""
-					+ summary
-					+ "\",\n \""
-					+ recurid
-					+ "\", \""
-					+ rrule
-					+ "\", \""
-					+ dtend
-					+ "\", "
-					+ duration
-					+ ", \""
-					+ color
-					+ "\", \""
-					+ categories
-					+ "\", \""
-					+ comment + "\", \"" + exdate + "\", \"" + rdate + "\");";
-
-			createStatement.executeUpdate(eventCreationString);
-
-			createStatement.close();
-			con.close();
-			return true;
-
+				createStatement.close();
+				con.close();
+				return true;
+			} else {
+				throw new RuntimeException("User id must not be null");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 

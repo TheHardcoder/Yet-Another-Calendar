@@ -25,8 +25,8 @@ public abstract class CalenderView extends View {
 	 * @param pYear
 	 *            - Vorlage vom Typ Year
 	 * @return Eine Datei ( :File), welches die gespeicherte XML Datei
-	 *         repräsentiert. Bei Bedarf kann auch direkt das XML-Dokument (
-	 *         :Document) zurückgegeben werden (Absprache Fabian)
+	 *         reprï¿½sentiert. Bei Bedarf kann auch direkt das XML-Dokument (
+	 *         :Document) zurï¿½ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
 	public CalenderView(Year pYear, String pPathOfXsl) {
@@ -34,7 +34,7 @@ public abstract class CalenderView extends View {
 		Element eRoot = new Element("calender"); // Wurzelelement
 		dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
 		dXml.setDocType(new DocType("calender", "resources/calender.dtd"));
-		// Stylesheet hinzufügen
+		// Stylesheet hinzufï¿½gen
 		HashMap<String, String> mapStylesheet = new HashMap<String, String>(2);
 		mapStylesheet.put("type", "text/xsl");
 		mapStylesheet.put("href", pPathOfXsl);
@@ -46,12 +46,12 @@ public abstract class CalenderView extends View {
 		YearViewHelper yView = new YearViewHelper(pYear);
 		Element eYear = yView.getElement();
 
-		// Alles in der Richtigen Reihenfolge anfügen
+		// Alles in der Richtigen Reihenfolge anfï¿½gen
 		eRoot.addContent(eYear);
 	}
 
 	public void printXml(Document pDoc, String pOutputPath) {
-		// XML tatsächlich auf Festplatte abbilden.
+		// XML tatsï¿½chlich auf Festplatte abbilden.
 		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		FileOutputStream output;
 		try {
@@ -61,6 +61,14 @@ public abstract class CalenderView extends View {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getXMLString() {
+		XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
+		Element root = new Element("Calender");
+		Document doc = new Document(root);
+		String xmlString = outputter.outputString(doc);
+		return xmlString;
 	}
 
 	public void createtestXML() {

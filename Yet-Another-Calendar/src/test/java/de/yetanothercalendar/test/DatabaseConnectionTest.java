@@ -14,8 +14,8 @@ public class DatabaseConnectionTest extends TestCase {
 	private static final String URL = "jdbc:mysql://localhost:3306/";
 	private static final String DB_NAME = "yetanothercalendar";
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String USER_NAME = "";
-	private static final String PASSWORD = "";
+	private static final String USER_NAME = "admin";
+	private static final String PASSWORD = "admin";
 
 	private static final String CREATION_STATEMENT = "CREATE DATABASE "
 			+ DB_NAME;

@@ -1,11 +1,23 @@
 package de.yetanothercalendar.model.impl;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Dur;
+import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.PeriodList;
+import net.fortuna.ical4j.model.Recur;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.DtEnd;
+import net.fortuna.ical4j.model.property.DtStart;
+import net.fortuna.ical4j.model.property.Duration;
 
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.database.Event;
@@ -20,7 +32,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 	}
 
 	public List<CalendarEntry> wrapEventToCalendar(Event event, Date begin,
-			Date end) {
+			Date end) throws IllegalArgumentException, ParseException {
 		// TODO Auto-generated method stub
 		if (event.getRrule().equals("")) {
 			event.setDtend(end);
@@ -30,25 +42,78 @@ public class RecurrentEventToCalendarEntryWrapper {
 		} else {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
+			/**
+			 * FIXME: Change to Calendar.getInstance(locale); Ask Fabian
+			 */
+			Calendar calBegin = new GregorianCalendar(locale);
+			calBegin.setTime(begin);
 
-			RRule rrule = new RRule(event.getRrule());
-			boolean endsBeforeStartOfEvent = ((rrule.getUntil() != null) && (rrule
-					.getUntil().compareTo(begin) <= 0));
-			boolean startsAfterEndOfEvent = (event.getDtstart().compareTo(end) > 0);
+			// Convert Dates into ICal4J Date format
+			DateTime dtBegin = new DateTime(begin);
+			DateTime dtEnd = new DateTime(end);
 
-			// RRule ends before end of the given Time Frame
-			if ((rrule.getUntil() != null)
-					&& (rrule.getUntil().compareTo(end) < 0)) {
-				end = rrule.getUntil();
+			Period period = new Period(dtBegin, dtEnd);
+
+			// Create a VEvent this is needed to use the
+			// calculateReccurenceSet-Method of iCal4J
+			VEvent ve = new VEvent();
+
+			/**
+			 * Only the necessary properties are added to the ICal4J Event
+			 */
+
+			net.fortuna.ical4j.model.Date d = new net.fortuna.ical4j.model.DateTime(
+					event.getDtstart());
+			ve.getProperties().add(new DtStart(d));
+
+			d = new net.fortuna.ical4j.model.DateTime(event.getDtend());
+			ve.getProperties().add(new DtEnd(d));
+
+			Recur recur = new Recur(event.getRrule());
+
+			ve.getProperties().add(
+					new net.fortuna.ical4j.model.property.RRule(recur));
+
+			/**
+			 * FIXME: rdate has to be added, too
+			 */
+
+			// calculate an end Date, if Duration Attribute is set to create a
+			// Duration Object for Ical4J
+			if (event.getDuration() > 0) {
+				Dur dur = new Dur(0, 0, (int) event.getDuration(), 0);
+				ve.getProperties().add(new Duration(dur));
 			}
 
-			if (!endsBeforeStartOfEvent || !startsAfterEndOfEvent) {
+			PeriodList perList = ve.calculateRecurrenceSet(period);
+			perList = perList.normalise();
 
-			} else {
-				// No event in the given time Frame
-				return null;
+			List<Event> events = new ArrayList<Event>();
+
+			for (Iterator iterator = perList.iterator(); iterator.hasNext();) {
+				Period per = (Period) iterator.next();
+				// all the original Properties of the Event get reused, only
+				// Start and Enddate get set
+				// TODO: clarify whether RRULE Property has to be set to ""
+				event.setDtstart(per.getStart());
+				event.setDtend(per.getEnd());
+				events.add(event);
+				// System.out.println("Start: " + per.getStart() + " Ende: "
+				// + per.getEnd());
 			}
-			return new ArrayList<CalendarEntry>();
+
+			EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(
+					Locale.GERMANY);
+
+			List<CalendarEntry> calendarEntries = new ArrayList<CalendarEntry>();
+
+			for (Iterator<Event> iterator = events.iterator(); iterator
+					.hasNext();) {
+				Event event2 = (Event) iterator.next();
+				calendarEntries.addAll(wrapper.wrapEventToCalendar(event2));
+			}
+
+			return calendarEntries;
 		}
 	}
 
@@ -59,110 +124,5 @@ public class RecurrentEventToCalendarEntryWrapper {
 			return rrule.substring(attrBegin, attrEnd);
 		} else
 			return "";
-	}
-
-	public List<Integer> getMonthsInTimeFrame(Date start, Date end) {
-		boolean sameYear = start.getYear() == end.getYear();
-		boolean oneYearDifference = start.getYear() == (end.getYear() - 1);
-
-		if (sameYear || oneYearDifference) {
-			int monthDifference = (sameYear) ? start.getMonth()
-					- end.getMonth() : 12 - (start.getMonth() + 1)
-					+ (end.getMonth() + 1);
-			List<Integer> months = new ArrayList<Integer>();
-			for (int i = 0; i < monthDifference; i++) {
-				// +1 because the Month start counting at zero in the Date-Class
-				months.add((start.getMonth() + 1 + i) % 12);
-			}
-			return months;
-
-		} else {
-			// all months occur between start and end date --> return a List
-			// with all Months
-			List<Integer> months = new ArrayList<Integer>(12);
-			for (int i = 1; i <= 12; i++) {
-				months.add(i);
-			}
-			return months;
-		}
-
-	}
-
-	public List<Integer> getWeeksInTimeFrame(Date start, Date end) {
-		boolean sameYear = start.getYear() == end.getYear();
-		boolean oneYearDifference = start.getYear() == (end.getYear() - 1);
-		Calendar startCal = new GregorianCalendar();
-		startCal.setTime(start);
-
-		Calendar endCal = new GregorianCalendar();
-		startCal.setTime(end);
-
-		if (sameYear || oneYearDifference) {
-			int weekDifference = (sameYear) ? startCal
-					.get(Calendar.WEEK_OF_YEAR)
-					- endCal.get(Calendar.WEEK_OF_YEAR) : 52
-					- startCal.get(Calendar.WEEK_OF_YEAR)
-					+ endCal.get(Calendar.WEEK_OF_YEAR);
-
-			List<Integer> weeks = new ArrayList<Integer>();
-			for (int i = 0; i < weekDifference; i++) {
-				weeks.add((startCal.get(Calendar.WEEK_OF_YEAR) + i) % 52);
-			}
-			return weeks;
-
-		} else {
-			// all Weeks occur between start and end date --> return a List
-			// with all Weeks
-			List<Integer> weeks = new ArrayList<Integer>(52);
-			for (int i = 1; i <= 52; i++) {
-				weeks.add(i);
-			}
-			return weeks;
-		}
-
-	}
-
-	public List<Date> getByMonthCandidates(Date start, Date end)
-			throws IllegalArgumentException {
-		List<Date> candidates = new ArrayList<Date>();
-		Calendar startCal = new GregorianCalendar();
-		startCal.setTime(start);
-		Calendar endCal = new GregorianCalendar();
-		startCal.setTime(end);
-		Calendar curCal = (Calendar) startCal.clone();
-
-		if (start.before(end)) {
-			List<Integer> monthsInTimeFrame = getMonthsInTimeFrame(start, end);
-			while (curCal.before(endCal)) {
-				if (monthsInTimeFrame
-						.contains((curCal.get(Calendar.MONTH) + 1))) {
-					candidates.add(curCal.getTime());
-				}
-				// increment Calendar Day
-				curCal.roll(Calendar.DATE, true);
-			}
-		} else {
-			throw new IllegalArgumentException(
-					"GetByMonthCandidates: Enddate before start date");
-		}
-
-		return candidates;
-	}
-
-	public List<Date> getByWeekNoCandidates(List<Date> dates, Date start,
-			Date end) throws IllegalArgumentException {
-		// Filter wrong weeks form the given Datelist, remember to set Weekstart
-		// first
-		List<Date> candidates = new ArrayList<Date>();
-		List<Integer> weeksInTimeFrame = getWeeksInTimeFrame(start, end);
-
-		for (Date date : dates) {
-			Calendar tmpCal = new GregorianCalendar();
-			tmpCal.setTime(date);
-			if (weeksInTimeFrame.contains(tmpCal.get(Calendar.WEEK_OF_YEAR))) {
-				candidates.add(date);
-			}
-		}
-		return candidates;
 	}
 }

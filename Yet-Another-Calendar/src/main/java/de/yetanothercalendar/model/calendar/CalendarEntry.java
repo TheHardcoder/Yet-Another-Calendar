@@ -201,4 +201,15 @@ public class CalendarEntry {
 		this.category = category;
 	}
 
+	@Override
+	public String toString() {
+		return "CalendarEntry [id=" + id + ", priority=" + priority
+				+ ", colorString=" + colorString + ", summary=" + summary
+				+ ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", durationTime=" + durationTime + ", location=" + location
+				+ ", description=" + description + ", created=" + created
+				+ ", modified=" + modified + ", comment=" + comment
+				+ ", category=" + category + "]";
+	}
+
 }

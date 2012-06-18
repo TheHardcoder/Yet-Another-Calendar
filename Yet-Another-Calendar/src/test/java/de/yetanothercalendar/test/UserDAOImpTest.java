@@ -22,8 +22,8 @@ public class UserDAOImpTest extends TestCase {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (user.createUser(new User("zeller8@yahoo.de", "Paull", "Sulzer",
-				"test")) == true) {
+		if (null != user.createUser(new User("zeller8@yahoo.de", "Paull",
+				"Sulzer", "test")) == true) {
 			System.out.println("Hat funktioniert");
 		} else {
 			fail("hat nicht funktioniert, User existiert wahrscheinlich ");

@@ -49,4 +49,10 @@ public class Day {
 		this.number = number;
 	}
 
+	@Override
+	public String toString() {
+		return "Day [calendarEntries=" + calendarEntries + ", name=" + name
+				+ ", number=" + number + "]";
+	}
+
 }

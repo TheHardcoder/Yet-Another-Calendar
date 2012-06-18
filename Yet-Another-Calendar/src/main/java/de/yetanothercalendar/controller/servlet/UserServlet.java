@@ -46,12 +46,15 @@ public class UserServlet extends HttpServlet {
 						hashPassword(password));
 				dao.createUser(user);
 			} else {
-				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect auf die Registrierungsseite mit Parameter errordescription="Beschreibung" super.
+				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
+				// auf die Registrierungsseite mit Parameter
+				// errordescription="Beschreibung" super.
 				throw new RuntimeException(
 						"No valid parameters for registering User");
 			}
 		} else if (action.toLowerCase().equals("login")) {
-			// TODO Beim Fehlschlagen des Logins wäre ein Redirect auf die Loginseite mit Parameter errordescription="Beschreibung" super.
+			// TODO Beim Fehlschlagen des Logins wäre ein Redirect auf die
+			// Loginseite mit Parameter errordescription="Beschreibung" super.
 			String email = (String) req.getAttribute("email");
 			String password = (String) req.getAttribute("password");
 			if (email != null && password != null) {

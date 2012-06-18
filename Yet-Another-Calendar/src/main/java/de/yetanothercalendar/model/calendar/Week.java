@@ -38,4 +38,9 @@ public class Week {
 		this.days = days;
 	}
 
+	@Override
+	public String toString() {
+		return "Week [number=" + number + ", days=" + days + "]";
+	}
+
 }
