@@ -31,9 +31,10 @@ public abstract class CalenderView extends View {
 	@SuppressWarnings("unchecked")
 	public CalenderView(Year pYear, String pPathOfXsl) {
 		// XML erstellen
-		Element eRoot = new Element("calender"); // Wurzelelement
+		Element eRoot = new Element("calendar"); // Wurzelelement
+		eRoot.setAttribute("selection", "0");
 		dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
-		dXml.setDocType(new DocType("calender", "resources/calender.dtd"));
+		dXml.setDocType(new DocType("calendar", "resources/calendar.dtd"));
 		// Stylesheet hinzuf�gen
 		HashMap<String, String> mapStylesheet = new HashMap<String, String>(2);
 		mapStylesheet.put("type", "text/xsl");
@@ -65,7 +66,6 @@ public abstract class CalenderView extends View {
 
 	public String getXMLString() {
 		XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
-		Element root = new Element("Calender");
 		String xmlString = outputter.outputString(dXml);
 		return xmlString;
 	}
