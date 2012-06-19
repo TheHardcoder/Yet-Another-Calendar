@@ -5,9 +5,9 @@ var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli
 
 function create() {
 	var startyear = document.getElementById("selectedyear").innerHTML;
-	var startmonth = document.getElementById("selectedmonth").innerHTML;
-	var startweek = document.getElementById("selectedweek").innerHTML;
-	var startday = document.getElementById("selectedday").innerHTML;
+	var startmonth = 2 + document.getElementById("selectedmonth").innerHTML;
+	var startweek = 2 + document.getElementById("selectedweek").innerHTML;
+	var startday = 2 + document.getElementById("selectedday").innerHTML;
 	startdate = new Date(startyear, startmonth, startday);
 	curdate = new Date(startyear, startmonth, startday);
 	startdate.setDate(1);
@@ -17,13 +17,11 @@ function create() {
 	var max = daysInMonth(curdate.getMonth(), curdate.getFullYear());
 	var i = 0;
 	output = "<tr><th colspan='7'>" + curdate.getDate() + ". " + monthnames[curdate.getMonth()] + " " + curdate.getFullYear() + "</th></tr><tr><td>Mo</td><td class='even'>Di</td><td>Mi</td><td class='even'>Do</td><td>Fr</td><td class='even'>Sa</td><td>So</td></tr>";
+	output += "<tr>";
 	while(i < curdate.getDate() || startdate.getDate() < daysInMonth(curdate.getMonth(), curdate.getFullYear())) {
-		if (startdate.getDay() == 1){
-			output += "<tr>";
-		}
 		writeDay(startdate.getDate());
 		if (startdate.getDay() == 0){
-			output += "</tr>";
+			output += "</tr><tr>";
 		}
 		i++;
 		startdate.setDate(startdate.getDate()+1);
