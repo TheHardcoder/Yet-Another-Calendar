@@ -27,7 +27,7 @@
 							alt="logo" />
 					</div>
 					<div id="info">
-						<a href="index.jsp" id="logout">Logout</a>
+						<a href="userservlet?action=logout" id="logout">Logout</a>
 						<canvas width="150" height="150" id="analog_clock"></canvas>
 						<table id="smallcalendar">
 						<tr>
