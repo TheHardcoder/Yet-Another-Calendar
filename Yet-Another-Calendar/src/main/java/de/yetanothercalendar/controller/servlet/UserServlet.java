@@ -63,6 +63,7 @@ public class UserServlet extends HttpServlet {
 				if (dao.checkUser(email, hashPassword(password))) {
 					User user = dao.returnUser(email);
 					session.setAttribute("user", user);
+					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=2012");
 				} else {
 					throw new RuntimeException(
 							"No valid credentials for loggin in the User");
@@ -73,6 +74,7 @@ public class UserServlet extends HttpServlet {
 			}
 		} else if (action.toLowerCase().equals("logout")) {
 			session.removeAttribute("user");
+			resp.sendRedirect("");
 		} else {
 			throw new RuntimeException("No valid action in User Servlet");
 		}

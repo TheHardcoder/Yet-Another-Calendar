@@ -27,7 +27,9 @@
 							alt="logo" />
 					</div>
 					<div id="info">
-						<a href="userservlet?action=logout" id="logout">Logout</a>
+						<form action="userservlet?action=logout" method="post">
+						<input type="submit" id="logout" value="Logout"></input>
+						</form>
 						<canvas width="150" height="150" id="analog_clock"></canvas>
 						<table id="smallcalendar">
 						<tr>
@@ -47,9 +49,11 @@
 						<div class="button">Neu</div>
 						<div class="button">Heute</div>
 						<div class="menuitem">
-							<select id="day" name="day" size="1">
+							<form action="calendarservlet" method="get">
+							<input type="hidden" name="view" value="yearview"></input>
+							<select id="day" name="selectedday" size="1">
 							</select>
-							<select id="month" name="month" size="1" onchange="update();">
+							<select id="month" name="selectedmonth" size="1" onchange="update();">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -63,7 +67,7 @@
 								<option>11</option>
 								<option>12</option>
 							</select>
-							<select id="year" name="year" size="1" onchange="update();">
+							<select id="year" name="selectedyear" size="1" onchange="update();">
 								<option>1990</option>
 								<option>1991</option>
 								<option>1992</option>
@@ -96,6 +100,7 @@
 								<option>2019</option>
 							</select>
 							<input type="submit" value="Go"></input>
+							</form>
 						</div>
 						<div class="button">Imp</div>
 						<div class="button">Exp</div>
