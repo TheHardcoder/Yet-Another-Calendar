@@ -23,7 +23,7 @@
 					<div>
 					<button>Login</button>
 					</div>
-					<a href="register.html">Noch nicht registriert?</a>
+					<a href="Register.html" id="registerlink">Noch nicht registriert?</a>
 				</fieldset>
 			</form>
 			<div id="footer">Impressum: &nbsp; Michael M&uuml;ller &nbsp; Tel: 10932048091284 &nbsp; Email: <a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a> &nbsp; Mehr: <a href="about.html">About</a></div>
