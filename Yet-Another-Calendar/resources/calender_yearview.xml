@@ -6,7 +6,148 @@
   <year number="2012">
     <month name="Januar" number="1">
       <week number="1">
-        <day name="So" number="1" />
+        <day name="So" number="1">
+          <entry id="1" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="2" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="3" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="4" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="5" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="6" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="7" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="8" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="9" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+          <entry id="10" priority="veryhigh" color="#fff">
+            <summary>what a great summary</summary>
+            <starttime hours="22" minutes="27" />
+            <endtime hours="22" minutes="27" />
+            <duration hours="22" minutes="27" />
+            <location>DHBW</location>
+            <description>Meeting</description>
+            <created day="19" month="5" year="2012" hours="22" minutes="27" />
+            <modified day="19" month="5" year="2012" hours="22" minutes="27" />
+            <comment>comment</comment>
+            <categories>
+              <category>[]</category>
+            </categories>
+          </entry>
+        </day>
       </week>
       <week number="2">
         <day name="Mo" number="2" />

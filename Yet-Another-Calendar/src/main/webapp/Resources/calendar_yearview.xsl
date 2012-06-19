@@ -22,6 +22,7 @@
 			</head>
 			<body>
 				<div id="main">
+				<div id="hiddeninfo"><div id="selectedyear"><xsl:value-of select="@selectedyear"></xsl:value-of></div><div id="selectedmonth"><xsl:value-of select="@selectedmonth"></xsl:value-of></div><div id="selectedweek"><xsl:value-of select="@selectedweek"></xsl:value-of></div><div id="selectedday"><xsl:value-of select="@selectedday"></xsl:value-of></div></div>
 					<div id="logo">
 						<img src="Resources/BabyGnu.png" width="100px" height="100px"
 							alt="logo" />
@@ -44,8 +45,16 @@
 						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
+					<xsl:variable name="calendarback">
+						<xsl:text>calendarservlet?view=yearview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear - 1"></xsl:value-of>
+					</xsl:variable>
+					<xsl:variable name="calendarforward">
+						<xsl:text>calendarservlet?view=yearview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear + 1"></xsl:value-of>
+					</xsl:variable>
 					<div id="menubar">
-						<div class="button">&lt;&lt;</div>
+						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
 						<div class="button">Neu</div>
 						<div class="button">Heute</div>
 						<div class="menuitem">
@@ -104,11 +113,11 @@
 						</div>
 						<div class="button">Imp</div>
 						<div class="button">Exp</div>
-						<div class="button">&gt;&gt;</div>
+						<div class="button"  onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
-							<div class="tab selected">Jahresansicht</div>
+							<div class="tab selected">Jahresansicht <xsl:value-of select="@selectedyear"></xsl:value-of></div>
 							<div class="tab">Monatsansicht</div>
 							<div class="tab">Wochenansicht</div>
 						</div>

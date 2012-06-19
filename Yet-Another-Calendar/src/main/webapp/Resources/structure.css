@@ -14,13 +14,15 @@ Secondary Color B:
 FF4F00	BF5D30	A63400	FF7B40	FF9E73
 */
 @font-face {
-  font-family: "Shark Soft Bites";
-  src: url("SharkSoftBites.ttf");
+	font-family: "Shark Soft Bites";
+	src: url("SharkSoftBites.ttf");
 }
+
 @font-face {
-  font-family: "Title";
-  src: url("SF slapstick Comic Shaded.ttf");
+	font-family: "Title";
+	src: url("SF slapstick Comic Shaded.ttf");
 }
+
 #main {
 	height: 600px;
 	background-color: #FFC273;
@@ -79,7 +81,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	-webkit-box-shadow: 1px -1px 2px 2px #A65E00;
 	box-shadow: 1px -1px 2px 2px #A65E00;
 	float: right;
-	vertical-align:middle;
+	vertical-align: middle;
 }
 
 #registerlink {
@@ -144,8 +146,8 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 
 #menubar {
 	height: 40px;
-	padding: 0px; 
-	margin : 10px;
+	padding: 0px;
+	margin: 10px;
 	margin-left: 110px;
 	margin-right: 190px;
 }
@@ -214,12 +216,12 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	border-radius: 15px;
 	border: 2px outset red;
 	text-align: center;
-	padding:2px;
+	padding: 2px;
 	background-color: red;
 	margin: 0px auto;
-	margin-top: 5px;
-	font-size: 16pt;
+	margin-top: 5px; font-size : 16pt;
 	cursor: pointer;
+	font-size: 16pt;
 }
 
 #logout:active {
@@ -231,7 +233,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	border-radius: 15px;
 	background-color: #FF9000;
 	margin: 0px auto;
-	border-spacing: 0; 
+	border-spacing: 0;
 	padding: 4px;
 }
 
@@ -259,6 +261,10 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 #error_messages {
 	color: red;
 	text-align: center;
+}
+
+#hiddeninfo {
+	display: none;
 }
 
 .month {
@@ -326,7 +332,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 
 .tab {
 	float: left;
-	width: 120px;
+	width: 180px;
 	height: 18px;
 	margin-right: 1px;
 	padding: 6px;
@@ -340,7 +346,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 .menuitem {
-	display:block;
+	display: block;
 	border: 0px;
 	height: 20px;
 	padding-top: 10px;
@@ -351,7 +357,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	cursor: pointer;
 	font-weight: bold;
 	background-color: #FFAC40;
-	
 	-moz-box-shadow: inset 0px 0px 10px #A65E00;
 	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
 	box-shadow: inset 0px 0px 10px #A65E00;
@@ -363,7 +368,7 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 .button {
-	display:block;
+	display: block;
 	border: 0px;
 	height: 20px;
 	padding-top: 10px;
@@ -374,7 +379,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	cursor: pointer;
 	font-weight: bold;
 	background-color: #FFAC40;
-	
 	-moz-box-shadow: inset 0px 0px 10px #A65E00;
 	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
 	box-shadow: inset 0px 0px 10px #A65E00;
