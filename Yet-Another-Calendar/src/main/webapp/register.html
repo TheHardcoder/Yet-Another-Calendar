@@ -5,6 +5,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" media="screen" href="Resources/structure.css"></link>
 <script type="text/JavaScript" src="Resources/analog_clock.js"></script>
+<script type="text/javascript">
+function validatePwd() {
+	var errormessages = document.getElementById("error_messages");
+	var invalid = " "; // Invalid character is a space
+	var minLength = 6; // Minimum length
+	var pw1 = document.registration.password.value;
+	var pw2 = document.registration.password_validation.value;
+	// check for a value in both fields.
+	if (pw1 == '' || pw2 == '') {
+	errormessages.innerHTML = 'Please enter your password twice.';
+	return false;
+	}
+	// check for minimum length
+	if (document.registration.password.value.length < minLength) {
+		errormessages.innerHTML = 'Your password must be at least ' + minLength + ' characters long. Try again.';
+	return false;
+	}
+	// check for spaces
+	if (document.registration.password.value.indexOf(invalid) > -1) {
+		errormessages.innerHTML = "Sorry, spaces are not allowed.";
+	return false;
+	}
+	else {
+	if (pw1 != pw2) {
+		errormessages.innerHTML = "You did not enter the same new password twice.";
+	return false;
+	}
+	else {
+		errormessages.innerHTML = "";
+	return true;
+	      }
+	   }
+	}
+</script>
 </head>
 <body>
 	<div id="main">
@@ -13,17 +47,39 @@
 		</div>
 		<div id="title" style="margin-left: 0px;">Yet Another Calendar</div>
 		<div style="font-size: 30pt; text-align: center;">
-			<form id="registerform" method="post"
-				action="userservlet?action=register">
-				<label for="email">Email</label><br />
-				<input name="email" size="30" id="email"value=""></input><br /> 
-				<label for="forename">Forename</label><br />
-				<input name="forename" size="30" id="forename" value=""></input><br /> 
-				<label for="lastname">Lastname</label><br /> 
-				<input name="lastname" size="30" id="lastname" value=""></input><br /> 
-				<label for="password">Password</label><br />
-				<input name="password" size="30" type="password" id="password" value=""></input><br />
-				<input type="submit" id="submit" value="Registrieren" />
+			<form id="loginyac" method="post"
+				action="userservlet?action=register" name="registration">
+			<fieldset id="login">
+				<legend>Registrierung</legend>
+				<div>
+					<label for="firstname" style="float: left;">Vorname: &nbsp;</label>
+					<input id="firstname" name="firstname" type="text" size="25"
+						maxlength="25" />
+				</div>
+				<div>
+					<label for="lastname" style="float: left;">Nachname: &nbsp;</label>
+					<input id="lastname" name="lastname" type="text" size="25"
+						maxlength="25" />
+				</div>
+				<div>
+					<label for="email" style="float: left;">Email: &nbsp;</label> <input
+						id="email" name="email" type="email" size="25" maxlength="25" />
+				</div>
+				<div>
+					<label for="password" style="float: left;">Passwort: &nbsp;</label>
+					<input id="password" name="password" type="password" size="25"
+						maxlength="25" />
+				</div>
+				<div>
+					<label for="password_validation" style="float: left;">Passwort <br>validieren: &nbsp;</label>
+					<input id="password_validation" name="password_validation" type="password" size="25"
+						maxlength="25" />
+				</div>
+				<div id="error_messages"></div>
+				<div>
+					<a href="#" onclick="validatePwd()" class="button" id="register">Registireren</a>
+				</div>
+			</fieldset>
 			</form>
 		</div>
 		<div id="footer">
