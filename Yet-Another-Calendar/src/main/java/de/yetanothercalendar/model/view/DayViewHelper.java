@@ -11,18 +11,13 @@ import de.yetanothercalendar.model.calendar.Day;
 public class DayViewHelper extends ViewHelper {
 
 	private Day day;
-	private Element eDayElement;
 
 	public DayViewHelper(Day pDay) {
 		this.day = pDay;
-		eDayElement = new Element("day");
-		eDayElement.setAttribute("name", day.getName());
-		eDayElement.setAttribute("number", String.valueOf(day.getNumber()));
-		eDayElement.addContent(this.getEntryElements());
-	}
-
-	public Element getWeekElement() {
-		return eDayElement;
+		element = new Element("day");
+		element.setAttribute("name", day.getName());
+		element.setAttribute("number", String.valueOf(day.getNumber()));
+		element.addContent(this.getEntryElements());
 	}
 
 	private List<Element> getEntryElements() {
@@ -33,7 +28,7 @@ public class DayViewHelper extends ViewHelper {
 			listOfEntryViews.add(new EntryViewHelper(itEntry));
 		}
 		for (EntryViewHelper eView : listOfEntryViews) {
-			listOfEntryElements.add(eView.getEntryElement());
+			listOfEntryElements.add(eView.getElement());
 		}
 		return listOfEntryElements;
 	}

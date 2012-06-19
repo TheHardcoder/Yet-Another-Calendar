@@ -1,6 +1,5 @@
 package de.yetanothercalendar.model.dao.impl;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +23,10 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
+	/**
+	 * Erstellt die Tabelle USERS in der die Benutzer ({@link Users})
+	 * abgespeichert werden sollen.
+	 */
 	public void createUserTable() {
 		try {
 			Connection con = manager.getConnection();
@@ -41,48 +44,30 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	public boolean createUser(User user) {
-		try {
-			Connection con = manager.getConnection();
-			Statement createStatement = con.createStatement();
-			String email = user.getEmail();
-			String forename = user.getForename();
-			String lastname = user.getLastname();
-			String password = user.getPasswordSHA1();
-			String userSurchString = "select email from users where email = \""
-					+ email + "\";";
+	public User createUser(User user) {
+		User result = returnUser(user.getEmail());
+		if (result == null) {
+			try {
+				Connection con = manager.getConnection();
+				Statement createStatement = con.createStatement();
+				String email = user.getEmail();
+				String forename = user.getForename();
+				String lastname = user.getLastname();
+				String password = user.getPasswordSHA1();
 
-			ResultSet rsUsers = createStatement.executeQuery(userSurchString);
-			String dbEmail = "";
-
-			while (rsUsers.next()) {
-				dbEmail = rsUsers.getString(1);
-			}
-
-			rsUsers.close();
-			if (dbEmail.equalsIgnoreCase(email)) {
-				// Wenn die Mail-Adresse schon existiert wird false
-				// zurückgegeben
-				return false;
-			} else {
 				String usercreationString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-						+ "VALUES (\"" + email + "\", \" " + forename
-						+ "\", \" " + lastname + "\", \" " + password + "\");";
-
+						+ "VALUES (\"" + email + "\", \"" + forename + "\", \""
+						+ lastname + "\", \"" + password + "\");";
 				createStatement.executeUpdate(usercreationString);
-
 				createStatement.close();
 				con.close();
-				return true;
-
+				result = returnUser(email);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-			return false;
 		}
-
+		return result;
 	}
 
 	public boolean checkUser(String email, String password) {
@@ -118,6 +103,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public User returnUser(String email) {
+		User result = null;
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
@@ -125,23 +111,20 @@ public class UserDAOImpl implements UserDAO {
 					+ "\";";
 
 			ResultSet rsUsers = createStatement.executeQuery(userSurch);
-
-			rsUsers.next();
-
-			Long dbId = rsUsers.getLong(1);
-			String dbEmail = rsUsers.getString(2);
-			String dbForename = rsUsers.getString(3);
-			String dbLastname = rsUsers.getString(4);
-			String dbPassword = rsUsers.getString(5);
-
+			if (rsUsers.next()) {
+				int dbId = rsUsers.getInt(1);
+				String dbEmail = rsUsers.getString(2);
+				String dbForename = rsUsers.getString(3);
+				String dbLastname = rsUsers.getString(4);
+				String dbPassword = rsUsers.getString(5);
+				result = new User(dbId, dbEmail, dbForename, dbLastname,
+						dbPassword);
+			}
 			createStatement.close();
 			con.close();
-			return new User(dbId, dbEmail, dbForename, dbLastname, dbPassword);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+		return result;
 	}
-
 }

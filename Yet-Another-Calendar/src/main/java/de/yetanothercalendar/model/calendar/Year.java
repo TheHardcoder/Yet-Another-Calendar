@@ -38,4 +38,8 @@ public class Year {
 		this.months = months;
 	}
 
+	@Override
+	public String toString() {
+		return "Year [number=" + number + ", months=" + months + "]";
+	}
 }

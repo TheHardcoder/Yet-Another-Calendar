@@ -9,7 +9,7 @@ public class MomentCreator {
 
 	private Locale locale;
 
-	protected MomentCreator(Locale locale) {
+	public  MomentCreator(Locale locale) {
 		this.locale = locale;
 	}
 
@@ -20,7 +20,7 @@ public class MomentCreator {
 	 *            Das {@link Date} mit dem gegebenen Tag
 	 * @return eine {@link Date} mit dem ersten Moment des Tages ( 00:00:00 )
 	 */
-	protected Date createFirstPossibleMomentOfDay(Date date) {
+	public Date createFirstPossibleMomentOfDay(Date date) {
 		Calendar calendar = new GregorianCalendar(locale);
 		calendar.setTime(date);
 		createFirstPossibleMomentOfDayReturningCalendar(calendar);
@@ -34,7 +34,7 @@ public class MomentCreator {
 	 *            Das {@link Date} mit dem gegebenen Tag
 	 * @return eine {@link Date} mit dem letzten Moment des Tages ( 23:59:59 )
 	 */
-	protected Date createLastPossibleMomentOfDay(Date date) {
+	public Date createLastPossibleMomentOfDay(Date date) {
 		Calendar calendar = new GregorianCalendar(locale);
 		calendar.setTime(date);
 		createLastPossibleMomentOfDayReturningCalendar(calendar);
@@ -49,7 +49,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem ersten Moment des Tages ( 00:00:00
 	 *         )
 	 */
-	protected Calendar createFirstPossibleMomentOfDayReturningCalendar(
+	public Calendar createFirstPossibleMomentOfDayReturningCalendar(
 			Calendar calendar) {
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
@@ -66,7 +66,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem letzten Moment des Tages ( 23:59:59
 	 *         )
 	 */
-	protected Calendar createLastPossibleMomentOfDayReturningCalendar(
+	public Calendar createLastPossibleMomentOfDayReturningCalendar(
 			Calendar calendar) {
 		calendar.set(Calendar.HOUR_OF_DAY,
 				calendar.getMaximum(Calendar.HOUR_OF_DAY));
@@ -85,10 +85,10 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem ersten Moment des Jahres ( 00:00:00
 	 *         )
 	 */
-	protected Calendar createFirstPossibleMomentOfYearReturningCalendar(
+	public Calendar createFirstPossibleMomentOfYearReturningCalendar(
 			Calendar calendar) {
 		createFirstPossibleMomentOfDayReturningCalendar(calendar);
-		calendar.set(Calendar.DAY_OF_YEAR, 0);
+		calendar.set(Calendar.DAY_OF_YEAR, 1);
 		return calendar;
 	}
 
@@ -100,7 +100,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem letzten Moment des Jahres (
 	 *         00:00:00 )
 	 */
-	protected Calendar createLastPossibleMomentOfYearReturningCalendar(
+	public Calendar createLastPossibleMomentOfYearReturningCalendar(
 			Calendar calendar) {
 		createLastPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_YEAR,
@@ -116,7 +116,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem ersten Moment des Monats ( 00:00:00
 	 *         )
 	 */
-	protected Calendar createFirstPossibleMomentOfMonthReturningCalendar(
+	public Calendar createFirstPossibleMomentOfMonthReturningCalendar(
 			Calendar calendar) {
 		createFirstPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_MONTH, 0);
@@ -131,7 +131,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem letzten Moment des Monats (
 	 *         00:00:00 )
 	 */
-	protected Calendar createLastPossibleMomentOfMonthReturningCalendar(
+	public Calendar createLastPossibleMomentOfMonthReturningCalendar(
 			Calendar calendar) {
 		createLastPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_YEAR,
@@ -147,7 +147,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem ersten Moment des woche ( 00:00:00
 	 *         )
 	 */
-	protected Calendar createFirstPossibleMomentOfWeekReturningCalendar(
+	public Calendar createFirstPossibleMomentOfWeekReturningCalendar(
 			Calendar calendar) {
 		createFirstPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_WEEK, 0);
@@ -162,7 +162,7 @@ public class MomentCreator {
 	 * @return eine {@link Calendar} mit dem letzten Moment des woches (
 	 *         00:00:00 )
 	 */
-	protected Calendar createLastPossibleMomentOfWeekReturningCalendar(
+	public Calendar createLastPossibleMomentOfWeekReturningCalendar(
 			Calendar calendar) {
 		createLastPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_YEAR,
@@ -170,7 +170,7 @@ public class MomentCreator {
 		return calendar;
 	}
 
-	protected boolean isSameDay(Calendar calendarStartDay,
+	public boolean isSameDay(Calendar calendarStartDay,
 			Calendar calendarEndDay) {
 		return calendarStartDay.get(Calendar.YEAR) == calendarEndDay
 				.get(Calendar.YEAR)
@@ -178,7 +178,7 @@ public class MomentCreator {
 						.get(Calendar.DAY_OF_YEAR);
 	}
 
-	protected boolean isOneDayDifference(Calendar calendarStartDay,
+	public boolean isOneDayDifference(Calendar calendarStartDay,
 			Calendar calendarEndDay) {
 		return ((calendarStartDay.get(Calendar.YEAR) == calendarEndDay
 				.get(Calendar.YEAR) && calendarStartDay

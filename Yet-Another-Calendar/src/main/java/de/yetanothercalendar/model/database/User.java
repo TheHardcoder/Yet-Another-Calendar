@@ -29,7 +29,7 @@ public class User {
 		this.passwordSHA1 = passwordSHA1;
 	}
 
-	public User(Long id, String email, String forename, String lastname,
+	public User(long id, String email, String forename, String lastname,
 			String passwordSHA1) {
 		super();
 		this.id = id;

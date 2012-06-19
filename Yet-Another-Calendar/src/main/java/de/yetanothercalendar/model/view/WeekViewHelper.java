@@ -11,17 +11,12 @@ import de.yetanothercalendar.model.calendar.Week;
 public class WeekViewHelper extends ViewHelper {
 
 	private Week week;
-	private Element eWeekElement;
 
 	public WeekViewHelper(Week pWeek) {
 		this.week = pWeek;
-		eWeekElement = new Element("week");
-		eWeekElement.setAttribute("number", String.valueOf(week.getNumber()));
-		eWeekElement.addContent(this.getWeekElements());
-	}
-
-	public Element getWeekElement() {
-		return eWeekElement;
+		element = new Element("week");
+		element.setAttribute("number", String.valueOf(week.getNumber()));
+		element.addContent(this.getWeekElements());
 	}
 
 	private List<Element> getWeekElements() {
@@ -32,7 +27,7 @@ public class WeekViewHelper extends ViewHelper {
 			listOfDayViews.add(new DayViewHelper(itDay));
 		}
 		for (DayViewHelper dView : listOfDayViews) {
-			listOfDayElements.add(dView.getWeekElement());
+			listOfDayElements.add(dView.getElement());
 		}
 		return listOfDayElements;
 	}

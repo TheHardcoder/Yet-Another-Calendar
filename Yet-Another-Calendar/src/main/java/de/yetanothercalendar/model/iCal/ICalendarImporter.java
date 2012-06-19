@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import net.fortuna.ical4j.data.CalendarBuilder;
@@ -15,6 +17,9 @@ import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.ComponentList;
+import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.PeriodList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import de.yetanothercalendar.model.database.Event;
@@ -22,7 +27,11 @@ import de.yetanothercalendar.model.database.User;
 
 public class ICalendarImporter {
 
-	public static Calendar importToIcal4J(InputStream in) throws IOException,
+	public ICalendarImporter() {
+
+	}
+
+	public Calendar importToIcal4J(InputStream in) throws IOException,
 			ParserException {
 		CalendarParserImpl cpI = new CalendarParserImpl();
 		CalendarBuilder cb = new CalendarBuilder(cpI);
@@ -38,9 +47,10 @@ public class ICalendarImporter {
 	 *            user to set as database property
 	 * @return Calendar as List of Events in our internal calendar format
 	 */
-	public static List<Event> parseIcal4JToEventList(Calendar iCal4j, User user) {
+	public List<Event> parseIcal4JToEventList(Calendar iCal4j, User user) {
 		ComponentList components = iCal4j.getComponents();
 		Component comp;
+		List<Event> eventList = new ArrayList<Event>();
 
 		for (int i = 0; i < components.size(); i++) {
 			comp = (Component) components.get(i);
@@ -58,42 +68,23 @@ public class ICalendarImporter {
 				 * beginning
 				 */
 
-				String uid = comp.getProperties(Property.UID).toString();
-				if (uid.startsWith("UID:")) {
-					uid = uid.substring("UID:".length());
-				}
+				String uid = getProperty(comp, Property.UID);
 
-				String description = comp.getProperties(Property.DESCRIPTION)
-						.toString();
-				if (description.startsWith("DESCRIPTION:")) {
-					description = description
-							.substring("DESCRIPTION:".length());
-				}
+				String description = getProperty(comp, Property.DESCRIPTION);
 
-				String location = comp.getProperties(Property.LOCATION)
-						.toString();
-				if (location.startsWith("LOCATION:")) {
-					location = location.substring("LOCATION:".length());
-				}
+				String location = getProperty(comp, Property.LOCATION);
 
-				String priority = comp.getProperties(Property.PRIORITY)
-						.toString();
-				if (priority.startsWith("PRIORITY:")) {
-					priority = priority.substring("PRIORITY:".length());
-				}
+				String priority = getProperty(comp, Property.PRIORITY);
 
-				String summary = comp.getProperties(Property.SUMMARY)
-						.toString();
-				if (summary.startsWith("SUMMARY:")) {
-					summary = summary.substring("SUMMARY:".length());
-				}
+				String summary = getProperty(comp, Property.SUMMARY);
 
-				String recurid = comp.getProperties(Property.RECURRENCE_ID)
-						.toString();
-				String rrule = comp.getProperties(Property.RRULE).toString();
-				if (rrule.startsWith("RRULE:")) {
-					rrule = rrule.substring("RRULE:".length());
-				}
+				String recurid = getProperty(comp, Property.RECURRENCE_ID);
+
+				String rrule = getProperty(comp, Property.RRULE);
+
+				/**
+				 * Debug Code for ICal RRule Testing FIXME: Evaluate and Delete
+				 */
 
 				String durationStr = comp.getProperties(Property.DURATION)
 						.toString();
@@ -101,7 +92,7 @@ public class ICalendarImporter {
 					durationStr = durationStr.substring("DURATION:PT".length());
 				}
 
-				long duration = 0;
+				long duration = -1;
 				int durH, durM, durS;
 				if (durationStr.indexOf("H") > -1) {
 					durH = Integer.parseInt(durationStr.substring(0,
@@ -140,11 +131,7 @@ public class ICalendarImporter {
 					}
 				}
 
-				String comment = comp.getProperties(Property.COMMENT)
-						.toString();
-				if (comment.startsWith("COMMENT:")) {
-					comment = comment.substring("COMMENT:".length());
-				}
+				String comment = getProperty(comp, Property.COMMENT);
 
 				Date dtstart = setDateProperty(Property.DTSTART, comp);
 				Date dtstamp = setDateProperty(Property.DTSTAMP, comp);
@@ -152,6 +139,12 @@ public class ICalendarImporter {
 				Date lastmod = setDateProperty(Property.LAST_MODIFIED, comp);
 				Date dtend = setDateProperty(Property.DTEND, comp);
 				Date exdate = setDateProperty(Property.EXDATE, comp);
+
+				/**
+				 * FIXME: rdate can be a List of Dates! maybe save as String or
+				 * as arrayList, depending on what is needed to parse back to
+				 * Ical4J later on
+				 */
 				Date rdate = setDateProperty(Property.RDATE, comp);
 
 				event.setCategories(categories);
@@ -175,12 +168,15 @@ public class ICalendarImporter {
 				event.setUser(user);
 
 				System.out.println(event.toString());
+
+				eventList.add(event);
 			}
 		}
-		return new ArrayList<Event>();
+
+		return eventList;
 	}
 
-	private static Date setDateProperty(String Propertyname, Component comp) {
+	private Date setDateProperty(String Propertyname, Component comp) {
 		try {
 			String dateStr = comp.getProperty(Propertyname).toString();
 			Date d = parseIcsDate(dateStr);
@@ -215,5 +211,32 @@ public class ICalendarImporter {
 		Date date = df.parse(dateString.toString());
 		System.out.println(date.toString());
 		return date;
+	}
+
+	/**
+	 * Deletes the lineseperator at the end of a String, if there is one
+	 * 
+	 * @param s
+	 *            Input String
+	 * @return String without the lineseperator at the End
+	 */
+	private String deleteLineFeed(String s) {
+		int lineSeperatorLength = System.getProperty("line.separator").length();
+		if ((s.length() > lineSeperatorLength)
+				&& (s.substring(s.length() - lineSeperatorLength, s.length())
+						.equals(System.getProperty("line.separator")))) {
+			s = s.substring(0, s.length() - lineSeperatorLength);
+		}
+		return s;
+	}
+
+	private String getProperty(Component comp, String name) {
+		String propertyString = comp.getProperties(name).toString();
+		if (propertyString.startsWith(name)) {
+			// +1 because of the : after the name
+			propertyString = propertyString.substring(name.length() + 1);
+		}
+		propertyString = deleteLineFeed(propertyString);
+		return propertyString;
 	}
 }

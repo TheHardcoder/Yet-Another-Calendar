@@ -1,6 +1,7 @@
 package de.yetanothercalendar.model.impl;
 
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class CalendarImpl implements Calendar {
 	private MomentCreator momentCreator;
 	/** Wrapper fuer Wrap von Event zu CalendarEntry */
 	private EventToCalendarEntryWrapper wrapper;
+	private RecurrentEventToCalendarEntryWrapper wrapperRecurringEvents;
 
 	public CalendarImpl(User user) {
 		this.user = user;
@@ -43,15 +45,15 @@ public class CalendarImpl implements Calendar {
 		wrapper = new EventToCalendarEntryWrapper(locale);
 		momentCreator = new MomentCreator(locale);
 		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
+		wrapperRecurringEvents = new RecurrentEventToCalendarEntryWrapper(
+				locale);
 	}
 
-	public Year getEntriesByWeek(int year, int month, int week) {
+	public Year getEntriesByWeek(int year, int week) {
 		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
 		java.util.Calendar calendar = new GregorianCalendar(locale);
-		calendar.set(java.util.Calendar.YEAR, year);
-		calendar.set(java.util.Calendar.MONTH, month - 1);
 		// TODO check if this uses the correct week
-		calendar.set(java.util.Calendar.DAY_OF_WEEK_IN_MONTH, week + 1);
+		calendar.set(java.util.Calendar.WEEK_OF_YEAR, week);
 		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
 		java.util.Calendar firstMomentInWeek = momentCreator
 				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);
@@ -113,17 +115,30 @@ public class CalendarImpl implements Calendar {
 	 */
 	private Map<java.util.Calendar, List<CalendarEntry>> geteventsBetweenDatesAndFillStrucuture(
 			java.util.Calendar startDate, java.util.Calendar endDate) {
-		List<Event> eventBetweenDates = eventDAO.getEventBetweenDates(user,
-				startDate.getTime(), endDate.getTime());
-		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
-		for (Event event : eventBetweenDates) {
-			List<CalendarEntry> wrapEventToCalendar = wrapper
-					.wrapEventToCalendar(event);
-			// fill map for use insertion in CalendaEntry later. Benutzt
-			// Referenzen der Liste und der Map
-			fillCalendarEntryMapForEvent(wrapEventToCalendar,
-					calendarDayOnCalendarEntryMap);
+		List<Event> eventsNotRecurring = eventDAO
+				.getEventsFromUserNotRecurring(user);
+		List<CalendarEntry> notRecurringCalendarEntries = new ArrayList<CalendarEntry>();
+		for (Event event : eventsNotRecurring) {
+			notRecurringCalendarEntries.addAll(wrapper
+					.wrapEventToCalendar(event));
 		}
+		List<Event> eventsRecurring = eventDAO.getEventsFromUserRecurring(user);
+		List<CalendarEntry> recurringCalendarEntries = new ArrayList<CalendarEntry>();
+		for (Event event : eventsRecurring) {
+			try {
+				recurringCalendarEntries.addAll(wrapperRecurringEvents
+						.wrapEventToCalendar(event, startDate.getTime(),
+								endDate.getTime()));
+			} catch (Exception e) {
+				// TODO richtige exception abfangen?
+				e.printStackTrace();
+			}
+		}
+		List<CalendarEntry> allEntries = new ArrayList<CalendarEntry>();
+		allEntries.addAll(notRecurringCalendarEntries);
+		allEntries.addAll(recurringCalendarEntries);
+		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
+		fillCalendarEntryMapForEvent(allEntries, calendarDayOnCalendarEntryMap);
 		return calendarDayOnCalendarEntryMap;
 	}
 
@@ -185,7 +200,7 @@ public class CalendarImpl implements Calendar {
 			// Der aktuelle monatstag
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
-			String dayname = dateFormatSymbols.getWeekdays()[calendar
+			String dayname = dateFormatSymbols.getShortWeekdays()[calendar
 					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
 			// Die Woche des jetztigen Tags im calendar.

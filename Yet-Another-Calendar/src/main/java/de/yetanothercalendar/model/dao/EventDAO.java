@@ -9,10 +9,25 @@ import de.yetanothercalendar.model.database.User;
 public interface EventDAO {
 
 	/**
-	 * Erstellt die Tabelle EVENTS in der die Events ({@link Event})
-	 * abgespeichert werden sollen.
+	 * Speichert Eventdaten in die Tabelle EVENTS
+	 * 
+	 * @param event
+	 * @return
 	 */
-	public abstract void createEventTable();
+	public abstract boolean createEvents(Event event);
+
+	/**
+	 * Gibt eine Liste mit allen Events, die in der Tablle EVENTS einem User
+	 * zugeordnet sind, zur�ck
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public abstract List<Event> getEventsFromUser(User user);
+
+	public abstract List<Event> getEventsFromUserRecurring(User user);
+
+	public abstract List<Event> getEventsFromUserNotRecurring(User user);
 
 	/**
 	 * 
