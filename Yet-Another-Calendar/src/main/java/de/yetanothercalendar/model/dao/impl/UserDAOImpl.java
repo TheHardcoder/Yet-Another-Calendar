@@ -103,6 +103,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public User returnUser(String email) {
+		User result = null;
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
@@ -110,22 +111,20 @@ public class UserDAOImpl implements UserDAO {
 					+ "\";";
 
 			ResultSet rsUsers = createStatement.executeQuery(userSurch);
-
-			rsUsers.next();
-
-			int dbId = rsUsers.getInt(1);
-			String dbEmail = rsUsers.getString(2);
-			String dbForename = rsUsers.getString(3);
-			String dbLastname = rsUsers.getString(4);
-			String dbPassword = rsUsers.getString(5);
-
+			if (rsUsers.next()) {
+				int dbId = rsUsers.getInt(1);
+				String dbEmail = rsUsers.getString(2);
+				String dbForename = rsUsers.getString(3);
+				String dbLastname = rsUsers.getString(4);
+				String dbPassword = rsUsers.getString(5);
+				result = new User(dbId, dbEmail, dbForename, dbLastname,
+						dbPassword);
+			}
 			createStatement.close();
 			con.close();
-			return new User(dbId, dbEmail, dbForename, dbLastname, dbPassword);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+		return result;
 	}
 }

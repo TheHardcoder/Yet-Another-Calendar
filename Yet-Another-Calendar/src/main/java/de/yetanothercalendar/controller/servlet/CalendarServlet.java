@@ -29,6 +29,9 @@ public class CalendarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		resp.setCharacterEncoding("utf-8");
+		
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
@@ -44,7 +47,8 @@ public class CalendarServlet extends HttpServlet {
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
 						YearView yearview = new YearView(entriesByYear);
-						resp.getWriter().write(yearview.getXMLString());
+						String result = yearview.getXMLString();
+						resp.getWriter().write(result);
 						printYear(entriesByYear);
 					} else {
 						throw new RuntimeException(

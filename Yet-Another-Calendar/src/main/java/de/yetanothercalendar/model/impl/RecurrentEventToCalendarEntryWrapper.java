@@ -75,7 +75,6 @@ public class RecurrentEventToCalendarEntryWrapper {
 			}
 
 			Recur recur = new Recur(event.getRrule());
-
 			ve.getProperties().add(
 					new net.fortuna.ical4j.model.property.RRule(recur));
 

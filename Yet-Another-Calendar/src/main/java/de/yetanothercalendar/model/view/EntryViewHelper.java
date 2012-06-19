@@ -1,8 +1,10 @@
 package de.yetanothercalendar.model.view;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.jdom.Element;
 
@@ -16,14 +18,17 @@ public class EntryViewHelper extends ViewHelper {
 		this.entry = pEntry;
 		element = new Element("entry");
 		element.setAttribute("id", String.valueOf(entry.getId()));
-		element.setAttribute("priority", entry.getPriority());
+		// remove all whitespaces
+		String priority = entry.getPriority();
+		priority = priority.replaceAll("\\s", "");
+		element.setAttribute("priority", priority);
 		element.setAttribute("color", entry.getColorString());
 		element.addContent(this.getEntryAttributes());
 	}
 
 	private List<Element> getEntryAttributes() {
 		List<Element> listOfEntryAttributes = new ArrayList<Element>();
-		listOfEntryAttributes.add(new Element("summery").setText(entry
+		listOfEntryAttributes.add(new Element("summary").setText(entry
 				.getSummary()));
 
 		listOfEntryAttributes.add(createTimeElement("starttime",
@@ -63,14 +68,17 @@ public class EntryViewHelper extends ViewHelper {
 	private Element createTimeElement(String pName, Date pDate,
 			boolean pExtended) {
 		Element rElement = new Element(pName);
+		// TODO set local germany locale
+		Calendar calendar = Calendar.getInstance(Locale.GERMANY);
 		// TODO Zeiten noch Berechnung noch implementieren (Werteinsetzen)
 		if (pExtended) {
-			rElement.setAttribute("day", "Wert");
-			rElement.setAttribute("month", "Wert");
-			rElement.setAttribute("year", "Wert");
+			rElement.setAttribute("day", calendar.get(Calendar.DAY_OF_MONTH)
+					+ "");
+			rElement.setAttribute("month", calendar.get(Calendar.MONTH) + "");
+			rElement.setAttribute("year", calendar.get(Calendar.YEAR) + "");
 		}
-		rElement.setAttribute("hours", "Wert");
-		rElement.setAttribute("minutes", "Wert");
+		rElement.setAttribute("hours", calendar.get(Calendar.HOUR_OF_DAY) + "");
+		rElement.setAttribute("minutes", calendar.get(Calendar.MINUTE) + "");
 
 		return rElement;
 	}

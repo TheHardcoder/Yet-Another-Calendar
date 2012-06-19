@@ -9,12 +9,20 @@
 		<servlet-class>de.yetanothercalendar.controller.servlet.CalendarServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>userservlet</servlet-name>
+		<servlet-class>de.yetanothercalendar.controller.servlet.UserServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>init</servlet-name>
 		<servlet-class>de.yetanothercalendar.controller.servlet.DummyDataCreatorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>calendarservlet</servlet-name>
 		<url-pattern>/calendarservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>userservlet</servlet-name>
+		<url-pattern>/userservlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>init</servlet-name>
