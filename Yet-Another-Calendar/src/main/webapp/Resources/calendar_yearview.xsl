@@ -152,7 +152,7 @@
 			<xsl:text>&amp;month=</xsl:text><xsl:value-of select="../../@number"></xsl:value-of>
 			<xsl:text>&amp;year=</xsl:text><xsl:value-of select="../../../@number"></xsl:value-of>
 			</xsl:variable>
-			<div class="daylabel" ondblclick="window.location='{$newentry}'">
+			<div class="daylabel" ondblclick="window.location='{$newentry}'; return false;">
 				<xsl:value-of select="$curd" />
 				<xsl:text> </xsl:text>
 				<xsl:value-of select="@name" />
@@ -161,15 +161,19 @@
 			<xsl:variable name="title">
 				<xsl:for-each select="entry">
 					<xsl:value-of select="summary" />
-					<xsl:text> </xsl:text>
+					<xsl:text>&#xD;</xsl:text>
 					<xsl:value-of select="starttime/@hours" />
 					<xsl:text>:</xsl:text>
 					<xsl:value-of select="starttime/@minutes" />
+					<xsl:text> Uhr - </xsl:text>
+					<xsl:value-of select="endtime/@hours" />
+					<xsl:text>:</xsl:text>
+					<xsl:value-of select="endtime/@minutes" />
 					<xsl:text> Uhr&#xD;</xsl:text>
 					<xsl:value-of select="description" />
 					<xsl:text>&#xD;</xsl:text>
 					<xsl:if test="position() != last()">
-						<xsl:text>&#xD;</xsl:text>
+						<xsl:text>---------------------------&#xD;</xsl:text>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:variable>

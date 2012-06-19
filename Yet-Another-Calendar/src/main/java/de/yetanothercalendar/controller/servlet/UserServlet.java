@@ -46,6 +46,8 @@ public class UserServlet extends HttpServlet {
 				User user = new User(email, forename, lastname,
 						hashPassword(password));
 				dao.createUser(user);
+				session.setAttribute("user", user);
+				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=2012");
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
 				// auf die Registrierungsseite mit Parameter

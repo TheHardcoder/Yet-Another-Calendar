@@ -216,7 +216,8 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	text-align: center;
 	padding:2px;
 	background-color: red;
-	margin: 10px;
+	margin: 0px auto;
+	margin-top: 5px;
 	font-size: 16pt;
 	cursor: pointer;
 }
