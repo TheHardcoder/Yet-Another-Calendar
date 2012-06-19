@@ -34,6 +34,7 @@ function validatePwd() {
 	}
 	else {
 		errormessages.innerHTML = "";
+		document.getElementById("loginyac").submit();
 	return true;
 	      }
 	   }
@@ -46,13 +47,13 @@ function validatePwd() {
 			<canvas width="150" height="150" id="analog_clock"></canvas>
 		</div>
 		<div id="title" style="margin-left: 0px;">Yet Another Calendar</div>
-		<form action="" method="post" id="loginyac" name="registration">
+		<form action="userservlet?action=register" method="post" id="loginyac" name="registration">
 			<img id="yacimage" src="Resources/BabyGnu.png" alt="Logo" />
 			<fieldset id="login">
 				<legend>Registrierung</legend>
 				<div>
-					<label for="firstname" style="float: left;">Vorname: &nbsp;</label>
-					<input id="firstname" name="firstname" type="text" size="25"
+					<label for="foretname" style="float: left;">Vorname: &nbsp;</label>
+					<input id="forename" name="forename" type="text" size="25"
 						maxlength="25" />
 				</div>
 				<div>
