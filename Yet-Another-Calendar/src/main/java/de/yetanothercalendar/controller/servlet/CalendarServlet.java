@@ -16,6 +16,7 @@ import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.impl.CalendarImpl;
 import de.yetanothercalendar.model.view.MonthView;
+import de.yetanothercalendar.model.view.WeekView;
 import de.yetanothercalendar.model.view.YearView;
 
 /**
@@ -72,8 +73,8 @@ public class CalendarServlet extends HttpServlet {
 						int week = Integer.parseInt(selectedWeek);
 						Year entriesByYear = calendar.getEntriesByWeek(year,
 								week);
-						MonthView monthview = new MonthView(entriesByYear);
-						resp.getWriter().write(monthview.getXMLString());
+						WeekView weekview = new WeekView(entriesByYear);
+						resp.getWriter().write(weekview.getXMLString());
 					} else {
 						throw new RuntimeException(
 								"Invalid parameters for view " + viewType);

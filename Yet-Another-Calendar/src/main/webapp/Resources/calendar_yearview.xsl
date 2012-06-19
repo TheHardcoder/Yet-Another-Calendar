@@ -119,7 +119,13 @@
 						<div id="tabbar">
 							<div class="tab selected">Jahresansicht <xsl:value-of select="@selectedyear"></xsl:value-of></div>
 							<div class="tab">Monatsansicht</div>
-							<div class="tab">Wochenansicht</div>
+							<xsl:variable name="weekviewlink">
+								<xsl:text>calendarservlet?view=weekview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$weekviewlink}'">Wochenansicht</div>
 						</div>
 						<xsl:apply-templates />
 					</div>
