@@ -31,9 +31,16 @@ public abstract class CalendarView extends View {
 	@SuppressWarnings("unchecked")
 	public CalendarView(Year pYear, String pPathOfXsl) {
 		// XML erstellen
-		Element eRoot = new Element("calendar"); // Wurzelelement
-		eRoot.setAttribute("selection", "0");
-		dXml = new Document(eRoot); // Dokument mit vorgegebener Wurzel
+
+		// Wurzelelement mit Attributen erzeugen
+		Element eRoot = new Element("calendar");
+		// TODO selcted-Attribute generisch holen Absprache mit Ben
+		eRoot.setAttribute("selectedyear", String.valueOf(pYear.getNumber()));
+		eRoot.setAttribute("selectedmonth", "0");
+		eRoot.setAttribute("selectedweek", "0");
+		eRoot.setAttribute("selectedday", "0");
+		// Dokument mit erstelltem Wurzelelement initialisieren
+		dXml = new Document(eRoot);
 		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
 		// Stylesheet hinzuf�gen
 		HashMap<String, String> mapStylesheet = new HashMap<String, String>(2);
