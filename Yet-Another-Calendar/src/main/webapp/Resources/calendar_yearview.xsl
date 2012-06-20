@@ -22,6 +22,7 @@
 			</head>
 			<body>
 				<div id="main">
+				<div id="hiddeninfo"><div id="selectedyear"><xsl:value-of select="@selectedyear"></xsl:value-of></div><div id="selectedmonth"><xsl:value-of select="@selectedmonth"></xsl:value-of></div><div id="selectedweek"><xsl:value-of select="@selectedweek"></xsl:value-of></div><div id="selectedday"><xsl:value-of select="@selectedday"></xsl:value-of></div></div>
 					<div id="logo">
 						<img src="Resources/BabyGnu.png" width="100px" height="100px"
 							alt="logo" />
@@ -44,8 +45,16 @@
 						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
+					<xsl:variable name="calendarback">
+						<xsl:text>calendarservlet?view=yearview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear - 1"></xsl:value-of>
+					</xsl:variable>
+					<xsl:variable name="calendarforward">
+						<xsl:text>calendarservlet?view=yearview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear + 1"></xsl:value-of>
+					</xsl:variable>
 					<div id="menubar">
-						<div class="button">&lt;&lt;</div>
+						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
 						<div class="button">Neu</div>
 						<div class="button">Heute</div>
 						<div class="menuitem">
@@ -104,13 +113,19 @@
 						</div>
 						<div class="button">Imp</div>
 						<div class="button">Exp</div>
-						<div class="button">&gt;&gt;</div>
+						<div class="button"  onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
-							<div class="tab selected">Jahresansicht</div>
+							<div class="tab selected">Jahresansicht <xsl:value-of select="@selectedyear"></xsl:value-of></div>
 							<div class="tab">Monatsansicht</div>
-							<div class="tab">Wochenansicht</div>
+							<xsl:variable name="weekviewlink">
+								<xsl:text>calendarservlet?view=weekview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$weekviewlink}'">Wochenansicht</div>
 						</div>
 						<xsl:apply-templates />
 					</div>
@@ -181,16 +196,28 @@
 				<xsl:text>Edit.html</xsl:text>
 				<xsl:text>?description=</xsl:text>
 				<xsl:value-of select="entry/description" />
+				<xsl:text>&amp;id=</xsl:text>
+				<xsl:value-of select="entry/@id" />
 				<xsl:text>&amp;summary=</xsl:text>
 				<xsl:value-of select="entry/summary" />
-				<xsl:text>&amp;starttime=</xsl:text>
+				<xsl:text>&amp;starttimehours=</xsl:text>
 				<xsl:value-of select="entry/starttime/@hours" />
-				<xsl:text>:</xsl:text>
+				<xsl:text>&amp;starttimeminutes=</xsl:text>
 				<xsl:value-of select="entry/starttime/@minutes" />
-				<xsl:text>&amp;endtime=</xsl:text>
+				<xsl:text>&amp;endtimehours=</xsl:text>
 				<xsl:value-of select="entry/endtime/@hours" />
-				<xsl:text>:</xsl:text>
+				<xsl:text>&amp;endtimeminutes=</xsl:text>
 				<xsl:value-of select="entry/endtime/@minutes" />
+				
+				<xsl:text>&amp;place=</xsl:text>
+				<xsl:value-of select="entry/location" />
+				
+				<xsl:text>&amp;priority=</xsl:text>
+				<xsl:value-of select="entry/@priority" />
+				<xsl:text>&amp;description=</xsl:text>
+				<xsl:value-of select="entry/description" />
+				<xsl:text>&amp;categories=</xsl:text>
+				<xsl:apply-templates select="entry/categories/category"></xsl:apply-templates>
 			</xsl:variable>
 			<xsl:if test="$no = 1">
 				<a href="{$link}" class="entry" title="{$title}">
@@ -206,6 +233,11 @@
 			</xsl:if>
 
 		</div>
+	</xsl:template>
+	
+	<xsl:template match="category">
+		<xsl:apply-templates></xsl:apply-templates>
+		<xsl:text>, </xsl:text>
 	</xsl:template>
 
 </xsl:stylesheet>

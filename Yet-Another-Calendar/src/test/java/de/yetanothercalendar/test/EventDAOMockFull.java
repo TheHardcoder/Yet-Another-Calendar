@@ -66,7 +66,7 @@ public class EventDAOMockFull implements EventDAO {
 				"description", new Date(), "location", "very high",
 				"what a great summary", "recurrid", "rrule", end.getTime(), 0,
 				"#fff", new ArrayList<String>(), "comment", new Date(),
-				new Date());
+				"");
 	}
 
 	public void createEventTable() {

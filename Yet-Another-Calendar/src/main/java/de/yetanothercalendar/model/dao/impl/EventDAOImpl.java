@@ -189,7 +189,7 @@ public class EventDAOImpl implements EventDAO {
 
 				String comment = rsEvent.getString(17);
 				Date exdate = sdf.parse(rsEvent.getString(18));
-				Date rdate = sdf.parse(rsEvent.getString(19));
+				String rdate = rsEvent.getString(19);
 
 				events.add(new Event(id, user, dtstamp, uid, dtstart, created,
 						description, lastmod, location, priority, summary,
@@ -304,7 +304,7 @@ public class EventDAOImpl implements EventDAO {
 
 			String comment = rsEvent.getString(17);
 			Date exdate = sdf.parse(rsEvent.getString(18));
-			Date rdate = sdf.parse(rsEvent.getString(19));
+			String rdate = rsEvent.getString(19);
 
 			events.add(new Event(id, user, dtstamp, uid, dtstart, created,
 					description, lastmod, location, priority, summary, recurid,
