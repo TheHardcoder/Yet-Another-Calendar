@@ -48,7 +48,7 @@ public class EventDAOImpTest extends TestCase {
 			List<String> categories = new ArrayList<String>();
 			categories.add("fhlefl�ajf�");
 			Date exdate = sdf.parse("2012-01-06 10:45");
-			Date rdate = sdf.parse("2012-01-06 14:30");
+			String rdate = "";
 			if (event.createEvents(new Event(testUser, dtstamp, "12340",
 					dtstart, created, "blatest", lastmod, "at Home", "wichtig",
 					"fdsf", "fadf561", "fn�lfvn�ae56156", dtend, duration,

@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import net.fortuna.ical4j.data.CalendarBuilder;
@@ -17,9 +15,6 @@ import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.ComponentList;
-import net.fortuna.ical4j.model.DateTime;
-import net.fortuna.ical4j.model.Period;
-import net.fortuna.ical4j.model.PeriodList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import de.yetanothercalendar.model.database.Event;
@@ -55,36 +50,25 @@ public class ICalendarImporter {
 		for (int i = 0; i < components.size(); i++) {
 			comp = (Component) components.get(i);
 			// Only Events get parsed: TODOs, ... get ignored (so far)
-			if (comp.getName() == comp.VEVENT) {
+			if (comp.getName() == Component.VEVENT) {
 				Event event = new Event();
 
 				// TODO: Clarify what to set for ID and Color when importing
 				// iCal-Files
 				Long id = (long) 1337;
-				// event.setColor(COLOR); can be set to a standard color
-
-				/**
+				
+				/*
 				 * Get the events' properties an delete the propertyname at the
 				 * beginning
 				 */
 
 				String uid = getProperty(comp, Property.UID);
-
 				String description = getProperty(comp, Property.DESCRIPTION);
-
 				String location = getProperty(comp, Property.LOCATION);
-
 				String priority = getProperty(comp, Property.PRIORITY);
-
 				String summary = getProperty(comp, Property.SUMMARY);
-
 				String recurid = getProperty(comp, Property.RECURRENCE_ID);
-
 				String rrule = getProperty(comp, Property.RRULE);
-
-				/**
-				 * Debug Code for ICal RRule Testing FIXME: Evaluate and Delete
-				 */
 
 				String durationStr = comp.getProperties(Property.DURATION)
 						.toString();
@@ -93,7 +77,7 @@ public class ICalendarImporter {
 				}
 
 				long duration = -1;
-				int durH, durM, durS;
+				int durH, durM; //durS
 				if (durationStr.indexOf("H") > -1) {
 					durH = Integer.parseInt(durationStr.substring(0,
 							durationStr.indexOf("H")));
@@ -108,16 +92,16 @@ public class ICalendarImporter {
 					durationStr = durationStr.substring(durationStr
 							.indexOf("M"));
 				}
-				/**
+
+				/*
 				 * NOTE: Seconds are ignored so far
 				 * 
 				 * if (durationStr.indexOf("S")> -1){ durS =
 				 * Integer.parseInt(durationStr.substring(0,
 				 * durationStr.indexOf("S"))); //duration = (long) (60*durH); }
-				 * 
 				 */
 
-				List<String> categories = new ArrayList();
+				List<String> categories = new ArrayList<String>();
 
 				PropertyList categoriesList = comp
 						.getProperties(Property.CATEGORIES);
@@ -133,19 +117,14 @@ public class ICalendarImporter {
 
 				String comment = getProperty(comp, Property.COMMENT);
 
-				Date dtstart = setDateProperty(Property.DTSTART, comp);
-				Date dtstamp = setDateProperty(Property.DTSTAMP, comp);
-				Date created = setDateProperty(Property.CREATED, comp);
-				Date lastmod = setDateProperty(Property.LAST_MODIFIED, comp);
-				Date dtend = setDateProperty(Property.DTEND, comp);
-				Date exdate = setDateProperty(Property.EXDATE, comp);
+				Date dtstart = convertPropertyToDate(Property.DTSTART, comp);
+				Date dtstamp = convertPropertyToDate(Property.DTSTAMP, comp);
+				Date created = convertPropertyToDate(Property.CREATED, comp);
+				Date lastmod = convertPropertyToDate(Property.LAST_MODIFIED, comp);
+				Date dtend = convertPropertyToDate(Property.DTEND, comp);
+				Date exdate = convertPropertyToDate(Property.EXDATE, comp);
 
-				/**
-				 * FIXME: rdate can be a List of Dates! maybe save as String or
-				 * as arrayList, depending on what is needed to parse back to
-				 * Ical4J later on
-				 */
-				Date rdate = setDateProperty(Property.RDATE, comp);
+				String rdate = getProperty(comp, Property.RDATE);
 
 				event.setCategories(categories);
 				event.setComment(comment);
@@ -176,7 +155,16 @@ public class ICalendarImporter {
 		return eventList;
 	}
 
-	private Date setDateProperty(String Propertyname, Component comp) {
+	/**
+	 * Converts a given property of the Component to a Date
+	 * 
+	 * @param Propertyname
+	 *            Name of the Property to convert
+	 * @param comp
+	 *            Name of the Component of the property
+	 * @return Date representation of the property
+	 */
+	private Date convertPropertyToDate(String Propertyname, Component comp) {
 		try {
 			String dateStr = comp.getProperty(Propertyname).toString();
 			Date d = parseIcsDate(dateStr);
@@ -214,11 +202,11 @@ public class ICalendarImporter {
 	}
 
 	/**
-	 * Deletes the lineseperator at the end of a String, if there is one
+	 * Deletes the lineseparator at the end of a String, if there is one
 	 * 
 	 * @param s
 	 *            Input String
-	 * @return String without the lineseperator at the End
+	 * @return String without the lineseparator at the End
 	 */
 	private String deleteLineFeed(String s) {
 		int lineSeperatorLength = System.getProperty("line.separator").length();
@@ -230,6 +218,12 @@ public class ICalendarImporter {
 		return s;
 	}
 
+	/**
+	 * Returns a String representation of the Property {@link name} of Component {@link comp}
+	 * @param comp
+	 * @param name
+	 * @return
+	 */
 	private String getProperty(Component comp, String name) {
 		String propertyString = comp.getProperties(name).toString();
 		if (propertyString.startsWith(name)) {

@@ -33,10 +33,11 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		daoUser.createUserTable();
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
 		daoEvent.createEventTable();
-		User user = new User("test@test.de", "Vorname", "Nachname", DigestUtils.shaHex("HashMe"));
+		User user = new User("test@test.de", "Vorname", "Nachname",
+				DigestUtils.shaHex("HashMe"));
 		user = daoUser.createUser(user);
 
-		//req.getSession().setAttribute("user", user);
+		// req.getSession().setAttribute("user", user);
 
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
 		calendarCreated.set(2012, 0, 3, 10, 0);
@@ -58,14 +59,15 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		System.out.println("ENDE listing");
 
 		// FIXME TODO Events nach datum abfragen funktioniert noch nicht!
-		System.out.println("\n\n\n\n---------------------------------------------------------------------------------------------------------------------");
+		System.out
+				.println("\n\n\n\n---------------------------------------------------------------------------------------------------------------------");
 		Calendar gregcalendar = new GregorianCalendar();
 		gregcalendar.set(Calendar.YEAR, 2010);
 		MomentCreator creator = new MomentCreator(Locale.GERMANY);
 		Calendar start = creator
-				.createFirstPossibleMomentOfYearReturningCalendar(gregcalendar );
+				.createFirstPossibleMomentOfYearReturningCalendar(gregcalendar);
 		Calendar end = creator
-				.createLastPossibleMomentOfYearReturningCalendar(gregcalendar );
+				.createLastPossibleMomentOfYearReturningCalendar(gregcalendar);
 		List<Event> eventBetweenDates = daoEvent.getEventBetweenDates(user,
 				start.getTime(), end.getTime());
 		System.out
@@ -88,6 +90,6 @@ public class DummyDataCreatorServlet extends HttpServlet {
 				new Date(), "uuid", start.getTime(), created.getTime(), desc,
 				new Date(), location, "very high", "what a great summary",
 				"recurrid", "rrule", end.getTime(), 0, "#fff",
-				new ArrayList<String>(), "comment", new Date(), new Date());
+				new ArrayList<String>(), "comment", new Date(), "");
 	}
 }

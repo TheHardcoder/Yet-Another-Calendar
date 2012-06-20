@@ -42,7 +42,7 @@ public class EventDAOMockSimple implements EventDAO {
 				start.getTime(), created.getTime(), "description", new Date(),
 				"location", "very high", "what a great summary", "recurrid",
 				"rrule", end.getTime(), 0, "#fff", new ArrayList<String>(),
-				"comment", new Date(), new Date());
+				"comment", new Date(), "");
 	}
 
 	public boolean createEvents(Event event) {

@@ -36,7 +36,8 @@ public class TestView extends View {
 		lMonths.add(mTMonth);
 		lMonths.add(mTMonth2);
 		Year yTest = new Year(2012, lMonths);
-		new YearView(yTest);
+		YearView yearview = new YearView(yTest, 1, 1, 1);
+		System.out.println(yearview.getXMLString());
 	}
 
 	public static void main(String[] args) {

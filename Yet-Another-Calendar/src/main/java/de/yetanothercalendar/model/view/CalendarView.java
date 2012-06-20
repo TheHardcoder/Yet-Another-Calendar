@@ -24,21 +24,25 @@ public abstract class CalendarView extends View {
 	 * 
 	 * @param pYear
 	 *            - Vorlage vom Typ Year
+	 * @param pSelectedDay
+	 * @param pSelectedWeek
+	 * @param pSelectedMonth
 	 * @return Eine Datei ( :File), welches die gespeicherte XML Datei
 	 *         repr�sentiert. Bei Bedarf kann auch direkt das XML-Dokument (
 	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public CalendarView(Year pYear, String pPathOfXsl) {
+	public CalendarView(Year pYear, int pSelectedMonth, int pSelectedWeek,
+			int pSelectedDay, String pPathOfXsl) {
 		// XML erstellen
 
 		// Wurzelelement mit Attributen erzeugen
 		Element eRoot = new Element("calendar");
 		// TODO selcted-Attribute generisch holen Absprache mit Ben
 		eRoot.setAttribute("selectedyear", String.valueOf(pYear.getNumber()));
-		eRoot.setAttribute("selectedmonth", "0");
-		eRoot.setAttribute("selectedweek", "0");
-		eRoot.setAttribute("selectedday", "0");
+		eRoot.setAttribute("selectedmonth", String.valueOf(pSelectedMonth));
+		eRoot.setAttribute("selectedweek", String.valueOf(pSelectedWeek));
+		eRoot.setAttribute("selectedday", String.valueOf(pSelectedDay));
 		// Dokument mit erstelltem Wurzelelement initialisieren
 		dXml = new Document(eRoot);
 		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
