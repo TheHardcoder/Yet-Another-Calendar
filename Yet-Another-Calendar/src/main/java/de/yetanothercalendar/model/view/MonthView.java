@@ -6,7 +6,5 @@ public class MonthView extends CalendarView {
 
 	public MonthView(Year pYear) {
 		super(pYear, "Resources/calendar_monthview.xsl");
-		// Datei drucken, noch mit Literal. Noch �berarbeiten
-		printXml(dXml, "resources/calender_monthview.xml");
 	}
 }
