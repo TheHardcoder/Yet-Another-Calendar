@@ -6,7 +6,8 @@ public class YearView extends CalendarView {
 
 	public YearView(Year pYear) {
 		super(pYear, "Resources/calendar_yearview.xsl");
-		// Datei drucken, noch mit Literal. Noch �berarbeiten
+
+		// Zum Test Datei drucken, noch mit Literal. Noch �berarbeiten
 		printXml(dXml, "resources/calender_yearview.xml");
 	}
 }
