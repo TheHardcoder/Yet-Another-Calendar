@@ -196,16 +196,28 @@
 				<xsl:text>Edit.html</xsl:text>
 				<xsl:text>?description=</xsl:text>
 				<xsl:value-of select="entry/description" />
+				<xsl:text>&amp;id=</xsl:text>
+				<xsl:value-of select="entry/@id" />
 				<xsl:text>&amp;summary=</xsl:text>
 				<xsl:value-of select="entry/summary" />
-				<xsl:text>&amp;starttime=</xsl:text>
+				<xsl:text>&amp;starttimehours=</xsl:text>
 				<xsl:value-of select="entry/starttime/@hours" />
-				<xsl:text>:</xsl:text>
+				<xsl:text>&amp;starttimeminutes=</xsl:text>
 				<xsl:value-of select="entry/starttime/@minutes" />
-				<xsl:text>&amp;endtime=</xsl:text>
+				<xsl:text>&amp;endtimehours=</xsl:text>
 				<xsl:value-of select="entry/endtime/@hours" />
-				<xsl:text>:</xsl:text>
+				<xsl:text>&amp;endtimeminutes=</xsl:text>
 				<xsl:value-of select="entry/endtime/@minutes" />
+				
+				<xsl:text>&amp;place=</xsl:text>
+				<xsl:value-of select="entry/location" />
+				
+				<xsl:text>&amp;priority=</xsl:text>
+				<xsl:value-of select="entry/@priority" />
+				<xsl:text>&amp;description=</xsl:text>
+				<xsl:value-of select="entry/description" />
+				<xsl:text>&amp;categories=</xsl:text>
+				<xsl:apply-templates select="entry/categories/category"></xsl:apply-templates>
 			</xsl:variable>
 			<xsl:if test="$no = 1">
 				<a href="{$link}" class="entry" title="{$title}">
@@ -221,6 +233,11 @@
 			</xsl:if>
 
 		</div>
+	</xsl:template>
+	
+	<xsl:template match="category">
+		<xsl:apply-templates></xsl:apply-templates>
+		<xsl:text>, </xsl:text>
 	</xsl:template>
 
 </xsl:stylesheet>
