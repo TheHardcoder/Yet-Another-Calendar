@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import net.fortuna.ical4j.model.DateList;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Dur;
 import net.fortuna.ical4j.model.Period;
@@ -18,6 +19,8 @@ import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
+import net.fortuna.ical4j.model.property.RDate;
+import net.fortuna.ical4j.model.property.RecurrenceId;
 
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.database.Event;
@@ -78,9 +81,12 @@ public class RecurrentEventToCalendarEntryWrapper {
 			ve.getProperties().add(
 					new net.fortuna.ical4j.model.property.RRule(recur));
 
-			/**
-			 * FIXME: rdate has to be added, too
-			 */
+			if (event.getRecurid() != "") {
+				ve.getProperties().add(new RecurrenceId(event.getRecurid()));
+			}
+
+			DateList rdates = new DateList(event.getRdate(), null);
+			ve.getProperties().add(new RDate(rdates));
 
 			// calculate an end Date, if Duration Attribute is set to create a
 			// Duration Object for Ical4J
@@ -94,8 +100,9 @@ public class RecurrentEventToCalendarEntryWrapper {
 
 			List<Event> events = new ArrayList<Event>();
 
-			for (Iterator iterator = perList.iterator(); iterator.hasNext();) {
-				Period per = (Period) iterator.next();
+			for (Iterator<Period> iterator = perList.iterator(); iterator
+					.hasNext();) {
+				Period per = iterator.next();
 				// all the original Properties of the Event get reused, only
 				// Start and Enddate get set
 				// otherwise it would always the same pointer
@@ -115,7 +122,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 
 			for (Iterator<Event> iterator = events.iterator(); iterator
 					.hasNext();) {
-				Event event2 = (Event) iterator.next();
+				Event event2 = iterator.next();
 				calendarEntries.addAll(wrapper.wrapEventToCalendar(event2));
 			}
 
