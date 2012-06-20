@@ -49,63 +49,185 @@
 				<h1>Termin bearbeiten</h1>
 
 				<form id="editform" method="post" action="">
-					<label for="summary">Kurzbeschreibung </label><br />
-					<input size="30" id="summary" value=""></input><br /> 
-					<label for="jday">Datum </label><br />
-					<select id="day" name="day" size="1">
-							</select>
-							<select id="month" name="month" size="1" onchange="update();">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
-								<option>10</option>
-								<option>11</option>
-								<option>12</option>
-							</select>
-							<select id="year" name="year" size="1" onchange="update();">
-								<option>1990</option>
-								<option>1991</option>
-								<option>1992</option>
-								<option>1993</option>
-								<option>1994</option>
-								<option>1995</option>
-								<option>1996</option>
-								<option>1997</option>
-								<option>1998</option>
-								<option>1999</option>
-								<option>2000</option>
-								<option>2001</option>
-								<option>2002</option>
-								<option>2003</option>
-								<option>2004</option>
-								<option>2005</option>
-								<option>2006</option>
-								<option>2007</option>
-								<option>2008</option>
-								<option>2009</option>
-								<option>2010</option>
-								<option>2011</option>
-								<option>2012</option>
-								<option>2013</option>
-								<option>2014</option>
-								<option>2015</option>
-								<option>2016</option>
-								<option>2017</option>
-								<option>2018</option>
-								<option>2019</option>
-							</select><br />
-					<label	for="starttime">Startzeit </label><br />
-					<input size="30" id="starttime" value=""></input><br /> <label
-						for="endtime">Endzeit </label><br />
-					<input size="30" id="endtime" value=""></input><br /> <label
-						for="description">Beschreibung </label><br />
-					<input size="30" id="description" value=""></input><br />
+					<fieldset>
+						<input type="hidden" id="id" value=""></input>
+					</fieldset>
+					<fieldset>
+						<label for="summary">Kurzbeschreibung: </label>
+						<input type="text" size="30" id="summary" value=""></input>
+					</fieldset>
+					<fieldset>
+						<label for="jday">Datum: </label>
+						<div>
+						<select id="day" name="day" size="1">
+						</select> 
+						<select id="month" name="month" size="1" onchange="update();">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+						</select> 
+						<select id="year" name="year" size="1" onchange="update();">
+							<option>1990</option>
+							<option>1991</option>
+							<option>1992</option>
+							<option>1993</option>
+							<option>1994</option>
+							<option>1995</option>
+							<option>1996</option>
+							<option>1997</option>
+							<option>1998</option>
+							<option>1999</option>
+							<option>2000</option>
+							<option>2001</option>
+							<option>2002</option>
+							<option>2003</option>
+							<option>2004</option>
+							<option>2005</option>
+							<option>2006</option>
+							<option>2007</option>
+							<option>2008</option>
+							<option>2009</option>
+							<option>2010</option>
+							<option>2011</option>
+							<option>2012</option>
+							<option>2013</option>
+							<option>2014</option>
+							<option>2015</option>
+							<option>2016</option>
+							<option>2017</option>
+							<option>2018</option>
+							<option>2019</option>
+						</select>
+						</div>
+					</fieldset>
+					<fieldset>
+						<label for="starttimehours">Startzeit: </label>
+						<select id="starttimehours" name="starttimehours" size="1">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							<option>19</option>
+							<option>20</option>
+							<option>21</option>
+							<option>22</option>
+							<option>23</option>
+							<option>24</option>
+						</select> 
+						<select id="starttimeminutes" name="starttimeminutes" size="1">
+							<option>00</option>
+							<option>05</option>
+							<option>10</option>
+							<option>15</option>
+							<option>20</option>
+							<option>25</option>
+							<option>30</option>
+							<option>35</option>
+							<option>40</option>
+							<option>45</option>
+							<option>50</option>
+							<option>55</option>
+						</select>
+					</fieldset>
+					<fieldset>
+						<label for="endtimehours">Endzeit: </label>
+						<select id="endtimehours" name="starttimehours" size="1">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							<option>19</option>
+							<option>20</option>
+							<option>21</option>
+							<option>22</option>
+							<option>23</option>
+							<option>24</option>
+						</select> 
+						<select id="endtimeminutes" name="starttimeminutes" size="1">
+							<option>00</option>
+							<option>05</option>
+							<option>10</option>
+							<option>15</option>
+							<option>20</option>
+							<option>25</option>
+							<option>30</option>
+							<option>35</option>
+							<option>40</option>
+							<option>45</option>
+							<option>50</option>
+							<option>55</option>
+						</select>
+					</fieldset>
+					<fieldset>
+						<label for="place">Ort: </label>
+						<input type="text" size="30"
+							id="place" value=""></input>
+					</fieldset>
+					<fieldset>
+						<label for="priority">Priorität: </label>
+						<select id="priority"
+							name="priority" size="1">
+							<option value="low">Niedrig</option>
+							<option value="normal" selected>Normal</option>
+							<option value="high">Hoch</option>
+						</select>
+					</fieldset>
+					<fieldset>
+						<label for="description">Beschreibung: </label>
+						<textarea cols="30" rows="5" id="description" value=""></textarea>
+					</fieldset>
+					<fieldset>
+						<label for="categories">Kategorien: </label>
+						<input type="text" size="30" id="categories" value=""></input>
+					</fieldset>
+					<fieldset>
+						<label for="color">Farbe: </label>
+						<select id="color" name="color" size="1">
+							<option selected>Braun</option>
+							<option>Rot</option>
+							<option>Blau</option>
+							<option>Grün</option>
+							<option>Gelb</option>
+							<option>Grau</option>
+						</select>
+					</fieldset>
 				</form>
 			</div>
 		</div>
