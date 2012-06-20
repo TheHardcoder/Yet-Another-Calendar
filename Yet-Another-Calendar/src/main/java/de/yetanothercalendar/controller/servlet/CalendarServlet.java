@@ -30,9 +30,9 @@ public class CalendarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		resp.setCharacterEncoding("utf-8");
-		
+
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
@@ -47,7 +47,9 @@ public class CalendarServlet extends HttpServlet {
 						// GET years
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
-						YearView yearview = new YearView(entriesByYear);
+						// TODO Fabian, bitte die selected Attribute
+						// implementieren
+						YearView yearview = new YearView(entriesByYear, 0, 0, 0);
 						String result = yearview.getXMLString();
 						resp.getWriter().write(result);
 						printYear(entriesByYear);
@@ -61,7 +63,10 @@ public class CalendarServlet extends HttpServlet {
 						int month = Integer.parseInt(selectedMonth);
 						Year entriesByMonth = calendar.getEntriesByMonth(year,
 								month);
-						MonthView monthview = new MonthView(entriesByMonth);
+						// TODO Fabian, bitte die selected Attribute
+						// implementieren
+						MonthView monthview = new MonthView(entriesByMonth, 0,
+								0, 0);
 						resp.getWriter().write(monthview.getXMLString());
 					} else {
 						throw new RuntimeException(
@@ -73,7 +78,9 @@ public class CalendarServlet extends HttpServlet {
 						int week = Integer.parseInt(selectedWeek);
 						Year entriesByYear = calendar.getEntriesByWeek(year,
 								week);
-						WeekView weekview = new WeekView(entriesByYear);
+						// TODO Fabian, bitte die selected Attribute
+						// implementieren
+						WeekView weekview = new WeekView(entriesByYear, 0, 0, 0);
 						resp.getWriter().write(weekview.getXMLString());
 					} else {
 						throw new RuntimeException(
