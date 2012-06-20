@@ -267,19 +267,25 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	display: none;
 }
 
-#editform > * {
+#editform > fieldset {
 	border: 0;
+	padding: 7px;
 }
 
-#editform > * > * {
-	
+#editform > fieldset > #editbutton {
+	margin: 0px auto;
+	width: 296px;
 }
 
-#editform > * > input[type="text"],  #editform > * > textarea{
+#editform > fieldset > #editbutton > * {
+	margin: 10px;
+}
+
+#editform > fieldset > input[type="text"],  #editform > * > textarea{
 	width: 250px;
 }
 
-#editform > * > label {
+#editform > fieldset > label {
 	margin-right: 10px;
 	margin-left: 20%;
 	float: left;
@@ -444,6 +450,7 @@ body {
 }
 
 html {
+	font-size: 14px;
 	font-family: Arial;
 	padding: 0px;
 	text-shadow: 0px 0px 4px #FF9000;

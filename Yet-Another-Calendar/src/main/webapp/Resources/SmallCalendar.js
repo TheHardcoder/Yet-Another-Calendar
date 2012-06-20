@@ -4,12 +4,8 @@ var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
 function create() {
-	var startyear = document.getElementById("selectedyear").innerHTML;
-	var startmonth = 2 + document.getElementById("selectedmonth").innerHTML;
-	var startweek = 2 + document.getElementById("selectedweek").innerHTML;
-	var startday = 2 + document.getElementById("selectedday").innerHTML;
-	startdate = new Date(startyear, startmonth, startday);
-	curdate = new Date(startyear, startmonth, startday);
+	startdate = new Date();
+	curdate = new Date();
 	startdate.setDate(1);
 	while (startdate.getDay() != 1){
 		startdate.setDate(startdate.getDate()-1);
