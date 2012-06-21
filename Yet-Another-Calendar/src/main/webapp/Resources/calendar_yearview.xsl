@@ -5,8 +5,6 @@
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
 
-	<xsl:variable name="cur">
-	</xsl:variable>
 	<xsl:variable name="no" select='count(//appointment)' />
 
 	<xsl:template match="/calendar">
