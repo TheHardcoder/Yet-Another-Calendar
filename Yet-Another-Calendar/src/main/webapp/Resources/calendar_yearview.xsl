@@ -5,6 +5,7 @@
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
 
+
 	<xsl:variable name="no" select='count(//appointment)' />
 
 	<xsl:template match="/calendar">
@@ -51,10 +52,13 @@
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear + 1"></xsl:value-of>
 					</xsl:variable>
+					<xsl:variable name="today">
+						<xsl:text>calendarservlet?view=yearview&amp;selectedyear=</xsl:text>
+					</xsl:variable>
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
 						<div class="button">Neu</div>
-						<div class="button">Heute</div>
+						<div class="button" onclick="goToToday('calendarservlet?view=yearview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
 							<input type="hidden" name="view" value="yearview"></input>

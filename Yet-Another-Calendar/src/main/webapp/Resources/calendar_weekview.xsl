@@ -73,7 +73,7 @@
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
 						<div class="button">Neu</div>
-						<div class="button">Heute</div>
+						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
 								<input type="hidden" name="view" value="yearview"></input>
