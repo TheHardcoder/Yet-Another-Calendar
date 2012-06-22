@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 import net.fortuna.ical4j.model.Calendar;
 
@@ -32,7 +33,7 @@ public class ICalendarImporterTest extends TestCase {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			this.fail("Error parsing sample .ics File");
+			Assert.fail("Error parsing sample .ics File");
 		}
 	}
 }

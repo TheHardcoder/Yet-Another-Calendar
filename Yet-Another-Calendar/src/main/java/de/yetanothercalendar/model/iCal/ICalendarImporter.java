@@ -56,7 +56,7 @@ public class ICalendarImporter {
 				// TODO: Clarify what to set for ID and Color when importing
 				// iCal-Files
 				Long id = (long) 1337;
-				
+
 				/*
 				 * Get the events' properties an delete the propertyname at the
 				 * beginning
@@ -76,8 +76,8 @@ public class ICalendarImporter {
 					durationStr = durationStr.substring("DURATION:PT".length());
 				}
 
-				long duration = -1;
-				int durH, durM; //durS
+				long duration = 0;
+				int durH, durM; // durS
 				if (durationStr.indexOf("H") > -1) {
 					durH = Integer.parseInt(durationStr.substring(0,
 							durationStr.indexOf("H")));
@@ -100,19 +100,32 @@ public class ICalendarImporter {
 				 * Integer.parseInt(durationStr.substring(0,
 				 * durationStr.indexOf("S"))); //duration = (long) (60*durH); }
 				 */
+				
+				if (duration > 0) {
+					event.setDuration(duration);
+				}
 
 				List<String> categories = new ArrayList<String>();
 
 				PropertyList categoriesList = comp
 						.getProperties(Property.CATEGORIES);
 
-				for (Object category : categoriesList) {
-					if (category.toString().startsWith("CATEGORIES:")) {
-						categories.add(category.toString().substring(
-								"CATEGORIES:".length()));
-					} else {
-						categories.add(category.toString());
+				String categoryString = categoriesList.toString();
+
+				if (categoryString.startsWith("CATEGORIES:")) {
+					// +1 because of the : after the name
+					categoryString = categoryString.substring("CATEGORIES:"
+							.length());
+				}
+
+				categoryString = deleteLineFeed(categoryString);
+
+				if (!(categoryString.equals(""))) {
+					String[] categoriesString = categoryString.split(",");
+					for (String string : categoriesString) {
+						categories.add(string);
 					}
+					event.setCategories(categories);
 				}
 
 				String comment = getProperty(comp, Property.COMMENT);
@@ -120,20 +133,19 @@ public class ICalendarImporter {
 				Date dtstart = convertPropertyToDate(Property.DTSTART, comp);
 				Date dtstamp = convertPropertyToDate(Property.DTSTAMP, comp);
 				Date created = convertPropertyToDate(Property.CREATED, comp);
-				Date lastmod = convertPropertyToDate(Property.LAST_MODIFIED, comp);
+				Date lastmod = convertPropertyToDate(Property.LAST_MODIFIED,
+						comp);
 				Date dtend = convertPropertyToDate(Property.DTEND, comp);
 				Date exdate = convertPropertyToDate(Property.EXDATE, comp);
 
 				String rdate = getProperty(comp, Property.RDATE);
 
-				event.setCategories(categories);
 				event.setComment(comment);
 				event.setCreated(created);
 				event.setDescription(description);
 				event.setDtend(dtend);
 				event.setDtstamp(dtstamp);
 				event.setDtstart(dtstart);
-				event.setDuration(duration);
 				event.setExdate(exdate);
 				event.setId(id);
 				event.setLastmod(lastmod);
@@ -210,7 +222,7 @@ public class ICalendarImporter {
 	 */
 	private String deleteLineFeed(String s) {
 		int lineSeperatorLength = System.getProperty("line.separator").length();
-		if ((s.length() > lineSeperatorLength)
+		if ((s.length() >= lineSeperatorLength)
 				&& (s.substring(s.length() - lineSeperatorLength, s.length())
 						.equals(System.getProperty("line.separator")))) {
 			s = s.substring(0, s.length() - lineSeperatorLength);
@@ -219,7 +231,9 @@ public class ICalendarImporter {
 	}
 
 	/**
-	 * Returns a String representation of the Property {@link name} of Component {@link comp}
+	 * Returns a String representation of the Property {@link name} of Component
+	 * {@link comp}
+	 * 
 	 * @param comp
 	 * @param name
 	 * @return
