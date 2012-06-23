@@ -76,7 +76,7 @@
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
-								<input type="hidden" name="view" value="yearview"></input>
+								<input type="hidden" name="view" value="weekview"></input>
 								<select id="day" name="selectedday" size="1">
 								</select>
 								<select id="month" name="selectedmonth" size="1"
