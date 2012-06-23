@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.yetanothercalendar.model.dao.EventDAO;
+
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;

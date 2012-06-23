@@ -63,11 +63,15 @@ public class UserDAOImpl implements UserDAO {
 				createStatement.close();
 				con.close();
 				result = returnUser(email);
+				return result;
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return null;
 			}
 		}
-		return result;
+		else{
+			return null;
+		}
 	}
 
 	public boolean checkUser(String email, String password) {
