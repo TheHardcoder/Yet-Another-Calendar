@@ -24,7 +24,7 @@ public interface EventDAO {
 	 * @return
 	 */
 	public abstract List<Event> getEventsFromUser(User user);
-
+	
 	public abstract List<Event> getEventsFromUserRecurring(User user);
 
 	public abstract List<Event> getEventsFromUserNotRecurring(User user);

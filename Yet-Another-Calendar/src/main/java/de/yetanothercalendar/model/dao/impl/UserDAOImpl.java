@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import de.yetanothercalendar.model.dao.UserDAO;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
@@ -49,18 +51,23 @@ public class UserDAOImpl implements UserDAO {
 		if (result == null) {
 			try {
 				Connection con = manager.getConnection();
-				Statement createStatement = con.createStatement();
+
 				String email = user.getEmail();
 				String forename = user.getForename();
 				String lastname = user.getLastname();
 				String password = user.getPasswordSHA1();
 
-				String usercreationString = "INSERT INTO users "
+				String sqlString = "INSERT INTO users "
 						+ "(email, forename, lastname, password)"
-						+ "VALUES (\"" + email + "\", \"" + forename + "\", \""
-						+ lastname + "\", \"" + password + "\");";
-				createStatement.executeUpdate(usercreationString);
-				createStatement.close();
+						+ "VALUES ( ?, ?, " + " ?, ? );";
+				java.sql.PreparedStatement pstmt = con
+						.prepareStatement(sqlString);
+				pstmt.setString(1, email);
+				pstmt.setString(2, forename);
+				pstmt.setString(3, lastname);
+				pstmt.setString(4, password);
+				pstmt.executeUpdate();
+				pstmt.close();
 				con.close();
 				result = returnUser(email);
 				return result;
@@ -68,8 +75,7 @@ public class UserDAOImpl implements UserDAO {
 				e.printStackTrace();
 				return null;
 			}
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
@@ -77,25 +83,29 @@ public class UserDAOImpl implements UserDAO {
 	public boolean checkUser(String email, String password) {
 		try {
 			Connection con = manager.getConnection();
-			Statement createStatement = con.createStatement();
-			String userSurch = "select password from users where email = \""
-					+ email + "\";";
-			ResultSet rsUser = createStatement.executeQuery(userSurch);
+
+			java.sql.PreparedStatement pstmt = con.prepareStatement("select password from users where email = ? ;");
+			pstmt.setString(1, email);
+			
+			ResultSet rsUser = pstmt.executeQuery();
 			String dbPassword;
 			while (rsUser.next()) {
 				dbPassword = rsUser.getString(1);
 				System.out.println(dbPassword + " = " + password);
 				if (dbPassword.equals(password)) {
-					createStatement.close();
+					pstmt.close();
+					rsUser.close();
 					con.close();
 					return true;
 				} else {
-					createStatement.close();
+					pstmt.close();
+					rsUser.close();
 					con.close();
 					return false;
 				}
 			}
-			createStatement.close();
+			pstmt.close();
+			rsUser.close();
 			con.close();
 			return false;
 
@@ -110,11 +120,13 @@ public class UserDAOImpl implements UserDAO {
 		User result = null;
 		try {
 			Connection con = manager.getConnection();
-			Statement createStatement = con.createStatement();
-			String userSurch = "select * from users where email = \"" + email
-					+ "\";";
-
-			ResultSet rsUsers = createStatement.executeQuery(userSurch);
+			
+			String userSurch = "select * from users where email = ? ;";
+					
+			java.sql.PreparedStatement pstmt = con.prepareStatement(userSurch);
+			pstmt.setString(1, email);
+			
+			ResultSet rsUsers = pstmt.executeQuery();
 			if (rsUsers.next()) {
 				int dbId = rsUsers.getInt(1);
 				String dbEmail = rsUsers.getString(2);
@@ -124,7 +136,8 @@ public class UserDAOImpl implements UserDAO {
 				result = new User(dbId, dbEmail, dbForename, dbLastname,
 						dbPassword);
 			}
-			createStatement.close();
+			pstmt.close();
+			rsUsers.close();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
