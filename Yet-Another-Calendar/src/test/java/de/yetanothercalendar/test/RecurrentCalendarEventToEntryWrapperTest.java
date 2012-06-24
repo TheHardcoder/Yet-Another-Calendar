@@ -54,9 +54,9 @@ public class RecurrentCalendarEventToEntryWrapperTest extends TestCase {
 			}
 
 			System.out.println("==============================");
-			System.out.println("RecurrentCalendarEventtoEntryWrapperTest");
+			System.out.println("RecurrentCalendarEventToEntryWrapperTest");
 			System.out.println("==============================");
-			for (Iterator iterator = calendarEntries.iterator(); iterator
+			for (Iterator<CalendarEntry> iterator = calendarEntries.iterator(); iterator
 					.hasNext();) {
 				CalendarEntry calendarEntry = (CalendarEntry) iterator.next();
 				System.out.println("Start: "

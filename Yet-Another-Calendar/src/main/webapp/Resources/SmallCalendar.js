@@ -3,13 +3,14 @@ var startdate = new Date();
 var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
+Date.prototype.getWeek = function() {
+	var onejan = new Date(this.getFullYear(),0,1);
+	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+} 
+
 function create() {
-	var startyear = document.getElementById("selectedyear").innerHTML;
-	var startmonth = 2 + document.getElementById("selectedmonth").innerHTML;
-	var startweek = 2 + document.getElementById("selectedweek").innerHTML;
-	var startday = 2 + document.getElementById("selectedday").innerHTML;
-	startdate = new Date(startyear, startmonth, startday);
-	curdate = new Date(startyear, startmonth, startday);
+	startdate = new Date();
+	curdate = new Date();
 	startdate.setDate(1);
 	while (startdate.getDay() != 1){
 		startdate.setDate(startdate.getDate()-1);
@@ -58,4 +59,9 @@ function writeDay(day){
 function daysInMonth(iMonth, iYear)
 {
 return 32 - new Date(iYear, iMonth, 32).getDate();
+}
+
+function goToToday(servlet){
+	var date = new Date();
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + date.getMonth() + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }

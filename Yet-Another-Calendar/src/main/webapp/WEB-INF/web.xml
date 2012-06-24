@@ -32,4 +32,12 @@
 		<error-code>404</error-code>
 		<location>/file_not_found.html</location>
 	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/Logout.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/ErrorPage.jsp</location>
+	</error-page>
 </web-app>

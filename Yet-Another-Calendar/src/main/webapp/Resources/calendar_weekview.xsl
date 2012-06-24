@@ -5,8 +5,6 @@
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
 
-	<xsl:variable name="cur">
-	</xsl:variable>
 	<xsl:variable name="no" select='count(//appointment)' />
 
 	<xsl:template match="/calendar">
@@ -60,21 +58,25 @@
 					<div id="title">Yet Another Calendar</div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=weekview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text>
+						<xsl:value-of select="@selectedyear"></xsl:value-of>
 						<xsl:text>&amp;selectedweek=</xsl:text>
 						<xsl:value-of select="@selectedweek - 1"></xsl:value-of>
 					</xsl:variable>
 					<xsl:variable name="calendarforward">
 						<xsl:text>calendarservlet?view=weekview</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text>
+						<xsl:value-of select="@selectedyear"></xsl:value-of>
 						<xsl:text>&amp;selectedweek=</xsl:text>
 						<xsl:value-of select="@selectedweek + 1"></xsl:value-of>
 					</xsl:variable>
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
 						<div class="button">Neu</div>
-						<div class="button">Heute</div>
+						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
-								<input type="hidden" name="view" value="yearview"></input>
+								<input type="hidden" name="view" value="weekview"></input>
 								<select id="day" name="selectedday" size="1">
 								</select>
 								<select id="month" name="selectedmonth" size="1"
@@ -133,12 +135,18 @@
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
-							<div class="tab">Jahresansicht</div>
+							<xsl:variable name="yearviewlink">
+								<xsl:text>calendarservlet?view=yearview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$yearviewlink}'">Jahresansicht</div>
 							<div class="tab">Monatsansicht</div>
 							<div class="tab selected">Wochenansicht <xsl:value-of select="@selectedweek"></xsl:value-of>
 							</div>
 						</div>
-						<xsl:apply-templates />
+						<xsl:apply-templates select="year[1]/month[1]/week[2]"/>
 					</div>
 					<div id="footer">
 						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
@@ -152,16 +160,30 @@
 		</html>
 	</xsl:template>
 
-	<xsl:template match="year/month/week">
+	<xsl:template match="year[1]/month[1]/week[2]">
 		<div id="weekview">
+			<div id="times">
+			<div class="hourlabel"> </div>
+			<xsl:call-template name="selects">
+               			<xsl:with-param name="i">1</xsl:with-param>
+               			<xsl:with-param name="count">24</xsl:with-param>
+               			<xsl:with-param name="print">1</xsl:with-param>
+            </xsl:call-template>
+            </div>
+            <div id="week">
 			<xsl:for-each select="day">
-				<div class="">
+				<div class="daycolumn">
+					<div class="daycolumntitle">
+						<xsl:value-of select="@name"></xsl:value-of>
+					</div>
 					<xsl:call-template name="selects">
                			<xsl:with-param name="i">1</xsl:with-param>
-               			<xsl:with-param name="count">48</xsl:with-param>
+               			<xsl:with-param name="count">24</xsl:with-param>
+               			<xsl:with-param name="print">0</xsl:with-param>
             		</xsl:call-template> 
 				</div>
 			</xsl:for-each>
+			</div>
 		</div>
 	</xsl:template>
 
@@ -169,13 +191,28 @@
 	<xsl:template name="selects">
 		<xsl:param name="i" />
 		<xsl:param name="count" />
+		<xsl:param name="print" />
+		
+		<xsl:variable name="time">
+				<xsl:if test="$i &lt; 10">
+					<xsl:text>0</xsl:text>
+				</xsl:if>
+				<xsl:value-of select="$i"></xsl:value-of>
+				<xsl:text>:00</xsl:text>
+		</xsl:variable>
 
 		<xsl:if test="$i &lt;= $count">
-			<div class="hour">
-				<xsl:value-of select="round(($i div 2) - 0.5)"></xsl:value-of>
-				<xsl:text>:</xsl:text>
-				<xsl:value-of select="($i mod 2)*30"></xsl:value-of>
-			</div>
+			
+			<xsl:if test="$print = 1">
+				<div class="hourlabel">
+				<xsl:value-of select="$time"></xsl:value-of>
+				</div>
+			</xsl:if>
+			<xsl:if test="$print != 1">
+			
+				<div class="hour" title="{$time}">
+				</div>
+			</xsl:if>
 		</xsl:if>
 
 		<!--begin_: RepeatTheLoopUntilFinished -->
@@ -187,6 +224,7 @@
 				<xsl:with-param name="count">
 					<xsl:value-of select="$count" />
 				</xsl:with-param>
+				<xsl:with-param name="print"><xsl:value-of select="$print" /></xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 

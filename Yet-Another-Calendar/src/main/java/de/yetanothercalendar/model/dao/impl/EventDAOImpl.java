@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.yetanothercalendar.model.dao.EventDAO;
+
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
@@ -66,25 +68,25 @@ public class EventDAOImpl implements EventDAO {
 			System.out.println(user.toString());
 			Long userid = event.getUser().getId();
 			if (userid != null) {
-				String dtstamp = sdf.format(event.getDtstamp());
-				System.out.println(dtstamp);
+				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event.getDtstamp().getTime());
+				
 				String uid = event.getUid();
-				String dtstart = sdf.format(event.getDtstart());
-				String created = sdf.format(event.getCreated());
+				java.sql.Timestamp dtstart = new java.sql.Timestamp(event.getDtstart().getTime());
+				java.sql.Timestamp created = new java.sql.Timestamp(event.getCreated().getTime());
 				String description = event.getDescription();
-				String lastmod = sdf.format(event.getLastmod());
+				java.sql.Timestamp lastmod = new java.sql.Timestamp(event.getLastmod().getTime());
 				String location = event.getLocation();
 				String priority = event.getPriority();
 				String summary = event.getSummary();
 				String recurid = event.getRecurid();
 				String rrule = event.getRrule();
-				String dtend = sdf.format(event.getDtend());
+				java.sql.Timestamp dtend = new java.sql.Timestamp(event.getDtend().getTime());
 				long duration = event.getDuration();
 				String color = event.getColor();
 				List<String> categories = event.getCategories();
 				String comment = event.getComment();
-				String exdate = sdf.format(event.getExdate());
-				String rdate = sdf.format(event.getRdate());
+				java.sql.Timestamp exdate = new java.sql.Timestamp(event.getExdate().getTime());
+				String rdate = event.getRdate();
 
 				String eventCreationString = "INSERT INTO events "
 						+ "(userId, dtstamp, uid, dtstart,"

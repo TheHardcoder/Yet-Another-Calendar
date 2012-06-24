@@ -267,25 +267,88 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	display: none;
 }
 
-#editform > * {
+#editform > fieldset {
 	border: 0;
+	padding: 7px;
 }
 
-#editform > * > * {
-	
+#editform > fieldset > #editbutton {
+	margin: 0px auto;
+	width: 296px;
 }
 
-#editform > * > input[type="text"],  #editform > * > textarea{
+#editform > fieldset > #editbutton > * {
+	margin: 10px;
+}
+
+#editform > fieldset > input[type="text"],  #editform > * > textarea{
 	width: 250px;
 }
 
-#editform > * > label {
+#editform > fieldset > label {
 	margin-right: 10px;
 	margin-left: 20%;
 	float: left;
 	width: 20%;
 	float: left;
 	text-align: right;
+}
+
+#weekview {
+	padding-top: 4px;
+}
+
+#times {
+	width: 40px;
+	float:left;
+}
+
+#week {
+	height: 520px;
+	margin-left: 40px;
+}
+
+#messagecontent {
+	margin-top: 100px;
+	margin-right: 190px;
+}
+
+#messagewindow {
+	font-size: 20px;
+	height: 210px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background-color:  #FF9000;
+	text-align: center;
+	width: 260px;
+	padding: 20px;
+	margin: 0px auto;
+}
+
+#messagewindow:first-line {
+	font-weight: bold;
+	line-height: 50px;
+}
+
+.daycolumn {
+	width: 14.28%;
+	float: left;
+}
+
+.daycolumntitle {
+	text-align: center;
+	font-weight: bold;
+}
+
+.hour {
+	height: 18.5px;
+	margin: 1px;
+	background-color: #FFD973;
+}
+
+.hourlabel {
+	height: 18.5px;
+	margin: 1px;
 }
 
 .month {
@@ -444,6 +507,7 @@ body {
 }
 
 html {
+	font-size: 14px;
 	font-family: Arial;
 	padding: 0px;
 	text-shadow: 0px 0px 4px #FF9000;

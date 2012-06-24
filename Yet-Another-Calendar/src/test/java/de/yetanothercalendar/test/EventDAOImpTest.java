@@ -37,7 +37,7 @@ public class EventDAOImpTest extends TestCase {
 			User testUser = user.returnUser("zeller@yahoo.de");
 			SimpleDateFormat sdf = new SimpleDateFormat();
 			sdf.applyPattern("yyyy-MM-dd HH:mm");
-			Date dtstamp = sdf.parse("2012-02-02 12:30");
+			Date dtstamp = sdf.parse("2012-02-02 11:29");
 			System.out.println("Datum: " + dtstamp);
 			System.out.println(dtstamp);
 			Date dtstart = sdf.parse("2012-01-07 15:30");
@@ -48,7 +48,7 @@ public class EventDAOImpTest extends TestCase {
 			List<String> categories = new ArrayList<String>();
 			categories.add("fhlefl�ajf�");
 			Date exdate = sdf.parse("2012-01-06 10:45");
-			String rdate = "";
+			String rdate = ("2012-01-06 10:45");
 			if (event.createEvents(new Event(testUser, dtstamp, "12340",
 					dtstart, created, "blatest", lastmod, "at Home", "wichtig",
 					"fdsf", "fadf561", "fn�lfvn�ae56156", dtend, duration,
