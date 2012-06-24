@@ -46,12 +46,12 @@ public class EventDAOImpTest extends TestCase {
 			Date dtend = sdf.parse("2012-01-06 13:15");
 			long duration = 135;
 			List<String> categories = new ArrayList<String>();
-			categories.add("fhlefl�ajf�");
+			categories.add("fhlefdfcxcvds");
 			Date exdate = sdf.parse("2012-01-06 10:45");
 			String rdate = ("2012-01-06 10:45");
 			if (event.createEvents(new Event(testUser, dtstamp, "12340",
 					dtstart, created, "blatest", lastmod, "at Home", "wichtig",
-					"fdsf", "fadf561", "fn�lfvn�ae56156", dtend, duration,
+					"fdsf", "fadf561", "fndfdsfds5113", dtend, duration,
 					"ffffff", categories, "Hallo das ist ein comment", exdate,
 					rdate))) {
 				System.out.println("Event wurde Erforgreich erstellt");

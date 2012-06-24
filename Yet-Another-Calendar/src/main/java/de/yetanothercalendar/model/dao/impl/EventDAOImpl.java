@@ -97,46 +97,32 @@ public class EventDAOImpl implements EventDAO {
 						+ " created, description, lastmod, location,"
 						+ " priority, summary, recurid, rrule, dtend,"
 						+ " duration,	color, categories, comment, exdate,"
-						+ " rdate)" + "VALUES (\n\""
-						+ userid
-						+ "\", \""
-						+ dtstamp
-						+ "\", \""
-						+ uid
-						+ "\", \""
-						+ dtstart
-						+ "\", \""
-						+ created
-						+ "\",\n\" "
-						+ description
-						+ "\", \""
-						+ lastmod
-						+ "\", \""
-						+ location
-						+ "\", \""
-						+ priority
-						+ "\", \""
-						+ summary
-						+ "\",\n \""
-						+ recurid
-						+ "\", \""
-						+ rrule
-						+ "\", \""
-						+ dtend
-						+ "\", "
-						+ duration
-						+ ", \""
-						+ color
-						+ "\", \""
-						+ categories
-						+ "\", \""
-						+ comment
-						+ "\", \""
-						+ exdate
-						+ "\", \"" + rdate + "\");";
-				createStatement.executeUpdate(eventCreationString);
+						+ " rdate)" + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
+				java.sql.PreparedStatement pstmt = con.prepareStatement(eventCreationString);
+				pstmt.setLong(1, userid);
+				pstmt.setTimestamp(2, dtstamp);				
+				pstmt.setString(3, uid);
+				pstmt.setTimestamp(4, dtstart);
+				pstmt.setTimestamp(5, created);
+				pstmt.setString(6, description);
+				pstmt.setTimestamp(7, lastmod);
+				pstmt.setString(8, location);
+				pstmt.setString(9, priority);
+				pstmt.setString(10, summary);
+				pstmt.setString(11, recurid);
+				pstmt.setString(12, rrule);
+				pstmt.setTimestamp(13, dtend);
+				pstmt.setLong(14, duration);
+				pstmt.setString(15, color);
+				pstmt.setObject(16, categories);
+				pstmt.setString(17, comment);
+				pstmt.setTimestamp(18, exdate);
+				pstmt.setString(19, rdate);
+				
+				
+				pstmt.executeUpdate();
 
-				createStatement.close();
+				pstmt.close();
 				con.close();
 				return true;
 			} else {
