@@ -151,9 +151,8 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public List<Event> getEventsFromUser(User user) {
+		List<Event> events = new ArrayList<Event>();
 		try {
-			Connection con = manager.getConnection();
-			Statement createStatement = con.createStatement();
 			String email = user.getEmail();
 
 			String eventCreationString = "SELECT events.id, events.dtstamp,"
@@ -165,54 +164,13 @@ public class EventDAOImpl implements EventDAO {
 					+ " ON  (events.userID = users.ID)"
 					+ "Where users.email = \"" + email + "\";";
 
-			ResultSet rsEvent = createStatement
-					.executeQuery(eventCreationString);
-			List<Event> events = new ArrayList<Event>();
-
-			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.applyPattern("yyyy-MM-dd HH:mm");
-
-			while (rsEvent.next()) {
-
-				long id = (long) rsEvent.getInt(1);
-				Date dtstamp = sdf.parse(rsEvent.getString(2));
-				String uid = rsEvent.getString(3);
-				Date dtstart = sdf.parse(rsEvent.getString(4));
-				Date created = sdf.parse(rsEvent.getString(5));
-				String description = rsEvent.getString(6);
-				Date lastmod = sdf.parse(rsEvent.getString(7));
-				String location = rsEvent.getString(8);
-				String priority = rsEvent.getString(9);
-				String summary = rsEvent.getString(10);
-				String recurid = rsEvent.getString(11);
-				String rrule = rsEvent.getString(12);
-				Date dtend = sdf.parse(rsEvent.getString(13));
-				long duration = rsEvent.getLong(14);
-				String color = rsEvent.getString(15);
-
-				List<String> categories = new ArrayList<String>();
-				categories.add(rsEvent.getString(16));
-
-				String comment = rsEvent.getString(17);
-				Date exdate = sdf.parse(rsEvent.getString(18));
-				String rdate = rsEvent.getString(19);
-
-				events.add(new Event(id, user, dtstamp, uid, dtstart, created,
-						description, lastmod, location, priority, summary,
-						recurid, rrule, dtend, duration, color, categories,
-						comment, exdate, rdate));
-			}
-
-			rsEvent.close();
-			createStatement.close();
-			con.close();
-			return events;
+			events = executeSELECTQuery(user, eventCreationString);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-
+		return events;
 	}
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
