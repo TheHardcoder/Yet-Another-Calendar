@@ -1,5 +1,6 @@
 package de.yetanothercalendar.model.dao.impl;
 
+import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,31 +62,34 @@ public class EventDAOImpl implements EventDAO {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
 
-			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.applyPattern("yyyy-MM-dd HH:mm");
-
 			User user = event.getUser();
 			System.out.println(user.toString());
 			Long userid = event.getUser().getId();
 			if (userid != null) {
-				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event.getDtstamp().getTime());
-				
+				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event
+						.getDtstamp().getTime());
+
 				String uid = event.getUid();
-				java.sql.Timestamp dtstart = new java.sql.Timestamp(event.getDtstart().getTime());
-				java.sql.Timestamp created = new java.sql.Timestamp(event.getCreated().getTime());
+				java.sql.Timestamp dtstart = new java.sql.Timestamp(event
+						.getDtstart().getTime());
+				java.sql.Timestamp created = new java.sql.Timestamp(event
+						.getCreated().getTime());
 				String description = event.getDescription();
-				java.sql.Timestamp lastmod = new java.sql.Timestamp(event.getLastmod().getTime());
+				java.sql.Timestamp lastmod = new java.sql.Timestamp(event
+						.getLastmod().getTime());
 				String location = event.getLocation();
 				String priority = event.getPriority();
 				String summary = event.getSummary();
 				String recurid = event.getRecurid();
 				String rrule = event.getRrule();
-				java.sql.Timestamp dtend = new java.sql.Timestamp(event.getDtend().getTime());
+				java.sql.Timestamp dtend = new java.sql.Timestamp(event
+						.getDtend().getTime());
 				long duration = event.getDuration();
 				String color = event.getColor();
 				List<String> categories = event.getCategories();
 				String comment = event.getComment();
-				java.sql.Timestamp exdate = new java.sql.Timestamp(event.getExdate().getTime());
+				java.sql.Timestamp exdate = new java.sql.Timestamp(event
+						.getExdate().getTime());
 				String rdate = event.getRdate();
 
 				String eventCreationString = "INSERT INTO events "
@@ -212,27 +216,24 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public List<Event> getEventBetweenDates(User user, Date from, Date til) {
-		List<Event> evenlist = new ArrayList<Event>();
-		try {
-			String email = user.getEmail();
-			java.sql.Date sFrom = new java.sql.Date(from.getTime());
-			java.sql.Date sTil = new java.sql.Date(til.getTime());
-			evenlist = executeSELECTQuery(
-					user,
-					"SELECT events.id, events.dtstamp,"
-							+ " events.uid, events.dtstart, events.created, events.description,"
-							+ " events.lastmod, events.location, events.priority,	events.summary,"
-							+ " events.recurid,	events.rrule, events.dtend, events.duration,"
-							+ "events.color, events.categories, events.comment, events.exdate,"
-							+ " events.rdate " + "from events INNER JOIN users"
-							+ " ON  (events.userID = users.ID)"
-							+ "Where users.email = \"" + email
-							+ "\" and dtstart BETWEEN \"" + sFrom + "\" AND \""
-							+ sTil + "\";");
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<Event> eventlist = getEventsFromUser(user);
+		List<Event> btwEventList = new ArrayList<Event>();
+		if (!eventlist.isEmpty()) {
+
+			for (int i = 0; i < eventlist.size(); i++) {
+				Date start = eventlist.get(i).getDtstart();
+
+				if (start.compareTo(from) >= 0 && start.compareTo(til) <= 0) {
+					btwEventList.add(eventlist.get(i));
+				}
+
+			}
+
+			return btwEventList;
+		} else {
+			return null;
 		}
-		return evenlist;
+
 	}
 
 	public List<Event> getEventsFromUserRecurring(User user) {

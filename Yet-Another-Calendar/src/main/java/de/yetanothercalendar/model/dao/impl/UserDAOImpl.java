@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
 			String dbPassword;
 			while (rsUser.next()) {
 				dbPassword = rsUser.getString(1);
-				System.out.println(dbPassword + "= " + password);
+				System.out.println(dbPassword + " = " + password);
 				if (dbPassword.equals(password)) {
 					createStatement.close();
 					con.close();
