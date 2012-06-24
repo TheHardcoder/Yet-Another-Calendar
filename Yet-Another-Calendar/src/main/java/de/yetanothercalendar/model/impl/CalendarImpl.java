@@ -219,6 +219,9 @@ public class CalendarImpl implements Calendar {
 			}
 			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
+			// Methodenaufruf zur Berechnung der Spalten für mehrere
+			// Kalendereinträge, die sich überschneiden @auther Lukas
+
 			weekDays.add(day);
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
 		}

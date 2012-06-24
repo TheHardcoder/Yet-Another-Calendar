@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.yetanothercalendar.model.calendar.*;
+import de.yetanothercalendar.model.calendar.CalendarEntry;
+import de.yetanothercalendar.model.calendar.Day;
+import de.yetanothercalendar.model.calendar.Month;
+import de.yetanothercalendar.model.calendar.Week;
+import de.yetanothercalendar.model.calendar.Year;
 
 public class TestView extends View {
 

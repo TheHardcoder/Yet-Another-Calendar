@@ -3,6 +3,7 @@ package de.yetanothercalendar.model.view;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
 
 import org.jdom.Comment;
@@ -12,6 +13,7 @@ import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.xml.sax.InputSource;
 
 import de.yetanothercalendar.model.calendar.Year;
 
@@ -80,6 +82,14 @@ public abstract class CalendarView extends View {
 		XMLOutputter outputter = new XMLOutputter(format);
 		String xmlString = outputter.outputString(dXml);
 		return xmlString;
+	}
+
+	public InputSource getXMLInputStream() {
+		Format format = Format.getPrettyFormat();
+		XMLOutputter outputter = new XMLOutputter(format);
+		String xmlString = outputter.outputString(dXml);
+		InputSource inputSource = new InputSource(new StringReader(xmlString));
+		return inputSource;
 	}
 
 	public void createtestXML() {
