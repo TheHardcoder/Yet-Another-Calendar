@@ -16,6 +16,7 @@ import org.jdom.output.XMLOutputter;
 import org.xml.sax.InputSource;
 
 import de.yetanothercalendar.model.calendar.Year;
+import de.yetanothercalendar.model.view.helper.YearViewHelper;
 
 public abstract class CalendarView extends View {
 
@@ -84,12 +85,10 @@ public abstract class CalendarView extends View {
 		return xmlString;
 	}
 
-	public InputSource getXMLInputStream() {
+	public XMLOutputter getXMLStream() {
 		Format format = Format.getPrettyFormat();
 		XMLOutputter outputter = new XMLOutputter(format);
-		String xmlString = outputter.outputString(dXml);
-		InputSource inputSource = new InputSource(new StringReader(xmlString));
-		return inputSource;
+		return outputter;
 	}
 
 	public void createtestXML() {
