@@ -294,20 +294,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	text-align: right;
 }
 
-#weekview {
-	padding-top: 4px;
-}
-
-#times {
-	width: 40px;
-	float:left;
-}
-
-#week {
-	height: 520px;
-	margin-left: 40px;
-}
-
 #messagecontent {
 	margin-top: 100px;
 	margin-right: 190px;
@@ -328,90 +314,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 #messagewindow:first-line {
 	font-weight: bold;
 	line-height: 50px;
-}
-
-.daycolumn {
-	width: 14.28%;
-	float: left;
-}
-
-.daycolumntitle {
-	text-align: center;
-	font-weight: bold;
-}
-
-.hour {
-	height: 18.5px;
-	margin: 1px;
-	background-color: #FFD973;
-}
-
-.hourlabel {
-	height: 18.5px;
-	margin: 1px;
-}
-
-.month {
-	width: 8.33%;
-	height: 482px;
-	float: left;
-	background-color: #FFBA00;
-	margin: 0px;
-	padding: 0px;
-}
-
-.daylist {
-	margin: 0px;
-	list-style-type: none;
-	padding: 0px;
-	width: 100%;
-}
-
-.monthtitle {
-	background-color: #FFD973;
-	margin: 1px;
-	margin-left: 2px;
-	margin-right: 2px;
-	height: 14px;
-	padding: 0px;
-	font-size: 8pt;
-	text-align: center;
-	font-weight: bold;
-}
-
-.day {
-	background-color: #FFD973;
-	margin: 1px;
-	margin-left: 2px;
-	margin-right: 2px;
-	height: 14px;
-	padding: 0px;
-	font-size: 8pt;
-	display: block;
-	line-height: 9pt;
-}
-
-.daylabel {
-	width: 32px;
-	float: left;
-	margin: 0px;
-	padding: 0px;
-	cursor: pointer;
-}
-
-.entry {
-	white-space: nowrap;
-	margin: 0px;
-	margin-top: 0px;
-	margin-left: 32px;
-	height: 14px;
-	text-decoration: none;
-	background-color: #BF8130;
-	color: white;
-	z-index: 0;
-	cursor: pointer;
-	display: block;
-	overflow: hidden;
 }
 
 .tab {

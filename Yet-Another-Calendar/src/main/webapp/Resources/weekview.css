@@ -1,0 +1,41 @@
+.daycolumn {
+	width: 14.28%;
+	float: left;
+}
+
+.daycolumntitle {
+	text-align: center;
+	font-weight: bold;
+}
+
+.hour {
+	height: 18.5px;
+	margin: 1px;
+	background-color: #FFD973;
+}
+
+.hourlabel {
+	height: 18.5px;
+	margin: 1px;
+}
+.entry {
+	margin-left: 1px;
+	margin-right: 1px;
+	position: absolute;
+	background-color: #FF9000;
+	overflow: hidden;
+	cursor: pointer;
+}
+#weekview {
+	padding-top: 4px;
+}
+#times {
+	width: 40px;
+	float:left;
+}
+
+#week {
+	position: relative;
+	height: 520px;
+	margin-left: 40px;
+}
