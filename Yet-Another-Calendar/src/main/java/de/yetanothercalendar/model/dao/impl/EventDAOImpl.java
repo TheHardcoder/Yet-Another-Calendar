@@ -1,11 +1,9 @@
 package de.yetanothercalendar.model.dao.impl;
 
-import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 
 import de.yetanothercalendar.model.dao.EventDAO;
-
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
@@ -97,10 +94,12 @@ public class EventDAOImpl implements EventDAO {
 						+ " created, description, lastmod, location,"
 						+ " priority, summary, recurid, rrule, dtend,"
 						+ " duration,	color, categories, comment, exdate,"
-						+ " rdate)" + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
-				java.sql.PreparedStatement pstmt = con.prepareStatement(eventCreationString);
+						+ " rdate)"
+						+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );";
+				java.sql.PreparedStatement pstmt = con
+						.prepareStatement(eventCreationString);
 				pstmt.setLong(1, userid);
-				pstmt.setTimestamp(2, dtstamp);				
+				pstmt.setTimestamp(2, dtstamp);
 				pstmt.setString(3, uid);
 				pstmt.setTimestamp(4, dtstart);
 				pstmt.setTimestamp(5, created);
@@ -118,8 +117,7 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setString(17, comment);
 				pstmt.setTimestamp(18, exdate);
 				pstmt.setString(19, rdate);
-				
-				
+
 				pstmt.executeUpdate();
 
 				pstmt.close();
@@ -263,5 +261,10 @@ public class EventDAOImpl implements EventDAO {
 		createStatement.close();
 		con.close();
 		return events;
+	}
+
+	public void updateEvent(Event event) {
+		// TODO Auto-generated method stub
+
 	}
 }
