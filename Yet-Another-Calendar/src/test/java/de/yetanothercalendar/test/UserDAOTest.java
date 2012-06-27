@@ -24,7 +24,8 @@ public class UserDAOTest extends TestCase {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (null != user.createUser(new User("zeller@yahoo.de", "Paull",
+		
+		if (null != user.createUser(new User("zeller4@yahoo.de", "Paull",
 				"Sulzer", "test"))) {
 			System.out.println("Hat funktioniert, der User existiert nicht und wurde angelegt");
 		} else {
@@ -45,7 +46,7 @@ public class UserDAOTest extends TestCase {
 					+ user.getPasswordSHA1());
 		} else {
 			System.out.println("Email-Adresse oder Passwort sind falsch! "
-					+ "Bitte �berpr�fen sie beides");
+					+ "Bitte ueberpruefen sie beides");
 		}
 
 	}
