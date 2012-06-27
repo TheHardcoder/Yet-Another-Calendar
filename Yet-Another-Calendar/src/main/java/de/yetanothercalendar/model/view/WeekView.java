@@ -4,9 +4,9 @@ import de.yetanothercalendar.model.calendar.Year;
 
 public class WeekView extends CalendarView {
 
-	public WeekView(Year pYear, String pSelectedMonth, String pSelectedWeek,
-			String pSelectedDay) {
-		super(pYear, pSelectedMonth, pSelectedWeek, pSelectedDay,
+	public WeekView(Year pYear, String pSelectedYear, String pSelectedMonth,
+			String pSelectedWeek) {
+		super(pYear, pSelectedYear, pSelectedMonth, pSelectedWeek,
 				"Resources/calendar_weekview.xsl");
 	}
 

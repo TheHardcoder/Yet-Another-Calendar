@@ -33,17 +33,28 @@ public abstract class CalendarView extends View {
 	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public CalendarView(Year pYear, String pSelectedMonth,
-			String pSelectedWeek, String pSelectedDay, String pPathOfXsl) {
+	public CalendarView(Year pYear, String pSelectedYear,
+			String pSelectedMonth, String pSelectedWeek, String pPathOfXsl) {
 		// XML erstellen
 
 		// Wurzelelement mit Attributen erzeugen
 		Element eRoot = new Element("calendar");
-		// TODO selcted-Attribute generisch holen Absprache mit Ben
-		eRoot.setAttribute("selectedyear", String.valueOf(pYear.getNumber()));
-		eRoot.setAttribute("selectedmonth", pSelectedMonth);
-		eRoot.setAttribute("selectedweek", pSelectedWeek);
-		eRoot.setAttribute("selectedday", pSelectedDay);
+		if (pSelectedYear != null) {
+			eRoot.setAttribute("selectedyear", pSelectedYear);
+		} else {
+			eRoot.setAttribute("selectedyear", " ");
+		}
+		if (pSelectedMonth != null) {
+			eRoot.setAttribute("selectedyear", pSelectedMonth);
+		} else {
+			eRoot.setAttribute("selectedyear", " ");
+		}
+		if (pSelectedWeek != null) {
+			eRoot.setAttribute("selectedweek", pSelectedWeek);
+		} else {
+			eRoot.setAttribute("selectedweek", " ");
+		}
+
 		// Dokument mit erstelltem Wurzelelement initialisieren
 		dXml = new Document(eRoot);
 		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
