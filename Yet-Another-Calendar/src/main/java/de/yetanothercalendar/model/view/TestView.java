@@ -40,7 +40,7 @@ public class TestView extends View {
 		lMonths.add(mTMonth);
 		lMonths.add(mTMonth2);
 		Year yTest = new Year(2012, lMonths);
-		YearView yearview = new YearView(yTest, 1, 1, 1);
+		YearView yearview = new YearView(yTest, "1", "1", "1");
 		System.out.println(yearview.getXMLString());
 	}
 
