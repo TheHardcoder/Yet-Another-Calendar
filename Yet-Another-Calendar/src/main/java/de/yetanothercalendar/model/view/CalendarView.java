@@ -3,7 +3,6 @@ package de.yetanothercalendar.model.view;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.HashMap;
 
 import org.jdom.Comment;
@@ -13,7 +12,6 @@ import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.xml.sax.InputSource;
 
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.view.helper.YearViewHelper;
