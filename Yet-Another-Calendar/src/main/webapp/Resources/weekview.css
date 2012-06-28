@@ -17,6 +17,7 @@
 .hourlabel {
 	height: 18.5px;
 	margin: 1px;
+	white-space: nowrap;
 }
 .entry {
 	margin-left: 1px;

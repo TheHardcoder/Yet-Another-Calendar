@@ -218,10 +218,10 @@
 			</xsl:apply-templates>
 			<xsl:call-template name="selects">
 				<xsl:with-param name="i">
-					1
+					0
 				</xsl:with-param>
 				<xsl:with-param name="count">
-					24
+					23
 				</xsl:with-param>
 				<xsl:with-param name="print">
 					0
@@ -312,7 +312,7 @@
 		<xsl:param name="print" />
 
 		<xsl:variable name="time">
-			<xsl:if test="$i &lt; 10"><xsl:text>0</xsl:text></xsl:if><xsl:value-of select="$i"></xsl:value-of><xsl:text>:00</xsl:text>
+			<xsl:if test="$i &lt; 10">0</xsl:if><xsl:value-of select="$i"></xsl:value-of>:00
 		</xsl:variable>
 
 		<xsl:if test="$i &lt;= $count">
