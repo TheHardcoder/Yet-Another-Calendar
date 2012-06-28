@@ -63,14 +63,23 @@
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
 						<xsl:value-of select="@selectedyear - 1"></xsl:value-of>
+						<xsl:text>&amp;selectedweek=</xsl:text>
+						<xsl:value-of select="@selectedweek"></xsl:value-of>
+						<xsl:text>&amp;selectedmonth=</xsl:text>
+						<xsl:value-of select="@selectedmonth"></xsl:value-of>
+						<xsl:text>&amp;selectedday=</xsl:text>
+						<xsl:value-of select="@selectedday"></xsl:value-of>
 					</xsl:variable>
 					<xsl:variable name="calendarforward">
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
 						<xsl:value-of select="@selectedyear + 1"></xsl:value-of>
-					</xsl:variable>
-					<xsl:variable name="today">
-						<xsl:text>calendarservlet?view=yearview&amp;selectedyear=</xsl:text>
+						<xsl:text>&amp;selectedweek=</xsl:text>
+						<xsl:value-of select="@selectedweek"></xsl:value-of>
+						<xsl:text>&amp;selectedmonth=</xsl:text>
+						<xsl:value-of select="@selectedmonth"></xsl:value-of>
+						<xsl:text>&amp;selectedday=</xsl:text>
+						<xsl:value-of select="@selectedday"></xsl:value-of>
 					</xsl:variable>
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>

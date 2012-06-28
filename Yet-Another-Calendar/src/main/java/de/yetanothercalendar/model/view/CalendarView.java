@@ -3,7 +3,6 @@ package de.yetanothercalendar.model.view;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.HashMap;
 
 import org.jdom.Comment;
@@ -13,7 +12,6 @@ import org.jdom.Element;
 import org.jdom.ProcessingInstruction;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.xml.sax.InputSource;
 
 import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.view.helper.YearViewHelper;
@@ -35,17 +33,28 @@ public abstract class CalendarView extends View {
 	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public CalendarView(Year pYear, int pSelectedMonth, int pSelectedWeek,
-			int pSelectedDay, String pPathOfXsl) {
+	public CalendarView(Year pYear, String pSelectedYear,
+			String pSelectedMonth, String pSelectedWeek, String pPathOfXsl) {
 		// XML erstellen
 
 		// Wurzelelement mit Attributen erzeugen
 		Element eRoot = new Element("calendar");
-		// TODO selcted-Attribute generisch holen Absprache mit Ben
-		eRoot.setAttribute("selectedyear", String.valueOf(pYear.getNumber()));
-		eRoot.setAttribute("selectedmonth", String.valueOf(pSelectedMonth));
-		eRoot.setAttribute("selectedweek", String.valueOf(pSelectedWeek));
-		eRoot.setAttribute("selectedday", String.valueOf(pSelectedDay));
+		if (pSelectedYear != null) {
+			eRoot.setAttribute("selectedyear", pSelectedYear);
+		} else {
+			eRoot.setAttribute("selectedyear", " ");
+		}
+		if (pSelectedMonth != null) {
+			eRoot.setAttribute("selectedyear", pSelectedMonth);
+		} else {
+			eRoot.setAttribute("selectedyear", " ");
+		}
+		if (pSelectedWeek != null) {
+			eRoot.setAttribute("selectedweek", pSelectedWeek);
+		} else {
+			eRoot.setAttribute("selectedweek", " ");
+		}
+
 		// Dokument mit erstelltem Wurzelelement initialisieren
 		dXml = new Document(eRoot);
 		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
