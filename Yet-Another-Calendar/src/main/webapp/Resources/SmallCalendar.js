@@ -3,8 +3,14 @@ var startdate = new Date();
 var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
+Date.prototype.getWeek = function() {
+	var onejan = new Date(this.getFullYear(),0,1);
+	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+} 
+
 function create() {
 	startdate = new Date();
+	curdate = new Date();
 	startdate.setDate(1);
 	while (startdate.getDay() != 1){
 		startdate.setDate(startdate.getDate()-1);
@@ -12,13 +18,11 @@ function create() {
 	var max = daysInMonth(curdate.getMonth(), curdate.getFullYear());
 	var i = 0;
 	output = "<tr><th colspan='7'>" + curdate.getDate() + ". " + monthnames[curdate.getMonth()] + " " + curdate.getFullYear() + "</th></tr><tr><td>Mo</td><td class='even'>Di</td><td>Mi</td><td class='even'>Do</td><td>Fr</td><td class='even'>Sa</td><td>So</td></tr>";
+	output += "<tr>";
 	while(i < curdate.getDate() || startdate.getDate() < daysInMonth(curdate.getMonth(), curdate.getFullYear())) {
-		if (startdate.getDay() == 1){
-			output += "<tr>";
-		}
 		writeDay(startdate.getDate());
 		if (startdate.getDay() == 0){
-			output += "</tr>";
+			output += "</tr><tr>";
 		}
 		i++;
 		startdate.setDate(startdate.getDate()+1);
@@ -55,4 +59,9 @@ function writeDay(day){
 function daysInMonth(iMonth, iYear)
 {
 return 32 - new Date(iYear, iMonth, 32).getDate();
+}
+
+function goToToday(servlet){
+	var date = new Date();
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + date.getMonth() + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }

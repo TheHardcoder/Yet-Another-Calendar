@@ -66,7 +66,7 @@ public class EventDAOMockFull implements EventDAO {
 				"description", new Date(), "location", "very high",
 				"what a great summary", "recurrid", "rrule", end.getTime(), 0,
 				"#fff", new ArrayList<String>(), "comment", new Date(),
-				new Date());
+				"");
 	}
 
 	public void createEventTable() {
@@ -92,5 +92,10 @@ public class EventDAOMockFull implements EventDAO {
 	public List<Event> getEventsFromUserNotRecurring(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void updateEvent(Event event) {
+		// TODO Auto-generated method stub
+		
 	}
 }

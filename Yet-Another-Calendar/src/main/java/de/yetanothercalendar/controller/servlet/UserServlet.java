@@ -1,6 +1,8 @@
 package de.yetanothercalendar.controller.servlet;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,7 @@ import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
  * Controller Klasse für {@link de.yetanothercalendar.model.database.User}.
  */
 public class UserServlet extends HttpServlet {
+	Calendar c = GregorianCalendar.getInstance();
 
 	private UserDAO dao;
 
@@ -47,7 +50,7 @@ public class UserServlet extends HttpServlet {
 						hashPassword(password));
 				dao.createUser(user);
 				session.setAttribute("user", user);
-				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=2012");
+				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
 				// auf die Registrierungsseite mit Parameter
@@ -65,7 +68,7 @@ public class UserServlet extends HttpServlet {
 				if (dao.checkUser(email, hashPassword(password))) {
 					User user = dao.returnUser(email);
 					session.setAttribute("user", user);
-					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=2012");
+					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 				} else {
 					throw new RuntimeException(
 							"No valid credentials for loggin in the User");

@@ -28,7 +28,7 @@ public class Event {
 	private List<String> categories;
 	private String comment;
 	private Date exdate;
-	private Date rdate;
+	private String rdate;
 
 	public Event() {
 	}
@@ -37,7 +37,7 @@ public class Event {
 			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
-			String comment, Date exdate, Date rdate) {
+			String comment, Date exdate, String rdate) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -65,7 +65,7 @@ public class Event {
 			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
-			String comment, Date exdate, Date rdate) {
+			String comment, Date exdate, String rdate) {
 		super();
 
 		this.user = user;
@@ -247,11 +247,11 @@ public class Event {
 		this.exdate = exdate;
 	}
 
-	public Date getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
 
-	public void setRdate(Date rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 
@@ -268,7 +268,7 @@ public class Event {
 				+ Double.toString(duration) + " color: " + color
 				+ " categories: " + categories + "\n" + "comment: " + comment
 				+ " Exdate: " + parseDate(exdate) + " rdate: "
-				+ parseDate(rdate);
+				+ rdate;
 	}
 
 	/**

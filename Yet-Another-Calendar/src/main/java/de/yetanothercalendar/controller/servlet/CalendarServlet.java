@@ -16,11 +16,13 @@ import de.yetanothercalendar.model.calendar.Year;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.impl.CalendarImpl;
 import de.yetanothercalendar.model.view.MonthView;
+import de.yetanothercalendar.model.view.WeekView;
 import de.yetanothercalendar.model.view.YearView;
 
 /**
  * Controller für die Kalender-sichten.
  */
+@SuppressWarnings("serial")
 public class CalendarServlet extends HttpServlet {
 
 	public CalendarServlet() {
@@ -29,9 +31,9 @@ public class CalendarServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		resp.setCharacterEncoding("utf-8");
-		
+
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
@@ -40,13 +42,16 @@ public class CalendarServlet extends HttpServlet {
 			String selectedMonth = (String) request
 					.getParameter("selectedmonth");
 			String selectedWeek = (String) request.getParameter("selectedweek");
+			String selectedDay = (String) request.getParameter("selectedday");
 			if (viewType != null) {
 				if (viewType.toLowerCase().equals("yearview")) {
 					if (selectedYear != null) {
 						// GET years
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
-						YearView yearview = new YearView(entriesByYear);
+						YearView yearview = new YearView(entriesByYear,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						String result = yearview.getXMLString();
 						resp.getWriter().write(result);
 						printYear(entriesByYear);
@@ -60,7 +65,9 @@ public class CalendarServlet extends HttpServlet {
 						int month = Integer.parseInt(selectedMonth);
 						Year entriesByMonth = calendar.getEntriesByMonth(year,
 								month);
-						MonthView monthview = new MonthView(entriesByMonth);
+						MonthView monthview = new MonthView(entriesByMonth,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						resp.getWriter().write(monthview.getXMLString());
 					} else {
 						throw new RuntimeException(
@@ -72,8 +79,10 @@ public class CalendarServlet extends HttpServlet {
 						int week = Integer.parseInt(selectedWeek);
 						Year entriesByYear = calendar.getEntriesByWeek(year,
 								week);
-						MonthView monthview = new MonthView(entriesByYear);
-						resp.getWriter().write(monthview.getXMLString());
+						WeekView weekview = new WeekView(entriesByYear,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
+						resp.getWriter().write(weekview.getXMLString());
 					} else {
 						throw new RuntimeException(
 								"Invalid parameters for view " + viewType);

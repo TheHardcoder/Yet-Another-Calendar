@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Calender>
-  <Year wert="2012">
-    <Month>August</Month>
-  </Year>
-  <!--Das ist ein Kommentar-->
-  <Month Wert="8" />
-</Calender>
-

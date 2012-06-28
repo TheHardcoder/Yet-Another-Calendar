@@ -14,6 +14,7 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import de.yetanothercalendar.model.calendar.Year;
+import de.yetanothercalendar.model.view.helper.YearViewHelper;
 
 public abstract class CalendarView extends View {
 
@@ -24,21 +25,41 @@ public abstract class CalendarView extends View {
 	 * 
 	 * @param pYear
 	 *            - Vorlage vom Typ Year
+	 * @param pSelectedDay
+	 * @param pSelectedWeek
+	 * @param pSelectedMonth
 	 * @return Eine Datei ( :File), welches die gespeicherte XML Datei
 	 *         repr�sentiert. Bei Bedarf kann auch direkt das XML-Dokument (
 	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
 	 */
 	@SuppressWarnings("unchecked")
-	public CalendarView(Year pYear, String pPathOfXsl) {
-		// XML erstellen
+	public CalendarView(Year pYear, String pSelectedYear,
+			String pSelectedMonth, String pSelectedWeek, String pSelectedDay,
+			String pPathOfXsl) {
 
 		// Wurzelelement mit Attributen erzeugen
 		Element eRoot = new Element("calendar");
-		// TODO selcted-Attribute generisch holen Absprache mit Ben
-		eRoot.setAttribute("selectedyear", String.valueOf(pYear.getNumber()));
-		eRoot.setAttribute("selectedmonth", "0");
-		eRoot.setAttribute("selectedweek", "0");
-		eRoot.setAttribute("selectedday", "0");
+		if (pSelectedYear != null) {
+			eRoot.setAttribute("selectedyear", pSelectedYear);
+		} else {
+			eRoot.setAttribute("selectedyear", " ");
+		}
+		if (pSelectedMonth != null) {
+			eRoot.setAttribute("selectedmonth", pSelectedMonth);
+		} else {
+			eRoot.setAttribute("selectedmonth", " ");
+		}
+		if (pSelectedWeek != null) {
+			eRoot.setAttribute("selectedweek", pSelectedWeek);
+		} else {
+			eRoot.setAttribute("selectedweek", " ");
+		}
+		if (pSelectedDay != null) {
+			eRoot.setAttribute("selectedday", pSelectedDay);
+		} else {
+			eRoot.setAttribute("selectedday", " ");
+		}
+
 		// Dokument mit erstelltem Wurzelelement initialisieren
 		dXml = new Document(eRoot);
 		dXml.setDocType(new DocType("calendar", "Resources/calendar.dtd"));
@@ -76,6 +97,12 @@ public abstract class CalendarView extends View {
 		XMLOutputter outputter = new XMLOutputter(format);
 		String xmlString = outputter.outputString(dXml);
 		return xmlString;
+	}
+
+	public XMLOutputter getXMLStream() {
+		Format format = Format.getPrettyFormat();
+		XMLOutputter outputter = new XMLOutputter(format);
+		return outputter;
 	}
 
 	public void createtestXML() {
