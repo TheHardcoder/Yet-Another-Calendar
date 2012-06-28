@@ -1,0 +1,500 @@
+/* Color-Scheme-Id(http://colorschemedesigner.com/): 0H51Qw0w0w0w0
+Palette URL: http://colorschemedesigner.com/#0H51Qw0w0w0w0*/
+/* Colors
+Primary Color:
+				
+FF9000	BF8130	A65E00	FFAC40	FFC273
+
+Secondary Color A:
+				
+FFBA00	BF9830	A67900	FFCB40	FFD973
+
+Secondary Color B:
+				
+FF4F00	BF5D30	A63400	FF7B40	FF9E73
+*/
+@font-face {
+	font-family: "Shark Soft Bites";
+	src: url("SharkSoftBites.ttf");
+}
+
+@font-face {
+	font-family: "Title";
+	src: url("SF slapstick Comic Shaded.ttf");
+}
+
+#main {
+	height: 600px;
+	background-color: #FFC273;
+	margin: 0px;
+	padding: 20px;
+	min-width: 1000px;
+}
+
+#editfrom {
+	
+}
+
+#login {
+	width: 300px;
+	position: absolute;
+	top: 100px;
+	left: 350px;
+	background-color: #FFAC40;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 30px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 30px #A65E00;
+	box-shadow: inset 0px 0px 30px #A65E00;
+	border: 0px;
+	margin-top: 150px;
+	padding: 20px;
+	padding-top: 30px;
+}
+
+#login legend {
+	position: absolute;
+	top: -20px;
+	left: 20px;
+	background-color: #FF9000;
+	border: 2px solid #A65E00;
+	border-radius: 13px;
+	-moz-border-radius: 13px;
+	box-shadow: 0px 0px 6px #A65E00;
+	padding-left: 6px;
+	padding-right: 6px;
+	font-size: 20pt;
+	background-color: #FF9000;
+}
+
+#login input {
+	background-color: #FF9000;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
+	border: 0px;
+	padding: 4px;
+	float: right;
+	width: 200px;
+	-webkit-box-shadow: 1px -1px 2px 2px #A65E00;
+	box-shadow: 1px -1px 2px 2px #A65E00;
+	float: right;
+	vertical-align: middle;
+}
+
+#registerlink {
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+}
+
+#register {
+	width: 100px;
+	text-decoration: none;
+}
+
+#login div {
+	display: block;
+	min-height: 30px;
+	margin: 6px;
+	margin-top: 10px;
+}
+
+#logo {
+	float: left;
+	width: 100px;
+	height: 100px;
+}
+
+#loginyac {
+	width: 500px;
+	height: 500px;
+	margin: 0px auto;
+	position: absolute;
+	padding: 0px;
+	left: 10%;
+	top: 50px;
+}
+
+#yacimage {
+	width: 600px;
+	height: 500px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#title {
+	font-family: Title;
+	margin-left: 110px;
+	margin-right: 190px;
+	margin-top: 0px;
+	padding-top: 5px;
+	height: 45px;
+	text-align: center;
+	font-size: 28pt;
+}
+
+#tabbar {
+	padding: 0px;
+	margin: 0px;
+	height: 30px;
+	background-color: #FFC273;
+}
+
+#menubar {
+	height: 40px;
+	padding: 0px;
+	margin: 10px;
+	margin-left: 110px;
+	margin-right: 190px;
+}
+
+#info {
+	padding: 5px;
+	float: right;
+	width: 170px;
+	height: 620px;
+	background-color: #FFAC40;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
+	float: right;
+}
+
+#calendar {
+	height: 520px;
+	margin: 5px;
+	margin-right: 191px;
+	margin-left: 0px;
+	background-color: #FFAC40;
+}
+
+#analog_clock {
+	margin: 10px;
+}
+
+#cyear {
+	left: 0px;
+	top: 0px;
+	list-style-type: none;
+	padding: 5px;
+	margin: 0px;
+	display: block;
+}
+
+#footer {
+	position: fixed;
+	margin-top: 10px;
+	right: 20px;
+	top: 650px;
+	left: 20px;
+	height: 20px;
+	background-color: #FFAC40;
+	padding: 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
+	min-width: 980px;
+}
+
+#edit {
+	padding: 20px;
+}
+
+#logout {
+	color: #FFC273;
+	text-decoration: none;
+	display: block;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	border: 2px outset #BF8130;
+	text-align: center;
+	padding: 2px;
+	background-color: #BF8130;
+	margin: 0px auto;
+	margin-top: 5px; font-size : 16pt;
+	cursor: pointer;
+	font-size: 16pt;
+}
+
+#logout:active {
+	border: 2px inset red;
+}
+
+#info table {
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #FF9000;
+	margin: 0px auto;
+	border-spacing: 0;
+	padding: 4px;
+}
+
+#info table tr td {
+	overflow: hidden;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+
+#info table tr td.gray {
+	color: gray;
+}
+
+#info table tr td.selected {
+	border: 1px solid blue;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#info table tr td.even {
+	background-color: #FFC273;
+}
+
+#error_messages {
+	color: red;
+	text-align: center;
+}
+
+#hiddeninfo {
+	display: none;
+}
+
+<<<<<<< HEAD
+.weekdayback {
+	width: 14.28%;
+	float: left;
+	background-color: #FFBA00;
+	margin: 0px;
+	padding: 0px;
+}
+
+.weekday {
+	background-color: #FFD973;
+	margin: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px;
+	font-size: 14pt;
+	text-align: center;
+}
+
+.weekdayothermonth {
+	color: #A65E00;
+	background-color: #FFAC40;
+	padding: 0px;
+	font-size: 14pt;
+	text-align: center;
+}
+
+.titlerow {
+	width: 14.28%;
+	height: 40px;
+	float: left;
+	background-color: #FFBA00;
+	margin: 0px;
+	padding: 0px;
+}
+
+.daylist {
+	margin: 0px;
+	list-style-type: none;
+	padding: 0px;
+	width: 100%;
+=======
+#editform > fieldset {
+	border: 0;
+	padding: 7px;
+>>>>>>> 877ba3996cf6e3fd71a9f7485b7f5d815d2f40c8
+}
+
+#editform > fieldset > #editbutton {
+	margin: 0px auto;
+	width: 296px;
+}
+
+<<<<<<< HEAD
+.daytitle {
+	height: 40px;
+	background-color: #FFD973;
+	margin: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px;
+	font-size: 16pt;
+	text-align: center;
+	font-weight: bold;
+}
+
+.day {
+	background-color: #FFD973;
+	margin: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	height: 14px;
+	padding: 0px;
+	font-size: 8pt;
+	display: block;
+	line-height: 9pt;
+}
+
+.monthday {
+	background-color: #FFD973;
+	margin: 2px;
+	margin-left: 1px;
+	margin-right: 1px;
+	height: 20%;
+	padding: 0px;
+	font-size: 8pt;
+	display: block;
+	line-height: 9pt;
+}
+
+.daylabel {
+	width: 32px;
+=======
+#editform > fieldset > #editbutton > * {
+	margin: 10px;
+}
+
+#editform > fieldset > input[type="text"],  #editform > * > textarea{
+	width: 250px;
+}
+
+#editform > fieldset > label {
+	margin-right: 10px;
+	margin-left: 20%;
+>>>>>>> 877ba3996cf6e3fd71a9f7485b7f5d815d2f40c8
+	float: left;
+	width: 20%;
+	float: left;
+	text-align: right;
+}
+
+#messagecontent {
+	margin-top: 100px;
+	margin-right: 190px;
+}
+
+#messagewindow {
+	font-size: 20px;
+	height: 210px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background-color:  #FF9000;
+	text-align: center;
+	width: 260px;
+	padding: 20px;
+	margin: 0px auto;
+}
+
+#messagewindow:first-line {
+	font-weight: bold;
+	line-height: 50px;
+}
+
+.tab {
+	float: left;
+	width: 180px;
+	height: 18px;
+	margin-right: 1px;
+	padding: 6px;
+	background-color: #FF9000;
+	text-align: center;
+	cursor: pointer;
+}
+
+.selected {
+	background-color: #FFAC40;
+}
+
+.menuitem {
+	display: block;
+	border: 0px;
+	height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 31%;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #FFAC40;
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
+}
+
+.menuitem select {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.button {
+	display: block;
+	border: 0px;
+	height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 11.5%;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: #FFAC40;
+	-moz-box-shadow: inset 0px 0px 10px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 10px #A65E00;
+	box-shadow: inset 0px 0px 10px #A65E00;
+}
+
+.button:first-child {
+	-moz-border-top-left-radius: 20px;
+	border-top-left-radius: 20px;
+	-moz-border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+.button:last-child {
+	-moz-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-bottom-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.button:hover {
+	background-color: #FFFF00;
+	-moz-box-shadow: inset 0px 0px 50px #FF9000;
+	-webkit-box-shadow: inset 0px 0px 50px #FF9000;
+	box-shadow: inset 0px 0px 50px #FF9000;
+}
+
+.button:active {
+	background-color: #A65E00;
+	-moz-box-shadow: inset 0px 0px 18px #FF9000;
+	-webkit-box-shadow: inset 0px 0px 18px #FF9000;
+	box-shadow: inset 0px 0px 18px #FF9000;
+}
+
+h1 {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	margin: 0px;
+	background-color: #FFC273;
+}
+
+html {
+	font-size: 14px;
+	font-family: Arial;
+	padding: 0px;
+	text-shadow: 0px 0px 4px #FF9000;
+}
