@@ -7,7 +7,7 @@ import de.yetanothercalendar.model.calendar.Day;
 import de.yetanothercalendar.model.calendar.Month;
 import de.yetanothercalendar.model.calendar.Week;
 import de.yetanothercalendar.model.calendar.Year;
-import de.yetanothercalendar.model.view.YearViewHelper;
+import de.yetanothercalendar.model.view.helper.YearViewHelper;
 import junit.framework.TestCase;
 
 public class XmlTestCase extends TestCase {

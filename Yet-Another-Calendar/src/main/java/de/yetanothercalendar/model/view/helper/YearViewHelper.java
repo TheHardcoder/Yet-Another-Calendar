@@ -1,4 +1,4 @@
-package de.yetanothercalendar.model.view;
+package de.yetanothercalendar.model.view.helper;
 
 import java.util.ArrayList;
 import java.util.List;

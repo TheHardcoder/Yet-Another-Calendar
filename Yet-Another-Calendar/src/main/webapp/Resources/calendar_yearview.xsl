@@ -15,45 +15,71 @@
 				<title>Yet Another Calendar</title>
 				<link type="text/css" rel="stylesheet" media="screen"
 					href="Resources/structure.css"></link>
+				<link type="text/css" rel="stylesheet" media="screen"
+					href="Resources/yearview.css"></link>
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
 			</head>
 			<body>
 				<div id="main">
-				<div id="hiddeninfo"><div id="selectedyear"><xsl:value-of select="@selectedyear"></xsl:value-of></div><div id="selectedmonth"><xsl:value-of select="@selectedmonth"></xsl:value-of></div><div id="selectedweek"><xsl:value-of select="@selectedweek"></xsl:value-of></div><div id="selectedday"><xsl:value-of select="@selectedday"></xsl:value-of></div></div>
+					<div id="hiddeninfo">
+						<div id="selectedyear">
+							<xsl:value-of select="@selectedyear"></xsl:value-of>
+						</div>
+						<div id="selectedmonth">
+							<xsl:value-of select="@selectedmonth"></xsl:value-of>
+						</div>
+						<div id="selectedweek">
+							<xsl:value-of select="@selectedweek"></xsl:value-of>
+						</div>
+						<div id="selectedday">
+							<xsl:value-of select="@selectedday"></xsl:value-of>
+						</div>
+					</div>
 					<div id="logo">
 						<img src="Resources/BabyGnu.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-						<input type="submit" id="logout" value="Logout"></input>
+							<input type="submit" id="logout" value="Logout"></input>
 						</form>
 						<canvas width="150" height="150" id="analog_clock"></canvas>
 						<table id="smallcalendar">
-						<tr>
-						<td>Mo</td>
-						<td>Di</td>
-						<td>Mi</td>
-						<td>Do</td>
-						<td>Fr</td>
-						<td>Sa</td>
-						<td>So</td>
-						</tr>
+							<tr>
+								<td>Mo</td>
+								<td>Di</td>
+								<td>Mi</td>
+								<td>Do</td>
+								<td>Fr</td>
+								<td>Sa</td>
+								<td>So</td>
+							</tr>
 						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
-						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear - 1"></xsl:value-of>
+						<xsl:text>&amp;selectedyear=</xsl:text>
+						<xsl:value-of select="@selectedyear - 1"></xsl:value-of>
+						<xsl:text>&amp;selectedweek=</xsl:text>
+						<xsl:value-of select="@selectedweek"></xsl:value-of>
+						<xsl:text>&amp;selectedmonth=</xsl:text>
+						<xsl:value-of select="@selectedmonth"></xsl:value-of>
+						<xsl:text>&amp;selectedday=</xsl:text>
+						<xsl:value-of select="@selectedday"></xsl:value-of>
 					</xsl:variable>
 					<xsl:variable name="calendarforward">
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
-						<xsl:text>&amp;selectedyear=</xsl:text><xsl:value-of select="@selectedyear + 1"></xsl:value-of>
-					</xsl:variable>
-					<xsl:variable name="today">
-						<xsl:text>calendarservlet?view=yearview&amp;selectedyear=</xsl:text>
+						<xsl:text>&amp;selectedyear=</xsl:text>
+						<xsl:value-of select="@selectedyear + 1"></xsl:value-of>
+						<xsl:text>&amp;selectedweek=</xsl:text>
+						<xsl:value-of select="@selectedweek"></xsl:value-of>
+						<xsl:text>&amp;selectedmonth=</xsl:text>
+						<xsl:value-of select="@selectedmonth"></xsl:value-of>
+						<xsl:text>&amp;selectedday=</xsl:text>
+						<xsl:value-of select="@selectedday"></xsl:value-of>
 					</xsl:variable>
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
@@ -61,65 +87,69 @@
 						<div class="button" onclick="goToToday('calendarservlet?view=yearview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
-							<input type="hidden" name="view" value="yearview"></input>
-							<select id="day" name="selectedday" size="1">
-							</select>
-							<select id="month" name="selectedmonth" size="1" onchange="update();">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
-								<option>10</option>
-								<option>11</option>
-								<option>12</option>
-							</select>
-							<select id="year" name="selectedyear" size="1" onchange="update();">
-								<option>1990</option>
-								<option>1991</option>
-								<option>1992</option>
-								<option>1993</option>
-								<option>1994</option>
-								<option>1995</option>
-								<option>1996</option>
-								<option>1997</option>
-								<option>1998</option>
-								<option>1999</option>
-								<option>2000</option>
-								<option>2001</option>
-								<option>2002</option>
-								<option>2003</option>
-								<option>2004</option>
-								<option>2005</option>
-								<option>2006</option>
-								<option>2007</option>
-								<option>2008</option>
-								<option>2009</option>
-								<option>2010</option>
-								<option>2011</option>
-								<option>2012</option>
-								<option>2013</option>
-								<option>2014</option>
-								<option>2015</option>
-								<option>2016</option>
-								<option>2017</option>
-								<option>2018</option>
-								<option>2019</option>
-							</select>
-							<input type="submit" value="Go"></input>
+								<input type="hidden" name="view" value="yearview"></input>
+								<select id="day" name="selectedday" size="1">
+								</select>
+								<select id="month" name="selectedmonth" size="1"
+									onchange="update();">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+								</select>
+								<select id="year" name="selectedyear" size="1" onchange="update();">
+									<option>1990</option>
+									<option>1991</option>
+									<option>1992</option>
+									<option>1993</option>
+									<option>1994</option>
+									<option>1995</option>
+									<option>1996</option>
+									<option>1997</option>
+									<option>1998</option>
+									<option>1999</option>
+									<option>2000</option>
+									<option>2001</option>
+									<option>2002</option>
+									<option>2003</option>
+									<option>2004</option>
+									<option>2005</option>
+									<option>2006</option>
+									<option>2007</option>
+									<option>2008</option>
+									<option>2009</option>
+									<option>2010</option>
+									<option>2011</option>
+									<option>2012</option>
+									<option>2013</option>
+									<option>2014</option>
+									<option>2015</option>
+									<option>2016</option>
+									<option>2017</option>
+									<option>2018</option>
+									<option>2019</option>
+								</select>
+								<input type="submit" value="Go"></input>
 							</form>
 						</div>
 						<div class="button">Imp</div>
 						<div class="button">Exp</div>
-						<div class="button"  onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
+						<div class="button" onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
-							<div class="tab selected">Jahresansicht <xsl:value-of select="@selectedyear"></xsl:value-of></div>
+							<div class="tab selected">
+								Jahresansicht
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+							</div>
 							<div class="tab">Monatsansicht</div>
 							<xsl:variable name="weekviewlink">
 								<xsl:text>calendarservlet?view=weekview&amp;selectedyear=</xsl:text>
@@ -164,10 +194,13 @@
 			<xsl:variable name="curd" select="@number">
 			</xsl:variable>
 			<xsl:variable name="newentry">
-			<xsl:text>Edit.html?</xsl:text>
-			<xsl:text>day=</xsl:text><xsl:value-of select="@number"></xsl:value-of>
-			<xsl:text>&amp;month=</xsl:text><xsl:value-of select="../../@number"></xsl:value-of>
-			<xsl:text>&amp;year=</xsl:text><xsl:value-of select="../../../@number"></xsl:value-of>
+				<xsl:text>Edit.html?</xsl:text>
+				<xsl:text>day=</xsl:text>
+				<xsl:value-of select="@number"></xsl:value-of>
+				<xsl:text>&amp;month=</xsl:text>
+				<xsl:value-of select="../../@number"></xsl:value-of>
+				<xsl:text>&amp;year=</xsl:text>
+				<xsl:value-of select="../../../@number"></xsl:value-of>
 			</xsl:variable>
 			<div class="daylabel" ondblclick="window.location='{$newentry}'; return false;">
 				<xsl:value-of select="$curd" />
@@ -210,10 +243,10 @@
 				<xsl:value-of select="entry/endtime/@hours" />
 				<xsl:text>&amp;endtimeminutes=</xsl:text>
 				<xsl:value-of select="entry/endtime/@minutes" />
-				
+
 				<xsl:text>&amp;place=</xsl:text>
 				<xsl:value-of select="entry/location" />
-				
+
 				<xsl:text>&amp;priority=</xsl:text>
 				<xsl:value-of select="entry/@priority" />
 				<xsl:text>&amp;description=</xsl:text>
@@ -236,7 +269,7 @@
 
 		</div>
 	</xsl:template>
-	
+
 	<xsl:template match="category">
 		<xsl:apply-templates></xsl:apply-templates>
 		<xsl:text>, </xsl:text>

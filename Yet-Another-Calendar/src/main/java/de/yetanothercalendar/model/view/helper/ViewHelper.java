@@ -1,4 +1,4 @@
-package de.yetanothercalendar.model.view;
+package de.yetanothercalendar.model.view.helper;
 
 import org.jdom.Element;
 
@@ -7,7 +7,7 @@ public abstract class ViewHelper {
 	protected Element element;
 
 	/**
-	 * Gibt das generierte Element zurück.
+	 * Gibt das generierte Element zurï¿½ck.
 	 * 
 	 * @return Element
 	 */

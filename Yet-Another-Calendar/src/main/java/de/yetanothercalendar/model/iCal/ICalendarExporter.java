@@ -80,12 +80,12 @@ public class ICalendarExporter {
 			StringBuffer categories = new StringBuffer("");
 			for (String string : e.getCategories()) {
 				if (!(string.equals(""))) {
-					categories.append(string +",");
+					categories.append(string + ",");
 				}
 			}
-			//delete the last ,
-			int lastChar = categories.length()-1;
-			if (lastChar>0){
+			// delete the last ,
+			int lastChar = categories.length() - 1;
+			if (lastChar > 0) {
 				categories.deleteCharAt(lastChar);
 			}
 
@@ -96,14 +96,15 @@ public class ICalendarExporter {
 		if (!(e.getComment().equals(""))) {
 			eventString.add("COMMENT:" + e.getComment());
 		}
-		if (e.getDuration()>0) {
-			eventString.add("DURATION:PT" + Long.toString(e.getDuration())+"M");
+		if (e.getDuration() > 0) {
+			eventString.add("DURATION:PT" + Long.toString(e.getDuration())
+					+ "M");
 		}
 		if (!(converDateToICSDate(e.getExdate()).equals(""))) {
 			eventString.add("EXDATE:" + converDateToICSDate(e.getExdate()));
 		}
-
-		if (!((e.getRdate().equals(""))||(e.getRdate().equals(System.lineSeparator())))) {
+		String lineseparator = System.getProperty("line.separator");
+		if (!((e.getRdate().equals("")) || (e.getRdate().equals(lineseparator)))) {
 			eventString.add("RDATE:" + e.getRdate());
 		}
 

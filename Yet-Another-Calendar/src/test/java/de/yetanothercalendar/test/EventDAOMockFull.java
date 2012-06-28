@@ -93,4 +93,9 @@ public class EventDAOMockFull implements EventDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void updateEvent(Event event) {
+		// TODO Auto-generated method stub
+		
+	}
 }

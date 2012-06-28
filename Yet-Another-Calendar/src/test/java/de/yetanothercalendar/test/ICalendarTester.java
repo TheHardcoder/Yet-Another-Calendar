@@ -1,7 +1,5 @@
 package de.yetanothercalendar.test;
 
-import static org.junit.Assert.*;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,11 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.print.attribute.standard.OutputDeviceAssigned;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
-
 import net.fortuna.ical4j.model.Calendar;
 
 import org.junit.Test;
@@ -65,7 +60,7 @@ public class ICalendarTester extends TestCase {
 			e.printStackTrace();
 			Assert.fail("Error parsing sample .ics File");
 		}
-		
+
 		ICalendarExporter export = new ICalendarExporter();
 		List<String> ics = export.exportToIcal(events);
 		File outputFile = new File("resources/exportTest.ics");
@@ -75,15 +70,16 @@ public class ICalendarTester extends TestCase {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
 			Iterator<String> it = ics.iterator();
+			String lineseparator = System.getProperty("line.separator");
 			while (it.hasNext()) {
-				out.write(it.next() + System.lineSeparator());
+				out.write(it.next() + lineseparator);
 			}
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		List<Event> eventsReImported = null;
 		try {
 			in = new FileInputStream(outputFile);
@@ -97,17 +93,18 @@ public class ICalendarTester extends TestCase {
 			e.printStackTrace();
 			Assert.fail("Error parsing sample .ics File");
 		}
-		
+
 		for (int i = 0; i < events.size(); i++) {
-			System.out.println("Comparing Event "+i);
+			System.out.println("Comparing Event " + i);
 			System.out.println("-------- Original Event --------");
 			System.out.println(events.get(i).toString());
 
 			System.out.println("-------- Reimported Event --------");
 			System.out.println(eventsReImported.get(i).toString());
-			assertEquals(events.get(i).toString(), eventsReImported.get(i).toString());
+			assertEquals(events.get(i).toString(), eventsReImported.get(i)
+					.toString());
 		}
-		
-		//assertEquals(events, eventsReImported);
+
+		// assertEquals(events, eventsReImported);
 	}
 }

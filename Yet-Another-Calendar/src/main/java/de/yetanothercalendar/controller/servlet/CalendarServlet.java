@@ -22,6 +22,7 @@ import de.yetanothercalendar.model.view.YearView;
 /**
  * Controller für die Kalender-sichten.
  */
+@SuppressWarnings("serial")
 public class CalendarServlet extends HttpServlet {
 
 	public CalendarServlet() {
@@ -41,15 +42,16 @@ public class CalendarServlet extends HttpServlet {
 			String selectedMonth = (String) request
 					.getParameter("selectedmonth");
 			String selectedWeek = (String) request.getParameter("selectedweek");
+			String selectedDay = (String) request.getParameter("selectedday");
 			if (viewType != null) {
 				if (viewType.toLowerCase().equals("yearview")) {
 					if (selectedYear != null) {
 						// GET years
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
-						// TODO Fabian, bitte die selected Attribute
-						// implementieren
-						YearView yearview = new YearView(entriesByYear, 0, 0, 0);
+						YearView yearview = new YearView(entriesByYear,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						String result = yearview.getXMLString();
 						resp.getWriter().write(result);
 						printYear(entriesByYear);
@@ -63,10 +65,9 @@ public class CalendarServlet extends HttpServlet {
 						int month = Integer.parseInt(selectedMonth);
 						Year entriesByMonth = calendar.getEntriesByMonth(year,
 								month);
-						// TODO Fabian, bitte die selected Attribute
-						// implementieren
-						MonthView monthview = new MonthView(entriesByMonth, 0,
-								0, 0);
+						MonthView monthview = new MonthView(entriesByMonth,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						resp.getWriter().write(monthview.getXMLString());
 					} else {
 						throw new RuntimeException(
@@ -78,9 +79,9 @@ public class CalendarServlet extends HttpServlet {
 						int week = Integer.parseInt(selectedWeek);
 						Year entriesByYear = calendar.getEntriesByWeek(year,
 								week);
-						// TODO Fabian, bitte die selected Attribute
-						// implementieren
-						WeekView weekview = new WeekView(entriesByYear, 0, 0, 0);
+						WeekView weekview = new WeekView(entriesByYear,
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						resp.getWriter().write(weekview.getXMLString());
 					} else {
 						throw new RuntimeException(

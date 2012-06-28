@@ -17,6 +17,14 @@ public interface EventDAO {
 	public abstract boolean createEvents(Event event);
 
 	/**
+	 * Updated den event mit der Id von @param event;
+	 * 
+	 * @param event
+	 *            Event, welcher geupdate werden soll
+	 */
+	public abstract void updateEvent(Event event);
+
+	/**
 	 * Gibt eine Liste mit allen Events, die in der Tablle EVENTS einem User
 	 * zugeordnet sind, zur�ck
 	 * 
