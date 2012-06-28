@@ -22,6 +22,7 @@ import de.yetanothercalendar.model.view.YearView;
 /**
  * Controller für die Kalender-sichten.
  */
+@SuppressWarnings("serial")
 public class CalendarServlet extends HttpServlet {
 
 	public CalendarServlet() {
@@ -41,6 +42,7 @@ public class CalendarServlet extends HttpServlet {
 			String selectedMonth = (String) request
 					.getParameter("selectedmonth");
 			String selectedWeek = (String) request.getParameter("selectedweek");
+			String selectedDay = (String) request.getParameter("selectedday");
 			if (viewType != null) {
 				if (viewType.toLowerCase().equals("yearview")) {
 					if (selectedYear != null) {
@@ -48,7 +50,8 @@ public class CalendarServlet extends HttpServlet {
 						int year = Integer.parseInt(selectedYear);
 						Year entriesByYear = calendar.getEntriesByYear(year);
 						YearView yearview = new YearView(entriesByYear,
-								selectedYear, selectedMonth, selectedWeek);
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						String result = yearview.getXMLString();
 						resp.getWriter().write(result);
 						printYear(entriesByYear);
@@ -63,7 +66,8 @@ public class CalendarServlet extends HttpServlet {
 						Year entriesByMonth = calendar.getEntriesByMonth(year,
 								month);
 						MonthView monthview = new MonthView(entriesByMonth,
-								selectedYear, selectedMonth, selectedWeek);
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						resp.getWriter().write(monthview.getXMLString());
 					} else {
 						throw new RuntimeException(
@@ -76,7 +80,8 @@ public class CalendarServlet extends HttpServlet {
 						Year entriesByYear = calendar.getEntriesByWeek(year,
 								week);
 						WeekView weekview = new WeekView(entriesByYear,
-								selectedYear, selectedMonth, selectedWeek);
+								selectedYear, selectedMonth, selectedWeek,
+								selectedDay);
 						resp.getWriter().write(weekview.getXMLString());
 					} else {
 						throw new RuntimeException(

@@ -34,8 +34,8 @@ public abstract class CalendarView extends View {
 	 */
 	@SuppressWarnings("unchecked")
 	public CalendarView(Year pYear, String pSelectedYear,
-			String pSelectedMonth, String pSelectedWeek, String pPathOfXsl) {
-		// XML erstellen
+			String pSelectedMonth, String pSelectedWeek, String pSelectedDay,
+			String pPathOfXsl) {
 
 		// Wurzelelement mit Attributen erzeugen
 		Element eRoot = new Element("calendar");
@@ -45,14 +45,19 @@ public abstract class CalendarView extends View {
 			eRoot.setAttribute("selectedyear", " ");
 		}
 		if (pSelectedMonth != null) {
-			eRoot.setAttribute("selectedyear", pSelectedMonth);
+			eRoot.setAttribute("selectedmonth", pSelectedMonth);
 		} else {
-			eRoot.setAttribute("selectedyear", " ");
+			eRoot.setAttribute("selectedmonth", " ");
 		}
 		if (pSelectedWeek != null) {
 			eRoot.setAttribute("selectedweek", pSelectedWeek);
 		} else {
 			eRoot.setAttribute("selectedweek", " ");
+		}
+		if (pSelectedDay != null) {
+			eRoot.setAttribute("selectedday", pSelectedDay);
+		} else {
+			eRoot.setAttribute("selectedday", " ");
 		}
 
 		// Dokument mit erstelltem Wurzelelement initialisieren
