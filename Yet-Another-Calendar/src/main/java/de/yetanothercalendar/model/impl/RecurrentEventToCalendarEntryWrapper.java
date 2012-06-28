@@ -34,6 +34,20 @@ public class RecurrentEventToCalendarEntryWrapper {
 		this.locale = locale;
 	}
 
+	/**
+	 * Wraps a (recurrent) Event to multiple Events in a given time frame
+	 * without the RRULE
+	 * 
+	 * @param event
+	 *            Event to wrap
+	 * @param begin
+	 *            begin of the time frame
+	 * @param end
+	 *            end of the time frame
+	 * @return List of Calendar Entries
+	 * @throws IllegalArgumentException
+	 * @throws ParseException
+	 */
 	public List<CalendarEntry> wrapEventToCalendar(Event event, Date begin,
 			Date end) throws IllegalArgumentException, ParseException {
 		// TODO Auto-generated method stub
@@ -45,7 +59,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 		} else {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
-	
+
 			Calendar calBegin = new GregorianCalendar(locale);
 			calBegin.setTime(begin);
 
@@ -128,6 +142,15 @@ public class RecurrentEventToCalendarEntryWrapper {
 		}
 	}
 
+	/**
+	 * Returns a proper String representation of an RRULE Property
+	 * @param name
+	 * Property name
+	 * @param rrule
+	 * rrule-String
+	 * @return
+	 * String representation of the property-value
+	 */
 	public static String getRRULEProperty(String name, String rrule) {
 		if (rrule.indexOf(name) > -1) {
 			int attrBegin = rrule.indexOf(name) + name.length();

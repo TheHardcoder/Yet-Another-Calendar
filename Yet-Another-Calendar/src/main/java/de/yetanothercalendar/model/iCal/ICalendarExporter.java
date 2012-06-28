@@ -38,10 +38,10 @@ public class ICalendarExporter {
 
 	/**
 	 * Converts an Event to an Event-String (iCal Syntax)
+	 * 
 	 * @param e
-	 * Event e
-	 * @return
-	 * String representation of the Event
+	 *            Event e
+	 * @return String representation of the Event
 	 */
 	private List<String> convertEventToString(Event e) {
 		List<String> eventString = new ArrayList<String>();
@@ -123,6 +123,13 @@ public class ICalendarExporter {
 		return eventString;
 	}
 
+	/**
+	 * Converts a Date to an iCal Date Strin 20120626T140000
+	 * 
+	 * @param d
+	 *            Date to convert
+	 * @return String representation of the Date
+	 */
 	private String converDateToICSDate(Date d) {
 		if (d != null) {
 			GregorianCalendar cal = new GregorianCalendar();
@@ -139,6 +146,13 @@ public class ICalendarExporter {
 		}
 	}
 
+	/**
+	 * Converts an Integer into at least two Chars
+	 * 
+	 * @param i
+	 *            Integer to convert
+	 * @return String representation of the Integer (with at least two Chars)
+	 */
 	private String getTwoCharacterString(int i) {
 		if (i < 9) {
 			return "0" + i;
@@ -147,6 +161,11 @@ public class ICalendarExporter {
 		}
 	}
 
+	/**
+	 * Returns the Calendar init Text
+	 * 
+	 * @return init Text like BEGIN:VCALENDAR
+	 */
 	private List<String> getCalendarInitText() {
 		List<String> initText = new ArrayList<String>();
 		initText.add("BEGIN:VCALENDAR");
