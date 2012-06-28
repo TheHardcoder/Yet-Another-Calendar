@@ -17,7 +17,7 @@ public class ICalendarExporter {
 	}
 
 	/**
-	 * Eyports an Eventlist into an ICal-String
+	 * Exports an Eventlist into an ICal-String
 	 * 
 	 * @param events
 	 *            Events to be exported
@@ -36,6 +36,13 @@ public class ICalendarExporter {
 		return null;
 	}
 
+	/**
+	 * Converts an Event to an Event-String (iCal Syntax)
+	 * @param e
+	 * Event e
+	 * @return
+	 * String representation of the Event
+	 */
 	private List<String> convertEventToString(Event e) {
 		List<String> eventString = new ArrayList<String>();
 		eventString.add("BEGIN:VEVENT");

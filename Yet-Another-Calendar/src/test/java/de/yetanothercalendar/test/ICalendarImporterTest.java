@@ -31,7 +31,6 @@ public class ICalendarImporterTest extends TestCase {
 			User user = new User("test@test.de", "test", "test", "123456");
 			events = importer.parseIcal4JToEventList(test, user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Assert.fail("Error parsing sample .ics File");
 		}

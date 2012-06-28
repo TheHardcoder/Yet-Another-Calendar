@@ -45,9 +45,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 		} else {
 			// parse Recurrent Event
 			// if event is in before the given end of the time Frame
-			/**
-			 * FIXME: Change to Calendar.getInstance(locale); Ask Fabian
-			 */
+	
 			Calendar calBegin = new GregorianCalendar(locale);
 			calBegin.setTime(begin);
 

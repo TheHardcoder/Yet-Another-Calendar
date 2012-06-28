@@ -50,7 +50,7 @@ public class ICalendarTester extends TestCase {
 	@Test
 	public void testExportToIcal4J() {
 		// TODO: more complex Test with _all_ properties set
-		File f = new File("resources/simple.ics");
+		File f = new File("resources/complex.ics");
 		InputStream in = null;
 		List<Event> events = null;
 		try {
