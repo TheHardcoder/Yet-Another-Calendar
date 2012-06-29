@@ -44,6 +44,11 @@ public class ICalendarTester extends TestCase {
 
 	@Test
 	public void testExportToIcal4J() {
+		/*
+		 * this test imports a given iCal-File, exports it and reimports it to
+		 * check wether there is no difference of the two corresponding Event
+		 * lists
+		 */
 		// TODO: more complex Test with _all_ properties set
 		File f = new File("resources/simple.ics");
 		InputStream in = null;
@@ -105,6 +110,5 @@ public class ICalendarTester extends TestCase {
 					.toString());
 		}
 
-		// assertEquals(events, eventsReImported);
 	}
 }
