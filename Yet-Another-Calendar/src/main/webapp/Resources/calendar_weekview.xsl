@@ -4,9 +4,6 @@
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
-
-	<xsl:variable name="no" select='count(//appointment)' />
-
 	<xsl:template match="/calendar">
 		<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
@@ -67,7 +64,7 @@
 						<xsl:text>&amp;selectedmonth=</xsl:text>
 						<xsl:value-of select="@selectedmonth"></xsl:value-of>
 						<xsl:text>&amp;selectedday=</xsl:text>
-						<xsl:value-of select="@selectedday"></xsl:value-of>
+						<xsl:value-of select="@selectedday - 7"></xsl:value-of>
 					</xsl:variable>
 					<xsl:variable name="calendarforward">
 						<xsl:text>calendarservlet?view=weekview</xsl:text>
@@ -78,10 +75,10 @@
 						<xsl:text>&amp;selectedmonth=</xsl:text>
 						<xsl:value-of select="@selectedmonth"></xsl:value-of>
 						<xsl:text>&amp;selectedday=</xsl:text>
-						<xsl:value-of select="@selectedday"></xsl:value-of>
+						<xsl:value-of select="@selectedday + 7"></xsl:value-of>
 					</xsl:variable>
 					<div id="menubar">
-						<div class="button" onclick="window.location='{$calendarback}'">&lt;&lt;</div>
+						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
 						<div class="button">Neu</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
@@ -136,12 +133,13 @@
 									<option>2018</option>
 									<option>2019</option>
 								</select>
+								<input id="week" name="selectedweek" type="hidden" value=""></input>
 								<input type="submit" value="Go"></input>
 							</form>
 						</div>
 						<div class="button">Imp</div>
 						<div class="button">Exp</div>
-						<div class="button" onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
+						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
@@ -162,7 +160,8 @@
 								<xsl:value-of select="@selectedweek"></xsl:value-of>
 							</div>
 						</div>
-						<xsl:apply-templates select="year[1]/month[1]/week[1]" />
+						<xsl:apply-templates
+							select="year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]"></xsl:apply-templates>
 					</div>
 					<div id="footer">
 						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
@@ -176,37 +175,38 @@
 		</html>
 	</xsl:template>
 
-	<xsl:template match="year[1]/month[1]/week[1]">
-		<div id="weekview">
-			<div id="times">
-				<div class="hourlabel">
+	<xsl:template
+		match="year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]">
+			<div id="weekview">
+				<div id="times">
+					<div class="hourlabel">
+					</div>
+					<xsl:call-template name="selects">
+						<xsl:with-param name="i">
+							0
+						</xsl:with-param>
+						<xsl:with-param name="count">
+							23
+						</xsl:with-param>
+						<xsl:with-param name="print">
+							1
+						</xsl:with-param>
+					</xsl:call-template>
 				</div>
-				<xsl:call-template name="selects">
-					<xsl:with-param name="i">
-						0
-					</xsl:with-param>
-					<xsl:with-param name="count">
-						23
-					</xsl:with-param>
-					<xsl:with-param name="print">
-						1
-					</xsl:with-param>
-				</xsl:call-template>
+				<div id="week">
+					<xsl:apply-templates select="day"></xsl:apply-templates>
+				</div>
 			</div>
-			<div id="week">
-				<xsl:apply-templates select="day"></xsl:apply-templates>
-			</div>
-		</div>
 	</xsl:template>
 
 	<xsl:template match="day">
 		<div class="daycolumn">
 			<div class="daycolumntitle">
-				<xsl:value-of select="@name"/>
+				<xsl:value-of select="@name" />
 				<xsl:text> </xsl:text>
-				<xsl:value-of select="@number"/>.<xsl:value-of select="//calendar/@selectedmonth"/>.<xsl:value-of select="//calendar/@selectedyear"/>
+				<xsl:value-of select="@number" />.<xsl:value-of select="//calendar/@selectedmonth" />.<xsl:value-of select="//calendar/@selectedyear" />
 			</div>
-			
+
 			<xsl:variable name="pos" select="position()"></xsl:variable>
 
 			<xsl:variable name="col">
@@ -219,7 +219,8 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-
+			
+			
 			<xsl:apply-templates>
 				<xsl:with-param name="columns">
 					<xsl:value-of select="$col"></xsl:value-of>
@@ -229,9 +230,7 @@
 				</xsl:with-param>
 			</xsl:apply-templates>
 			<xsl:call-template name="selects">
-				<xsl:with-param name="i">
-					0
-				</xsl:with-param>
+				<xsl:with-param name="i">0</xsl:with-param>
 				<xsl:with-param name="count">
 					23
 				</xsl:with-param>
@@ -245,7 +244,7 @@
 	<xsl:template match="entry">
 		<xsl:param name="columns" />
 		<xsl:param name="pos" />
-		
+
 
 		<xsl:variable name="entry_x">
 			<xsl:value-of select="((@column div $columns) + ($pos - 1)) * 14.28"></xsl:value-of>
@@ -253,7 +252,7 @@
 		</xsl:variable>
 		<xsl:variable name="entry_y">
 			<xsl:value-of
-				select="(starttime/@hours) * 19.5 + (starttime/@minutes div 3) + 18"></xsl:value-of>
+				select="(starttime/@hours) * 19.5 + (starttime/@minutes div 3) + 17"></xsl:value-of>
 			<xsl:text>px</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="entry_h">
@@ -262,36 +261,36 @@
 			<xsl:text>px</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="entry_w">
-			<xsl:value-of select="(1 div $columns) * 14.28"></xsl:value-of>
+			<xsl:value-of select="(1 div $columns) * 14.2 - 0.1"></xsl:value-of>
 			<xsl:text>%</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="link">
-				<xsl:text>Edit.html</xsl:text>
-				<xsl:text>?description=</xsl:text>
-				<xsl:value-of select="description" />
-				<xsl:text>&amp;id=</xsl:text>
-				<xsl:value-of select="@id" />
-				<xsl:text>&amp;summary=</xsl:text>
-				<xsl:value-of select="summary" />
-				<xsl:text>&amp;starttimehours=</xsl:text>
-				<xsl:value-of select="starttime/@hours" />
-				<xsl:text>&amp;starttimeminutes=</xsl:text>
-				<xsl:value-of select="starttime/@minutes" />
-				<xsl:text>&amp;endtimehours=</xsl:text>
-				<xsl:value-of select="endtime/@hours" />
-				<xsl:text>&amp;endtimeminutes=</xsl:text>
-				<xsl:value-of select="endtime/@minutes" />
+			<xsl:text>Edit.html</xsl:text>
+			<xsl:text>?description=</xsl:text>
+			<xsl:value-of select="description" />
+			<xsl:text>&amp;id=</xsl:text>
+			<xsl:value-of select="@id" />
+			<xsl:text>&amp;summary=</xsl:text>
+			<xsl:value-of select="summary" />
+			<xsl:text>&amp;starttimehours=</xsl:text>
+			<xsl:value-of select="starttime/@hours" />
+			<xsl:text>&amp;starttimeminutes=</xsl:text>
+			<xsl:value-of select="starttime/@minutes" />
+			<xsl:text>&amp;endtimehours=</xsl:text>
+			<xsl:value-of select="endtime/@hours" />
+			<xsl:text>&amp;endtimeminutes=</xsl:text>
+			<xsl:value-of select="endtime/@minutes" />
 
-				<xsl:text>&amp;place=</xsl:text>
-				<xsl:value-of select="location" />
+			<xsl:text>&amp;place=</xsl:text>
+			<xsl:value-of select="location" />
 
-				<xsl:text>&amp;priority=</xsl:text>
-				<xsl:value-of select="@priority" />
-				<xsl:text>&amp;description=</xsl:text>
-				<xsl:value-of select="description" />
-				<xsl:text>&amp;categories=</xsl:text>
-				<xsl:apply-templates select="categories/category"></xsl:apply-templates>
-			</xsl:variable>
+			<xsl:text>&amp;priority=</xsl:text>
+			<xsl:value-of select="@priority" />
+			<xsl:text>&amp;description=</xsl:text>
+			<xsl:value-of select="description" />
+			<xsl:text>&amp;categories=</xsl:text>
+			<xsl:apply-templates select="categories/category"></xsl:apply-templates>
+		</xsl:variable>
 		<xsl:variable name="title">
 			<xsl:value-of select="summary" />
 			<xsl:text>&#xD;</xsl:text>
@@ -312,7 +311,7 @@
 			<xsl:value-of select="summary"></xsl:value-of>
 		</div>
 	</xsl:template>
-	
+
 	<xsl:template match="category">
 		<xsl:apply-templates></xsl:apply-templates>
 		<xsl:text>, </xsl:text>
@@ -324,7 +323,7 @@
 		<xsl:param name="print" />
 
 		<xsl:variable name="time">
-			<xsl:if test="$i &lt; 10">0</xsl:if><xsl:value-of select="$i"></xsl:value-of>:00
+			<div><xsl:if test="$i &lt; 10">0</xsl:if><xsl:value-of select="$i"></xsl:value-of>:00</div>
 		</xsl:variable>
 
 		<xsl:if test="$i &lt;= $count">

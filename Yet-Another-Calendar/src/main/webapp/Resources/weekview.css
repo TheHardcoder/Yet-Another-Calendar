@@ -26,6 +26,8 @@
 	background-color: #FF9000;
 	overflow: hidden;
 	cursor: pointer;
+	min-height: 18px;
+	display: block;
 }
 #weekview {
 	padding-top: 4px;

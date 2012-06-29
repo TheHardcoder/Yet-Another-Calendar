@@ -4,8 +4,9 @@ var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
 Date.prototype.getWeek = function() {
-	var onejan = new Date(this.getFullYear(),0,1);
-	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+	return Math.ceil(this.getDate()/7);
+	//var onejan = new Date(this.getFullYear(),0,1);
+	//return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
 } 
 
 function create() {
@@ -64,4 +65,10 @@ return 32 - new Date(iYear, iMonth, 32).getDate();
 function goToToday(servlet){
 	var date = new Date();
 	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + date.getMonth() + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
+}
+
+function changeWeek(servlet, next){
+	var date = new Date(document.getElementById("selectedyear").innerHTML, document.getElementById("selectedmonth").innerHTML - 1, document.getElementById("selectedday").innerHTML);
+	date = new Date(date.getTime() + (next ? 7: -7) * 24 * 60 * 60 * 1000)
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + (date.getMonth() + 1) + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }

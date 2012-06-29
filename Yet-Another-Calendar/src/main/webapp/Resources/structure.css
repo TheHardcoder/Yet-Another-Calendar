@@ -363,18 +363,20 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 #messagewindow {
-	font-size: 20px;
+	font-size: 14px;
 	height: 210px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 	background-color:  #FF9000;
 	text-align: center;
-	width: 260px;
+	width: 350px;
 	padding: 20px;
 	margin: 0px auto;
+	line-height: 25px;
 }
 
 #messagewindow:first-line {
+	font-size: 18px;
 	font-weight: bold;
 	line-height: 50px;
 }

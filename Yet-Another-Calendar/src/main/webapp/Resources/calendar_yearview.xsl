@@ -88,7 +88,7 @@
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
 								<input type="hidden" name="view" value="yearview"></input>
-								<select id="day" name="selectedday" size="1">
+								<select id="day" name="selectedday" size="1"  onchange="update();">
 								</select>
 								<select id="month" name="selectedmonth" size="1"
 									onchange="update();">
@@ -137,6 +137,8 @@
 									<option>2018</option>
 									<option>2019</option>
 								</select>
+								<input id="week" name="selectedweek" type="hidden"
+									value=""></input>
 								<input type="submit" value="Go"></input>
 							</form>
 						</div>
@@ -154,8 +156,12 @@
 							<xsl:variable name="weekviewlink">
 								<xsl:text>calendarservlet?view=weekview&amp;selectedyear=</xsl:text>
 								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedmonth=</xsl:text>
+								<xsl:value-of select="@selectedmonth"></xsl:value-of>
 								<xsl:text>&amp;selectedweek=</xsl:text>
 								<xsl:value-of select="@selectedweek"></xsl:value-of>
+								<xsl:text>&amp;selectedday=</xsl:text>
+								<xsl:value-of select="@selectedday"></xsl:value-of>
 							</xsl:variable>
 							<div class="tab" onclick="window.location='{$weekviewlink}'">Wochenansicht</div>
 						</div>

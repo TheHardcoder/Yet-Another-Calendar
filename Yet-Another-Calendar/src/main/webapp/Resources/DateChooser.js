@@ -10,10 +10,16 @@ backup01 = window.onload;
 window.onload = function() {
 	backup01();
 	update();
+	
 }
 
 function update() {
 	writeSelectableDays(daysInMonth(document.getElementById("month").value - 1, document.getElementById("year").value));
+	var date = new Date(document.getElementById("year").value, document.getElementById("month").value - 1, document.getElementById("day").value);
+	var onejan = new Date(date.getFullYear(),0,1);
+	var week = Math.ceil((((date - onejan) / 86400000) + onejan.getDay()+1)/7);
+	//document.getElementById("week").value = week;
+	document.getElementById("week").value = Math.ceil(date.getDate()/7);
 }
 
 function writeSelectableDays(max){
