@@ -39,7 +39,9 @@
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-						<div><input type="submit" id="logout" value="Logout"></input></div>
+							<div>
+								<input type="submit" id="logout" value="Logout"></input>
+							</div>
 						</form>
 						<ul id="cl_clock">
 							<li id="cl_sec"></li>
@@ -90,59 +92,59 @@
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
-							<div>
-								<input type="hidden" name="view" value="weekview"></input>
-								<select id="day" name="selectedday" size="1">
-								</select>
-								<select id="month" name="selectedmonth" size="1"
-									onchange="update();">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-									<option>6</option>
-									<option>7</option>
-									<option>8</option>
-									<option>9</option>
-									<option>10</option>
-									<option>11</option>
-									<option>12</option>
-								</select>
-								<select id="year" name="selectedyear" size="1" onchange="update();">
-									<option>1990</option>
-									<option>1991</option>
-									<option>1992</option>
-									<option>1993</option>
-									<option>1994</option>
-									<option>1995</option>
-									<option>1996</option>
-									<option>1997</option>
-									<option>1998</option>
-									<option>1999</option>
-									<option>2000</option>
-									<option>2001</option>
-									<option>2002</option>
-									<option>2003</option>
-									<option>2004</option>
-									<option>2005</option>
-									<option>2006</option>
-									<option>2007</option>
-									<option>2008</option>
-									<option>2009</option>
-									<option>2010</option>
-									<option>2011</option>
-									<option>2012</option>
-									<option>2013</option>
-									<option>2014</option>
-									<option>2015</option>
-									<option>2016</option>
-									<option>2017</option>
-									<option>2018</option>
-									<option>2019</option>
-								</select>
-								<input id="week" name="selectedweek" type="hidden" value=""></input>
-								<input type="submit" value="Go"></input>
+								<div>
+									<input type="hidden" name="view" value="weekview"></input>
+									<select id="day" name="selectedday" size="1">
+									</select>
+									<select id="month" name="selectedmonth" size="1"
+										onchange="update();">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+									</select>
+									<select id="year" name="selectedyear" size="1" onchange="update();">
+										<option>1990</option>
+										<option>1991</option>
+										<option>1992</option>
+										<option>1993</option>
+										<option>1994</option>
+										<option>1995</option>
+										<option>1996</option>
+										<option>1997</option>
+										<option>1998</option>
+										<option>1999</option>
+										<option>2000</option>
+										<option>2001</option>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+										<option>2005</option>
+										<option>2006</option>
+										<option>2007</option>
+										<option>2008</option>
+										<option>2009</option>
+										<option>2010</option>
+										<option>2011</option>
+										<option>2012</option>
+										<option>2013</option>
+										<option>2014</option>
+										<option>2015</option>
+										<option>2016</option>
+										<option>2017</option>
+										<option>2018</option>
+										<option>2019</option>
+									</select>
+									<input id="week" name="selectedweek" type="hidden" value=""></input>
+									<input type="submit" value="Go"></input>
 								</div>
 							</form>
 						</div>
@@ -210,14 +212,17 @@
 
 	<xsl:template match="day">
 		<div class="daycolumn">
-			<div class="daycolumntitle">
-				<xsl:value-of select="@name" />
-				<xsl:text> </xsl:text>
+			<xsl:variable name="daytitle">
 				<xsl:value-of select="@number" />
 				.
 				<xsl:value-of select="//calendar/@selectedmonth" />
 				.
 				<xsl:value-of select="//calendar/@selectedyear" />
+			</xsl:variable>
+			<div class="daycolumntitle">
+				<xsl:value-of select="@name" />
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="translate(normalize-space($daytitle), ' ', '')"></xsl:value-of>
 			</div>
 
 			<xsl:variable name="pos" select="position()"></xsl:variable>
@@ -337,7 +342,7 @@
 		<xsl:param name="count" />
 		<xsl:param name="print" />
 
-		<xsl:variable name="time">
+		<xsl:variable name="pretime">
 			<div>
 				<xsl:if test="$i &lt; 10">
 					0
@@ -345,6 +350,9 @@
 				<xsl:value-of select="$i"></xsl:value-of>
 				:00
 			</div>
+		</xsl:variable>
+		<xsl:variable name="time">
+			<xsl:value-of select="translate(normalize-space($pretime), ' ', '')"></xsl:value-of>
 		</xsl:variable>
 
 		<xsl:if test="$i &lt;= $count">
