@@ -16,6 +16,8 @@
 				<title>Yet Another Calendar</title>
 				<link type="text/css" rel="stylesheet" media="screen"
 					href="Resources/structure.css"></link>
+					<link type="text/css" rel="stylesheet" media="screen"
+					href="Resources/monthview.css"></link>
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
