@@ -5,6 +5,7 @@
 <title>Yet Another Calendar</title>
 <link rel="stylesheet" media="screen" href="Resources/structure.css">
 <script type="text/JavaScript" src="Resources/analog_clock.js"></script>
+<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
 </head>
 <body>
 	<div id="main">
@@ -14,12 +15,23 @@
 				<li id="cl_hour"></li>
 				<li id="cl_min"></li>
 			</ul>
+			<table id="smallcalendar">
+				<tr>
+					<td>Mo</td>
+					<td>Di</td>
+					<td>Mi</td>
+					<td>Do</td>
+					<td>Fr</td>
+					<td>Sa</td>
+					<td>So</td>
+				</tr>
+			</table>
 		</div>
 		<div id="title" style="margin-left: 0px;">
 			<div id="titleimage"></div>
 		</div>
 		<form action="userservlet" method="post" id="loginyac">
-			<img id="yacimage" src="Resources/Images/BabyGnu.png" alt="Logo" />
+			<img id="yacimage" src="Resources/Images/yac.png" alt="Logo" />
 			<fieldset id="login">
 				<legend>Login</legend>
 				<div>

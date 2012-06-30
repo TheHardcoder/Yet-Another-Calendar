@@ -10,7 +10,7 @@ window.onload = function() {
 function updateTime() {
 	var date = new Date();
 	var seconds = date.getSeconds();
-    var sdegree = seconds * 6;
+    var sdegree = seconds * 6 -1;
     var srotate = "rotate(" + sdegree + "deg)";
     var hours = date.getHours();
     var mins = date.getMinutes();

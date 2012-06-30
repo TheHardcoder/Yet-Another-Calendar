@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div id="logo">
-						<img src="Resources/Images/BabyGnu.png" width="100px" height="100px"
+						<img src="Resources/Images/yac_logo.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
@@ -165,7 +165,17 @@
 								<xsl:value-of select="@selectedday"></xsl:value-of>
 							</xsl:variable>
 							<div class="tab" onclick="window.location='{$yearviewlink}'">Jahresansicht</div>
-							<div class="tab">Monatsansicht</div>
+							<xsl:variable name="monthviewlink">
+								<xsl:text>calendarservlet?view=monthview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedmonth=</xsl:text>
+								<xsl:value-of select="@selectedmonth"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+								<xsl:text>&amp;selectedday=</xsl:text>
+								<xsl:value-of select="@selectedday"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$monthviewlink}'">Monatsansicht</div>
 							<div class="tab selected">
 								Wochenansicht
 								<xsl:value-of select="@selectedweek"></xsl:value-of>

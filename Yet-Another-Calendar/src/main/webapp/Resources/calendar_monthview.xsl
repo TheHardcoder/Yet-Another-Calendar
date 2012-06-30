@@ -23,24 +23,30 @@
 			<body>
 				<div id="main">
 					<div id="logo">
-						<img src="Resources/BabyGnu.png" width="100px" height="100px"
+						<img src="Resources/Images/yac_logo.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-						<input type="submit" id="logout" value="Logout"></input>
+							<div>
+								<input type="submit" id="logout" value="Logout"></input>
+							</div>
 						</form>
-						<canvas width="150" height="150" id="analog_clock"></canvas>
+						<ul id="cl_clock">
+							<li id="cl_sec"></li>
+							<li id="cl_hour"></li>
+							<li id="cl_min"></li>
+						</ul>
 						<table id="smallcalendar">
-						<tr>
-						<td>Mo</td>
-						<td>Di</td>
-						<td>Mi</td>
-						<td>Do</td>
-						<td>Fr</td>
-						<td>Sa</td>
-						<td>So</td>
-						</tr>
+							<tr>
+								<td>Mo</td>
+								<td>Di</td>
+								<td>Mi</td>
+								<td>Do</td>
+								<td>Fr</td>
+								<td>Sa</td>
+								<td>So</td>
+							</tr>
 						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
@@ -99,6 +105,7 @@
 								<option>2018</option>
 								<option>2019</option>
 							</select>
+							<input id="week" name="selectedweek" type="hidden" value=""></input>
 							<input type="submit" value="Go"></input>
 							</form>
 						</div>
@@ -119,7 +126,7 @@
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
-						<a href="about.html">About</a>
+						<a href="About.html">About</a>
 					</div>
 				</div>
 			</body>
