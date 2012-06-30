@@ -9,9 +9,9 @@
 	<body>
 		<div id="main">
 			<div id="info"><canvas width="150" height="150" id="analog_clock"></canvas></div>
-			<div id="title" style="margin-left: 0px;">Yet Another Calendar</div>
+			<div id="title" style="margin-left: 0px;"><div id="titleimage"></div></div>
 			<form action="userservlet" method="post"  id="loginyac">
-			<img id="yacimage" src="Resources/BabyGnu.png" alt="Logo" />
+			<img id="yacimage" src="Resources/Images/BabyGnu.png" alt="Logo" />
 				<fieldset id="login">
 					<legend>Login</legend>
 					<div>
@@ -27,7 +27,7 @@
 					<a href="Register.html" id="registerlink">Noch nicht registriert?</a>
 				</fieldset>
 			</form>
-			<div id="footer">Impressum: &nbsp; Michael M&uuml;ller &nbsp; Tel: 10932048091284 &nbsp; Email: <a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a> &nbsp; Mehr: <a href="about.html">About</a></div>
+			<div id="footer">Impressum: &nbsp; Michael M&uuml;ller &nbsp; Tel: 10932048091284 &nbsp; Email: <a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a> &nbsp; Mehr: <a href="About.html">About</a></div>
 		</div>
 	</body>
 </html>

@@ -20,8 +20,10 @@
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
+				<script type="text/JavaScript" src="Resources/Import.js"></script>
 			</head>
 			<body>
+			<div id="fileopen"></div>
 				<div id="main">
 					<div id="hiddeninfo">
 						<div id="selectedyear">
@@ -38,7 +40,7 @@
 						</div>
 					</div>
 					<div id="logo">
-						<img src="Resources/BabyGnu.png" width="100px" height="100px"
+						<img src="Resources/Images/BabyGnu.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
@@ -58,7 +60,7 @@
 							</tr>
 						</table>
 					</div>
-					<div id="title">Yet Another Calendar</div>
+					<div id="title"><div id="titleimage"></div></div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
@@ -142,7 +144,7 @@
 								<input type="submit" value="Go"></input>
 							</form>
 						</div>
-						<div class="button">Imp</div>
+						<div class="button" onclick="showFileOpenDialog();">Imp</div>
 						<div class="button">Exp</div>
 						<div class="button" onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
@@ -172,7 +174,7 @@
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
-						<a href="about.html">About</a>
+						<a href="About.html">About</a>
 					</div>
 				</div>
 			</body>

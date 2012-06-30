@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div id="logo">
-						<img src="Resources/BabyGnu.png" width="100px" height="100px"
+						<img src="Resources/Images/BabyGnu.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
@@ -54,7 +54,7 @@
 							</tr>
 						</table>
 					</div>
-					<div id="title">Yet Another Calendar</div>
+					<div id="title"><div id="titleimage"></div></div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=weekview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
@@ -168,7 +168,7 @@
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
-						<a href="about.html">About</a>
+						<a href="About.html">About</a>
 					</div>
 				</div>
 			</body>
