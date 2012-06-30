@@ -1,5 +1,7 @@
 package de.yetanothercalendar.test;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.yetanothercalendar.model.dao.impl.UserDAOImpl;
@@ -9,28 +11,35 @@ import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
 import junit.framework.TestCase;
 
 public class UserDAOTest extends TestCase {
+	
+	static UserDAOImpl user;
+	
+	@BeforeClass
+	public static void prepaireClas() {
+		user = new UserDAOImpl(new DatabaseConnectionManager(
+				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
+	}
 
-	@Test
+	@AfterClass
+	public static void cleanUp(){
+		
+	}
+	
+	@Test // Schlaegt auf jedenfall fehl weil ein NullPointerException erwartet wird(expected = NullPointerException.class)
 	public void testCreateUserTable() {
 
-		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
-				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
+		/** wenn Test fehlschlägt, dann ist das Anlegen des UserDAOs fehlgeschlagen*/
 		assertNotNull("Anlegen des UserDAOs fehlgeschlagen!", user);
 		user.createUserTable();
 	}
 
 	@Test
 	public void testCreateUser() {
-		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
-				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
-
+				
+		User testUser = user.createUser(new User("zeller4@yahoo.de", "Paull",
+				"Sulzer", "test"));
+		assertNotNull(testUser);
 		
-		if (null != user.createUser(new User("zeller4@yahoo.de", "Paull",
-				"Sulzer", "test"))) {
-			System.out.println("Hat funktioniert, der User existiert nicht und wurde angelegt");
-		} else {
-			System.out.println("hat nicht funktioniert, User existiert wahrscheinlich ");
-		}
 	}
 
 	@Test
