@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,32 +7,7 @@
 <script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 <script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 <script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
-<script type="text/javascript">
-	backup = window.onload;
-
-	window.onload = function() {
-		backup();
-		var querystring = location.search;
-		if (querystring == '')
-			return;
-		var wertestring = querystring.slice(1);
-		var paare = wertestring.split("&");
-		var paar, name, wert;
-
-		for ( var i = 0; i < paare.length; i++) {
-			paar = paare[i].split("=");
-			name = paar[0];
-			wert = paar[1];
-			name = unescape(name).replace("+", " ");
-			wert = unescape(wert).replace("+", " ");
-			this[name] = wert;
-			if (document.getElementById(name) != null) {
-				document.getElementById(name).value = wert;
-			}
-		}
-
-	}
-</script>
+<script type="text/javascript" src="Resources/edit.js"></script>
 </head>
 <body>
 	<div id="main">
@@ -81,8 +56,9 @@
 					</fieldset>
 					<fieldset>
 						<label for="jday">Datum: </label>
-						<div>
+						<div id="jday">
 							<select id="day" name="day" size="1">
+								<option>1</option>
 							</select> <select id="month" name="month" size="1" onchange="update();">
 								<option>1</option>
 								<option>2</option>
@@ -222,13 +198,13 @@
 						<label for="priority">Priorität: </label> <select id="priority"
 							name="priority" size="1">
 							<option value="low">Niedrig</option>
-							<option value="normal" selected>Normal</option>
+							<option value="normal" selected="selected">Normal</option>
 							<option value="high">Hoch</option>
 						</select>
 					</fieldset>
 					<fieldset>
 						<label for="description">Beschreibung: </label>
-						<textarea cols="30" rows="5" id="description" value=""></textarea>
+						<textarea cols="30" rows="5" id="description"></textarea>
 					</fieldset>
 					<fieldset>
 						<label for="categories">Kategorien: </label> <input type="text"
@@ -237,7 +213,7 @@
 					<fieldset>
 						<label for="color">Farbe: </label> <select id="color" name="color"
 							size="1">
-							<option selected>Braun</option>
+							<option selected="selected">Braun</option>
 							<option>Rot</option>
 							<option>Blau</option>
 							<option>Grün</option>
