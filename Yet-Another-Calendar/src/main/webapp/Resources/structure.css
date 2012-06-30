@@ -497,6 +497,8 @@ html {
 	list-style: none;
 	padding: 0px;
 	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #cl_sec, #cl_min, #cl_hour {
@@ -510,6 +512,7 @@ html {
 #cl_sec {
 	background: url(Images/sechand.png);
 	z-index: 3;
+	left: 72px;
 }
    
 #cl_min {
