@@ -39,7 +39,7 @@
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-							<input type="submit" id="logout" value="Logout"></input>
+						<div><input type="submit" id="logout" value="Logout"></input></div>
 						</form>
 						<ul id="cl_clock">
 							<li id="cl_sec"></li>
@@ -90,6 +90,7 @@
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
+							<div>
 								<input type="hidden" name="view" value="weekview"></input>
 								<select id="day" name="selectedday" size="1">
 								</select>
@@ -142,6 +143,7 @@
 								</select>
 								<input id="week" name="selectedweek" type="hidden" value=""></input>
 								<input type="submit" value="Go"></input>
+								</div>
 							</form>
 						</div>
 						<div class="button">Imp</div>
@@ -200,7 +202,7 @@
 					</xsl:with-param>
 				</xsl:call-template>
 			</div>
-			<div id="week">
+			<div id="weekdays">
 				<xsl:apply-templates select="day"></xsl:apply-templates>
 			</div>
 		</div>
