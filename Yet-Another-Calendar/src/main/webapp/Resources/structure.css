@@ -486,3 +486,38 @@ html {
 	padding: 0px;
 	text-shadow: 0px 0px 4px #FF9000;
 }
+
+
+/*Uhr*/
+#cl_clock {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	background: url(Images/clockface.png);
+	list-style: none;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#cl_sec, #cl_min, #cl_hour {
+	position: absolute;
+	width: 4px;
+	height: 150px;
+	top: 0px;
+	left: 71px;
+}
+
+#cl_sec {
+	background: url(Images/sechand.png);
+	z-index: 3;
+}
+   
+#cl_min {
+	background: url(Images/minhand.png);
+	z-index: 2;
+}
+   
+#cl_hour {
+	background: url(Images/hourhand.png);
+	z-index: 1;
+}

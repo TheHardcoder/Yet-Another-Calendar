@@ -23,7 +23,7 @@
 				<script type="text/JavaScript" src="Resources/Import.js"></script>
 			</head>
 			<body>
-			<div id="fileopen"></div>
+				<div id="fileopen"></div>
 				<div id="main">
 					<div id="hiddeninfo">
 						<div id="selectedyear">
@@ -45,9 +45,13 @@
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-							<input type="submit" id="logout" value="Logout"></input>
+						<div><input type="submit" id="logout" value="Logout"></input></div>
 						</form>
-						<canvas width="150" height="150" id="analog_clock"></canvas>
+						<ul id="cl_clock">
+							<li id="cl_sec"></li>
+							<li id="cl_hour"></li>
+							<li id="cl_min"></li>
+						</ul>
 						<table id="smallcalendar">
 							<tr>
 								<td>Mo</td>
@@ -60,7 +64,9 @@
 							</tr>
 						</table>
 					</div>
-					<div id="title"><div id="titleimage"></div></div>
+					<div id="title">
+						<div id="titleimage"></div>
+					</div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=yearview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
@@ -89,8 +95,9 @@
 						<div class="button" onclick="goToToday('calendarservlet?view=yearview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
+							<div>
 								<input type="hidden" name="view" value="yearview"></input>
-								<select id="day" name="selectedday" size="1"  onchange="update();">
+								<select id="day" name="selectedday" size="1" onchange="update();">
 								</select>
 								<select id="month" name="selectedmonth" size="1"
 									onchange="update();">
@@ -139,9 +146,9 @@
 									<option>2018</option>
 									<option>2019</option>
 								</select>
-								<input id="week" name="selectedweek" type="hidden"
-									value=""></input>
+								<input id="week" name="selectedweek" type="hidden" value=""></input>
 								<input type="submit" value="Go"></input>
+								</div>
 							</form>
 						</div>
 						<div class="button" onclick="showFileOpenDialog();">Imp</div>

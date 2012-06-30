@@ -41,7 +41,11 @@
 						<form action="userservlet?action=logout" method="post">
 							<input type="submit" id="logout" value="Logout"></input>
 						</form>
-						<canvas width="150" height="150" id="analog_clock"></canvas>
+						<ul id="cl_clock">
+							<li id="cl_sec"></li>
+							<li id="cl_hour"></li>
+							<li id="cl_min"></li>
+						</ul>
 						<table id="smallcalendar">
 							<tr>
 								<td>Mo</td>
@@ -54,7 +58,9 @@
 							</tr>
 						</table>
 					</div>
-					<div id="title"><div id="titleimage"></div></div>
+					<div id="title">
+						<div id="titleimage"></div>
+					</div>
 					<xsl:variable name="calendarback">
 						<xsl:text>calendarservlet?view=weekview</xsl:text>
 						<xsl:text>&amp;selectedyear=</xsl:text>
@@ -78,7 +84,8 @@
 						<xsl:value-of select="@selectedday + 7"></xsl:value-of>
 					</xsl:variable>
 					<div id="menubar">
-						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
+						<div class="button"
+							onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
 						<div class="button">Neu</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
@@ -177,26 +184,26 @@
 
 	<xsl:template
 		match="year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]">
-			<div id="weekview">
-				<div id="times">
-					<div class="hourlabel">
-					</div>
-					<xsl:call-template name="selects">
-						<xsl:with-param name="i">
-							0
-						</xsl:with-param>
-						<xsl:with-param name="count">
-							23
-						</xsl:with-param>
-						<xsl:with-param name="print">
-							1
-						</xsl:with-param>
-					</xsl:call-template>
+		<div id="weekview">
+			<div id="times">
+				<div class="hourlabel">
 				</div>
-				<div id="week">
-					<xsl:apply-templates select="day"></xsl:apply-templates>
-				</div>
+				<xsl:call-template name="selects">
+					<xsl:with-param name="i">
+						0
+					</xsl:with-param>
+					<xsl:with-param name="count">
+						23
+					</xsl:with-param>
+					<xsl:with-param name="print">
+						1
+					</xsl:with-param>
+				</xsl:call-template>
 			</div>
+			<div id="week">
+				<xsl:apply-templates select="day"></xsl:apply-templates>
+			</div>
+		</div>
 	</xsl:template>
 
 	<xsl:template match="day">
@@ -204,7 +211,11 @@
 			<div class="daycolumntitle">
 				<xsl:value-of select="@name" />
 				<xsl:text> </xsl:text>
-				<xsl:value-of select="@number" />.<xsl:value-of select="//calendar/@selectedmonth" />.<xsl:value-of select="//calendar/@selectedyear" />
+				<xsl:value-of select="@number" />
+				.
+				<xsl:value-of select="//calendar/@selectedmonth" />
+				.
+				<xsl:value-of select="//calendar/@selectedyear" />
 			</div>
 
 			<xsl:variable name="pos" select="position()"></xsl:variable>
@@ -219,8 +230,8 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-			
-			
+
+
 			<xsl:apply-templates>
 				<xsl:with-param name="columns">
 					<xsl:value-of select="$col"></xsl:value-of>
@@ -230,7 +241,9 @@
 				</xsl:with-param>
 			</xsl:apply-templates>
 			<xsl:call-template name="selects">
-				<xsl:with-param name="i">0</xsl:with-param>
+				<xsl:with-param name="i">
+					0
+				</xsl:with-param>
 				<xsl:with-param name="count">
 					23
 				</xsl:with-param>
@@ -323,7 +336,13 @@
 		<xsl:param name="print" />
 
 		<xsl:variable name="time">
-			<div><xsl:if test="$i &lt; 10">0</xsl:if><xsl:value-of select="$i"></xsl:value-of>:00</div>
+			<div>
+				<xsl:if test="$i &lt; 10">
+					0
+				</xsl:if>
+				<xsl:value-of select="$i"></xsl:value-of>
+				:00
+			</div>
 		</xsl:variable>
 
 		<xsl:if test="$i &lt;= $count">

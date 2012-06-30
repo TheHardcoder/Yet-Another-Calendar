@@ -44,7 +44,11 @@ function validatePwd() {
 <body>
 	<div id="main">
 		<div id="info">
-			<canvas width="150" height="150" id="analog_clock"></canvas>
+			<ul id="cl_clock">
+				<li id="cl_sec"></li>
+				<li id="cl_hour"></li>
+				<li id="cl_min"></li>
+			</ul>
 		</div>
 		<div id="title" style="margin-left: 0px;"><div id="titleimage"></div></div>
 		<form action="userservlet?action=register" method="post" id="loginyac" name="registration">
