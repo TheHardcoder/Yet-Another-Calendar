@@ -16,6 +16,8 @@
 				<title>Yet Another Calendar</title>
 				<link type="text/css" rel="stylesheet" media="screen"
 					href="Resources/structure.css"></link>
+					<link type="text/css" rel="stylesheet" media="screen"
+					href="Resources/monthview.css"></link>
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
@@ -23,24 +25,30 @@
 			<body>
 				<div id="main">
 					<div id="logo">
-						<img src="Resources/BabyGnu.png" width="100px" height="100px"
+						<img src="Resources/Images/yac_logo.png" width="100px" height="100px"
 							alt="logo" />
 					</div>
 					<div id="info">
 						<form action="userservlet?action=logout" method="post">
-						<input type="submit" id="logout" value="Logout"></input>
+							<div>
+								<input type="submit" id="logout" value="Logout"></input>
+							</div>
 						</form>
-						<canvas width="150" height="150" id="analog_clock"></canvas>
+						<ul id="cl_clock">
+							<li id="cl_sec"></li>
+							<li id="cl_hour"></li>
+							<li id="cl_min"></li>
+						</ul>
 						<table id="smallcalendar">
-						<tr>
-						<td>Mo</td>
-						<td>Di</td>
-						<td>Mi</td>
-						<td>Do</td>
-						<td>Fr</td>
-						<td>Sa</td>
-						<td>So</td>
-						</tr>
+							<tr>
+								<td>Mo</td>
+								<td>Di</td>
+								<td>Mi</td>
+								<td>Do</td>
+								<td>Fr</td>
+								<td>Sa</td>
+								<td>So</td>
+							</tr>
 						</table>
 					</div>
 					<div id="title">Yet Another Calendar</div>
@@ -99,6 +107,7 @@
 								<option>2018</option>
 								<option>2019</option>
 							</select>
+							<input id="week" name="selectedweek" type="hidden" value=""></input>
 							<input type="submit" value="Go"></input>
 							</form>
 						</div>
@@ -108,9 +117,29 @@
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
-							<div class="tab">Jahresansicht</div>
+							<xsl:variable name="yearviewlink">
+								<xsl:text>calendarservlet?view=yearview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+								<xsl:text>&amp;selectedmonth=</xsl:text>
+								<xsl:value-of select="@selectedmonth"></xsl:value-of>
+								<xsl:text>&amp;selectedday=</xsl:text>
+								<xsl:value-of select="@selectedday"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$yearviewlink}'">Jahresansicht</div>
 							<div class="tab selected">Monatsansicht</div>
-							<div class="tab">Wochenansicht</div>
+							<xsl:variable name="weekviewlink">
+								<xsl:text>calendarservlet?view=weekview&amp;selectedyear=</xsl:text>
+								<xsl:value-of select="@selectedyear"></xsl:value-of>
+								<xsl:text>&amp;selectedmonth=</xsl:text>
+								<xsl:value-of select="@selectedmonth"></xsl:value-of>
+								<xsl:text>&amp;selectedweek=</xsl:text>
+								<xsl:value-of select="@selectedweek"></xsl:value-of>
+								<xsl:text>&amp;selectedday=</xsl:text>
+								<xsl:value-of select="@selectedday"></xsl:value-of>
+							</xsl:variable>
+							<div class="tab" onclick="window.location='{$weekviewlink}'">Wochenansicht</div>
 						</div>
 						<xsl:apply-templates />
 					</div>
@@ -119,7 +148,7 @@
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
-						<a href="about.html">About</a>
+						<a href="About.html">About</a>
 					</div>
 				</div>
 			</body>

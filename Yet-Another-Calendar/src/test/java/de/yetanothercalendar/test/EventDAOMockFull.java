@@ -65,8 +65,7 @@ public class EventDAOMockFull implements EventDAO {
 				new Date(), "uuid", start.getTime(), created.getTime(),
 				"description", new Date(), "location", "very high",
 				"what a great summary", "recurrid", "rrule", end.getTime(), 0,
-				"#fff", new ArrayList<String>(), "comment", new Date(),
-				"");
+				"#fff", new ArrayList<String>(), "comment", new Date(), "");
 	}
 
 	public void createEventTable() {
@@ -86,16 +85,19 @@ public class EventDAOMockFull implements EventDAO {
 
 	public List<Event> getEventsFromUserRecurring(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Event> eventBetweenDates = getEventBetweenDates(user,
+				new GregorianCalendar(2012, 0, 1).getTime(),
+				new GregorianCalendar(2013, 0, 1).getTime());
+		return eventBetweenDates;
 	}
 
 	public List<Event> getEventsFromUserNotRecurring(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Event>();
 	}
 
 	public void updateEvent(Event event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

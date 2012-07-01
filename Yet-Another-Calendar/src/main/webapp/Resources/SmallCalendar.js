@@ -4,9 +4,8 @@ var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
 Date.prototype.getWeek = function() {
-	return Math.ceil(this.getDate()/7);
-	//var onejan = new Date(this.getFullYear(),0,1);
-	//return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+	var onejan = new Date(this.getFullYear(),0,1);
+	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
 } 
 
 function create() {
