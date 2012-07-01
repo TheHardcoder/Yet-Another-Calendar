@@ -259,16 +259,20 @@ public class CalendarImpl implements Calendar {
 		} else if (month == java.util.Calendar.DECEMBER) {
 			java.util.Calendar lastSunday = momentCreator
 					.createLastSundayLastWeekOfYear(year);
+			int pos = 0;
 			while (lastSunday.get(java.util.Calendar.YEAR) != year) {
 				// get add before the first day of the first week: a new day
 				// with the name and
 				weeks.get(weeks.size() - 1)
 						.getDays()
-						.add(new Day(
-								dateFormatSymbols.getShortWeekdays()[lastSunday
-										.get(java.util.Calendar.DAY_OF_WEEK)],
-								lastSunday.get(java.util.Calendar.DAY_OF_WEEK)));
+						.add(weeks.get(weeks.size() - 1).getDays().size() - pos,
+								new Day(
+										dateFormatSymbols.getShortWeekdays()[lastSunday
+												.get(java.util.Calendar.DAY_OF_WEEK)],
+										lastSunday
+												.get(java.util.Calendar.DAY_OF_WEEK)));
 				lastSunday.add(java.util.Calendar.DAY_OF_YEAR, -1);
+				pos++;
 			}
 		}
 	}
