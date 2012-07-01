@@ -1,0 +1,55 @@
+
+.monthday {
+	background-color: #FFD973;
+	margin: 2px;
+	margin-left: 1px;
+	margin-right: 1px;
+	height: 20%;
+}
+
+.daytitle {
+	height: 40px;
+	background-color: #FFD973;
+	margin: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px;
+	font-size: 16pt;
+	text-align: center;
+	font-weight: bold;
+}
+
+.weekdayback {
+	width: 14.28%;
+	float: left;
+	background-color: #FFBA00;
+	margin: 0px;
+	padding: 0px;
+}
+
+.weekday {
+	background-color: #FFD973;
+	margin: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px;
+	font-size: 14pt;
+	text-align: center;
+}
+
+.weekdayothermonth {
+	color: #A65E00;
+	background-color: #FFAC40;
+	padding: 0px;
+	font-size: 14pt;
+	text-align: center;
+}
+
+.titlerow {
+	width: 14.28%;
+	height: 40px;
+	float: left;
+	background-color: #FFBA00;
+	margin: 0px;
+	padding: 0px;
+}

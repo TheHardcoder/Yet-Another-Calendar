@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page isErrorPage="true"%>
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>Yet Another Calendar</title>
-<link rel="stylesheet" media="screen" href="Resources/structure.css">
+<link rel="stylesheet" media="screen" href="Resources/structure.css"/>
 <script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 </head>
 <body>
