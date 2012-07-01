@@ -1,5 +1,6 @@
 package de.yetanothercalendar.model.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,7 +10,7 @@ public class MomentCreator {
 
 	private Locale locale;
 
-	public  MomentCreator(Locale locale) {
+	public MomentCreator(Locale locale) {
 		this.locale = locale;
 	}
 
@@ -89,6 +90,7 @@ public class MomentCreator {
 			Calendar calendar) {
 		createFirstPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_YEAR, 1);
+		calendar.set(Calendar.WEEK_OF_YEAR, 0);
 		return calendar;
 	}
 
@@ -105,6 +107,8 @@ public class MomentCreator {
 		createLastPossibleMomentOfDayReturningCalendar(calendar);
 		calendar.set(Calendar.DAY_OF_YEAR,
 				calendar.getMaximum(Calendar.DAY_OF_YEAR));
+		calendar.set(Calendar.WEEK_OF_YEAR,
+				calendar.getMaximum(Calendar.WEEK_OF_YEAR));
 		return calendar;
 	}
 
@@ -170,8 +174,7 @@ public class MomentCreator {
 		return calendar;
 	}
 
-	public boolean isSameDay(Calendar calendarStartDay,
-			Calendar calendarEndDay) {
+	public boolean isSameDay(Calendar calendarStartDay, Calendar calendarEndDay) {
 		return calendarStartDay.get(Calendar.YEAR) == calendarEndDay
 				.get(Calendar.YEAR)
 				&& calendarStartDay.get(Calendar.DAY_OF_YEAR) == calendarEndDay
@@ -184,5 +187,36 @@ public class MomentCreator {
 				.get(Calendar.YEAR) && calendarStartDay
 				.get(Calendar.DAY_OF_YEAR) == calendarEndDay
 				.get(Calendar.DAY_OF_YEAR) - 1));
+	}
+
+	public Calendar createMondayFirstWeekOfYear(int year) {
+		java.util.Calendar calendar = new GregorianCalendar(locale);
+		calendar.clear();
+		calendar.set(java.util.Calendar.YEAR, year);
+		// FIXME ?????? DATUM AENDERT SICH OHNE AUSGABE!!!!!
+		System.out.println(new SimpleDateFormat().format(new Date(calendar
+				.getTimeInMillis())));
+		calendar.set(java.util.Calendar.DAY_OF_YEAR, 1);
+		System.out.println("DAY OF YEAR: "
+				+ (calendar.get(java.util.Calendar.DAY_OF_YEAR)));
+		calendar.set(java.util.Calendar.DAY_OF_WEEK, java.util.Calendar.MONDAY);
+		System.out.println("DAY_OF_WEEK: "
+				+ (calendar.get(java.util.Calendar.DAY_OF_WEEK)));
+		return calendar;
+	}
+
+	public Calendar createLastSundayLastWeekOfYear(int year) {
+		java.util.Calendar calendar = new GregorianCalendar(locale);
+		calendar.set(java.util.Calendar.YEAR, year);
+		System.out.println(new SimpleDateFormat().format(new Date(calendar
+				.getTimeInMillis())));
+		calendar.set(java.util.Calendar.DAY_OF_YEAR,
+				calendar.getActualMaximum(java.util.Calendar.DAY_OF_YEAR));
+		System.out.println("DAY OF YEAR: "
+				+ (calendar.get(java.util.Calendar.DAY_OF_YEAR)));
+		calendar.set(java.util.Calendar.DAY_OF_WEEK, java.util.Calendar.SUNDAY);
+		System.out.println("DAY_OF_WEEK: "
+				+ (calendar.get(java.util.Calendar.DAY_OF_WEEK)));
+		return calendar;
 	}
 }

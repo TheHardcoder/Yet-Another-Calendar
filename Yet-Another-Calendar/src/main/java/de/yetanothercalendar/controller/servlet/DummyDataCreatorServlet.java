@@ -45,8 +45,9 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		calendar.set(2012, 0, 1, 12, 0);
 		Calendar calendar2 = new GregorianCalendar(Locale.GERMANY);
 		calendar2.set(2012, 0, 1, 14, 0);
-		daoEvent.createEvents(createEvent(user, calendarCreated, calendar,
-				calendar2, "Meeting", "DHBW"));
+		Event createEvent = createEvent(user, calendarCreated, calendar,
+				calendar2, "Meeting", "DHBW");
+		daoEvent.createEvents(createEvent);
 
 		System.out.println("User logged in: " + user.toString());
 		System.out.println("Events in der db:");
