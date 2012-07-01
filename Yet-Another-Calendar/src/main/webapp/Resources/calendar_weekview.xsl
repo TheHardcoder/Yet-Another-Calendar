@@ -221,14 +221,26 @@
 	</xsl:template>
 
 	<xsl:template match="day">
+		<xsl:variable name="day1" select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
+		<xsl:variable name="day7" select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[7]/@number"></xsl:variable>
+		<xsl:variable name="daytitle">
+			<xsl:choose>
+				<xsl:when test="$day1 - @number &gt; 0 and //calendar/@selectedmonth = 12">
+					<xsl:value-of select="@number" />
+					.1.
+					<xsl:value-of select="//calendar/@selectedyear + 1" />
+				</xsl:when>
+				<xsl:when test="@number - $day7 &gt; 0 and //calendar/@selectedmonth = 1">
+					<xsl:value-of select="@number" />
+					.12.
+					<xsl:value-of select="//calendar/@selectedyear - 1" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="@number" />.<xsl:value-of select="//calendar/@selectedmonth" />.<xsl:value-of select="//calendar/@selectedyear" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<div class="daycolumn">
-			<xsl:variable name="daytitle">
-				<xsl:value-of select="@number" />
-				.
-				<xsl:value-of select="//calendar/@selectedmonth" />
-				.
-				<xsl:value-of select="//calendar/@selectedyear" />
-			</xsl:variable>
 			<div class="daycolumntitle">
 				<xsl:value-of select="@name" />
 				<xsl:text> </xsl:text>
