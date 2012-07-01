@@ -13,7 +13,7 @@ public class UserDAOImpTest extends TestCase {
 	public void testCreateUserTable() {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
-		assertNotNull("Anlegen des UserDAOs fehlgeschlagen!", user);
+		assertNotNull("Anlegen des UserDAOImp fehlgeschlagen!", user);
 		user.createUserTable();
 	}
 
@@ -22,7 +22,7 @@ public class UserDAOImpTest extends TestCase {
 		UserDAOImpl user = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (null != user.createUser(new User("zeller8@yahoo.de", "Paull",
+		if (null != user.createUser(new User("zeller@yahoo.de", "Paull",
 				"Sulzer", "test")) == true) {
 			System.out.println("Hat funktioniert");
 		} else {
@@ -35,7 +35,7 @@ public class UserDAOImpTest extends TestCase {
 		UserDAOImpl userImp = new UserDAOImpl(new DatabaseConnectionManager(
 				"admin", "admin", "localhost", 3306, "yetanothercalendar"));
 
-		if (userImp.checkUser("zeller@yahoo.de", "Test")) {
+		if (userImp.checkUser("zeller@yahoo.de", "test")) {
 			User user = userImp.returnUser("zeller@yahoo.de");
 			System.out.println("Email: " + user.getEmail() + " Vorname: "
 					+ user.getForename() + " ID: " + user.getId()
@@ -43,7 +43,7 @@ public class UserDAOImpTest extends TestCase {
 					+ user.getPasswordSHA1());
 		} else {
 			fail("Email-Adresse oder Passwort sind falsch! "
-					+ "Bitte �berpr�fen");
+					+ "Bitte ueberpruefen");
 		}
 
 	}

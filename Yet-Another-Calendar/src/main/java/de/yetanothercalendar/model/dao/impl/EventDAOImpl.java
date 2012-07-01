@@ -83,7 +83,16 @@ public class EventDAOImpl implements EventDAO {
 						.getDtend().getTime());
 				long duration = event.getDuration();
 				String color = event.getColor();
+
 				List<String> categories = event.getCategories();
+				String strCategories = "";
+
+				for (int i = 0; i < categories.size(); i++) {
+					strCategories += categories.get(i);
+					strCategories += ";";
+
+				}
+
 				String comment = event.getComment();
 				java.sql.Timestamp exdate = new java.sql.Timestamp(event
 						.getExdate().getTime());
@@ -113,7 +122,7 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setTimestamp(13, dtend);
 				pstmt.setLong(14, duration);
 				pstmt.setString(15, color);
-				pstmt.setObject(16, categories);
+				pstmt.setObject(16, strCategories);
 				pstmt.setString(17, comment);
 				pstmt.setTimestamp(18, exdate);
 				pstmt.setString(19, rdate);
@@ -166,8 +175,8 @@ public class EventDAOImpl implements EventDAO {
 				Date start = eventlist.get(i).getDtstart();
 				Date end = eventlist.get(i).getDtend();
 
-				if ((start.compareTo(from) >= 0 && start.compareTo(til) <= 0) ||
-						(end.compareTo(from) >= 0  && end.compareTo(til) <=0) ){
+				if ((start.compareTo(from) >= 0 && start.compareTo(til) <= 0)
+						|| (end.compareTo(from) >= 0 && end.compareTo(til) <= 0)) {
 					btwEventList.add(eventlist.get(i));
 				}
 
@@ -247,8 +256,12 @@ public class EventDAOImpl implements EventDAO {
 			String color = rsEvent.getString(15);
 
 			List<String> categories = new ArrayList<String>();
-			categories.add(rsEvent.getString(16));
+			String[] strCategories = rsEvent.getString(16).split(";");
 
+			for (int i = 0; i < strCategories.length; i++) {
+				categories.add(strCategories[i]);
+
+			}
 			String comment = rsEvent.getString(17);
 			Date exdate = sdf.parse(rsEvent.getString(18));
 			String rdate = rsEvent.getString(19);
@@ -269,10 +282,10 @@ public class EventDAOImpl implements EventDAO {
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
-			
+
 			Long id = event.getId();
-			
-			if (id!= null) {
+
+			if (id != null) {
 				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event
 						.getDtstamp().getTime());
 				Long userid = event.getUser().getId();
@@ -294,20 +307,26 @@ public class EventDAOImpl implements EventDAO {
 				long duration = event.getDuration();
 				String color = event.getColor();
 				List<String> categories = event.getCategories();
+				String strCategories = "";
+				
+
+				for (int i = 0; i < categories.size(); i++) {
+					strCategories += categories.get(i);
+					strCategories += ";";
+
+				}
 				String comment = event.getComment();
 				java.sql.Timestamp exdate = new java.sql.Timestamp(event
 						.getExdate().getTime());
 				String rdate = event.getRdate();
 
-			
-				String eventCreationString =  "UPDATE events " 
-						+ "\n(SET id = ? , userId = ? , dtstamp = ? , uid = ? , dtstart = ? ,"
-						+ " created = ?, description = ?, lastmod ? , location = ? ,"
+				String eventCreationString = "UPDATE events "
+						+ "\n SET id = ?,\n userId = ? , dtstamp = ? , uid = ? , dtstart = ? ,"
+						+ " created = ?, description = ?, lastmod = ? , location = ? ,"
 						+ " priority = ? , summary = ? , recurid = ? , rrule = ? , dtend = ? ,"
 						+ " duration = ? , color = ? , categories = ? , comment = ? , exdate = ? ,"
-						+ " rdate = ? )"
-						+ "Where id = ? );";				
-				
+						+ " rdate = ? " + "Where id = ? ;";
+
 				java.sql.PreparedStatement pstmt = con
 						.prepareStatement(eventCreationString);
 				pstmt.setLong(1, id);
@@ -326,19 +345,19 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setTimestamp(14, dtend);
 				pstmt.setLong(15, duration);
 				pstmt.setString(16, color);
-				pstmt.setObject(17, categories);
+				pstmt.setObject(17, strCategories);
 				pstmt.setString(18, comment);
 				pstmt.setTimestamp(19, exdate);
 				pstmt.setString(20, rdate);
 				pstmt.setLong(21, id);
-				
+
 				pstmt.executeUpdate();
 
 				pstmt.close();
-			}else{
-				
+			} else {
+				throw new RuntimeException("User id must not be null");
 			}
-			
+
 			con.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
