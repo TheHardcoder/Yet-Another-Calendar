@@ -217,10 +217,10 @@ public class CalendarImpl implements Calendar {
 			// Methodenaufruf für diverse Berechungen für die View
 			// @author Lukas
 			CalendarViewCalculation viewCalculation = new CalendarViewCalculation();
-			viewCalculation.analyseColumns(calendarDayOnCalendarEntryMap);
+			viewCalculation.analyseColumns(day);
 			// Auf day kann ich hier zugreifen, sie sind gefüllt
 			// day.getEntries();
-
+			
 			weekDays.add(day);
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
 		}
