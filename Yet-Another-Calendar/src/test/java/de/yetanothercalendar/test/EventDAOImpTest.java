@@ -94,4 +94,7 @@ public class EventDAOImpTest extends TestCase {
 			fail("Die Emailadresse ist nicht vorhanden");
 		}
 	}
+	
+	
+
 }

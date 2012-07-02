@@ -26,6 +26,15 @@ public class ICalendarImporter {
 
 	}
 
+	/**
+	 * Imports a Calendar from a File Input Stream
+	 * 
+	 * @param in
+	 *            InputStream of the Calendar File
+	 * @return Calendar Object from Ical4J
+	 * @throws IOException
+	 * @throws ParserException
+	 */
 	public Calendar importToIcal4J(InputStream in) throws IOException,
 			ParserException {
 		CalendarParserImpl cpI = new CalendarParserImpl();
@@ -100,7 +109,7 @@ public class ICalendarImporter {
 				 * Integer.parseInt(durationStr.substring(0,
 				 * durationStr.indexOf("S"))); //duration = (long) (60*durH); }
 				 */
-				
+
 				if (duration > 0) {
 					event.setDuration(duration);
 				}

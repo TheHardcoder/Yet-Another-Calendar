@@ -76,7 +76,7 @@ public class UserDAOImpl implements UserDAO {
 				return null;
 			}
 		} else {
-			return null;
+			return result;
 		}
 	}
 
@@ -144,4 +144,6 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
+	
+	
 }

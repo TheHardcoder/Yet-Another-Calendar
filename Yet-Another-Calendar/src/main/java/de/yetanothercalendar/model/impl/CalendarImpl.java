@@ -2,7 +2,9 @@ package de.yetanothercalendar.model.impl;
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -33,27 +35,28 @@ public class CalendarImpl implements Calendar {
 	/** EventDAO fuer Datenbankzugriff */
 	private EventDAO eventDAO;
 	private DatabaseConnectionManager manager;
-	/** Creator Klasse zum Erstellen von Zeitrandwerten */
 	private MomentCreator momentCreator;
 	/** Wrapper fuer Wrap von Event zu CalendarEntry */
-	private EventToCalendarEntryWrapper wrapper;
 	private RecurrentEventToCalendarEntryWrapper wrapperRecurringEvents;
 
 	public CalendarImpl(User user) {
 		this.user = user;
 		this.manager = new DatabaseConnectionManager();
-		wrapper = new EventToCalendarEntryWrapper(locale);
-		momentCreator = new MomentCreator(locale);
 		eventDAO = new EventDAOImpl(new DatabaseConnectionManager());
+		momentCreator = new MomentCreator(locale);
 		wrapperRecurringEvents = new RecurrentEventToCalendarEntryWrapper(
 				locale);
 	}
 
 	public Year getEntriesByWeek(int year, int week) {
+		// FIXME
 		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
 		java.util.Calendar calendar = new GregorianCalendar(locale);
 		// TODO check if this uses the correct week
-		calendar.set(java.util.Calendar.WEEK_OF_YEAR, week);
+		calendar.set(java.util.Calendar.DAY_OF_YEAR, 1);
+		calendar.set(java.util.Calendar.DAY_OF_WEEK, 1);
+		Date time = calendar.getTime();
+		System.out.println(new SimpleDateFormat().format(time));
 		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
 		java.util.Calendar firstMomentInWeek = momentCreator
 				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);
@@ -64,6 +67,7 @@ public class CalendarImpl implements Calendar {
 	}
 
 	public Year getEntriesByMonth(int year, int month) {
+		// FIXME
 		// Jetztigen Calendar auf das aktuelle Monat und Jahr setzen
 		java.util.Calendar calendar = new GregorianCalendar(locale);
 		calendar.set(java.util.Calendar.YEAR, year);
@@ -79,14 +83,17 @@ public class CalendarImpl implements Calendar {
 
 	public Year getEntriesByYear(int year) {
 		// Jetztigen Calendar auf das aktuelle Jahr setzen
-		java.util.Calendar calendar = new GregorianCalendar(locale);
-		calendar.set(java.util.Calendar.YEAR, year);
+		java.util.Calendar calendar = momentCreator
+				.createMondayFirstWeekOfYear(year);
 		// Die beiden Grenzwerte des Jahres, in dem gesucht werden soll setzten
-		java.util.Calendar firstMomentInYear = momentCreator
-				.createFirstPossibleMomentOfYearReturningCalendar(calendar);
-		java.util.Calendar lastMomentInYear = momentCreator
-				.createLastPossibleMomentOfYearReturningCalendar(calendar);
+		java.util.Calendar firstMomentInYear = (java.util.Calendar) calendar
+				.clone();
+		java.util.Calendar createLastSundayLastWeekOfYear = momentCreator
+				.createLastSundayLastWeekOfYear(year);
+		java.util.Calendar lastMomentInYear = (java.util.Calendar) createLastSundayLastWeekOfYear
+				.clone();
 		// Alle Events in diesem Zeitraum holen
+		// Kompletter Zeitraum
 		return createYearInRange(firstMomentInYear, lastMomentInYear, year);
 	}
 
@@ -115,28 +122,17 @@ public class CalendarImpl implements Calendar {
 	 */
 	private Map<java.util.Calendar, List<CalendarEntry>> geteventsBetweenDatesAndFillStrucuture(
 			java.util.Calendar startDate, java.util.Calendar endDate) {
-		List<Event> eventsNotRecurring = eventDAO
-				.getEventsFromUserNotRecurring(user);
-		List<CalendarEntry> notRecurringCalendarEntries = new ArrayList<CalendarEntry>();
-		for (Event event : eventsNotRecurring) {
-			notRecurringCalendarEntries.addAll(wrapper
-					.wrapEventToCalendar(event));
-		}
 		List<Event> eventsRecurring = eventDAO.getEventsFromUserRecurring(user);
-		List<CalendarEntry> recurringCalendarEntries = new ArrayList<CalendarEntry>();
+		List<CalendarEntry> allEntries = new ArrayList<CalendarEntry>();
 		for (Event event : eventsRecurring) {
 			try {
-				recurringCalendarEntries.addAll(wrapperRecurringEvents
-						.wrapEventToCalendar(event, startDate.getTime(),
-								endDate.getTime()));
+				allEntries.addAll(wrapperRecurringEvents.wrapEventToCalendar(
+						event, startDate.getTime(), endDate.getTime()));
 			} catch (Exception e) {
 				// TODO richtige exception abfangen?
 				e.printStackTrace();
 			}
 		}
-		List<CalendarEntry> allEntries = new ArrayList<CalendarEntry>();
-		allEntries.addAll(notRecurringCalendarEntries);
-		allEntries.addAll(recurringCalendarEntries);
 		Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap = new HashMap<java.util.Calendar, List<CalendarEntry>>();
 		fillCalendarEntryMapForEvent(allEntries, calendarDayOnCalendarEntryMap);
 		return calendarDayOnCalendarEntryMap;
@@ -147,13 +143,13 @@ public class CalendarImpl implements Calendar {
 	 * 
 	 * @param year
 	 *            Das Jahr
-	 * @return Eine Liste den Monaten des gegebenen Jahres
+	 * @return Eine Liste den Monaten des gegebenen Jahres Mit den vollen
+	 *         Randwochen
 	 */
 	protected List<Month> getMonthList(int year) {
 		List<Month> result = new ArrayList<Month>();
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
-		calendar.clear();
-		calendar.set(java.util.Calendar.YEAR, year);
+		// auch die andern beiden monate
 		int maximumMonthCount = calendar.getMaximum(java.util.Calendar.MONTH);
 		for (int monthindex = 0; monthindex <= maximumMonthCount; monthindex++) {
 			result.add(new Month(dateFormatSymbols.getMonths()[monthindex],
@@ -195,7 +191,6 @@ public class CalendarImpl implements Calendar {
 		// "verpackt") hinzugefügt werden müssen.
 		int currentWeek = -1;
 		// Zaehler fuer number der Woche im XML
-		int weeknumer = 1;
 		while (calendar.get(java.util.Calendar.MONTH) == month) {
 			// Der aktuelle monatstag
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
@@ -209,13 +204,13 @@ public class CalendarImpl implements Calendar {
 			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
 			// Monat gespeichert.
 			if (!(weekOfYear == currentWeek)) {
-				Week week = new Week(weeknumer);
+				Week week = new Week(
+						calendar.get(java.util.Calendar.WEEK_OF_YEAR));
 				week.setDays(weekDays);
 				weeks.add(week);
 				// Zurücksetzung der attribute
 				weekDays = new ArrayList<Day>();
 				weekOfYear = currentWeek;
-				weeknumer++;
 			}
 			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
@@ -231,11 +226,55 @@ public class CalendarImpl implements Calendar {
 		}
 		// Ueberpruefung, ob wir noch im Monat sind.
 		if (weekDays.size() > 0) {
-			Week week = new Week(weeknumer);
+			Week week = new Week(calendar.get(java.util.Calendar.WEEK_OF_YEAR));
 			week.setDays(weekDays);
 			weeks.add(week);
 		}
+		addLastOrFirstWeekDaysOfYear(weeks, monthToSearch, year);
 		return weeks;
+	}
+
+	private void addLastOrFirstWeekDaysOfYear(List<Week> weeks, int month,
+			int year) {
+		// TODO FIXME: Dringenst werden test cases benötigt
+		// Add the days of the first week to the first week
+		if (month == java.util.Calendar.JANUARY) {
+			java.util.Calendar firstMonday = momentCreator
+					.createMondayFirstWeekOfYear(year);
+			int pos = 0;
+			while (firstMonday.get(java.util.Calendar.YEAR) != year) {
+				// get add before the first day of the first week: a new day
+				// with the name and
+				weeks.get(0)
+						.getDays()
+						.add(pos,
+								new Day(
+										dateFormatSymbols.getShortWeekdays()[firstMonday
+												.get(java.util.Calendar.DAY_OF_WEEK)],
+										firstMonday
+												.get(java.util.Calendar.DAY_OF_MONTH)));
+				firstMonday.add(java.util.Calendar.DAY_OF_YEAR, 1);
+				pos++;
+			}
+		} else if (month == java.util.Calendar.DECEMBER) {
+			java.util.Calendar lastSunday = momentCreator
+					.createLastSundayLastWeekOfYear(year);
+			int pos = 0;
+			while (lastSunday.get(java.util.Calendar.YEAR) != year) {
+				// get add before the first day of the first week: a new day
+				// with the name and
+				weeks.get(weeks.size() - 1)
+						.getDays()
+						.add(weeks.get(weeks.size() - 1).getDays().size() - pos,
+								new Day(
+										dateFormatSymbols.getShortWeekdays()[lastSunday
+												.get(java.util.Calendar.DAY_OF_WEEK)],
+										lastSunday
+												.get(java.util.Calendar.DAY_OF_WEEK)));
+				lastSunday.add(java.util.Calendar.DAY_OF_YEAR, -1);
+				pos++;
+			}
+		}
 	}
 
 	private Day insertCalendarEntriesToDay(

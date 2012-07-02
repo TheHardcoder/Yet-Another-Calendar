@@ -10,10 +10,45 @@ backup01 = window.onload;
 window.onload = function() {
 	backup01();
 	update();
+	var syear = document.getElementById("selectedyear");
+	var smonth = document.getElementById("selectedmonth");
+	var sweek = document.getElementById("selectedweek");
+	var sday = document.getElementById("selectedday");
+	if (syear != null){
+		var children = document.getElementById("year").childNodes;
+		for (i = 0; i < children.length; i++){
+			if (children[i].innerHTML == syear.innerHTML){
+				children[i].selected = true;
+			}
+		}
+	}
+	if (smonth != null){
+		var children = document.getElementById("month").childNodes;
+		for (i = 0; i < children.length; i++){
+			if (children[i].innerHTML == smonth.innerHTML){
+				children[i].selected = true;
+			}
+		}
+	}
+	if (sweek != null){
+		document.getElementById("week").value = sweek.innerHTML;
+	}
+	if (sday != null){
+		var children = document.getElementById("day").childNodes;
+		for (i = 0; i < children.length; i++){
+			if (children[i].innerHTML == sday.innerHTML){
+				children[i].selected = true;
+			}
+		}
+	}
 }
 
 function update() {
 	writeSelectableDays(daysInMonth(document.getElementById("month").value - 1, document.getElementById("year").value));
+	var date = new Date(document.getElementById("year").value, document.getElementById("month").value - 1, document.getElementById("day").value);
+	var onejan = new Date(date.getFullYear(),0,1);
+	var week = Math.ceil((((date - onejan) / 86400000) + onejan.getDay()+1)/7);
+	document.getElementById("week").value = week;
 }
 
 function writeSelectableDays(max){

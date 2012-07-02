@@ -17,6 +17,7 @@
 .hourlabel {
 	height: 18.5px;
 	margin: 1px;
+	white-space: nowrap;
 }
 .entry {
 	margin-left: 1px;
@@ -25,6 +26,8 @@
 	background-color: #FF9000;
 	overflow: hidden;
 	cursor: pointer;
+	min-height: 18px;
+	display: block;
 }
 #weekview {
 	padding-top: 4px;
@@ -34,7 +37,7 @@
 	float:left;
 }
 
-#week {
+#weekdays {
 	position: relative;
 	height: 520px;
 	margin-left: 40px;

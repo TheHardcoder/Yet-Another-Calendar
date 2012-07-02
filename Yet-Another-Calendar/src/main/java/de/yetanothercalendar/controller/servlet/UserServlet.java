@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
 						hashPassword(password));
 				dao.createUser(user);
 				session.setAttribute("user", user);
-				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
+				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedweek=" + c.get(Calendar.WEEK_OF_YEAR) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
 				// auf die Registrierungsseite mit Parameter
@@ -68,7 +68,7 @@ public class UserServlet extends HttpServlet {
 				if (dao.checkUser(email, hashPassword(password))) {
 					User user = dao.returnUser(email);
 					session.setAttribute("user", user);
-					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
+					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedweek=" + c.get(Calendar.WEEK_OF_YEAR) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 				} else {
 					throw new RuntimeException(
 							"No valid credentials for loggin in the User");

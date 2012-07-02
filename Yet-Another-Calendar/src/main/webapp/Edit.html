@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,43 +6,41 @@
 <link rel="stylesheet" media="screen" href="Resources/structure.css"></link>
 <script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 <script type="text/JavaScript" src="Resources/DateChooser.js"></script>
-<script type="text/javascript">
-	backup = window.onload;
-
-	window.onload = function() {
-		backup();
-		var querystring = location.search;
-		if (querystring == '')
-			return;
-		var wertestring = querystring.slice(1);
-		var paare = wertestring.split("&");
-		var paar, name, wert;
-
-		for ( var i = 0; i < paare.length; i++) {
-			paar = paare[i].split("=");
-			name = paar[0];
-			wert = paar[1];
-			name = unescape(name).replace("+", " ");
-			wert = unescape(wert).replace("+", " ");
-			this[name] = wert;
-			if (document.getElementById(name) != null) {
-				document.getElementById(name).value = wert;
-			}
-		}
-
-	}
-</script>
+<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
+<script type="text/javascript" src="Resources/edit.js"></script>
 </head>
 <body>
 	<div id="main">
 		<div id="logo">
-			<img src="Resources/BabyGnu.png" width="100px" height="100px"
+			<img src="Resources/Images/yac_logo.png" width="100px" height="100px"
 				alt="logo" />
 		</div>
 		<div id="info">
-			<canvas width="150" height="150" id="analog_clock"></canvas>
+			<form action="userservlet?action=logout" method="post">
+				<div>
+					<input type="submit" id="logout" value="Logout"></input>
+				</div>
+			</form>
+			<ul id="cl_clock">
+				<li id="cl_sec"></li>
+				<li id="cl_hour"></li>
+				<li id="cl_min"></li>
+			</ul>
+			<table id="smallcalendar">
+				<tr>
+					<td>Mo</td>
+					<td>Di</td>
+					<td>Mi</td>
+					<td>Do</td>
+					<td>Fr</td>
+					<td>Sa</td>
+					<td>So</td>
+				</tr>
+			</table>
 		</div>
-		<div id="title">Yet Another Calendar</div>
+		<div id="title">
+			<div id="titleimage"></div>
+		</div>
 		<div id="menubar"></div>
 		<div id="calendar">
 			<div id="edit">
@@ -53,65 +51,64 @@
 						<input type="hidden" id="id" value=""></input>
 					</fieldset>
 					<fieldset>
-						<label for="summary">Betreff: </label>
-						<input type="text" size="30" id="summary" value=""></input>
+						<label for="summary">Betreff: </label> <input type="text"
+							size="30" id="summary" value=""></input>
 					</fieldset>
 					<fieldset>
 						<label for="jday">Datum: </label>
-						<div>
-						<select id="day" name="day" size="1">
-						</select> 
-						<select id="month" name="month" size="1" onchange="update();">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option>
-							<option>11</option>
-							<option>12</option>
-						</select> 
-						<select id="year" name="year" size="1" onchange="update();">
-							<option>1990</option>
-							<option>1991</option>
-							<option>1992</option>
-							<option>1993</option>
-							<option>1994</option>
-							<option>1995</option>
-							<option>1996</option>
-							<option>1997</option>
-							<option>1998</option>
-							<option>1999</option>
-							<option>2000</option>
-							<option>2001</option>
-							<option>2002</option>
-							<option>2003</option>
-							<option>2004</option>
-							<option>2005</option>
-							<option>2006</option>
-							<option>2007</option>
-							<option>2008</option>
-							<option>2009</option>
-							<option>2010</option>
-							<option>2011</option>
-							<option>2012</option>
-							<option>2013</option>
-							<option>2014</option>
-							<option>2015</option>
-							<option>2016</option>
-							<option>2017</option>
-							<option>2018</option>
-							<option>2019</option>
-						</select>
+						<div id="jday">
+							<select id="day" name="day" size="1">
+								<option>1</option>
+							</select> <select id="month" name="month" size="1" onchange="update();">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+							</select> <select id="year" name="year" size="1" onchange="update();">
+								<option>1990</option>
+								<option>1991</option>
+								<option>1992</option>
+								<option>1993</option>
+								<option>1994</option>
+								<option>1995</option>
+								<option>1996</option>
+								<option>1997</option>
+								<option>1998</option>
+								<option>1999</option>
+								<option>2000</option>
+								<option>2001</option>
+								<option>2002</option>
+								<option>2003</option>
+								<option>2004</option>
+								<option>2005</option>
+								<option>2006</option>
+								<option>2007</option>
+								<option>2008</option>
+								<option>2009</option>
+								<option>2010</option>
+								<option>2011</option>
+								<option>2012</option>
+								<option>2013</option>
+								<option>2014</option>
+								<option>2015</option>
+								<option>2016</option>
+								<option>2017</option>
+								<option>2018</option>
+								<option>2019</option>
+							</select> <input id="week" name="selectedweek" type="hidden" value=""></input>
 						</div>
 					</fieldset>
 					<fieldset>
-						<label for="starttimehours">Startzeit: </label>
-						<select id="starttimehours" name="starttimehours" size="1">
+						<label for="starttimehours">Startzeit: </label> <select
+							id="starttimehours" name="starttimehours" size="1">
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -136,8 +133,7 @@
 							<option>22</option>
 							<option>23</option>
 							<option>24</option>
-						</select> 
-						<select id="starttimeminutes" name="starttimeminutes" size="1">
+						</select> <select id="starttimeminutes" name="starttimeminutes" size="1">
 							<option>00</option>
 							<option>05</option>
 							<option>10</option>
@@ -153,8 +149,8 @@
 						</select>
 					</fieldset>
 					<fieldset>
-						<label for="endtimehours">Endzeit: </label>
-						<select id="endtimehours" name="starttimehours" size="1">
+						<label for="endtimehours">Endzeit: </label> <select
+							id="endtimehours" name="starttimehours" size="1">
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -179,8 +175,7 @@
 							<option>22</option>
 							<option>23</option>
 							<option>24</option>
-						</select> 
-						<select id="endtimeminutes" name="starttimeminutes" size="1">
+						</select> <select id="endtimeminutes" name="starttimeminutes" size="1">
 							<option>00</option>
 							<option>05</option>
 							<option>10</option>
@@ -196,31 +191,29 @@
 						</select>
 					</fieldset>
 					<fieldset>
-						<label for="place">Ort: </label>
-						<input type="text" size="30"
+						<label for="place">Ort: </label> <input type="text" size="30"
 							id="place" value=""></input>
 					</fieldset>
 					<fieldset>
-						<label for="priority">Priorität: </label>
-						<select id="priority"
+						<label for="priority">Priorität: </label> <select id="priority"
 							name="priority" size="1">
 							<option value="low">Niedrig</option>
-							<option value="normal" selected>Normal</option>
+							<option value="normal" selected="selected">Normal</option>
 							<option value="high">Hoch</option>
 						</select>
 					</fieldset>
 					<fieldset>
 						<label for="description">Beschreibung: </label>
-						<textarea cols="30" rows="5" id="description" value=""></textarea>
+						<textarea cols="30" rows="5" id="description"></textarea>
 					</fieldset>
 					<fieldset>
-						<label for="categories">Kategorien: </label>
-						<input type="text" size="30" id="categories" value=""></input>
+						<label for="categories">Kategorien: </label> <input type="text"
+							size="30" id="categories" value=""></input>
 					</fieldset>
 					<fieldset>
-						<label for="color">Farbe: </label>
-						<select id="color" name="color" size="1">
-							<option selected>Braun</option>
+						<label for="color">Farbe: </label> <select id="color" name="color"
+							size="1">
+							<option selected="selected">Braun</option>
 							<option>Rot</option>
 							<option>Blau</option>
 							<option>Grün</option>
@@ -230,9 +223,10 @@
 					</fieldset>
 					<fieldset>
 						<div id="editbutton">
-						<input type="button" value="Speichern" onclick="history.back();"></input>
-						<input type="button" value="Zur&uuml;ck" onclick="history.back();"></input>
-						<input type="button" value="L&ouml;schen" onclick="history.back();"></input>
+							<input type="button" value="Speichern" onclick="history.back();"></input>
+							<input type="button" value="Zur&uuml;ck"
+								onclick="history.back();"></input> <input type="button"
+								value="L&ouml;schen" onclick="history.back();"></input>
 						</div>
 					</fieldset>
 				</form>
@@ -241,7 +235,7 @@
 		<div id="footer">
 			Impressum: &#160; Michael M&uuml;ller &#160; Tel: 10932048091284
 			&#160; Email: <a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
-			&#160; Mehr: <a href="about.html">About</a>
+			&#160; Mehr: <a href="About.html">About</a>
 		</div>
 	</div>
 </body>

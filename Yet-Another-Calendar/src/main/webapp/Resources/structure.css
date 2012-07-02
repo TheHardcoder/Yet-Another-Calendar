@@ -15,12 +15,12 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 */
 @font-face {
 	font-family: "Shark Soft Bites";
-	src: url("SharkSoftBites.ttf");
+	src: url("Resources/SharkSoftBites.ttf");
 }
 
 @font-face {
 	font-family: "Title";
-	src: url("SF slapstick Comic Shaded.ttf");
+	src: url("Resources/SF slapstick Comic Shaded.ttf");
 }
 
 #main {
@@ -272,12 +272,20 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	padding: 7px;
 }
 
-#editform > fieldset > #editbutton {
-	margin: 0px auto;
-	width: 296px;
+#titleimage {
+	background-image: url("Images/YAC_title.png");
+	width: 400px;
+	height: 45px;
+	margin: 0 auto;
 }
 
-#editform > fieldset > #editbutton > * {
+#editbutton {
+	dispaly: block;
+	margin: 0px auto;
+	width: 380px;
+}
+
+#editbutton > * {
 	margin: 10px;
 }
 
@@ -300,18 +308,20 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 }
 
 #messagewindow {
-	font-size: 20px;
+	font-size: 14px;
 	height: 210px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 	background-color:  #FF9000;
 	text-align: center;
-	width: 260px;
+	width: 350px;
 	padding: 20px;
 	margin: 0px auto;
+	line-height: 25px;
 }
 
 #messagewindow:first-line {
+	font-size: 18px;
 	font-weight: bold;
 	line-height: 50px;
 }
@@ -413,4 +423,41 @@ html {
 	font-family: Arial;
 	padding: 0px;
 	text-shadow: 0px 0px 4px #FF9000;
+}
+
+
+/*Uhr*/
+#cl_clock {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	background: url(Images/clockface.png);
+	list-style: none;
+	padding: 0px;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#cl_sec, #cl_min, #cl_hour {
+	position: absolute;
+	width: 4px;
+	height: 150px;
+	top: 0px;
+	left: 73px;
+}
+
+#cl_sec {
+	background: url(Images/sechand.png);
+	z-index: 3;
+}
+   
+#cl_min {
+	background: url(Images/minhand.png);
+	z-index: 2;
+}
+   
+#cl_hour {
+	background: url(Images/hourhand.png);
+	z-index: 1;
 }

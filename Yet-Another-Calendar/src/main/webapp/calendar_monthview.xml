@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE calendar SYSTEM "Resources/calendar.dtd">
+<?xml-stylesheet type="text/xsl" href="Resources/calendar_monthview.xsl" ?>
+<calendar selectedyear="2012" selectedmonth="2" selectedweek="6" selectedday="12">
+	<year number="2012">
+		<month name="Mar" number="3">
+			<week number="1">
+				<day name="Mo" number="28"/>
+				<day name="Di" number="29"/>
+				<day name="Mi" number="30"/>
+				<day name="Do" number="31"/>
+			</week>
+		</month>
+		<month name="Apr" number="4">
+			<week number="1">
+				<day name="Fr" number="1">
+					<entry id="523jhls2" priority="high" color="#000">
+						<summary>Kaffee</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>SAP Coffeecorner</location>
+						<description>Test1</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test1</category>
+							<category>test1</category>
+						</categories>
+					</entry>
+					<entry id="23kh234" priority="high" color="#000">
+						<summary>Projektbesprechung</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>DHBW</location>
+						<description>Test3</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test3</category>
+							<category>test3</category>
+						</categories>
+					</entry>
+				</day>
+				<day name="Sa" number="2">
+					<entry id="1" daycount="2">
+					<summary>Test2</summary>
+						<starttime hours="16" minutes="00"/>
+						<endtime   hours="20" minutes="00"/>
+						<duration  hours="4"  minutes="0"/>
+						<location>Test1</location>
+						<description>Test2</description>
+						<created  day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<modified day="12" month="03" year="1920" hours="12" minutes="30"/>
+						<comment>text</comment>
+						<categories>
+							<category>test1</category>
+							<category>test1</category>
+						</categories>
+					</entry>
+				</day>
+				<day name="So" number="3"/>
+				<day name="Mo" number="4"/>
+				<day name="Di" number="5"/>
+				<day name="Mi" number="6"/>
+				<day name="Do" number="7"/>
+			</week>
+			<week number="2">
+				<day name="Fr" number="8"/>
+				<day name="Sa" number="9"/>
+				<day name="So" number="10"/>
+				<day name="Mo" number="11"/>
+				<day name="Di" number="12"/>
+				<day name="Mi" number="13"/>
+				<day name="Do" number="14"/>
+			</week>
+			<week number="2">
+				<day name="Fr" number="15"/>
+				<day name="Sa" number="16"/>
+				<day name="So" number="17">
+				</day>
+				<day name="Mo" number="18"/>
+				<day name="Di" number="19"/>
+				<day name="Mi" number="20"/>
+				<day name="Do" number="21"/>
+			</week>
+			<week number="2">
+				<day name="Fr" number="22"/>
+				<day name="Sa" number="23"/>
+				<day name="So" number="24"/>
+				<day name="Mo" number="25"/>
+				<day name="Di" number="26"/>
+				<day name="Mi" number="27"/>
+				<day name="Do" number="28"/>
+			</week>
+			<week number="2">
+				<day name="Fr" number="29"/>
+				<day name="Sa" number="30"/>
+			</week>
+		</month>
+		<month name="May" number="5">
+			<week number="1">
+				<day name="So" number="1"/>
+			</week>
+		</month>
+	</year>
+</calendar>
