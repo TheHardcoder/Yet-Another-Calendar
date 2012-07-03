@@ -42,7 +42,8 @@ public class UserServlet extends HttpServlet {
 			String forename = (String) req.getParameter("forename");
 			String lastname = (String) req.getParameter("lastname");
 			String password = (String) req.getParameter("password");
-			System.out.println("DATA: " + email + forename + lastname + password);
+			System.out.println("DATA: " + email + forename + lastname
+					+ password);
 			if (email != null && forename != null && lastname != null
 					&& password != null) {
 				// TODO check if hashing works correct
@@ -50,7 +51,11 @@ public class UserServlet extends HttpServlet {
 						hashPassword(password));
 				dao.createUser(user);
 				session.setAttribute("user", user);
-				resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedweek=" + c.get(Calendar.WEEK_OF_YEAR) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
+				resp.sendRedirect("calendarservlet?view=yearview&selectedyear="
+						+ c.get(Calendar.YEAR) + "&selectedmonth="
+						+ c.get(Calendar.MONTH) + "&selectedweek="
+						+ c.get(Calendar.WEEK_OF_YEAR) + "&selectedday="
+						+ c.get(Calendar.DAY_OF_MONTH));
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
 				// auf die Registrierungsseite mit Parameter
@@ -68,19 +73,26 @@ public class UserServlet extends HttpServlet {
 				if (dao.checkUser(email, hashPassword(password))) {
 					User user = dao.returnUser(email);
 					session.setAttribute("user", user);
-					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedweek=" + c.get(Calendar.WEEK_OF_YEAR) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
+					resp.sendRedirect("calendarservlet?view=yearview&selectedyear="
+							+ c.get(Calendar.YEAR)
+							+ "&selectedmonth="
+							+ c.get(Calendar.MONTH)
+							+ "&selectedweek="
+							+ c.get(Calendar.WEEK_OF_YEAR)
+							+ "&selectedday="
+							+ c.get(Calendar.DAY_OF_MONTH));
 				} else {
 					resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Ungültige Email-Adresse oder ungültiges Passwort.");
 				}
 			} else {
-				throw new RuntimeException(
-						"No valid parameters for loggin in the  User");
+				throw new RuntimeException("Invalid login parameters");
 			}
 		} else if (action.toLowerCase().equals("logout")) {
 			session.removeAttribute("user");
 			resp.sendRedirect("");
 		} else {
-			throw new RuntimeException("No valid action in User Servlet");
+			throw new RuntimeException(
+					"Invalid action parameter in User Servlet");
 		}
 	}
 
