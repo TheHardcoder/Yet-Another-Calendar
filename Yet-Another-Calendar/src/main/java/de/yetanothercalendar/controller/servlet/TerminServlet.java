@@ -1,23 +1,182 @@
 package de.yetanothercalendar.controller.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import de.yetanothercalendar.model.Calendar;
+import de.yetanothercalendar.model.calendar.CalendarEntry;
+import de.yetanothercalendar.model.calendar.Day;
+import de.yetanothercalendar.model.calendar.Month;
+import de.yetanothercalendar.model.calendar.Week;
+import de.yetanothercalendar.model.calendar.Year;
+import de.yetanothercalendar.model.dao.EventDAO;
+import de.yetanothercalendar.model.dao.UserDAO;
+import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
+import de.yetanothercalendar.model.dao.impl.UserDAOImpl;
+import de.yetanothercalendar.model.database.Event;
+import de.yetanothercalendar.model.database.User;
+import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
+import de.yetanothercalendar.model.impl.CalendarImpl;
+import de.yetanothercalendar.model.view.MonthView;
+import de.yetanothercalendar.model.view.WeekView;
+import de.yetanothercalendar.model.view.YearView;
 
 /**
  * Controller Klasse für Termin im-/export.
  */
 public class TerminServlet extends HttpServlet {
+
+	private EventDAO dao;
+
+	public TerminServlet() {
+		dao = new EventDAOImpl(new DatabaseConnectionManager());
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// TODO action parameter (update oder create) lesen
-		// TODO restlichen Parameter lesen
-		// TODO event speichern bzw. updaten
-		super.doPost(req, resp);
+
+		String action = (String) req.getParameter("action");
+		HttpSession session = req.getSession();
+
+		Event event = new Event();
+		try {
+			long id = Long.parseLong(req.getParameter("id"));
+			event.setId(id);
+		} catch (Exception e) {
+			throw new RuntimeException("Error parsing Id at Termin Servlet!");
+		}
+
+		// create User form given Data
+		User user = new User();
+		String email = req.getParameter("email");
+		user.setEmail(email);
+		String forename = req.getParameter("forename");
+		user.setForename(forename);
+		String lastname = req.getParameter("lastname");
+		user.setLastname(lastname);
+
+		try {
+			long uid = Long.parseLong(req.getParameter("uid"));
+			user.setId(uid);
+		} catch (Exception e) {
+			throw new RuntimeException(
+					"Error parsing User-Id at Termin Servlet!");
+		}
+
+		String passwordSHA1 = req.getParameter("passwordSHA1");
+		user.setPasswordSHA1(passwordSHA1);
+
+		String uid = (String) req.getParameter("uid");
+
+		String description = req.getParameter("description");
+		String location = req.getParameter("location");
+		String priority = req.getParameter("priority");
+		String summary = req.getParameter("summary");
+		String recurid = req.getParameter("recurid");
+		String rrule = req.getParameter("rrule");
+
+		Date lastmod = getDateParameterValue("lastmod", req);
+		Date dtstart = getDateParameterValue("dtstart", req);
+		if (dtstart.equals(null)) {
+			throw new RuntimeException("Error parsing Dtstart at TerminServlet");
+		}
+
+		Date dtend = getDateParameterValue("dtend", req);
+		if (dtend.equals(null)) {
+			// Duration should only be set if Dtend is not set
+			try {
+				long duration = Long.parseLong(req.getParameter("duration"));
+				event.setDuration(duration);
+			} catch (Exception e) {
+				throw new RuntimeException(
+						"Error at TerminServlet: Neither Dtend nor Duration is set");
+			}
+		}
+
+		Date created = getDateParameterValue("created", req);
+		Date dtstamp = getDateParameterValue("dtstamp", req);
+		Date exdate = getDateParameterValue("exdate", req);
+
+		String color = req.getParameter("color");
+		String comment = req.getParameter("comment");
+		// Shouldn't be set because recurrent events get wrapped to
+		// non-recurrent multiple single events
+		String rdate = req.getParameter("rdate");
+
+		List<String> categoriesList = new ArrayList<String>();
+		String[] categories = req.getParameterValues("categories");
+
+		for (String category : categories) {
+			categoriesList.add(category);
+		}
+
+		// gelesene Eventeigenschaften setzen
+		event.setColor(color);
+		event.setCategories(categoriesList);
+		event.setComment(comment);
+		event.setCreated(created);
+		event.setDescription(description);
+		event.setDtend(dtend);
+		event.setDtstamp(dtstamp);
+		event.setDtstart(dtstart);
+		event.setExdate(exdate);
+		event.setLastmod(lastmod);
+		event.setLocation(location);
+		event.setPriority(priority);
+		event.setRdate(rdate);
+		event.setRecurid(recurid);
+		event.setRrule(rrule);
+		event.setSummary(summary);
+		event.setUid(uid);
+		event.setUser(user);
+
+		// action parameter (update oder create) lesen
+		if (action.toLowerCase().equals("create")) {
+			dao.createEvents(event);
+		} else if (action.toLowerCase().equals("update")) {
+			dao.updateEvent(event);
+		} else {
+			throw new RuntimeException(
+					"Invalid action Parameter in TerminServlet");
+		}
+	}
+
+	/**
+	 * returns a Date representation of the Parameters name+"Year"
+	 * name+"Month"....
+	 * 
+	 * @param name
+	 *            Name of the Date property e.g. dtstart
+	 * @param req
+	 *            req HttpServletRequest
+	 * @return Date representation of the parameter Values null if one of the
+	 *         Parameters is not set
+	 */
+	private Date getDateParameterValue(String name, HttpServletRequest req) {
+		String year = req.getParameter(name + "Year");
+		String month = req.getParameter(name + "Month");
+		String day = req.getParameter(name + "Day");
+		String hour = req.getParameter(name + "Hour");
+		String minute = req.getParameter(name + "Minute");
+		String second = req.getParameter(name + "Second");
+		try {
+			GregorianCalendar cal = new GregorianCalendar(
+					Integer.parseInt(year), Integer.parseInt(month),
+					Integer.parseInt(day), Integer.parseInt(hour),
+					Integer.parseInt(minute), Integer.parseInt(second));
+			return cal.getTime();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
