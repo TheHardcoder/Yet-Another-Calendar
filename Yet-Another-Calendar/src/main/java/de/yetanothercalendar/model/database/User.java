@@ -20,6 +20,10 @@ public class User {
 				+ " lastname: " + lastname + " passwordSHA1: " + passwordSHA1;
 	}
 
+	public User(){
+		
+	}
+	
 	public User(String email, String forename, String lastname,
 			String passwordSHA1) {
 		super();
