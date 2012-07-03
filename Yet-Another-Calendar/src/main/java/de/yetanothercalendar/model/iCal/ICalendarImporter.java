@@ -64,6 +64,9 @@ public class ICalendarImporter {
 
 				// TODO: Clarify what to set for ID and Color when importing
 				// iCal-Files
+				/*
+				 * FIXME: This is going to be a huge problem!!!!
+				 */
 				Long id = (long) 1337;
 
 				/*
