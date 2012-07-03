@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page isErrorPage="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -36,6 +39,17 @@
 			</div>
 			<fieldset id="login">
 				<legend>Login</legend>
+					<%
+						if (pageContext.getErrorData().getStatusCode() == 401){
+							%>
+							<div id="errorbox">
+							<% 
+							out.println("<div>Ungültige Email-Adresse oder ungültiges Passwort.</div>");
+							%>
+							</div>
+							<%
+						}
+					%>
 				<div>
 					<label for="email" style="float: left;">Email: &nbsp;</label> <input
 						id="email" name="email" type="text" size="25" maxlength="25" />
@@ -49,6 +63,7 @@
 					<input type="hidden" name="action" value="login" />
 						<button type="submit">Login</button>
 				</div>
+				
 				<a href="Register.html" id="registerlink">Noch nicht
 					registriert?</a>
 			</fieldset>

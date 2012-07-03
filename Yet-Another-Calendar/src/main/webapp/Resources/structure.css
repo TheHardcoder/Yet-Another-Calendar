@@ -461,3 +461,8 @@ html {
 	background: url(Images/hourhand.png);
 	z-index: 1;
 }
+
+#errorbox {
+	border: 1px solid red;
+	color: red;
+}

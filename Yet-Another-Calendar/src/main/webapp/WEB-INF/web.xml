@@ -34,7 +34,7 @@
 	</error-page>
 	<error-page>
 		<error-code>401</error-code>
-		<location>/Logout.html</location>
+		<location>/index.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>

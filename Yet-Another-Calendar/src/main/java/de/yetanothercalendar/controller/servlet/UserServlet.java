@@ -70,8 +70,7 @@ public class UserServlet extends HttpServlet {
 					session.setAttribute("user", user);
 					resp.sendRedirect("calendarservlet?view=yearview&selectedyear=" + c.get(Calendar.YEAR) + "&selectedmonth=" + c.get(Calendar.MONTH) + "&selectedweek=" + c.get(Calendar.WEEK_OF_YEAR) + "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 				} else {
-					throw new RuntimeException(
-							"No valid credentials for loggin in the User");
+					resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Ungültige Email-Adresse oder ungültiges Passwort.");
 				}
 			} else {
 				throw new RuntimeException(
