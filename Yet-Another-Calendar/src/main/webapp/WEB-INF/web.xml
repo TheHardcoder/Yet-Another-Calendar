@@ -13,6 +13,10 @@
 		<servlet-class>de.yetanothercalendar.controller.servlet.UserServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>terminservlet</servlet-name>
+		<servlet-class>de.yetanothercalendar.controller.servlet.TerminServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>init</servlet-name>
 		<servlet-class>de.yetanothercalendar.controller.servlet.DummyDataCreatorServlet</servlet-class>
 	</servlet>
@@ -23,6 +27,10 @@
 	<servlet-mapping>
 		<servlet-name>userservlet</servlet-name>
 		<url-pattern>/userservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>terminservlet</servlet-name>
+		<url-pattern>/terminservlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>init</servlet-name>

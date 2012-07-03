@@ -52,31 +52,13 @@ public class TerminServlet extends HttpServlet {
 		try {
 			long id = Long.parseLong(req.getParameter("id"));
 			event.setId(id);
+			//TODO Wenn die id = 0 ist soll eine neue ID zum erstellen des Termins generiert werden.
 		} catch (Exception e) {
-			throw new RuntimeException("Error parsing Id at Termin Servlet!");
+			throw new RuntimeException("Error parsing Id at Termin Servlet! (" + req.getParameter("id") + ")");
 		}
 
 		// create User form given Data
-		User user = new User();
-		String email = req.getParameter("email");
-		user.setEmail(email);
-		String forename = req.getParameter("forename");
-		user.setForename(forename);
-		String lastname = req.getParameter("lastname");
-		user.setLastname(lastname);
-
-		try {
-			long uid = Long.parseLong(req.getParameter("uid"));
-			user.setId(uid);
-		} catch (Exception e) {
-			throw new RuntimeException(
-					"Error parsing User-Id at Termin Servlet!");
-		}
-
-		String passwordSHA1 = req.getParameter("passwordSHA1");
-		user.setPasswordSHA1(passwordSHA1);
-
-		String uid = (String) req.getParameter("uid");
+		User user = (User) req.getSession().getAttribute("user");
 
 		String description = req.getParameter("description");
 		String location = req.getParameter("location");
@@ -87,12 +69,12 @@ public class TerminServlet extends HttpServlet {
 
 		Date lastmod = getDateParameterValue("lastmod", req);
 		Date dtstart = getDateParameterValue("dtstart", req);
-		if (dtstart.equals(null)) {
+		if (dtstart == null) {
 			throw new RuntimeException("Error parsing Dtstart at TerminServlet");
 		}
 
 		Date dtend = getDateParameterValue("dtend", req);
-		if (dtend.equals(null)) {
+		if (dtend== null) {
 			// Duration should only be set if Dtend is not set
 			try {
 				long duration = Long.parseLong(req.getParameter("duration"));
@@ -114,10 +96,14 @@ public class TerminServlet extends HttpServlet {
 		String rdate = req.getParameter("rdate");
 
 		List<String> categoriesList = new ArrayList<String>();
-		String[] categories = req.getParameterValues("categories");
+		
+		String categoryString = req.getParameter("categories");
+		if (categoryString != null){
+			String[] categories = categoryString.split(",");
 
-		for (String category : categories) {
-			categoriesList.add(category);
+			for (String category : categories) {
+				categoriesList.add(category);
+			}
 		}
 
 		// gelesene Eventeigenschaften setzen
@@ -137,7 +123,7 @@ public class TerminServlet extends HttpServlet {
 		event.setRecurid(recurid);
 		event.setRrule(rrule);
 		event.setSummary(summary);
-		event.setUid(uid);
+		event.setUid(user.getId().toString());
 		event.setUser(user);
 
 		// action parameter (update oder create) lesen
