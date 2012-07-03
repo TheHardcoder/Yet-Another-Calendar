@@ -135,6 +135,16 @@ public class TerminServlet extends HttpServlet {
 			throw new RuntimeException(
 					"Invalid action Parameter in TerminServlet");
 		}
+		java.util.Calendar c = GregorianCalendar.getInstance();
+		c.setTime(dtstart);
+		resp.sendRedirect("calendarservlet?view="+ req.getParameter("view") + "&selectedyear="
+				+ c.get(java.util.Calendar.YEAR)
+				+ "&selectedmonth="
+				+ c.get(java.util.Calendar.MONTH)
+				+ "&selectedweek="
+				+ c.get(java.util.Calendar.WEEK_OF_YEAR)
+				+ "&selectedday="
+				+ c.get(java.util.Calendar.DAY_OF_MONTH));
 	}
 
 	/**

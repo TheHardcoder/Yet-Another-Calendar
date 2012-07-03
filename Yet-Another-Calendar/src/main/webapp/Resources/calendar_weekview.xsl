@@ -16,8 +16,10 @@
 				<script type="text/JavaScript" src="Resources/analog_clock.js"></script>
 				<script type="text/JavaScript" src="Resources/DateChooser.js"></script>
 				<script type="text/JavaScript" src="Resources/SmallCalendar.js"></script>
+				<script type="text/JavaScript" src="Resources/Import.js"></script>
 			</head>
 			<body>
+			<div id="fileopen"></div>
 				<div id="main">
 					<div id="hiddeninfo">
 						<div id="selectedyear">
@@ -88,7 +90,17 @@
 					<div id="menubar">
 						<div class="button"
 							onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
-						<div class="button">Neu</div>
+						<xsl:variable name="newentry">
+							<xsl:text>Edit.html?view=weekview&amp;year=</xsl:text>
+							<xsl:value-of select="@selectedyear"></xsl:value-of>
+							<xsl:text>&amp;month=</xsl:text>
+							<xsl:value-of select="@selectedmonth"></xsl:value-of>
+							<xsl:text>&amp;week=</xsl:text>
+							<xsl:value-of select="@selectedweek"></xsl:value-of>
+							<xsl:text>&amp;day=</xsl:text>
+							<xsl:value-of select="@selectedday"></xsl:value-of>
+						</xsl:variable>
+						<div class="button" onclick="window.location='{$newentry}'">Neu</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
@@ -148,8 +160,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="button">Imp</div>
-						<div class="button">Exp</div>
+						<div class="button" onclick="showFileOpenDialog();"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/import-icon_HP.png"></img></div>
+						<div class="button"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/export-icon_HP.png"></img></div>
 						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
 					</div>
 					<div id="calendar">

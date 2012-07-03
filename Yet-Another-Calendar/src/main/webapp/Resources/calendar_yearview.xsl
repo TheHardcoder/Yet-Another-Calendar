@@ -153,8 +153,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog();">Imp</div>
-						<div class="button">Exp</div>
+						<div class="button" onclick="showFileOpenDialog();"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/import-icon_HP.png"></img></div>
+						<div class="button"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/export-icon_HP.png"></img></div>
 						<div class="button" onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
@@ -223,8 +223,8 @@
 				<xsl:variable name="curd" select="@number">
 				</xsl:variable>
 				<xsl:variable name="newentry">
-					<xsl:text>Edit.html?</xsl:text>
-					<xsl:text>day=</xsl:text>
+					<xsl:text>Edit.html?view=yearview</xsl:text>
+					<xsl:text>&amp;day=</xsl:text>
 					<xsl:value-of select="@number"></xsl:value-of>
 					<xsl:text>&amp;month=</xsl:text>
 					<xsl:value-of select="../../@number"></xsl:value-of>
@@ -257,8 +257,8 @@
 					</xsl:for-each>
 				</xsl:variable>
 				<xsl:variable name="link">
-					<xsl:text>Edit.html</xsl:text>
-					<xsl:text>?description=</xsl:text>
+					<xsl:text>Edit.html?view=yearview</xsl:text>
+					<xsl:text>&amp;description=</xsl:text>
 					<xsl:value-of select="entry/description" />
 					<xsl:text>&amp;id=</xsl:text>
 					<xsl:value-of select="entry/@id" />
