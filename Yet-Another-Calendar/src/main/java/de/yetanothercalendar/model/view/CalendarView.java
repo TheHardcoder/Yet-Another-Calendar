@@ -24,13 +24,15 @@ public abstract class CalendarView extends View {
 	 * Erzeugt ein XML-Dokument aus einem "calender"-Objekt vom Typ Year.
 	 * 
 	 * @param pYear
-	 *            - Vorlage vom Typ Year
+	 *            - Vollständiges gefülltes Year-Objekt 
 	 * @param pSelectedDay
+	 *            - Attribtu
 	 * @param pSelectedWeek
+	 *            -
 	 * @param pSelectedMonth
-	 * @return Eine Datei ( :File), welches die gespeicherte XML Datei
-	 *         repr�sentiert. Bei Bedarf kann auch direkt das XML-Dokument (
-	 *         :Document) zur�ckgegeben werden (Absprache Fabian)
+	 *            -
+	 * @param pSelectedYear
+	 *            -
 	 */
 	@SuppressWarnings("unchecked")
 	public CalendarView(Year pYear, String pSelectedYear,

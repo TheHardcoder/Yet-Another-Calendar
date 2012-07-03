@@ -137,14 +137,14 @@ public class EventToCalendarEntryWrapper {
 				event.getColor(), event.getSummary(), startDate, endDate,
 				duration, event.getLocation(), event.getDescription(),
 				event.getCreated(), event.getLastmod(), event.getComment(),
-				event.getCategories());
+				event.getCategories(), 1);
 	}
 
 	/**
 	 * Erstellt einen {@link CalendarEntry} aus einem Event
 	 * 
 	 * @param event
-	 *            das even fuer den der CalendarEntry erstellt wird
+	 *            das event fuer den der CalendarEntry erstellt wird
 	 * @return einen {@link CalendarEntry} aus dem gegebenen {@link Event]
 	 */
 	private CalendarEntry createCalendarEntryFromEvent(Event event) {
@@ -153,6 +153,6 @@ public class EventToCalendarEntryWrapper {
 				event.getColor(), event.getSummary(), event.getDtstart(),
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
-				event.getComment(), event.getCategories());
+				event.getComment(), event.getCategories(), 1);
 	}
 }
