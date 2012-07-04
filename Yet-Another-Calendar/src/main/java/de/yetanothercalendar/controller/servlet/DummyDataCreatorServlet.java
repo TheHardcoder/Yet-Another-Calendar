@@ -37,7 +37,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 				DigestUtils.shaHex("HashMe"));
 		user = daoUser.createUser(user);
 
-		// req.getSession().setAttribute("user", user);
+		req.getSession().setAttribute("user", user);
 
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
 		calendarCreated.set(2012, 0, 3, 10, 0);
@@ -90,7 +90,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		return new Event(new Long((int) (Math.random() * 100000)), user,
 				new Date(), "uuid", start.getTime(), created.getTime(), desc,
 				new Date(), location, "very high", "what a great summary",
-				"recurrid", "rrule", end.getTime(), 0, "#fff",
+				"recurrid", null, end.getTime(), 0, "#fff",
 				new ArrayList<String>(), "comment", new Date(), "");
 	}
 }

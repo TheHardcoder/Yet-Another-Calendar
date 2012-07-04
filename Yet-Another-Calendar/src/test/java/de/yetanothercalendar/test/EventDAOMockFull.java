@@ -22,9 +22,9 @@ public class EventDAOMockFull implements EventDAO {
 		// TODO es werden erst alle termine in einem Jahr gemappt
 		// Calendar facts
 		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
-		calendarCreated.set(2011, 1, 1, 1, 1);
+		calendarCreated.set(2008, 1, 1, 1, 1);
 		Calendar calendar = new GregorianCalendar(Locale.GERMANY);
-		calendar.set(2012, 0, 01, 10, 00);
+		calendar.set(2008, 0, 01, 10, 00);
 		Calendar calendar2 = new GregorianCalendar(Locale.GERMANY);
 		calendar2.set(2012, 0, 05, 10, 00);
 		for (int yearcount = 0; yearcount < 4; yearcount++) {
@@ -64,7 +64,7 @@ public class EventDAOMockFull implements EventDAO {
 		return new Event(new Long((int) (Math.random() * 100000)), user,
 				new Date(), "uuid", start.getTime(), created.getTime(),
 				"description", new Date(), "location", "very high",
-				"what a great summary", "recurrid", "rrule", end.getTime(), 0,
+				"what a great summary", "recurrid", null, end.getTime(), 0,
 				"#fff", new ArrayList<String>(), "comment", new Date(), "");
 	}
 

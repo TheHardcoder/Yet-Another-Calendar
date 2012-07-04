@@ -123,9 +123,11 @@ public class CalendarImpl implements Calendar {
 	 */
 	private Map<java.util.Calendar, List<CalendarEntry>> geteventsBetweenDatesAndFillStrucuture(
 			java.util.Calendar startDate, java.util.Calendar endDate) {
-		List<Event> eventsRecurring = eventDAO.getEventsFromUserRecurring(user);
+		List<Event> events = eventDAO.getEventsFromUserRecurring(user);
+		events.addAll(eventDAO.getEventsFromUserNotRecurring(user));
 		List<CalendarEntry> allEntries = new ArrayList<CalendarEntry>();
-		for (Event event : eventsRecurring) {
+		// FIXME Calendar Entries are Empty
+		for (Event event : events) {
 			try {
 				allEntries.addAll(wrapperRecurringEvents.wrapEventToCalendar(
 						event, startDate.getTime(), endDate.getTime()));

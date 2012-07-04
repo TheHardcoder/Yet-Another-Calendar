@@ -23,7 +23,7 @@ public class CalendarFullTest extends TestCase {
 				"test@iteabag.org", "test", "lastnametest", "i am awesome"));
 		EventDAO eventDAO = new EventDAOMockFull();
 		calendar.setEventDAO(eventDAO);
-		Year entriesByYear = calendar.getEntriesByYear(2011);
+		Year entriesByYear = calendar.getEntriesByYear(2012);
 		printYear(entriesByYear);
 	}
 
