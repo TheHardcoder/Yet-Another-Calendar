@@ -38,6 +38,7 @@ public class CalendarImpl implements Calendar {
 	private MomentCreator momentCreator;
 	/** Wrapper fuer Wrap von Event zu CalendarEntry */
 	private RecurrentEventToCalendarEntryWrapper wrapperRecurringEvents;
+	private CalendarViewCalculation viewCalculation = new CalendarViewCalculation();
 
 	public CalendarImpl(User user) {
 		this.user = user;
@@ -241,12 +242,9 @@ public class CalendarImpl implements Calendar {
 					new Pair<java.util.Calendar, Day>(calendar, day));
 
 			// Methodenaufruf für diverse Berechungen für die View
+			// Day ist hier mit 
 			// @author Lukas
-			// CalendarViewCalculation viewCalculation = new
-			// CalendarViewCalculation();
-			// viewCalculation.analyseColumns(day);
-			// Auf day kann ich hier zugreifen, sie sind gefüllt
-			// day.getEntries();
+			// day = viewCalculation.analyseColumns(day);
 
 			weekDays.add(day);
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);

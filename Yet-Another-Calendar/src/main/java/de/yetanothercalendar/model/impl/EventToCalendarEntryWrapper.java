@@ -137,7 +137,7 @@ public class EventToCalendarEntryWrapper {
 				event.getColor(), event.getSummary(), startDate, endDate,
 				duration, event.getLocation(), event.getDescription(),
 				event.getCreated(), event.getLastmod(), event.getComment(),
-				event.getCategories(), 1);
+				event.getCategories());
 	}
 
 	/**
@@ -153,6 +153,6 @@ public class EventToCalendarEntryWrapper {
 				event.getColor(), event.getSummary(), event.getDtstart(),
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
-				event.getComment(), event.getCategories(), 1);
+				event.getComment(), event.getCategories());
 	}
 }
