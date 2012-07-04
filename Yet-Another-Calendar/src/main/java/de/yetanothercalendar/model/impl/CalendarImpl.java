@@ -175,8 +175,19 @@ public class CalendarImpl implements Calendar {
 			int year,
 			int monthToSearch,
 			Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap) {
+		// java.util.Calendar raphael = java.util.Calendar.getInstance(locale);
+		// raphael.clear();
+		// raphael.setMinimalDaysInFirstWeek(1);
+		// raphael.set(java.util.Calendar.YEAR, year);
+		// raphael.set(java.util.Calendar.MONTH, monthToSearch);
+		// raphael.set(java.util.Calendar.DAY_OF_YEAR, 1);
+		// boolean yearstartswithsunday = raphael
+		// .get(java.util.Calendar.DAY_OF_WEEK) == java.util.Calendar.SUNDAY ?
+		// true
+		// : false;
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
 		calendar.clear();
+		calendar.setMinimalDaysInFirstWeek(1);
 		calendar.set(java.util.Calendar.YEAR, year);
 		calendar.set(java.util.Calendar.MONTH, monthToSearch);
 		List<Week> weeks = new ArrayList<Week>();
@@ -194,6 +205,7 @@ public class CalendarImpl implements Calendar {
 		int currentWeek = -1;
 		// Zaehler fuer number der Woche im XML
 		while (calendar.get(java.util.Calendar.MONTH) == month) {
+			System.out.print(new SimpleDateFormat().format(calendar.getTime()));
 			// Der aktuelle monatstag
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
@@ -201,20 +213,31 @@ public class CalendarImpl implements Calendar {
 					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
 			// Die Woche des jetztigen Tags im calendar.
-			currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+			// Workaround for sunday
+			boolean isSunday = calendar.get(java.util.Calendar.DAY_OF_WEEK) == java.util.Calendar.SUNDAY;
+			int weeknumber = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+			currentWeek = weeknumber;
+			System.out.println("  currenweek: " + currentWeek + " weekofyear: "
+					+ weekOfYear);
+			// if (yearstartswithsunday & !isSunday) {
+			// currentWeek = weeknumber + 1;
+			// } else if (!yearstartswithsunday & isSunday) {
+			// currentWeek = weeknumber - 1;
+			// } else {
+			// currentWeek = weeknumber;
+			// }
 			// Wenn die nächste woche erreicht wird, werden die temporaer
 			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
 			// Monat gespeichert.
 			if (!(weekOfYear == currentWeek)) {
-				Week week = new Week(
-						calendar.get(java.util.Calendar.WEEK_OF_YEAR));
+				Week week = new Week(weekOfYear);
 				week.setDays(weekDays);
 				weeks.add(week);
 				// Zurücksetzung der attribute
 				weekDays = new ArrayList<Day>();
 				weekOfYear = currentWeek;
 			}
-			insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
+			day = insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
 
 			// Methodenaufruf für diverse Berechungen für die View
@@ -234,6 +257,7 @@ public class CalendarImpl implements Calendar {
 			week.setDays(weekDays);
 			weeks.add(week);
 		}
+		// TODO workaround for last week
 		addLastOrFirstWeekDaysOfYear(weeks, monthToSearch, year);
 		return weeks;
 	}
