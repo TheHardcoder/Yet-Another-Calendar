@@ -10,12 +10,14 @@ public class Day {
 	private List<CalendarEntry> calendarEntries;
 	private String name;
 	private int number;
+	private int columnCount;
 
 	public Day(String name, int number) {
 		super();
 		this.name = name;
 		this.number = number;
 		calendarEntries = new ArrayList<CalendarEntry>();
+		this.setColumnCount(0);
 	}
 
 	public Day(List<CalendarEntry> calendarEntries, String name, int number) {
@@ -53,6 +55,14 @@ public class Day {
 	public String toString() {
 		return "Day [calendarEntries=" + calendarEntries + ", name=" + name
 				+ ", number=" + number + "]";
+	}
+
+	public int getColumnCount() {
+		return columnCount;
+	}
+
+	public void setColumnCount(int columnCount) {
+		this.columnCount = columnCount;
 	}
 
 }

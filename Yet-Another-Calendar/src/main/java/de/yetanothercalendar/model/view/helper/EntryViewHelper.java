@@ -32,9 +32,9 @@ public class EntryViewHelper extends ViewHelper {
 		listOfEntryAttributes.add(createTimeElement("starttime",
 				entry.getStartTime(), false));
 		listOfEntryAttributes.add(createTimeElement("endtime",
-				entry.getStartTime(), false));
+				entry.getEndTime(), false));
 		listOfEntryAttributes.add(createTimeElement("duration",
-				entry.getStartTime(), false));
+				entry.getDurationTime(), false));
 
 		listOfEntryAttributes.add(new Element("location").setText(entry
 				.getLocation()));
@@ -42,9 +42,9 @@ public class EntryViewHelper extends ViewHelper {
 				.getDescription()));
 
 		listOfEntryAttributes.add(createTimeElement("created",
-				entry.getStartTime(), true));
+				entry.getCreated(), true));
 		listOfEntryAttributes.add(createTimeElement("modified",
-				entry.getStartTime(), true));
+				entry.getModified(), true));
 
 		listOfEntryAttributes.add(new Element("comment").setText(entry
 				.getComment()));

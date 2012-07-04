@@ -82,7 +82,7 @@ public class CalendarEntry {
 	public CalendarEntry(long id, String priority, String colorString,
 			String summary, Date startTime, Date endTime, Date durationTime,
 			String location, String description, Date created, Date modified,
-			String comment, List<String> category, int column) {
+			String comment, List<String> category) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -97,7 +97,7 @@ public class CalendarEntry {
 		this.modified = modified;
 		this.comment = comment;
 		this.category = category;
-		this.column = column;
+		this.column = 0;
 	}
 
 	public long getId() {

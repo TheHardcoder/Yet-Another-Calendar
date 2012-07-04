@@ -25,7 +25,7 @@ public class TestView extends View {
 		sCate.add("Cate3");
 		CalendarEntry cE = new CalendarEntry(1, "high", "#FFFF", "Hammer Job",
 				dt, dt, dt, "KA", "Teeeest", dt, dt, "Hoffentlich klappts",
-				sCate, 3);
+				sCate);
 		lCalendarEntries.add(cE);
 		Day dTday = new Day("Mo", 1);
 		dTday.setCalendarEntries(lCalendarEntries);
