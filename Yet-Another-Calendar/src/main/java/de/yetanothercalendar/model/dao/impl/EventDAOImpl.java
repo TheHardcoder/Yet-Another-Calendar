@@ -220,7 +220,7 @@ public class EventDAOImpl implements EventDAO {
 					+ "events.color, events.categories, events.comment, events.exdate,"
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
-					+ "Where users.email = \"" + email
+					+ " Where users.email = \"" + email
 					+ "\" and events.rrule IS NOT NULL;";
 			events = executeSELECTQuery(user, eventCreationString);
 		} catch (Exception e) {

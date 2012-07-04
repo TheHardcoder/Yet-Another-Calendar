@@ -41,7 +41,7 @@ public class EventDAOMockSimple implements EventDAO {
 		return new Event(new Long(12), user, new Date(), "uuid",
 				start.getTime(), created.getTime(), "description", new Date(),
 				"location", "very high", "what a great summary", "recurrid",
-				"rrule", end.getTime(), 0, "#fff", new ArrayList<String>(),
+				null, end.getTime(), 0, "#fff", new ArrayList<String>(),
 				"comment", new Date(), "");
 	}
 

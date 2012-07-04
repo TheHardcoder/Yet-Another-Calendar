@@ -51,8 +51,9 @@ public class RecurrentEventToCalendarEntryWrapper {
 	public List<CalendarEntry> wrapEventToCalendar(Event event, Date begin,
 			Date end) throws IllegalArgumentException, ParseException {
 		// TODO Auto-generated method stub
-		if (event.getRrule().equals("")) {
-			event.setDtend(end);
+		if (event.getRrule() == null) {
+			// TODO warum wird hier das enddatum ueberschrieben?
+			// event.setDtend(end);
 			EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(
 					Locale.GERMANY);
 			return wrapper.wrapEventToCalendar(event);
@@ -144,12 +145,12 @@ public class RecurrentEventToCalendarEntryWrapper {
 
 	/**
 	 * Returns a proper String representation of an RRULE Property
+	 * 
 	 * @param name
-	 * Property name
+	 *            Property name
 	 * @param rrule
-	 * rrule-String
-	 * @return
-	 * String representation of the property-value
+	 *            rrule-String
+	 * @return String representation of the property-value
 	 */
 	public static String getRRULEProperty(String name, String rrule) {
 		if (rrule.indexOf(name) > -1) {
