@@ -84,14 +84,15 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = manager.getConnection();
 
-			java.sql.PreparedStatement pstmt = con.prepareStatement("select password from users where email = ? ;");
+			java.sql.PreparedStatement pstmt = con
+					.prepareStatement("select password from users where email = ? ;");
 			pstmt.setString(1, email);
-			
+
 			ResultSet rsUser = pstmt.executeQuery();
 			String dbPassword;
 			while (rsUser.next()) {
 				dbPassword = rsUser.getString(1);
-				System.out.println(dbPassword + " = " + password);
+
 				if (dbPassword.equals(password)) {
 					pstmt.close();
 					rsUser.close();
@@ -120,12 +121,12 @@ public class UserDAOImpl implements UserDAO {
 		User result = null;
 		try {
 			Connection con = manager.getConnection();
-			
+
 			String userSurch = "select * from users where email = ? ;";
-					
+
 			java.sql.PreparedStatement pstmt = con.prepareStatement(userSurch);
 			pstmt.setString(1, email);
-			
+
 			ResultSet rsUsers = pstmt.executeQuery();
 			if (rsUsers.next()) {
 				int dbId = rsUsers.getInt(1);
@@ -144,6 +145,5 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
-	
-	
+
 }

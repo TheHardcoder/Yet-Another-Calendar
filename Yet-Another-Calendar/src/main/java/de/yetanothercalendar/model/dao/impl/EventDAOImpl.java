@@ -60,7 +60,7 @@ public class EventDAOImpl implements EventDAO {
 			Statement createStatement = con.createStatement();
 
 			User user = event.getUser();
-			System.out.println(user.toString());
+
 			Long userid = event.getUser().getId();
 			if (userid != null) {
 				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event
@@ -308,7 +308,6 @@ public class EventDAOImpl implements EventDAO {
 				String color = event.getColor();
 				List<String> categories = event.getCategories();
 				String strCategories = "";
-				
 
 				for (int i = 0; i < categories.size(); i++) {
 					strCategories += categories.get(i);
