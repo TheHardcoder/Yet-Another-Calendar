@@ -176,88 +176,47 @@ public class CalendarImpl implements Calendar {
 			int year,
 			int monthToSearch,
 			Map<java.util.Calendar, List<CalendarEntry>> calendarDayOnCalendarEntryMap) {
-		// java.util.Calendar raphael = java.util.Calendar.getInstance(locale);
-		// raphael.clear();
-		// raphael.setMinimalDaysInFirstWeek(1);
-		// raphael.set(java.util.Calendar.YEAR, year);
-		// raphael.set(java.util.Calendar.MONTH, monthToSearch);
-		// raphael.set(java.util.Calendar.DAY_OF_YEAR, 1);
-		// boolean yearstartswithsunday = raphael
-		// .get(java.util.Calendar.DAY_OF_WEEK) == java.util.Calendar.SUNDAY ?
-		// true
-		// : false;
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
 		calendar.clear();
-		calendar.setMinimalDaysInFirstWeek(1);
+		// calendar.setMinimalDaysInFirstWeek(calendar.getMinimalDaysInFirstWeek()
+		// + 1);
 		calendar.set(java.util.Calendar.YEAR, year);
 		calendar.set(java.util.Calendar.MONTH, monthToSearch);
-		List<Week> weeks = new ArrayList<Week>();
-		// Den aktuellen monat sichern
-		int month = calendar.get(java.util.Calendar.MONTH);
-		// Der Tag des Kalenders wird auf den ersten des monats gesetzt
 		calendar.set(java.util.Calendar.DAY_OF_MONTH, 1);
-		// Zwischenvariablen initialisieren
+		List<Week> weeks = new ArrayList<Week>();
+		int month = calendar.get(java.util.Calendar.MONTH);
 		List<Day> weekDays = new ArrayList<Day>();
-		int weekOfYear = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
-		// Fussgesteuertes while(true) funktioniert nicht, da bei
-		// nichteinhaltung der bedingung (nächste Monat erreicht) noch die
-		// "resttage" in der zwischenvariable weekDays zum Monat (als woche
-		// "verpackt") hinzugefügt werden müssen.
-		int currentWeek = -1;
-		// Zaehler fuer number der Woche im XML
+		int weekOfYear = getWeekNumberMondayToSaturDay(calendar);
 		while (calendar.get(java.util.Calendar.MONTH) == month) {
-			System.out.print(new SimpleDateFormat().format(calendar.getTime()));
-			// Der aktuelle monatstag
+			int currenWeekNumber = getWeekNumberMondayToSaturDay(calendar);
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
-			// Der name des aktuellen tages
 			String dayname = dateFormatSymbols.getShortWeekdays()[calendar
 					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
-			// Die Woche des jetztigen Tags im calendar.
-			// Workaround for sunday
-			boolean isSunday = calendar.get(java.util.Calendar.DAY_OF_WEEK) == java.util.Calendar.SUNDAY;
-			int weeknumber = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
-			currentWeek = weeknumber;
-			System.out.println("  currenweek: " + currentWeek + " weekofyear: "
-					+ weekOfYear);
-			// if (yearstartswithsunday & !isSunday) {
-			// currentWeek = weeknumber + 1;
-			// } else if (!yearstartswithsunday & isSunday) {
-			// currentWeek = weeknumber - 1;
-			// } else {
-			// currentWeek = weeknumber;
-			// }
-			// Wenn die nächste woche erreicht wird, werden die temporaer
-			// abgespeicherten tage in weekDays zur Woche zusammengefasst und im
-			// Monat gespeichert.
-			if (!(weekOfYear == currentWeek)) {
+			day = insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
+					new Pair<java.util.Calendar, Day>(calendar, day));
+			if (weekOfYear != currenWeekNumber) {
 				Week week = new Week(weekOfYear);
 				week.setDays(weekDays);
 				weeks.add(week);
-				// Zurücksetzung der attribute
 				weekDays = new ArrayList<Day>();
-				weekOfYear = currentWeek;
+				weekOfYear = currenWeekNumber;
 			}
-			day = insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
-					new Pair<java.util.Calendar, Day>(calendar, day));
-
-			// Methodenaufruf für diverse Berechungen für die View
-			// Day ist hier mit 
-			// @author Lukas
-			// day = viewCalculation.analyseColumns(day);
-
 			weekDays.add(day);
 			calendar.add(java.util.Calendar.DAY_OF_YEAR, 1);
 		}
-		// Ueberpruefung, ob wir noch im Monat sind.
 		if (weekDays.size() > 0) {
-			Week week = new Week(calendar.get(java.util.Calendar.WEEK_OF_YEAR));
+			Week week = new Week(weekOfYear);
 			week.setDays(weekDays);
 			weeks.add(week);
 		}
-		// TODO workaround for last week
 		addLastOrFirstWeekDaysOfYear(weeks, monthToSearch, year);
 		return weeks;
+	}
+
+	private int getWeekNumberMondayToSaturDay(java.util.Calendar calendar) {
+		int currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+		return currentWeek;
 	}
 
 	private void addLastOrFirstWeekDaysOfYear(List<Week> weeks, int month,
