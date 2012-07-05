@@ -19,7 +19,7 @@
 				<script type="text/JavaScript" src="Resources/Import.js"></script>
 			</head>
 			<body>
-			<div id="fileopen"></div>
+				<div id="fileopen"></div>
 				<div id="main">
 					<div id="hiddeninfo">
 						<div id="selectedyear">
@@ -160,8 +160,14 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog();"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/import-icon_HP.png"></img></div>
-						<div class="button"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/export-icon_HP.png"></img></div>
+						<div class="button" onclick="showFileOpenDialog();">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/import-icon_HP.png"></img>
+						</div>
+						<div class="button">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/export-icon_HP.png"></img>
+						</div>
 						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
@@ -193,8 +199,27 @@
 								<xsl:value-of select="@selectedweek"></xsl:value-of>
 							</div>
 						</div>
-						<xsl:apply-templates
-							select="year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]"></xsl:apply-templates>
+						<div id="weekview">
+							<div id="times">
+								<div class="hourlabel">
+								</div>
+								<xsl:call-template name="selects">
+									<xsl:with-param name="i">
+										0
+									</xsl:with-param>
+									<xsl:with-param name="count">
+										23
+									</xsl:with-param>
+									<xsl:with-param name="print">
+										1
+									</xsl:with-param>
+								</xsl:call-template>
+							</div>
+							<div id="weekdays">
+								<xsl:apply-templates
+									select="year/month/week[@number=//calendar/@selectedweek]"></xsl:apply-templates>
+							</div>
+						</div>
 					</div>
 					<div id="footer">
 						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
@@ -208,36 +233,19 @@
 		</html>
 	</xsl:template>
 
-	<xsl:template
-		match="year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]">
-		<div id="weekview">
-			<div id="times">
-				<div class="hourlabel">
-				</div>
-				<xsl:call-template name="selects">
-					<xsl:with-param name="i">
-						0
-					</xsl:with-param>
-					<xsl:with-param name="count">
-						23
-					</xsl:with-param>
-					<xsl:with-param name="print">
-						1
-					</xsl:with-param>
-				</xsl:call-template>
-			</div>
-			<div id="weekdays">
-				<xsl:apply-templates select="day"></xsl:apply-templates>
-			</div>
-		</div>
+	<xsl:template match="year/month/week[@number=//calendar/@selectedweek]">
+		<xsl:apply-templates select="day"></xsl:apply-templates>
 	</xsl:template>
 
 	<xsl:template match="day">
-		<xsl:variable name="day1" select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
-		<xsl:variable name="day7" select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[7]/@number"></xsl:variable>
+		<xsl:variable name="day1"
+			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
+		<xsl:variable name="day7"
+			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[7]/@number"></xsl:variable>
 		<xsl:variable name="daytitle">
 			<xsl:choose>
-				<xsl:when test="$day1 - @number &gt; 0 and //calendar/@selectedmonth = 12">
+				<xsl:when
+					test="$day1 - @number &gt; 0 and //calendar/@selectedmonth = 12">
 					<xsl:value-of select="@number" />
 					.1.
 					<xsl:value-of select="//calendar/@selectedyear + 1" />
@@ -248,7 +256,11 @@
 					<xsl:value-of select="//calendar/@selectedyear - 1" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="@number" />.<xsl:value-of select="//calendar/@selectedmonth" />.<xsl:value-of select="//calendar/@selectedyear" />
+					<xsl:value-of select="@number" />
+					.
+					<xsl:value-of select="//calendar/@selectedmonth" />
+					.
+					<xsl:value-of select="//calendar/@selectedyear" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
