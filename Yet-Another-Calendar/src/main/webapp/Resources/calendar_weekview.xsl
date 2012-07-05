@@ -264,6 +264,20 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+		
+		<xsl:variable name="monthdiff" select="../../@number - //calendar/@selectedmonth"></xsl:variable>
+		<xsl:variable name="monthdiffabs">
+			<xsl:choose>
+				<xsl:when test="$monthdiff &lt; 0">
+					<xsl:value-of select="- $monthdiff"></xsl:value-of>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$monthdiff"></xsl:value-of>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<xsl:if test="$monthdiffabs &lt; 2">
 		<div class="daycolumn">
 			<div class="daycolumntitle">
 				<xsl:value-of select="@name" />
@@ -305,6 +319,7 @@
 				</xsl:with-param>
 			</xsl:call-template>
 		</div>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="entry">
