@@ -133,11 +133,12 @@ public class EventToCalendarEntryWrapper {
 	private CalendarEntry createCalendarEntryFromEvent(Event event,
 			Date startDate, Date endDate) {
 		Date duration = new Date(event.getDuration());
+		// TODO rRule noch richtig hinzufügen
 		return new CalendarEntry(new Long(event.getId()), event.getPriority(),
 				event.getColor(), event.getSummary(), startDate, endDate,
 				duration, event.getLocation(), event.getDescription(),
 				event.getCreated(), event.getLastmod(), event.getComment(),
-				event.getCategories());
+				event.getCategories(), null);
 	}
 
 	/**
@@ -149,10 +150,11 @@ public class EventToCalendarEntryWrapper {
 	 */
 	private CalendarEntry createCalendarEntryFromEvent(Event event) {
 		Date duration = new Date(event.getDuration());
+		// TODO rRule noch richtig hinzufügen
 		return new CalendarEntry(new Long(event.getId()), event.getPriority(),
 				event.getColor(), event.getSummary(), event.getDtstart(),
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
-				event.getComment(), event.getCategories());
+				event.getComment(), event.getCategories(), null);
 	}
 }

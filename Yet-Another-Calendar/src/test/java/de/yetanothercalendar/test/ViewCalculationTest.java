@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.print.attribute.standard.PDLOverrideSupported;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -21,7 +23,7 @@ public class ViewCalculationTest extends TestCase {
 	public void testSortCalendarEntryList() throws InterruptedException {
 		Date dFirst = new Date();
 		Thread.sleep(1000);
-		List<CalendarEntry> lCalendarEntries = createEntryList();
+		List<CalendarEntry> lCalendarEntries = createEntryList1();
 		List<CalendarEntry> lCalendarEntriesSorted;
 		Collections.shuffle(lCalendarEntries);
 		System.out
@@ -40,7 +42,7 @@ public class ViewCalculationTest extends TestCase {
 		}
 		CalendarEntry previousCalendarEntry = new CalendarEntry(42, "Test",
 				"Test", "Test", dFirst, dFirst, dFirst, "Test", "Test", dFirst,
-				dFirst, "Test", null);
+				dFirst, "Test", null, null);
 		for (CalendarEntry calendarEntry : lCalendarEntriesSorted) {
 			System.out.println(previousCalendarEntry.getStartTime().before(
 					calendarEntry.getStartTime()));
@@ -50,27 +52,65 @@ public class ViewCalculationTest extends TestCase {
 	}
 
 	@Test
-	public void testRecursChecking() {
-		System.out.println("Recurse Checking");
-		List<CalendarEntry> lCalendarEntries = createEntryList();
-		Day day = new Day(lCalendarEntries, "TestTag", 1);
-		day = viewCalculation.analyseColumns(day);
-		for (CalendarEntry calendarEntry : day.getCalendarEntries()) {
-			assertNotNull(calendarEntry.getColumn());
-			System.out.println(calendarEntry.getStartTime().toString()
+	public void testColumnInitialization() {
+		// First Test
+		System.out.println("30 Spalten (Diagonal versetzt)");
+		List<CalendarEntry> lCalendarEntries = createEntryList1();
+		Day day = new Day(lCalendarEntries, "TestTag", 0);
+		day = viewCalculation.initializeColumns(day);
+		lCalendarEntries = day.getCalendarEntries();
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			System.out.println(calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime() + " "
 					+ calendarEntry.getColumn());
-
+			assertEquals(30, day.getColumnCount());
 		}
-		assertNotNull(day.getColumnCount());
-		// System.out.println(day.getColumnCount());
+		// Second Test
+		System.out.println("Nur eine Spalte (Hintereinander)");
+		lCalendarEntries = createEntryList2();
+		day = new Day(lCalendarEntries, "TestTag", 0);
+		day = viewCalculation.initializeColumns(day);
+		lCalendarEntries = day.getCalendarEntries();
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			System.out.println(calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime() + " "
+					+ calendarEntry.getColumn());
+			assertEquals(1, day.getColumnCount());
+		}
+		// Third Test
+		System.out.println("30 Spalten (Spitz)");
+		lCalendarEntries = createEntryList3();
+		day = new Day(lCalendarEntries, "TestTag", 0);
+		day = viewCalculation.initializeColumns(day);
+		lCalendarEntries = day.getCalendarEntries();
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			System.out.println(calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime() + " "
+					+ calendarEntry.getColumn());
+			assertEquals(30, day.getColumnCount());
+		}
 	}
 
-	public List<CalendarEntry> createEntryList() {
+	@Test
+	public void testDateList() {
+		System.out.println("Date Checking");
+		List<CalendarEntry> lCalendarEntries = createEntryList1();
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			System.out.println(calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime() + " "
+					+ calendarEntry.getColumn());
+		}
+	}
+
+	// Diagonal verschoben, mximale Spaltenanzahl
+	public List<CalendarEntry> createEntryList1() {
 		List<CalendarEntry> rlCalendarEntries = new ArrayList<CalendarEntry>();
-		for (int i = 0; i < 30; i++) {
-			Date dt = new Date();
-			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
-					dt, dt, dt, "Test", "Test", dt, dt, "Test", null));
+		Date dt = new Date();
+		Date[] dStart = new Date[30];
+		Date[] dEnd = new Date[30];
+		// Versetzte Liste
+		for (int i = 0; i < dStart.length; i++) {
+			dStart[i] = new Date();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -78,6 +118,76 @@ public class ViewCalculationTest extends TestCase {
 			} catch (IllegalMonitorStateException e) {
 				System.out.println("Ignore");
 			}
+		}
+		for (int i = 0; i < dEnd.length; i++) {
+			dEnd[i] = new Date();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IllegalMonitorStateException e) {
+				System.out.println("Ignore");
+			}
+		}
+
+		for (int i = 0; i < 30; i++) {
+			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
+					dStart[i], dEnd[i], dt, "Test", "Test", dt, dt, "Test",
+					null, null));
+		}
+		return rlCalendarEntries;
+	}
+
+	// Ein Eintrag nach dem Anderen
+	public List<CalendarEntry> createEntryList2() {
+		List<CalendarEntry> rlCalendarEntries = new ArrayList<CalendarEntry>();
+		Date dt = new Date();
+		Date[] dStart = new Date[30];
+		Date[] dEnd = new Date[30];
+		// Versetzte Liste
+		for (int i = 0; i < dStart.length; i++) {
+			try {
+				dStart[i] = new Date();
+				Thread.sleep(100);
+				dEnd[i] = new Date();
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IllegalMonitorStateException e) {
+				System.out.println("Ignore");
+			}
+		}
+
+		for (int i = 0; i < 30; i++) {
+			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
+					dStart[i], dEnd[i], dt, "Test", "Test", dt, dt, "Test",
+					null, null));
+		}
+		return rlCalendarEntries;
+	}
+
+	// Stack in spitz zulaufend ( Pyramide )
+	public List<CalendarEntry> createEntryList3() {
+		List<CalendarEntry> rlCalendarEntries = new ArrayList<CalendarEntry>();
+		Date dt = new Date();
+		Date[] dStart = new Date[30];
+		// Versetzte Liste
+		for (int i = 0; i < dStart.length; i++) {
+			try {
+				dStart[i] = new Date();
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IllegalMonitorStateException e) {
+				System.out.println("Ignore");
+			}
+		}
+		Date dEnd = new Date();
+
+		for (int i = 0; i < 30; i++) {
+			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
+					dStart[i], dEnd, dt, "Test", "Test", dt, dt, "Test", null,
+					null));
 		}
 		return rlCalendarEntries;
 	}

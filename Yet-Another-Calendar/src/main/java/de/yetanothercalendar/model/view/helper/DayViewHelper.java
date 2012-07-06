@@ -17,6 +17,8 @@ public class DayViewHelper extends ViewHelper {
 		element = new Element("day");
 		element.setAttribute("name", day.getName());
 		element.setAttribute("number", String.valueOf(day.getNumber()));
+		// TODO Noch mit Ben abklären ob die Attribute hier in Ordnung sind
+		element.setAttribute("columns", String.valueOf(day.getColumnCount()));
 		element.addContent(this.getEntryElements());
 	}
 

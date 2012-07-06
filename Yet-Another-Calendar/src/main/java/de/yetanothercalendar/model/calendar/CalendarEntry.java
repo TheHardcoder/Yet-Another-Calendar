@@ -79,10 +79,12 @@ public class CalendarEntry {
 
 	private int column;
 
+	private String rRule;
+
 	public CalendarEntry(long id, String priority, String colorString,
 			String summary, Date startTime, Date endTime, Date durationTime,
 			String location, String description, Date created, Date modified,
-			String comment, List<String> category) {
+			String comment, List<String> category, String rRule) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -98,6 +100,7 @@ public class CalendarEntry {
 		this.comment = comment;
 		this.category = category;
 		this.column = 0;
+		this.setrRule(rRule);
 	}
 
 	public long getId() {
@@ -212,6 +215,14 @@ public class CalendarEntry {
 		this.column = column;
 	}
 
+	public String getrRule() {
+		return rRule;
+	}
+
+	public void setrRule(String rRule) {
+		this.rRule = rRule;
+	}
+
 	@Override
 	public String toString() {
 		return "CalendarEntry [id=" + id + ", priority=" + priority
@@ -220,7 +231,8 @@ public class CalendarEntry {
 				+ ", durationTime=" + durationTime + ", location=" + location
 				+ ", description=" + description + ", created=" + created
 				+ ", modified=" + modified + ", comment=" + comment
-				+ ", category=" + category + ", column=" + column + "]";
+				+ ", category=" + category + ", column=" + column + ", rRule:"
+				+ rRule + "]";
 	}
 
 }
