@@ -191,9 +191,7 @@ public class CalendarImpl implements Calendar {
 			int currenWeekNumber = getWeekNumberMondayToSaturDay(calendar);
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			String dayname = dateFormatSymbols.getShortWeekdays()[calendar
-					.get(java.util.Calendar.DAY_OF_WEEK)]
-					+ " -- "
-					+ calendar.get(java.util.Calendar.WEEK_OF_YEAR);
+					.get(java.util.Calendar.DAY_OF_WEEK)];
 			Day day = new Day(dayname, dayOfMonth);
 			day = insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
