@@ -1,3 +1,4 @@
+
 package de.yetanothercalendar.model.impl;
 
 import java.util.ArrayList;
