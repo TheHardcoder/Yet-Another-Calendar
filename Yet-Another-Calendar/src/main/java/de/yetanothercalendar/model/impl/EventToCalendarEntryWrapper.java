@@ -157,6 +157,6 @@ public class EventToCalendarEntryWrapper {
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
 				event.getComment(), event.getCategories(), event.getRrule(),
-				event.getDtend(), event.getDtend());
+				event.getDtstart(), event.getDtend());
 	}
 }
