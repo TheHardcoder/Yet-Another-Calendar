@@ -42,8 +42,8 @@ public class UserServlet extends HttpServlet {
 			String forename = (String) req.getParameter("forename");
 			String lastname = (String) req.getParameter("lastname");
 			String password = (String) req.getParameter("password");
-			System.out.println("DATA: " + email + forename + lastname
-					+ password);
+//			System.out.println("DATA: " + email + forename + lastname
+//					+ password);
 			if (email != null && forename != null && lastname != null
 					&& password != null) {
 				// TODO check if hashing works correct
@@ -54,7 +54,7 @@ public class UserServlet extends HttpServlet {
 				resp.sendRedirect("calendarservlet?view=yearview&selectedyear="
 						+ c.get(Calendar.YEAR) + "&selectedmonth="
 						+ c.get(Calendar.MONTH) + "&selectedweek="
-						+ c.get(Calendar.WEEK_OF_YEAR) + "&selectedday="
+						+ (c.get(Calendar.WEEK_OF_YEAR) + 1) + "&selectedday="
 						+ c.get(Calendar.DAY_OF_MONTH));
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
@@ -78,7 +78,7 @@ public class UserServlet extends HttpServlet {
 							+ "&selectedmonth="
 							+ c.get(Calendar.MONTH)
 							+ "&selectedweek="
-							+ c.get(Calendar.WEEK_OF_YEAR)
+							+ (c.get(Calendar.WEEK_OF_YEAR) + 1)
 							+ "&selectedday="
 							+ c.get(Calendar.DAY_OF_MONTH));
 				} else {

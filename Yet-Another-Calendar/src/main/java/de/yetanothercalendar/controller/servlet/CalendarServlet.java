@@ -54,7 +54,7 @@ public class CalendarServlet extends HttpServlet {
 								selectedDay);
 						String result = yearview.getXMLString();
 						resp.getWriter().write(result);
-						printYear(entriesByYear);
+//						printYear(entriesByYear);
 					} else {
 						throw new RuntimeException(
 								"Invalid parameters for view " + viewType);

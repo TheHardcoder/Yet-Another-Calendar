@@ -62,13 +62,6 @@ public class ICalendarImporter {
 			if (comp.getName() == Component.VEVENT) {
 				Event event = new Event();
 
-				// TODO: Clarify what to set for ID and Color when importing
-				// iCal-Files
-				/*
-				 * FIXME: This is going to be a huge problem!!!!
-				 */
-				Long id = (long) 1337;
-
 				/*
 				 * Get the events' properties an delete the propertyname at the
 				 * beginning
@@ -159,7 +152,6 @@ public class ICalendarImporter {
 				event.setDtstamp(dtstamp);
 				event.setDtstart(dtstart);
 				event.setExdate(exdate);
-				event.setId(id);
 				event.setLastmod(lastmod);
 				event.setLocation(location);
 				event.setPriority(priority);
@@ -169,8 +161,11 @@ public class ICalendarImporter {
 				event.setSummary(summary);
 				event.setUid(uid);
 				event.setUser(user);
+				
+				//Event Id not set --> Database sets a new one!
+				//event.setId(id);
 
-				System.out.println(event.toString());
+//				System.out.println(event.toString());
 
 				eventList.add(event);
 			}
@@ -221,7 +216,7 @@ public class ICalendarImporter {
 
 		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
 		Date date = df.parse(dateString.toString());
-		System.out.println(date.toString());
+//		System.out.println(date.toString());
 		return date;
 	}
 

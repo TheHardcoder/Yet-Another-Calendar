@@ -363,4 +363,35 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
+	public Event checkEvent(Event event){
+		User user = event.getUser();
+		List<Event> events = getEventsFromUser(user);
+		Event newEvent = null;
+		boolean isEmpty = false;
+		
+		for(int i = 0; i < events.size(); i++){
+			if(event.getUid().equals(events.get(i).getUid())){
+				isEmpty = true;
+				event.setId(events.get(i).getId());
+				break;
+			}
+		}
+		if(isEmpty){
+			
+			updateEvent(event);
+		}
+		else{
+			createEvents(event);
+		}
+		events.clear();
+		events = getEventsFromUser(user);
+		for(int i = 0; i < events.size(); i++){
+			if(event.getUid().equals(events.get(i).getUid())){
+				newEvent = events.get(i);
+				break;
+			}
+		}
+		
+		return newEvent;
+	}
 }

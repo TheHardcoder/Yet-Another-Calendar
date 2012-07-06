@@ -19,7 +19,7 @@ function updateTime() {
     var mdegree = mins * 6;
     var mrotate = "rotate(" + mdegree + "deg)";
     
-    document.getElementById("cl_sec").setAttribute('style', "-moz-transform: " + srotate + "; -webkit-transform: " + srotate);
-    document.getElementById("cl_hour").setAttribute('style', "-moz-transform: " + hrotate + "; -webkit-transform: " + hrotate);
-    document.getElementById("cl_min").setAttribute('style', "-moz-transform: " + mrotate + "; -webkit-transform: " + mrotate);
+    document.getElementById("cl_sec").setAttribute('style', "-moz-transform: " + srotate + "; -webkit-transform: " + srotate + "; -o-transform: " + srotate + "; -ms-transform: " + srotate + "; transform: " + srotate);
+    document.getElementById("cl_hour").setAttribute('style', "-moz-transform: " + hrotate + "; -webkit-transform: " + hrotate + "; -o-transform: " + hrotate + "; -ms-transform: " + hrotate + "; transform: " + hrotate);
+    document.getElementById("cl_min").setAttribute('style', "-moz-transform: " + mrotate + "; -webkit-transform: " + mrotate + "; -o-transform: " + mrotate + "; -ms-transform: " + mrotate + "; transform: " + mrotate);
 }
