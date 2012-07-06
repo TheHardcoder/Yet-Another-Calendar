@@ -55,7 +55,7 @@
 					</fieldset>
 					<fieldset>
 						<label for="summary">Betreff: </label> <input type="text"
-							size="30" id="summary" value=""></input>
+							size="30" id="summary" value="" name="summary"></input>
 					</fieldset>
 					<fieldset>
 						<label for="jday">Startdatum: </label>
@@ -125,7 +125,7 @@
 							<option>9</option>
 							<option>10</option>
 							<option>11</option>
-							<option>12</option>
+							<option selected="selected">12</option>
 							<option>13</option>
 							<option>14</option>
 							<option>15</option>
@@ -139,7 +139,7 @@
 							<option>23</option>
 							<option>24</option>
 						</select> <select id="starttimeminutes" name="dtstartMinute" size="1">
-							<option>00</option>
+							<option selected="selected">00</option>
 							<option>05</option>
 							<option>10</option>
 							<option>15</option>
@@ -156,9 +156,9 @@
 					<fieldset>
 						<label for="jday">Enddatum: </label>
 						<div id="jday">
-							<select id="day" name="dtendDay" size="1">
+							<select id="endday" name="dtendDay" size="1">
 								<option>1</option>
-							</select> <select id="month" name="dtendMonth" size="1"
+							</select> <select id="endmonth" name="dtendMonth" size="1"
 								onchange="update();">
 								<option>1</option>
 								<option>2</option>
@@ -172,7 +172,7 @@
 								<option>10</option>
 								<option>11</option>
 								<option>12</option>
-							</select> <select id="year" name="dtendYear" size="1" onchange="update();">
+							</select> <select id="endyear" name="dtendYear" size="1" onchange="update();">
 								<option>1990</option>
 								<option>1991</option>
 								<option>1992</option>
@@ -203,7 +203,7 @@
 								<option>2017</option>
 								<option>2018</option>
 								<option>2019</option>
-							</select> <input id="week" name="selectedweek" type="hidden" value=""></input>
+							</select> <input id="endweek" name="selectedweek" type="hidden" value=""></input>
 						</div>
 					</fieldset>
 					<fieldset>
@@ -221,7 +221,7 @@
 							<option>10</option>
 							<option>11</option>
 							<option>12</option>
-							<option>13</option>
+							<option selected="selected">13</option>
 							<option>14</option>
 							<option>15</option>
 							<option>16</option>
@@ -234,7 +234,7 @@
 							<option>23</option>
 							<option>24</option>
 						</select> <select id="endtimeminutes" name="dtendMinute" size="1">
-							<option>00</option>
+							<option selected="selected">00</option>
 							<option>05</option>
 							<option>10</option>
 							<option>15</option>
@@ -272,19 +272,18 @@
 						<label for="color">Farbe: </label> <select id="color" name="color"
 							size="1">
 							<option selected="selected">Braun</option>
-							<option>Rot</option>
-							<option>Blau</option>
-							<option>Grün</option>
-							<option>Gelb</option>
-							<option>Grau</option>
+							<option value="#ff0000">Rot</option>
+							<option value="#0000ff">Blau</option>
+							<option value="#00bf00">Grün</option>
+							<option value="#ffdf00">Gelb</option>
+							<option value="#6f6f6f">Grau</option>
 						</select>
 					</fieldset>
 					<fieldset>
 						<div id="editbutton">
-							<input type="submit" value="Speichern"></input> <input
-								type="button" value="Zur&uuml;ck" onclick="history.back();"></input>
-							<input type="button" value="L&ouml;schen"
-								onclick="history.back();"></input>
+							<input type="submit" value="Speichern"></input> 
+							<input type="button" value="Zur&uuml;ck" onclick="history.back();"></input>
+							<input type="button" value="L&ouml;schen"></input>
 						</div>
 					</fieldset>
 				</form>

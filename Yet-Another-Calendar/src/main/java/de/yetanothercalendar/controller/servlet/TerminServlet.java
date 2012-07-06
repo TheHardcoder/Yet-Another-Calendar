@@ -169,7 +169,7 @@ public class TerminServlet extends HttpServlet {
 		String second = req.getParameter(name + "Second");
 		try {
 			GregorianCalendar cal = new GregorianCalendar(
-					Integer.parseInt(year), Integer.parseInt(month),
+					Integer.parseInt(year), Integer.parseInt(month) - 1,
 					Integer.parseInt(day), Integer.parseInt(hour),
 					Integer.parseInt(minute), Integer.parseInt(second));
 			return cal.getTime();
