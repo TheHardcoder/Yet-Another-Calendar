@@ -188,7 +188,7 @@ public class CalendarImpl implements Calendar {
 		// : false;
 		java.util.Calendar calendar = java.util.Calendar.getInstance(locale);
 		calendar.clear();
-		calendar.setMinimalDaysInFirstWeek(1);
+		calendar.setMinimalDaysInFirstWeek(4);
 		calendar.set(java.util.Calendar.YEAR, year);
 		calendar.set(java.util.Calendar.MONTH, monthToSearch);
 		List<Week> weeks = new ArrayList<Week>();
@@ -211,7 +211,9 @@ public class CalendarImpl implements Calendar {
 			int dayOfMonth = calendar.get(java.util.Calendar.DAY_OF_MONTH);
 			// Der name des aktuellen tages
 			String dayname = dateFormatSymbols.getShortWeekdays()[calendar
-					.get(java.util.Calendar.DAY_OF_WEEK)];
+					.get(java.util.Calendar.DAY_OF_WEEK)]
+					+ " -- "
+					+ calendar.get(java.util.Calendar.WEEK_OF_YEAR);
 			Day day = new Day(dayname, dayOfMonth);
 			// Die Woche des jetztigen Tags im calendar.
 			// Workaround for sunday
@@ -242,7 +244,7 @@ public class CalendarImpl implements Calendar {
 					new Pair<java.util.Calendar, Day>(calendar, day));
 
 			// Methodenaufruf für diverse Berechungen für die View
-			// Day ist hier mit 
+			// Day ist hier mit
 			// @author Lukas
 			// day = viewCalculation.analyseColumns(day);
 

@@ -5,7 +5,7 @@ var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli
 
 Date.prototype.getWeek = function() {
 	var onejan = new Date(this.getFullYear(),0,1);
-	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1)/7);
 } 
 
 function create() {
@@ -63,7 +63,7 @@ return 32 - new Date(iYear, iMonth, 32).getDate();
 
 function goToToday(servlet){
 	var date = new Date();
-	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + date.getMonth() + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + (date.getMonth() + 1) + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }
 
 function changeWeek(servlet, next){

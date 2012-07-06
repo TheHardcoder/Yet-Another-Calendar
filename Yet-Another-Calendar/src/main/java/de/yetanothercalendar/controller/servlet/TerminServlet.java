@@ -58,7 +58,7 @@ public class TerminServlet extends HttpServlet {
 		}
 
 		// create User form given Data
-		User user = (User) req.getSession().getAttribute("user");
+		User user = (User) session.getAttribute("user");
 
 		String description = req.getParameter("description");
 		String location = req.getParameter("location");
@@ -127,10 +127,12 @@ public class TerminServlet extends HttpServlet {
 		event.setUser(user);
 
 		// action parameter (update oder create) lesen
-		if (action.toLowerCase().equals("create")) {
+		if (action.toLowerCase().equals("save") && event.getId() == 0) {
 			dao.createEvents(event);
-		} else if (action.toLowerCase().equals("update")) {
+		} else if (action.toLowerCase().equals("save")) {
 			dao.updateEvent(event);
+		} else if (action.toLowerCase().equals("delete")) {
+			//TODO delete Event
 		} else {
 			throw new RuntimeException(
 					"Invalid action Parameter in TerminServlet");

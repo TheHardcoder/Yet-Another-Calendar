@@ -239,9 +239,9 @@
 
 	<xsl:template match="day">
 		<xsl:variable name="day1"
-			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
+			select="//calendar/year/month/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
 		<xsl:variable name="day7"
-			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[7]/@number"></xsl:variable>
+			select="(//calendar/year/month/week[@number=//calendar/@selectedweek]/day[last()]/@number)[last()]"></xsl:variable>
 		<xsl:variable name="daytitle">
 			<xsl:choose>
 				<xsl:when
@@ -258,9 +258,9 @@
 				<xsl:otherwise>
 					<xsl:value-of select="@number" />
 					.
-					<xsl:value-of select="//calendar/@selectedmonth" />
+					<xsl:value-of select="../../@number" />
 					.
-					<xsl:value-of select="//calendar/@selectedyear" />
+					<xsl:value-of select="../../../@number" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
