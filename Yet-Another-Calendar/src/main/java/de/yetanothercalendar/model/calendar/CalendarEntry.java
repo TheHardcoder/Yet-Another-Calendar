@@ -70,6 +70,9 @@ public class CalendarEntry {
 	 */
 	private String comment;
 
+	private Date datestartOfEvent;
+	private Date dateendOfEvent;
+
 	/**
 	 * Repraesentiert die Kategorie im XML für das Element <categories Jeder
 	 * enthaltene String der Liste {@link #category} repraesentiert eine
@@ -82,7 +85,8 @@ public class CalendarEntry {
 	public CalendarEntry(long id, String priority, String colorString,
 			String summary, Date startTime, Date endTime, Date durationTime,
 			String location, String description, Date created, Date modified,
-			String comment, List<String> category) {
+			String comment, List<String> category, Date startdateOfEvent,
+			Date enddayofEvent) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -98,6 +102,8 @@ public class CalendarEntry {
 		this.comment = comment;
 		this.category = category;
 		this.column = 0;
+		this.dateendOfEvent = enddayofEvent;
+		this.datestartOfEvent = startdateOfEvent;
 	}
 
 	public long getId() {
@@ -210,6 +216,36 @@ public class CalendarEntry {
 
 	public void setColumn(int column) {
 		this.column = column;
+	}
+
+	/**
+	 * @return the datestartOfEvent
+	 */
+	public Date getDatestartOfEvent() {
+		return datestartOfEvent;
+	}
+
+	/**
+	 * @param datestartOfEvent
+	 *            the datestartOfEvent to set
+	 */
+	public void setDatestartOfEvent(Date datestartOfEvent) {
+		this.datestartOfEvent = datestartOfEvent;
+	}
+
+	/**
+	 * @return the dateendOfEvent
+	 */
+	public Date getDateendOfEvent() {
+		return dateendOfEvent;
+	}
+
+	/**
+	 * @param dateendOfEvent
+	 *            the dateendOfEvent to set
+	 */
+	public void setDateendOfEvent(Date dateendOfEvent) {
+		this.dateendOfEvent = dateendOfEvent;
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class ViewCalculationTest extends TestCase {
 		}
 		CalendarEntry previousCalendarEntry = new CalendarEntry(42, "Test",
 				"Test", "Test", dFirst, dFirst, dFirst, "Test", "Test", dFirst,
-				dFirst, "Test", null);
+				dFirst, "Test", null, dFirst, dFirst);
 		for (CalendarEntry calendarEntry : lCalendarEntriesSorted) {
 			System.out.println(previousCalendarEntry.getStartTime().before(
 					calendarEntry.getStartTime()));
@@ -70,7 +70,7 @@ public class ViewCalculationTest extends TestCase {
 		for (int i = 0; i < 30; i++) {
 			Date dt = new Date();
 			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
-					dt, dt, dt, "Test", "Test", dt, dt, "Test", null));
+					dt, dt, dt, "Test", "Test", dt, dt, "Test", null, dt, dt));
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
