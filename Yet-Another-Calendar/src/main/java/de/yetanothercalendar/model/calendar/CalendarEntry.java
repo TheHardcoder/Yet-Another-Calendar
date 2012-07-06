@@ -87,8 +87,8 @@ public class CalendarEntry {
 	public CalendarEntry(long id, String priority, String colorString,
 			String summary, Date startTime, Date endTime, Date durationTime,
 			String location, String description, Date created, Date modified,
-			String comment, List<String> category, Date startdateOfEvent,
-			Date enddayofEvent, String rRule) {
+			String comment, List<String> category, String rRule,
+			Date startdateOfEvent, Date enddayofEvent) {
 		super();
 		this.id = id;
 		this.priority = priority;
@@ -105,6 +105,7 @@ public class CalendarEntry {
 		this.category = category;
 		this.column = 0;
 		this.setrRule(rRule);
+		this.dateendOfEvent = enddayofEvent;
 		this.datestartOfEvent = startdateOfEvent;
 	}
 

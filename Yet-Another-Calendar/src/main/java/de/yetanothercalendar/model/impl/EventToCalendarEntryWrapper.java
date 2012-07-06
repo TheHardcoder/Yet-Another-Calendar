@@ -137,7 +137,9 @@ public class EventToCalendarEntryWrapper {
 		return new CalendarEntry(new Long(event.getId()), event.getPriority(),
 				event.getColor(), event.getSummary(), startDate, endDate,
 				duration, event.getLocation(), event.getDescription(),
- 				event.getCreated(), event.getLastmod(), event.getComment(),event.getCategories(), null, event.getDtstart(), event.getDtend());
+				event.getCreated(), event.getLastmod(), event.getComment(),
+				event.getCategories(), null, event.getDtstart(),
+				event.getDtend());
 	}
 
 	/**
@@ -154,7 +156,7 @@ public class EventToCalendarEntryWrapper {
 				event.getColor(), event.getSummary(), event.getDtstart(),
 				event.getDtend(), duration, event.getLocation(),
 				event.getDescription(), event.getCreated(), event.getLastmod(),
- null, event.getDtstart(), event.getDtend()
-				event.getDtend());
+				event.getComment(), event.getCategories(), event.getRrule(),
+				event.getDtend(), event.getDtend());
 	}
 }
