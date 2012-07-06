@@ -42,8 +42,8 @@ public class UserServlet extends HttpServlet {
 			String forename = (String) req.getParameter("forename");
 			String lastname = (String) req.getParameter("lastname");
 			String password = (String) req.getParameter("password");
-			System.out.println("DATA: " + email + forename + lastname
-					+ password);
+//			System.out.println("DATA: " + email + forename + lastname
+//					+ password);
 			if (email != null && forename != null && lastname != null
 					&& password != null) {
 				// TODO check if hashing works correct

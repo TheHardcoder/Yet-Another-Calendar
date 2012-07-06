@@ -49,40 +49,39 @@ public class DummyDataCreatorServlet extends HttpServlet {
 				calendar2, "Meeting", "DHBW");
 		daoEvent.createEvents(createEvent);
 
-		System.out.println("User logged in: " + user.toString());
-		System.out.println("Events in der db:");
-		List<Event> eventlist = daoEvent.getEventsFromUser(user);
-		for (Event event : eventlist) {
-			System.out.println("--");
-			System.out.println(event.toString() + "\n");
-			System.out.println("--");
-		}
-		System.out.println("ENDE listing");
+//		System.out.println("User logged in: " + user.toString());
+//		System.out.println("Events in der db:");
+//		List<Event> eventlist = daoEvent.getEventsFromUser(user);
+//		for (Event event : eventlist) {
+//			System.out.println("--");
+//			System.out.println(event.toString() + "\n");
+//			System.out.println("--");
+//		}
+//		System.out.println("ENDE listing");
 
-		// FIXME TODO Events nach datum abfragen funktioniert noch nicht!
-		System.out
-				.println("\n\n\n\n---------------------------------------------------------------------------------------------------------------------");
-		Calendar gregcalendar = new GregorianCalendar();
-		gregcalendar.set(Calendar.YEAR, 2010);
-		MomentCreator creator = new MomentCreator(Locale.GERMANY);
-		Calendar start = creator
-				.createFirstPossibleMomentOfYearReturningCalendar(gregcalendar);
-		Calendar end = creator
-				.createLastPossibleMomentOfYearReturningCalendar(gregcalendar);
-		List<Event> eventBetweenDates = daoEvent.getEventBetweenDates(user,
-				start.getTime(), end.getTime());
-		System.out
-				.println("Events in der db zwischen : "
-						+ start.getTime().toString() + " - "
-						+ end.getTime().toString());
-		List<Event> eventsBetweenDates = daoEvent.getEventsFromUser(user);
-		for (Event event : eventsBetweenDates) {
-			System.out.println("--");
-			System.out.println(event.toString() + "\n");
-			System.out.println("--");
-		}
-		System.out.println("ENDE listing");
-		System.out.println("EVENTS between");
+//		System.out
+//				.println("\n\n\n\n---------------------------------------------------------------------------------------------------------------------");
+//		Calendar gregcalendar = new GregorianCalendar();
+//		gregcalendar.set(Calendar.YEAR, 2010);
+//		MomentCreator creator = new MomentCreator(Locale.GERMANY);
+//		Calendar start = creator
+//				.createFirstPossibleMomentOfYearReturningCalendar(gregcalendar);
+//		Calendar end = creator
+//				.createLastPossibleMomentOfYearReturningCalendar(gregcalendar);
+//		List<Event> eventBetweenDates = daoEvent.getEventBetweenDates(user,
+//				start.getTime(), end.getTime());
+//		System.out
+//				.println("Events in der db zwischen : "
+//						+ start.getTime().toString() + " - "
+//						+ end.getTime().toString());
+//		List<Event> eventsBetweenDates = daoEvent.getEventsFromUser(user);
+//		for (Event event : eventsBetweenDates) {
+//			System.out.println("--");
+//			System.out.println(event.toString() + "\n");
+//			System.out.println("--");
+//		}
+//		System.out.println("ENDE listing");
+//		System.out.println("EVENTS between");
 	}
 
 	private Event createEvent(User user, Calendar created, Calendar start,

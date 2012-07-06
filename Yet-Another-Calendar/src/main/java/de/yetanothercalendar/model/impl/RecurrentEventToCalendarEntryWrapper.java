@@ -124,8 +124,8 @@ public class RecurrentEventToCalendarEntryWrapper {
 				event.setDtstart(per.getStart());
 				event.setDtend(per.getEnd());
 				events.add(event);
-				System.out.println("Start: " + per.getStart() + " Ende: "
-						+ per.getEnd());
+//				System.out.println("Start: " + per.getStart() + " Ende: "
+//						+ per.getEnd());
 			}
 
 			EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(

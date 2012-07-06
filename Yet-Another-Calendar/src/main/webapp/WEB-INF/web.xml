@@ -36,10 +36,10 @@
 		<servlet-name>terminservlet</servlet-name>
 		<url-pattern>/terminservlet</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
+	<!--<servlet-mapping>
 		<servlet-name>init</servlet-name>
 		<url-pattern>/init</url-pattern>
-	</servlet-mapping>
+</servlet-mapping>-->
 	<servlet-mapping>
 		<servlet-name>import</servlet-name>
 		<url-pattern>/import</url-pattern>

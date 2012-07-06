@@ -165,7 +165,7 @@ public class ICalendarImporter {
 				//Event Id not set --> Database sets a new one!
 				//event.setId(id);
 
-				System.out.println(event.toString());
+//				System.out.println(event.toString());
 
 				eventList.add(event);
 			}
@@ -216,7 +216,7 @@ public class ICalendarImporter {
 
 		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
 		Date date = df.parse(dateString.toString());
-		System.out.println(date.toString());
+//		System.out.println(date.toString());
 		return date;
 	}
 
