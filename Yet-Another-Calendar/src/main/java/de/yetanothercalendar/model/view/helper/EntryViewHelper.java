@@ -37,6 +37,10 @@ public class EntryViewHelper extends ViewHelper {
 				entry.getEndTime(), false));
 		listOfEntryAttributes.add(createTimeElement("duration",
 				entry.getDurationTime(), false));
+		listOfEntryAttributes.add(createTimeElement("startdate",
+				entry.getDatestartOfEvent(), true));
+		listOfEntryAttributes.add(createTimeElement("enddate",
+				entry.getDateendOfEvent(), true));
 
 		listOfEntryAttributes.add(new Element("location").setText(entry
 				.getLocation()));
@@ -69,15 +73,16 @@ public class EntryViewHelper extends ViewHelper {
 	private Element createTimeElement(String pName, Date pDate,
 			boolean pExtended) {
 		Element rElement = new Element(pName);
-		String[] sDateStrings = prepareDateString(pDate.toString());
-		if (pExtended) {
-			rElement.setAttribute("day", sDateStrings[0]);
-			rElement.setAttribute("month", sDateStrings[1]);
-			rElement.setAttribute("year", sDateStrings[2]);
+		if (pDate != null) {
+			String[] sDateStrings = prepareDateString(pDate.toString());
+			if (pExtended) {
+				rElement.setAttribute("day", sDateStrings[0]);
+				rElement.setAttribute("month", sDateStrings[1]);
+				rElement.setAttribute("year", sDateStrings[2]);
+			}
+			rElement.setAttribute("hours", sDateStrings[3]);
+			rElement.setAttribute("minutes", sDateStrings[4]);
 		}
-		rElement.setAttribute("hours", sDateStrings[3]);
-		rElement.setAttribute("minutes", sDateStrings[4]);
-
 		return rElement;
 	}
 
