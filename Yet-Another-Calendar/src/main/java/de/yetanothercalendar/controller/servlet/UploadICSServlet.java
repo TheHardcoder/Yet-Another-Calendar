@@ -69,8 +69,8 @@ public class UploadICSServlet extends HttpServlet {
 										.parseIcal4JToEventList(importToIcal4J,
 												user);
 								for (Event event : parseIcal4JToEventList) {
-									System.out.println("Event imported: "
-											+ event.toString());
+//									System.out.println("Event imported: "
+//											+ event.toString());
 									dao.createEvents(event);
 								}
 							} catch (ParserException e) {
