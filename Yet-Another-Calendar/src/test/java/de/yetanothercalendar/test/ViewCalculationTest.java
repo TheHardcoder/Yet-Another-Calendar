@@ -51,15 +51,18 @@ public class ViewCalculationTest extends TestCase {
 
 	@Test
 	public void testRecursChecking() {
+		System.out.println("Recurse Checking");
 		List<CalendarEntry> lCalendarEntries = createEntryList();
 		Day day = new Day(lCalendarEntries, "TestTag", 1);
 		day = viewCalculation.analyseColumns(day);
 		for (CalendarEntry calendarEntry : day.getCalendarEntries()) {
 			assertNotNull(calendarEntry.getColumn());
-			System.out.println(calendarEntry.getColumn());
+			System.out.println(calendarEntry.getStartTime().toString()
+					+ calendarEntry.getColumn());
+
 		}
 		assertNotNull(day.getColumnCount());
-		System.out.println(day.getColumnCount());
+		// System.out.println(day.getColumnCount());
 	}
 
 	public List<CalendarEntry> createEntryList() {

@@ -220,7 +220,7 @@ public class CalendarEntry {
 				+ ", durationTime=" + durationTime + ", location=" + location
 				+ ", description=" + description + ", created=" + created
 				+ ", modified=" + modified + ", comment=" + comment
-				+ ", category=" + category + "]";
+				+ ", category=" + category + ", column=" + column + "]";
 	}
 
 }

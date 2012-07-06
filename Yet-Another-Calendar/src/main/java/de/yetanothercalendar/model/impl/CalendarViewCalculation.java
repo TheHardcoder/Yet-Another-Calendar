@@ -15,81 +15,70 @@ public class CalendarViewCalculation {
 		// Liste der Calendereinträge nach Startzeitpunkt sortieren
 		lCalendarEntries = sortByStartTime(lCalendarEntries);
 
-		// Spaltenanzahl und Position berechnen
-		int columns = 0;
-		if (lCalendarEntries.get(0) != null) {
-			for (CalendarEntry calendarEntry : lCalendarEntries) {
-				List<CalendarEntry> lCalendarEntriesDecremented = lCalendarEntries;
-				lCalendarEntriesDecremented.remove(calendarEntry);
-				CalendarEntry equalCalendarEntry;
-				if ((equalCalendarEntry = checkOverlapping(calendarEntry,
-						lCalendarEntriesDecremented)) != null) {
-					calendarEntry.setColumn(columns);
-					columns++;
-					equalCalendarEntry.setColumn(columns);
+		// Basisspalte auf 1 setzen
+		int columns = 1;
+		if (lCalendarEntries != null && lCalendarEntries.size() > 0) {
+			// Ersten Eintrag des Tages der ersten Spaöte zuweisen
+			lCalendarEntries.get(0).setColumn(columns);
+
+			for (int i = 1; i < lCalendarEntries.size(); i++) {
+				CalendarEntry activeEntry = lCalendarEntries.get(i);
+
+				for (CalendarEntry comparedEntry : lCalendarEntries) {
+					int checkColumn = 1;
+					boolean stay = true;
+					boolean entryOrdered = false;
+					while (!entryOrdered) {
+						if (comparedEntry.getColumn() != 0) {
+							if (activeEntry.getStartTime().after(
+									comparedEntry.getEndTime())) {
+								for (CalendarEntry columnEntry : lCalendarEntries) {
+									if (comparedEntry.getColumn() == columnEntry
+											.getColumn()) {
+										if (comparedEntry.getStartTime().after(
+												columnEntry.getEndTime())) {
+										} else {
+											stay = false;
+										}
+									}
+								}
+							}
+						}
+						if (stay) {
+							activeEntry.setColumn(columns);
+							entryOrdered = true;
+						} else {
+							checkColumn++;
+						}
+					}
+
 				}
-
-				// for (CalendarEntry calendarEntry : lCalendarEntries) {
-				//
-				// for (CalendarEntry calendarEntryComperator :
-				// lCalendarEntries) {
-				// // Auf Gleichheit prüfen
-				// if (calendarEntry.getStartTime().equals(
-				// calendarEntryComperator.getStartTime())) {
-				// addColumnNumber(calendarEntry, columns);
-				// columns++;
-				// addColumnNumber(calendarEntryComperator, columns);
-				//
-				// // Wenn Endzeitpunkt des betrachteten Eintrags
-				// // (calendarEntry) nach dem Startzeitpunkt des
-				// // Vergleichseintrags (calendarEntryIterator) liegt und
-				// // zugleich Nebenbedingung (Startzeit des betrachteten
-				// if ((calendarEntry.getEndTime().after(
-				// calendarEntryComperator.getStartTime()) && calendarEntry
-				// .getStartTime().before(
-				// calendarEntryComperator.getEndTime()))
-				// || (calendarEntry.getStartTime().before(
-				// calendarEntryComperator.getEndTime()) && calendarEntry
-				// .getEndTime().after(
-				// calendarEntryComperator
-				// .getStartTime()))) {
-				// columns++;
-				// // Spaltenposition setzen
-				// }
-				// } else {
-				// columns++;
-				// }
-				// }
-				// }
 			}
-			pDay.setColumnCount(columns);
-			pDay.setCalendarEntries(lCalendarEntries);
-
 		}
+		pDay.setColumnCount(columns);
+		pDay.setCalendarEntries(lCalendarEntries);
+
 		return pDay;
 	}
 
-	private CalendarEntry checkOverlapping(CalendarEntry cEntry,
-			List<CalendarEntry> lCalendarEntries) {
-		if (lCalendarEntries.size() == 1) {
-			CalendarEntry cEntryComperator = lCalendarEntries.get(0);
-			if ((cEntry.getEndTime().after(cEntryComperator.getStartTime()) && cEntry
-					.getStartTime().before(cEntryComperator.getEndTime()))
-					|| (cEntry.getStartTime().before(
-							cEntryComperator.getEndTime()) && cEntry
-							.getEndTime()
-							.after(cEntryComperator.getStartTime()))) {
-				return cEntryComperator;
-			}
-		} else {
-			CalendarEntry cEntryRecurse = lCalendarEntries
-					.remove(lCalendarEntries.size() - 1);
-			return checkOverlapping(cEntryRecurse, lCalendarEntries);
-
-		}
-		// Wenn es keine Überscheidung gibt wird null zurückgegeben
-		return null;
-	}
+	// private CalendarEntry checkOverlapping(CalendarEntry cEntry,
+	// List<CalendarEntry> lCalendarEntries) {
+	// if (lCalendarEntries.size() == 1) {
+	// CalendarEntry cEntryComperator = lCalendarEntries.get(0);
+	// if ((cEntry.getEndTime().after(cEntryComperator.getStartTime()) && cEntry
+	// .getStartTime().before(cEntryComperator.getEndTime()))
+	// || (cEntry.getStartTime().before(
+	// cEntryComperator.getEndTime()) && cEntry
+	// .getEndTime()
+	// .after(cEntryComperator.getStartTime()))) {
+	// return cEntryComperator;
+	// }
+	// } else {
+	// checkOverlapping(cEntry, lCalendarEntries);
+	// }
+	// // Wenn es keine Überscheidung gibt wird null zurückgegeben
+	// return null;
+	// }
 
 	public CalendarEntry calculateEntryColumns(CalendarEntry pCalendarEntry) {
 
@@ -124,3 +113,76 @@ public class CalendarViewCalculation {
 		return list;
 	}
 }
+
+// Dumbing Area for useless code
+
+//
+// // Äußere Schleife, die für jeden Kalendereintrag evtl. Überscheidungen
+// // prüft
+// List<CalendarEntry> lComparableCalendarEntries = lCalendarEntries;
+// CalendarEntry comparedCalendarEntry;
+
+//
+// // Wurzelkalendareintag momentaner Basisspalte zuweisen
+// rootCalendarEntry.setColumn(columns);
+//
+// // Vergleichsobjekt festlegen
+// lComparableCalendarEntries.remove(lComparableCalendarEntries
+// .indexOf(rootCalendarEntry));
+// if (lCalendarEntries.get(
+// lCalendarEntries.indexOf(rootCalendarEntry) + 1)
+// .getColumn() == 0) {
+// comparedCalendarEntry = lCalendarEntries.get(lCalendarEntries
+// .indexOf(rootCalendarEntry) + 1);
+// } else {
+// continue;
+// }
+//
+// // Überprüfung auf nahtlosen Übergang
+// if (rootCalendarEntry.getEndTime().equals(
+// comparedCalendarEntry.getStartTime())) {
+// comparedCalendarEntry.setColumn(columns);
+// continue;
+// }
+//
+// int overlapColumn = 1;
+// // Innere Schleife, mit dem vergleichenden Kalendareintrag
+// while (rootCalendarEntry.getEndTime().after(
+// comparedCalendarEntry.getStartTime())) {
+//
+// // Überprüfung auf Überschneidung
+// // Wenn Endzeitpunkt des Wurzeleintrags
+// // (rootCalendarEntry) nach dem Startzeitpunkt des
+// // Vergleichseintrags (compareCalendarEntry) liegt
+// if (rootCalendarEntry.getEndTime().after(
+//
+// comparedCalendarEntry.getStartTime())) {
+// columns++;
+//
+// comparedCalendarEntry.setColumn(columns);
+// }
+//
+// if ((rootCalendarEntry.getStartTime().before(
+//
+// comparedCalendarEntry.getEndTime()) && rootCalendarEntry
+// .getEndTime().after(
+// comparedCalendarEntry.getStartTime()))) {
+//
+// }
+// }
+
+// if (lCalendarEntries.get(0) != null) {
+// for (CalendarEntry calendarEntry : lCalendarEntries) {
+// List<CalendarEntry> lCalendarEntriesDecremented =
+// lCalendarEntries;
+// lCalendarEntriesDecremented.remove(calendarEntry);
+// CalendarEntry equalCalendarEntry;
+// if ((equalCalendarEntry = checkOverlapping(calendarEntry,
+// lCalendarEntriesDecremented)) != null) {
+// calendarEntry.setColumn(columns);
+// columns++;
+// equalCalendarEntry.setColumn(columns);
+// }
+// }
+// }
+

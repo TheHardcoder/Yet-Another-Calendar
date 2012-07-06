@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 	<display-name>Yet-AnotherCalendar</display-name>
 	<servlet>
@@ -20,6 +20,10 @@
 		<servlet-name>init</servlet-name>
 		<servlet-class>de.yetanothercalendar.controller.servlet.DummyDataCreatorServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>import</servlet-name>
+		<servlet-class>de.yetanothercalendar.controller.servlet.UploadICSServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>calendarservlet</servlet-name>
 		<url-pattern>/calendarservlet</url-pattern>
@@ -35,6 +39,10 @@
 	<servlet-mapping>
 		<servlet-name>init</servlet-name>
 		<url-pattern>/init</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>import</servlet-name>
+		<url-pattern>/import</url-pattern>
 	</servlet-mapping>
 	<error-page>
 		<error-code>404</error-code>
