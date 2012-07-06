@@ -34,17 +34,28 @@ window.onload = function() {
 		if (name == 'week'){
 			document.getElementById("endweek").value=wert;
 		}
-		if (name == 'id' && wert == 0){
-			document.getElementById("Edittitle").innerHTML="Termin erstellen";
-		}
 		else {
 			document.getElementById("Edittitle").innerHTML="Termin bearbeiten";
 		}
+	}
+	if (document.getElementById("id").value == 0){
+		document.getElementById("Edittitle").innerHTML="Termin erstellen";
 	}
 }
 
 var datevalues = new Array("Year", "Month", "Day", "Hour", "Minute", "Second");
 var dates = new Array("dtstamp", "created", "lastmod", "exdate");
+
+function updateEvent(){
+	setFormData();
+	document.getElementById("editaction").value="save";
+	document.getElementById("editform").submit();
+}
+
+function deleteEvent(){
+	document.getElementById("editaction").value="delete";
+	document.getElementById("editform").submit();
+}
 
 function setFormData() {
 	for (i = 0; i < dates.length; i++) {

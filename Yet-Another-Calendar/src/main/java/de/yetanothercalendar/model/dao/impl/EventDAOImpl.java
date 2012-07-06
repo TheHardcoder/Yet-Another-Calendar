@@ -363,6 +363,35 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
+	
+	public void deleteEvent(Event event) {
+		try {
+			Connection con = manager.getConnection();
+			Statement createStatement = con.createStatement();
+
+			Long id = event.getId();
+
+			if (id != null) {
+				String eventCreationString = "DELETE FROM events WHERE id = ?;";
+
+				java.sql.PreparedStatement pstmt = con
+						.prepareStatement(eventCreationString);
+				pstmt.setLong(1, id);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+			} else {
+				throw new RuntimeException("User id must not be null");
+			}
+
+			con.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+	
 	public Event checkEvent(Event event){
 		User user = event.getUser();
 		List<Event> events = getEventsFromUser(user);

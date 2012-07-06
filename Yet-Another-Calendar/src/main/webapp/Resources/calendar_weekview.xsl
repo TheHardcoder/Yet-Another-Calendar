@@ -246,7 +246,8 @@
 					.1.
 					<xsl:value-of select="//calendar/@selectedyear + 1" />
 				</xsl:when>
-				<xsl:when test="@number &gt; 15 and //calendar/@selectedmonth = 1 and (../@number=1 or ../@number=52)">
+				<xsl:when
+					test="@number &gt; 15 and //calendar/@selectedmonth = 1 and (../@number=1 or ../@number=52)">
 					<xsl:value-of select="@number" />
 					.12.
 					<xsl:value-of select="//calendar/@selectedyear - 1" />
@@ -339,35 +340,19 @@
 			<xsl:text>px</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="entry_w">
-			<xsl:value-of select="(1 div $columns) * 14.2 - 0.1"></xsl:value-of>
+			<xsl:choose>
+				<xsl:when test="$columns &lt; 1">
+					<xsl:value-of select="14.1"></xsl:value-of>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="(1 div $columns) * 14.2 - 0.1"></xsl:value-of>
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:text>%</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="link">
-			<xsl:text>Edit.html</xsl:text>
-			<xsl:text>?description=</xsl:text>
-			<xsl:value-of select="description" />
-			<xsl:text>&amp;id=</xsl:text>
-			<xsl:value-of select="@id" />
-			<xsl:text>&amp;summary=</xsl:text>
-			<xsl:value-of select="summary" />
-			<xsl:text>&amp;starttimehours=</xsl:text>
-			<xsl:value-of select="starttime/@hours" />
-			<xsl:text>&amp;starttimeminutes=</xsl:text>
-			<xsl:value-of select="starttime/@minutes" />
-			<xsl:text>&amp;endtimehours=</xsl:text>
-			<xsl:value-of select="endtime/@hours" />
-			<xsl:text>&amp;endtimeminutes=</xsl:text>
-			<xsl:value-of select="endtime/@minutes" />
-
-			<xsl:text>&amp;place=</xsl:text>
-			<xsl:value-of select="location" />
-
-			<xsl:text>&amp;priority=</xsl:text>
-			<xsl:value-of select="@priority" />
-			<xsl:text>&amp;description=</xsl:text>
-			<xsl:value-of select="description" />
-			<xsl:text>&amp;categories=</xsl:text>
-			<xsl:apply-templates select="categories/category"></xsl:apply-templates>
+			<xsl:text>Edit.html?view=weekview</xsl:text>
+			<xsl:call-template name="entrycontent"></xsl:call-template>
 		</xsl:variable>
 		<xsl:variable name="title">
 			<xsl:value-of select="summary" />
@@ -384,10 +369,77 @@
 			<xsl:text>&#xD;</xsl:text>
 		</xsl:variable>
 		<div class="entry" onclick="window.location='{$link}'"
-			style="top: {$entry_y}; left: {$entry_x}; height: {$entry_h}; width: {$entry_w}; background-color: {@color};"
+			style="top: {$entry_y}; left: {$entry_x}; height: {$entry_h}; width: {$entry_w}; background-color: #{@color};"
 			title="{$title}">
-			<xsl:value-of select="summary"></xsl:value-of>
+			<div class="entrycontent">
+				<xsl:value-of select="summary"></xsl:value-of>
+				<br />
+				<xsl:value-of select="starttime/@hours" />
+				<xsl:text>:</xsl:text>
+				<xsl:value-of select="starttime/@minutes" />
+				<xsl:text> Uhr - </xsl:text>
+				<xsl:value-of select="endtime/@hours" />
+				<xsl:text>:</xsl:text>
+				<xsl:value-of select="endtime/@minutes" />
+				<xsl:text> Uhr</xsl:text>
+				<br />
+				<xsl:value-of select="description" />
+				<xsl:text>&#xD;</xsl:text>
+			</div>
 		</div>
+	</xsl:template>
+
+	<xsl:template name="entrycontent">
+		<xsl:text>&amp;id=</xsl:text>
+		<xsl:value-of select="@id"></xsl:value-of>
+		<xsl:text>&amp;priority=</xsl:text>
+		<xsl:value-of select="@priority"></xsl:value-of>
+		<xsl:text>&amp;color=</xsl:text>
+		<xsl:value-of select="@color"></xsl:value-of>
+		<xsl:text>&amp;summary=</xsl:text>
+		<xsl:value-of select="summary"></xsl:value-of>
+
+		<xsl:text>&amp;year=</xsl:text>
+		<xsl:value-of select="startdate/@year" />
+		<xsl:text>&amp;month=</xsl:text>
+		<xsl:value-of select="startdate/@month" />
+		<xsl:text>&amp;day=</xsl:text>
+		<xsl:value-of select="startdate/@day" />
+		<xsl:text>&amp;starttimehours=</xsl:text>
+		<xsl:value-of select="startdate/@hours" />
+		<xsl:text>&amp;starttimeminutes=</xsl:text>
+		<xsl:value-of select="startdate/@minutes" />
+
+		<xsl:text>&amp;endyear=</xsl:text>
+		<xsl:value-of select="enddate/@year" />
+		<xsl:text>&amp;endmonth=</xsl:text>
+		<xsl:value-of select="enddate/@month" />
+		<xsl:text>&amp;endday=</xsl:text>
+		<xsl:value-of select="enddate/@day" />
+		<xsl:text>&amp;endtimehours=</xsl:text>
+		<xsl:value-of select="enddate/@hours" />
+		<xsl:text>&amp;endtimeminutes=</xsl:text>
+		<xsl:value-of select="enddate/@minutes" />
+		<xsl:text>&amp;place=</xsl:text>
+		<xsl:value-of select="location" />
+		<xsl:text>&amp;description=</xsl:text>
+		<xsl:value-of select="description" />
+		<xsl:text>&amp;categories=</xsl:text>
+		<xsl:apply-templates select="categories/category"></xsl:apply-templates>
+
+		<xsl:text>&amp;createdYear=</xsl:text>
+		<xsl:value-of select="created/@year" />
+		<xsl:text>&amp;createdMonth=</xsl:text>
+		<xsl:value-of select="created/@month" />
+		<xsl:text>&amp;createdDay=</xsl:text>
+		<xsl:value-of select="created/@day" />
+		<xsl:text>&amp;createdHour=</xsl:text>
+		<xsl:value-of select="created/@hours" />
+		<xsl:text>&amp;createdMinutes=</xsl:text>
+		<xsl:value-of select="created/@minutes" />
+
+		<xsl:text>&amp;comment=</xsl:text>
+		<xsl:value-of select="comment" />
 	</xsl:template>
 
 	<xsl:template match="category">

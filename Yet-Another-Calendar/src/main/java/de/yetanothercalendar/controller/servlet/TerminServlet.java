@@ -135,7 +135,7 @@ public class TerminServlet extends HttpServlet {
 		} else if (action.toLowerCase().equals("save")) {
 			dao.updateEvent(event);
 		} else if (action.toLowerCase().equals("delete")) {
-			//TODO delete Event
+			dao.deleteEvent(event);
 		} else {
 			throw new RuntimeException(
 					"Invalid action Parameter in TerminServlet");
@@ -144,7 +144,7 @@ public class TerminServlet extends HttpServlet {
 		c.setTime(dtstart);
 		resp.sendRedirect("calendarservlet?view=" + req.getParameter("view")
 				+ "&selectedyear=" + c.get(java.util.Calendar.YEAR)
-				+ "&selectedmonth=" + c.get(java.util.Calendar.MONTH)
+				+ "&selectedmonth=" + (c.get(java.util.Calendar.MONTH) +1)
 				+ "&selectedweek=" + c.get(java.util.Calendar.WEEK_OF_YEAR)
 				+ "&selectedday=" + c.get(java.util.Calendar.DAY_OF_MONTH));
 	}

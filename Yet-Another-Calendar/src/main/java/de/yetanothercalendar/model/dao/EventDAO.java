@@ -17,12 +17,20 @@ public interface EventDAO {
 	public abstract boolean createEvents(Event event);
 
 	/**
-	 * Updated den event mit der Id von @param event;
+	 * Updated das event mit der Id von @param event;
 	 * 
 	 * @param event
-	 *            Event, welcher geupdate werden soll
+	 *            Event, welches geupdatet werden soll
 	 */
 	public abstract void updateEvent(Event event);
+	
+	/**
+	 * Löscht das event mit der Id von @param event;
+	 * 
+	 * @param event
+	 *            Event, welches gelöscht werden soll
+	 */
+	public void deleteEvent(Event event);
 
 	/**
 	 * Gibt eine Liste mit allen Events, die in der Tablle EVENTS einem User

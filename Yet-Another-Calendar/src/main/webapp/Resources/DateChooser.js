@@ -85,7 +85,10 @@ function writeSelectableDays(max, element){
 	}
 	var s = "";
 	for (var i = 1; i <= max; i++){
-		s += "<option>" + i + "</option>";
+		if (i < 10)
+			s += "<option>0" + i + "</option>";
+		else
+			s += "<option>" + i + "</option>";
 	}
 	element.innerHTML = s;
 	element.options[select].selected = true;

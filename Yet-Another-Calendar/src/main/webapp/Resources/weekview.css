@@ -29,6 +29,16 @@
 	min-height: 18px;
 	display: block;
 }
+
+.entrycontent {
+	margin: 3px;
+}
+
+.entrycontent:first-line {
+	text-align: center;
+	font-weight: bold;
+}
+
 #weekview {
 	padding-top: 4px;
 }

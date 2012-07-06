@@ -225,9 +225,23 @@
 				<xsl:variable name="newentry">
 					<xsl:text>Edit.html?view=yearview</xsl:text>
 					<xsl:text>&amp;day=</xsl:text>
-					<xsl:value-of select="@number"></xsl:value-of>
+					<xsl:choose>
+						<xsl:when test="@number &lt; 10">
+							<xsl:text>0</xsl:text><xsl:value-of select="@number"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="@number"></xsl:value-of>
+						</xsl:otherwise>
+					</xsl:choose>
 					<xsl:text>&amp;month=</xsl:text>
-					<xsl:value-of select="../../@number"></xsl:value-of>
+					<xsl:choose>
+						<xsl:when test="../../@number &lt; 10">
+							<xsl:text>0</xsl:text><xsl:value-of select="../../@number"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="../../@number"></xsl:value-of>
+						</xsl:otherwise>
+					</xsl:choose>
 					<xsl:text>&amp;year=</xsl:text>
 					<xsl:value-of select="../../../@number"></xsl:value-of>
 				</xsl:variable>
@@ -256,41 +270,14 @@
 						</xsl:if>
 					</xsl:for-each>
 				</xsl:variable>
-				<xsl:variable name="link">
-					<xsl:text>Edit.html?view=yearview</xsl:text>
-					<xsl:text>&amp;description=</xsl:text>
-					<xsl:value-of select="entry/description" />
-					<xsl:text>&amp;id=</xsl:text>
-					<xsl:value-of select="entry/@id" />
-					<xsl:text>&amp;summary=</xsl:text>
-					<xsl:value-of select="entry/summary" />
-					<xsl:text>&amp;starttimehours=</xsl:text>
-					<xsl:value-of select="entry/starttime/@hours" />
-					<xsl:text>&amp;starttimeminutes=</xsl:text>
-					<xsl:value-of select="entry/starttime/@minutes" />
-					<xsl:text>&amp;endtimehours=</xsl:text>
-					<xsl:value-of select="entry/endtime/@hours" />
-					<xsl:text>&amp;endtimeminutes=</xsl:text>
-					<xsl:value-of select="entry/endtime/@minutes" />
-
-					<xsl:text>&amp;place=</xsl:text>
-					<xsl:value-of select="entry/location" />
-
-					<xsl:text>&amp;priority=</xsl:text>
-					<xsl:value-of select="entry/@priority" />
-					<xsl:text>&amp;description=</xsl:text>
-					<xsl:value-of select="entry/description" />
-					<xsl:text>&amp;categories=</xsl:text>
-					<xsl:apply-templates select="entry/categories/category"></xsl:apply-templates>
-				</xsl:variable>
 				<xsl:if test="$no = 1">
-					<a href="{$link}" class="entry" title="{$title}">
+					<a href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});" class="entry" title="{$title}">
 						<xsl:value-of select="$no" />
 						<xsl:text> Termin</xsl:text>
 					</a>
 				</xsl:if>
 				<xsl:if test="$no &gt; 1">
-					<a href="{$link}" class="entry" title="{$title}">
+					<a href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});" class="entry" title="{$title}">
 						<xsl:value-of select="$no" />
 						<xsl:text> Termine</xsl:text>
 					</a>
@@ -298,11 +285,6 @@
 
 			</div>
 		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="category">
-		<xsl:apply-templates></xsl:apply-templates>
-		<xsl:text>, </xsl:text>
 	</xsl:template>
 
 </xsl:stylesheet>

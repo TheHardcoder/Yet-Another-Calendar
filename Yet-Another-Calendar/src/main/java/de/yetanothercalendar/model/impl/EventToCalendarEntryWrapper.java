@@ -36,7 +36,7 @@ public class EventToCalendarEntryWrapper {
 		Date startdate = event.getDtstart();
 		Date enddate = event.getDtend();
 		if (startdate.after(enddate)) {
-			throw new RuntimeException("Startdatum ist hinter enddatum");
+			throw new RuntimeException("Startdatum ist hinter enddatum, Event(" +event.getId() + "): " + event.getSummary());
 		}
 		Calendar calendarStartDay = Calendar.getInstance(locale);
 		calendarStartDay.setTime(startdate);

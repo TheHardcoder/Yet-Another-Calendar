@@ -46,10 +46,9 @@
 			<div id="edit">
 				<h1 id="Edittitle" style="text-align: center;">Termin</h1>
 
-				<form id="editform" method="post" action="terminservlet"
-					onsubmit="return setFormData();">
+				<form id="editform" method="post" action="terminservlet">
 					<fieldset id="hiddenfields">
-						<input type="hidden" name="action" value="save"></input> <input
+						<input type="hidden" id="editaction" name="action" value="save"></input> <input
 							type="hidden" id="id" name="id" value="0"></input> <input type="hidden"
 							name="view" id="view" value=""></input>
 					</fieldset>
@@ -61,18 +60,18 @@
 						<label for="jday">Startdatum: </label>
 						<div id="jday">
 							<select id="day" name="dtstartDay" size="1">
-								<option>1</option>
+								<option>01</option>
 							</select> <select id="month" name="dtstartMonth" size="1"
 								onchange="update();">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
+								<option>01</option>
+								<option>02</option>
+								<option>03</option>
+								<option>04</option>
+								<option>05</option>
+								<option>06</option>
+								<option>07</option>
+								<option>08</option>
+								<option>09</option>
 								<option>10</option>
 								<option>11</option>
 								<option>12</option>
@@ -114,15 +113,16 @@
 					<fieldset>
 						<label for="starttimehours">Startzeit: </label> <select
 							id="starttimehours" name="dtstartHour" size="1">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
+							<option>00</option>
+							<option>01</option>
+							<option>02</option>
+							<option>03</option>
+							<option>04</option>
+							<option>05</option>
+							<option>06</option>
+							<option>07</option>
+							<option>08</option>
+							<option>09</option>
 							<option>10</option>
 							<option>11</option>
 							<option selected="selected">12</option>
@@ -137,7 +137,6 @@
 							<option>21</option>
 							<option>22</option>
 							<option>23</option>
-							<option>24</option>
 						</select> <select id="starttimeminutes" name="dtstartMinute" size="1">
 							<option selected="selected">00</option>
 							<option>05</option>
@@ -160,15 +159,15 @@
 								<option>1</option>
 							</select> <select id="endmonth" name="dtendMonth" size="1"
 								onchange="update();">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-								<option>6</option>
-								<option>7</option>
-								<option>8</option>
-								<option>9</option>
+								<option>01</option>
+								<option>02</option>
+								<option>03</option>
+								<option>04</option>
+								<option>05</option>
+								<option>06</option>
+								<option>07</option>
+								<option>08</option>
+								<option>09</option>
 								<option>10</option>
 								<option>11</option>
 								<option>12</option>
@@ -209,15 +208,16 @@
 					<fieldset>
 						<label for="endtimehours">Endzeit: </label> <select
 							id="endtimehours" name="dtendHour" size="1">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
+							<option>00</option>
+							<option>01</option>
+							<option>02</option>
+							<option>03</option>
+							<option>04</option>
+							<option>05</option>
+							<option>06</option>
+							<option>07</option>
+							<option>08</option>
+							<option>09</option>
 							<option>10</option>
 							<option>11</option>
 							<option>12</option>
@@ -232,7 +232,6 @@
 							<option>21</option>
 							<option>22</option>
 							<option>23</option>
-							<option>24</option>
 						</select> <select id="endtimeminutes" name="dtendMinute" size="1">
 							<option selected="selected">00</option>
 							<option>05</option>
@@ -272,18 +271,18 @@
 						<label for="color">Farbe: </label> <select id="color" name="color"
 							size="1">
 							<option selected="selected">Braun</option>
-							<option value="#ff0000">Rot</option>
-							<option value="#0000ff">Blau</option>
-							<option value="#00bf00">Grün</option>
-							<option value="#ffdf00">Gelb</option>
-							<option value="#6f6f6f">Grau</option>
+							<option value="dd2200">Rot</option>
+							<option value="6495ed">Blau</option>
+							<option value="00bf00">Grün</option>
+							<option value="ffdf00">Gelb</option>
+							<option value="6f6f6f">Grau</option>
 						</select>
 					</fieldset>
 					<fieldset>
 						<div id="editbutton">
-							<input type="submit" value="Speichern"></input> 
+							<input type="button" value="Speichern" onclick="updateEvent();"></input> 
 							<input type="button" value="Zur&uuml;ck" onclick="history.back();"></input>
-							<input type="button" value="L&ouml;schen"></input>
+							<input type="button" value="L&ouml;schen"  onclick="deleteEvent();"></input>
 						</div>
 					</fieldset>
 				</form>
