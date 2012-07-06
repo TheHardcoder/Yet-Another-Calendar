@@ -57,7 +57,7 @@ public class CalendarImpl implements Calendar {
 		calendar.set(java.util.Calendar.DAY_OF_YEAR, 1);
 		calendar.set(java.util.Calendar.DAY_OF_WEEK, 1);
 		Date time = calendar.getTime();
-		System.out.println(new SimpleDateFormat().format(time));
+//		System.out.println(new SimpleDateFormat().format(time));
 		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
 		java.util.Calendar firstMomentInWeek = momentCreator
 				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);

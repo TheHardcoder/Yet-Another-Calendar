@@ -41,7 +41,7 @@ public class TestView extends View {
 		lMonths.add(mTMonth2);
 		Year yTest = new Year(2012, lMonths);
 		YearView yearview = new YearView(yTest, "1", "2", "3", "4");
-		System.out.println(yearview.getXMLString());
+//		System.out.println(yearview.getXMLString());
 	}
 
 	public static void main(String[] args) {
