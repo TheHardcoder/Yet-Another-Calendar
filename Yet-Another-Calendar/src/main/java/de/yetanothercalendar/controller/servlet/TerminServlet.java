@@ -52,13 +52,15 @@ public class TerminServlet extends HttpServlet {
 		try {
 			long id = Long.parseLong(req.getParameter("id"));
 			event.setId(id);
-			//TODO Wenn die id = 0 ist soll eine neue ID zum erstellen des Termins generiert werden.
+			// TODO Wenn die id = 0 ist soll eine neue ID zum erstellen des
+			// Termins generiert werden.
 		} catch (Exception e) {
-			throw new RuntimeException("Error parsing Id at Termin Servlet! (" + req.getParameter("id") + ")");
+			throw new RuntimeException("Error parsing Id at Termin Servlet! ("
+					+ req.getParameter("id") + ")");
 		}
 
 		// create User form given Data
-		User user = (User) req.getSession().getAttribute("user");
+		User user = (User) session.getAttribute("user");
 
 		String description = req.getParameter("description");
 		String location = req.getParameter("location");
@@ -74,7 +76,7 @@ public class TerminServlet extends HttpServlet {
 		}
 
 		Date dtend = getDateParameterValue("dtend", req);
-		if (dtend== null) {
+		if (dtend == null) {
 			// Duration should only be set if Dtend is not set
 			try {
 				long duration = Long.parseLong(req.getParameter("duration"));
@@ -96,9 +98,9 @@ public class TerminServlet extends HttpServlet {
 		String rdate = req.getParameter("rdate");
 
 		List<String> categoriesList = new ArrayList<String>();
-		
+
 		String categoryString = req.getParameter("categories");
-		if (categoryString != null){
+		if (categoryString != null) {
 			String[] categories = categoryString.split(",");
 
 			for (String category : categories) {
@@ -123,28 +125,28 @@ public class TerminServlet extends HttpServlet {
 		event.setRecurid(recurid);
 		event.setRrule(rrule);
 		event.setSummary(summary);
+		// FIXME uid is not the user id!
 		event.setUid(user.getId().toString());
 		event.setUser(user);
 
 		// action parameter (update oder create) lesen
-		if (action.toLowerCase().equals("create")) {
+		if (action.toLowerCase().equals("save") && event.getId() == 0) {
 			dao.createEvents(event);
-		} else if (action.toLowerCase().equals("update")) {
+		} else if (action.toLowerCase().equals("save")) {
 			dao.updateEvent(event);
+		} else if (action.toLowerCase().equals("delete")) {
+			//TODO delete Event
 		} else {
 			throw new RuntimeException(
 					"Invalid action Parameter in TerminServlet");
 		}
 		java.util.Calendar c = GregorianCalendar.getInstance();
 		c.setTime(dtstart);
-		resp.sendRedirect("calendarservlet?view="+ req.getParameter("view") + "&selectedyear="
-				+ c.get(java.util.Calendar.YEAR)
-				+ "&selectedmonth="
-				+ c.get(java.util.Calendar.MONTH)
-				+ "&selectedweek="
-				+ c.get(java.util.Calendar.WEEK_OF_YEAR)
-				+ "&selectedday="
-				+ c.get(java.util.Calendar.DAY_OF_MONTH));
+		resp.sendRedirect("calendarservlet?view=" + req.getParameter("view")
+				+ "&selectedyear=" + c.get(java.util.Calendar.YEAR)
+				+ "&selectedmonth=" + c.get(java.util.Calendar.MONTH)
+				+ "&selectedweek=" + c.get(java.util.Calendar.WEEK_OF_YEAR)
+				+ "&selectedday=" + c.get(java.util.Calendar.DAY_OF_MONTH));
 	}
 
 	/**

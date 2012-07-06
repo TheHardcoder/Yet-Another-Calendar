@@ -4,9 +4,19 @@ var curdate = new Date();
 var monthnames = new Array("Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
 
 Date.prototype.getWeek = function() {
-	var onejan = new Date(this.getFullYear(),0,1);
-	return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
-} 
+	Datum = this; // Anm. 1
+	DoDat=donnerstag(Datum);
+	kwjahr=DoDat.getFullYear();
+	DoKW1=donnerstag(new Date(kwjahr,0,4)); // Anm. 2
+	kw=Math.floor(1.5+(DoDat.getTime()-DoKW1.getTime())/86400000/7);
+	return kw;
+}
+
+function donnerstag(datum) { // Anm. 5
+	  var Do=new Date();
+	  Do.setTime(datum.getTime() + (3-((datum.getDay()+6) % 7)) * 86400000); // Anm. 3
+	  return Do;
+}
 
 function create() {
 	startdate = new Date();
@@ -63,7 +73,7 @@ return 32 - new Date(iYear, iMonth, 32).getDate();
 
 function goToToday(servlet){
 	var date = new Date();
-	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + date.getMonth() + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + (date.getMonth() + 1) + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }
 
 function changeWeek(servlet, next){

@@ -84,9 +84,9 @@ public class EventDAOImpl implements EventDAO {
 				long duration = event.getDuration();
 				String color = event.getColor();
 
-				List<String> categories = event.getCategories();
+				
 				String strCategories = "";
-
+				List<String> categories = event.getCategories();
 				for (int i = 0; i < categories.size(); i++) {
 					strCategories += categories.get(i);
 					strCategories += ";";

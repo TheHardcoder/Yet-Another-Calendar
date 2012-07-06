@@ -239,9 +239,9 @@
 
 	<xsl:template match="day">
 		<xsl:variable name="day1"
-			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
+			select="//calendar/year/month/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
 		<xsl:variable name="day7"
-			select="//calendar/year[@number=//calendar/@selectedyear]/month[@number=//calendar/@selectedmonth]/week[@number=//calendar/@selectedweek]/day[7]/@number"></xsl:variable>
+			select="(//calendar/year/month/week[@number=//calendar/@selectedweek]/day[last()]/@number)[last()]"></xsl:variable>
 		<xsl:variable name="daytitle">
 			<xsl:choose>
 				<xsl:when
@@ -258,12 +258,26 @@
 				<xsl:otherwise>
 					<xsl:value-of select="@number" />
 					.
-					<xsl:value-of select="//calendar/@selectedmonth" />
+					<xsl:value-of select="../../@number" />
 					.
-					<xsl:value-of select="//calendar/@selectedyear" />
+					<xsl:value-of select="../../../@number" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+		
+		<xsl:variable name="monthdiff" select="../../@number - //calendar/@selectedmonth"></xsl:variable>
+		<xsl:variable name="monthdiffabs">
+			<xsl:choose>
+				<xsl:when test="$monthdiff &lt; 0">
+					<xsl:value-of select="- $monthdiff"></xsl:value-of>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$monthdiff"></xsl:value-of>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<xsl:if test="$monthdiffabs &lt; 2">
 		<div class="daycolumn">
 			<div class="daycolumntitle">
 				<xsl:value-of select="@name" />
@@ -305,6 +319,7 @@
 				</xsl:with-param>
 			</xsl:call-template>
 		</div>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="entry">

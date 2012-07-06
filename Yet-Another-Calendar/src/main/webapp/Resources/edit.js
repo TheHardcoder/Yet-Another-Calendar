@@ -22,6 +22,12 @@ window.onload = function() {
 		if (document.getElementById(name) != null) {
 			document.getElementById(name).value = wert;
 		}
+		if (name == 'id' && wert == 0){
+			document.getElementById("Edittitle").innerHTML="Termin erstellen";
+		}
+		else {
+			document.getElementById("Edittitle").innerHTML="Termin bearbeiten";
+		}
 	}
 }
 
