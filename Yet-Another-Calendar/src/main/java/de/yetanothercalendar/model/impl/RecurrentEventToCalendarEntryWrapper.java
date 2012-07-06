@@ -51,7 +51,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 	public List<CalendarEntry> wrapEventToCalendar(Event event, Date begin,
 			Date end) throws IllegalArgumentException, ParseException {
 		// TODO Auto-generated method stub
-		if (event.getRrule() == null) {
+		if ((event.getRrule() == null)||(event.getRrule().equals(""))) {
 			// TODO warum wird hier das enddatum ueberschrieben?
 			// event.setDtend(end);
 			EventToCalendarEntryWrapper wrapper = new EventToCalendarEntryWrapper(
