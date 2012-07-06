@@ -106,7 +106,7 @@
 							<form action="calendarservlet" method="get">
 								<div>
 									<input type="hidden" name="view" value="weekview"></input>
-									<select id="day" name="selectedday" size="1">
+									<select id="day" name="selectedday" size="1" onchange="update();">
 									</select>
 									<select id="month" name="selectedmonth" size="1"
 										onchange="update();">
@@ -238,19 +238,15 @@
 	</xsl:template>
 
 	<xsl:template match="day">
-		<xsl:variable name="day1"
-			select="//calendar/year/month/week[@number=//calendar/@selectedweek]/day[1]/@number"></xsl:variable>
-		<xsl:variable name="day7"
-			select="(//calendar/year/month/week[@number=//calendar/@selectedweek]/day[last()]/@number)[last()]"></xsl:variable>
 		<xsl:variable name="daytitle">
 			<xsl:choose>
 				<xsl:when
-					test="$day1 - @number &gt; 0 and //calendar/@selectedmonth = 12">
+					test="@number &lt; 15 and //calendar/@selectedmonth = 12 and (../@number=1 or ../@number=52)">
 					<xsl:value-of select="@number" />
 					.1.
 					<xsl:value-of select="//calendar/@selectedyear + 1" />
 				</xsl:when>
-				<xsl:when test="@number - $day7 &gt; 0 and //calendar/@selectedmonth = 1">
+				<xsl:when test="@number &gt; 15 and //calendar/@selectedmonth = 1 and (../@number=1 or ../@number=52)">
 					<xsl:value-of select="@number" />
 					.12.
 					<xsl:value-of select="//calendar/@selectedyear - 1" />
@@ -264,8 +260,9 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		
-		<xsl:variable name="monthdiff" select="../../@number - //calendar/@selectedmonth"></xsl:variable>
+
+		<xsl:variable name="monthdiff"
+			select="../../@number - //calendar/@selectedmonth"></xsl:variable>
 		<xsl:variable name="monthdiffabs">
 			<xsl:choose>
 				<xsl:when test="$monthdiff &lt; 0">
@@ -276,49 +273,49 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		
+
 		<xsl:if test="$monthdiffabs &lt; 2">
-		<div class="daycolumn">
-			<div class="daycolumntitle">
-				<xsl:value-of select="@name" />
-				<xsl:text> </xsl:text>
-				<xsl:value-of select="translate(normalize-space($daytitle), ' ', '')"></xsl:value-of>
+			<div class="daycolumn">
+				<div class="daycolumntitle">
+					<xsl:value-of select="@name" />
+					<xsl:text> </xsl:text>
+					<xsl:value-of select="translate(normalize-space($daytitle), ' ', '')"></xsl:value-of>
+				</div>
+
+				<xsl:variable name="pos" select="position()"></xsl:variable>
+
+				<xsl:variable name="col">
+					<xsl:choose>
+						<xsl:when test="@columns">
+							<xsl:value-of select="@columns"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							1
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+
+
+				<xsl:apply-templates>
+					<xsl:with-param name="columns">
+						<xsl:value-of select="$col"></xsl:value-of>
+					</xsl:with-param>
+					<xsl:with-param name="pos">
+						<xsl:value-of select="$pos"></xsl:value-of>
+					</xsl:with-param>
+				</xsl:apply-templates>
+				<xsl:call-template name="selects">
+					<xsl:with-param name="i">
+						0
+					</xsl:with-param>
+					<xsl:with-param name="count">
+						23
+					</xsl:with-param>
+					<xsl:with-param name="print">
+						0
+					</xsl:with-param>
+				</xsl:call-template>
 			</div>
-
-			<xsl:variable name="pos" select="position()"></xsl:variable>
-
-			<xsl:variable name="col">
-				<xsl:choose>
-					<xsl:when test="@columns">
-						<xsl:value-of select="@columns"></xsl:value-of>
-					</xsl:when>
-					<xsl:otherwise>
-						1
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
-
-
-			<xsl:apply-templates>
-				<xsl:with-param name="columns">
-					<xsl:value-of select="$col"></xsl:value-of>
-				</xsl:with-param>
-				<xsl:with-param name="pos">
-					<xsl:value-of select="$pos"></xsl:value-of>
-				</xsl:with-param>
-			</xsl:apply-templates>
-			<xsl:call-template name="selects">
-				<xsl:with-param name="i">
-					0
-				</xsl:with-param>
-				<xsl:with-param name="count">
-					23
-				</xsl:with-param>
-				<xsl:with-param name="print">
-					0
-				</xsl:with-param>
-			</xsl:call-template>
-		</div>
 		</xsl:if>
 	</xsl:template>
 
