@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;

@@ -1,4 +1,3 @@
-
 package de.yetanothercalendar.model.impl;
 
 import java.util.ArrayList;
@@ -28,38 +27,42 @@ public class CalendarViewCalculation {
 	public Day initializeColumns(Day pDay) {
 		List<CalendarEntry> lCalendarEntries = new ArrayList<CalendarEntry>();
 		lCalendarEntries.addAll(pDay.getCalendarEntries());
-		List<CalendarEntry> lBufferEntries = lCalendarEntries;
-		List<CalendarEntry> lRemovedEntries = new ArrayList<CalendarEntry>();
+		// Nur Spaltenberechnen, wenn der Tag Einträge besitzt
+		if (!lCalendarEntries.isEmpty()) {
+			List<CalendarEntry> lBufferEntries = lCalendarEntries;
+			List<CalendarEntry> lRemovedEntries = new ArrayList<CalendarEntry>();
 
-		// Liste der Calendereinträge nach Startzeitpunkt sortieren
-		lCalendarEntries = sortByStartTime(lCalendarEntries);
-		int i = 0;
-		int column = 0;
-		CalendarEntry eActive;
-		CalendarEntry ePrivious = lBufferEntries.remove(0);
-		ePrivious.setColumn(column);
-		lRemovedEntries.add(ePrivious);
-		while (!lBufferEntries.isEmpty()) {
-			eActive = lBufferEntries.get(i);
-			if (checkOnOverlapping(ePrivious, eActive)) {
-				if (i < lBufferEntries.size() - 1) {
-					i++;
+			// Liste der Calendereinträge nach Startzeitpunkt sortieren
+			lCalendarEntries = sortByStartTime(lCalendarEntries);
+			int i = 0;
+			int column = 0;
+			CalendarEntry eActive;
+			CalendarEntry ePrivious = lBufferEntries.remove(0);
+			ePrivious.setColumn(column);
+			lRemovedEntries.add(ePrivious);
+			while (!lBufferEntries.isEmpty()) {
+				eActive = lBufferEntries.get(i);
+				if (checkOnOverlapping(ePrivious, eActive)) {
+					if (i < lBufferEntries.size() - 1) {
+						i++;
+					} else {
+						column++;
+						i = 0;
+						ePrivious = lBufferEntries.remove(i);
+						ePrivious.setColumn(column);
+						lRemovedEntries.add(ePrivious);
+					}
 				} else {
-					column++;
-					i = 0;
 					ePrivious = lBufferEntries.remove(i);
 					ePrivious.setColumn(column);
 					lRemovedEntries.add(ePrivious);
 				}
-			} else {
-				ePrivious = lBufferEntries.remove(i);
-				ePrivious.setColumn(column);
-				lRemovedEntries.add(ePrivious);
 			}
+
+			lCalendarEntries.addAll(lRemovedEntries);
+			pDay.setCalendarEntries(lCalendarEntries);
+			pDay.setColumnCount(column + 1);
 		}
-		lCalendarEntries.addAll(lRemovedEntries);
-		pDay.setCalendarEntries(lCalendarEntries);
-		pDay.setColumnCount(column + 1);
 		return pDay;
 	}
 

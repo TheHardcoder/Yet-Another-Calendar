@@ -23,6 +23,7 @@ import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
+import de.yetanothercalendar.test.ViewCalculationTest;
 
 public class CalendarImpl implements Calendar {
 
@@ -57,7 +58,7 @@ public class CalendarImpl implements Calendar {
 		calendar.set(java.util.Calendar.DAY_OF_YEAR, 1);
 		calendar.set(java.util.Calendar.DAY_OF_WEEK, 1);
 		Date time = calendar.getTime();
-//		System.out.println(new SimpleDateFormat().format(time));
+		// System.out.println(new SimpleDateFormat().format(time));
 		// Die beiden Grenzwerte des Monats, in dem gesucht werden soll setzten
 		java.util.Calendar firstMomentInWeek = momentCreator
 				.createFirstPossibleMomentOfWeekReturningCalendar(calendar);
@@ -195,6 +196,10 @@ public class CalendarImpl implements Calendar {
 			Day day = new Day(dayname, dayOfMonth);
 			day = insertCalendarEntriesToDay(calendarDayOnCalendarEntryMap,
 					new Pair<java.util.Calendar, Day>(calendar, day));
+
+			// Spaltenberechnung der Tage @auther Lukas
+			day = viewCalculation.initializeColumns(day);
+
 			if (weekOfYear != currenWeekNumber) {
 				Week week = new Week(weekOfYear);
 				week.setDays(weekDays);
