@@ -285,13 +285,27 @@
 
 				<xsl:variable name="pos">
 					<xsl:choose>
-						<xsl:when test="@name='Di'">2</xsl:when>
-						<xsl:when test="@name='Mi'">3</xsl:when>
-						<xsl:when test="@name='Do'">4</xsl:when>
-						<xsl:when test="@name='Fr'">5</xsl:when>
-						<xsl:when test="@name='Sa'">6</xsl:when>
-						<xsl:when test="@name='So'">7</xsl:when>
-						<xsl:otherwise>1</xsl:otherwise>
+						<xsl:when test="@name='Di'">
+							2
+						</xsl:when>
+						<xsl:when test="@name='Mi'">
+							3
+						</xsl:when>
+						<xsl:when test="@name='Do'">
+							4
+						</xsl:when>
+						<xsl:when test="@name='Fr'">
+							5
+						</xsl:when>
+						<xsl:when test="@name='Sa'">
+							6
+						</xsl:when>
+						<xsl:when test="@name='So'">
+							7
+						</xsl:when>
+						<xsl:otherwise>
+							1
+						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
 
@@ -336,7 +350,7 @@
 
 
 		<xsl:variable name="entry_x">
-			<xsl:value-of select="((@column div $columns) + ($pos - 1)) * 14.28"></xsl:value-of>
+			<xsl:value-of select="(@column div $columns) * 14.15 + 14.28 *  ($pos - 1)"></xsl:value-of>
 			<xsl:text>%</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="entry_y">
@@ -352,10 +366,10 @@
 		<xsl:variable name="entry_w">
 			<xsl:choose>
 				<xsl:when test="$columns &lt; 1">
-					<xsl:value-of select="14.1"></xsl:value-of>
+					<xsl:value-of select="14.15"></xsl:value-of>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="(1 div $columns) * 14.2 - 0.1"></xsl:value-of>
+					<xsl:value-of select="(1 div $columns) * 14.1 + 0.05"></xsl:value-of>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:text>%</xsl:text>
@@ -483,8 +497,46 @@
 				</div>
 			</xsl:if>
 			<xsl:if test="$print != 1">
-
-				<div class="hour" title="{$time}">
+				<xsl:variable name="newentry">
+					<xsl:text>Edit.html?view=weekview</xsl:text>
+					<xsl:text>&amp;day=</xsl:text>
+					<xsl:choose>
+						<xsl:when test="@number &lt; 10">
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="@number"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="@number"></xsl:value-of>
+						</xsl:otherwise>
+					</xsl:choose>
+					<xsl:text>&amp;month=</xsl:text>
+					<xsl:choose>
+						<xsl:when test="../../@number &lt; 10">
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="../../@number"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="../../@number"></xsl:value-of>
+						</xsl:otherwise>
+					</xsl:choose>
+					<xsl:text>&amp;year=</xsl:text>
+					<xsl:value-of select="../../../@number"></xsl:value-of>
+					<xsl:text>&amp;starttimehours=</xsl:text>
+					<xsl:value-of select="substring-before($time,':')"></xsl:value-of>
+					<xsl:text>&amp;endtimehours=</xsl:text>
+					<xsl:choose>
+						<xsl:when test="(1 + substring-before($time,':')) &lt; 10">
+							<xsl:text>0</xsl:text><xsl:value-of select="(1 + substring-before($time,':'))" />
+						</xsl:when>
+						<xsl:when test="(1 + substring-before($time,':')) = 24">
+							<xsl:text>23&amp;endtimeminutes=55</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="(1 + substring-before($time,':'))" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<div class="hour" title="{$time}" ondblclick="window.location='{$newentry}';">
 				</div>
 			</xsl:if>
 		</xsl:if>
