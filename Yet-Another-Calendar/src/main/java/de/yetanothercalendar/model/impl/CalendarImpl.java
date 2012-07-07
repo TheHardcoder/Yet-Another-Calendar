@@ -23,7 +23,6 @@ import de.yetanothercalendar.model.dao.impl.EventDAOImpl;
 import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 import de.yetanothercalendar.model.database.helper.DatabaseConnectionManager;
-import de.yetanothercalendar.test.ViewCalculationTest;
 
 public class CalendarImpl implements Calendar {
 

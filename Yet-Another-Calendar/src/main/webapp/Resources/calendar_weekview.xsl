@@ -283,7 +283,17 @@
 					<xsl:value-of select="translate(normalize-space($daytitle), ' ', '')"></xsl:value-of>
 				</div>
 
-				<xsl:variable name="pos" select="position()"></xsl:variable>
+				<xsl:variable name="pos">
+					<xsl:choose>
+						<xsl:when test="@name='Di'">2</xsl:when>
+						<xsl:when test="@name='Mi'">3</xsl:when>
+						<xsl:when test="@name='Do'">4</xsl:when>
+						<xsl:when test="@name='Fr'">5</xsl:when>
+						<xsl:when test="@name='Sa'">6</xsl:when>
+						<xsl:when test="@name='So'">7</xsl:when>
+						<xsl:otherwise>1</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
 
 				<xsl:variable name="col">
 					<xsl:choose>

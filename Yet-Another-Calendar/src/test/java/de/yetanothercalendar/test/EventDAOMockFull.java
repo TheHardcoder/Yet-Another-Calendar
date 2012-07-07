@@ -100,4 +100,9 @@ public class EventDAOMockFull implements EventDAO {
 		// TODO Auto-generated method stub
 
 	}
+
+	public void deleteEvent(Event event) {
+		// TODO Auto-generated method stub
+		
+	}
 }
