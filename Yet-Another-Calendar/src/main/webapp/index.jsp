@@ -60,10 +60,10 @@
 						maxlength="25" />
 				</div>
 				<div>
-					<input type="hidden" name="action" value="login" />
-						<button type="submit">Login</button>
+					<a href="javascript:document.forms[0].submit();" class="button" style="width: 100px;text-decoration: none;">Login</a>
+					
 				</div>
-				
+				<input type="hidden" name="action" value="login" />
 				<a href="Register.html" id="registerlink">Noch nicht
 					registriert?</a>
 			</fieldset>
