@@ -441,6 +441,8 @@ html {
 	list-style: none;
 	padding: 0px;
 	margin: 20px auto;
+	border-radius: 150px;
+	border: 1px solid #444;
 }
 
 #cl_sec, #cl_min, #cl_hour {
