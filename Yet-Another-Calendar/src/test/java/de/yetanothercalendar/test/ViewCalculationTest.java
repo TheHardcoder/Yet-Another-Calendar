@@ -66,12 +66,26 @@ public class ViewCalculationTest extends TestCase {
 		// Second Test
 		System.out.println("Nur eine Spalte (Hintereinander)");
 		lCalendarEntries = createEntryList2();
+		viewCalculation.sortByStartTime(lCalendarEntries);
+		// Teste Datumsliste
+		CalendarEntry privious = lCalendarEntries.get(0);
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			if (privious != calendarEntry) {
+				System.out.println(calendarEntry.getStartTime().toString()
+						+ " " + calendarEntry.getEndTime() + " "
+						+ calendarEntry.getColumn());
+				assertTrue(privious.getStartTime().before(
+						calendarEntry.getStartTime()));
+			}
+			privious = calendarEntry;
+		}
 		day = new Day(lCalendarEntries, "TestTag", 0);
 		day = viewCalculation.initializeColumns(day);
 		lCalendarEntries = day.getCalendarEntries();
 		for (CalendarEntry calendarEntry : lCalendarEntries) {
-			System.out.println(calendarEntry.getStartTime().toString() + " "
-					+ calendarEntry.getEndTime() + " "
+			System.out.println(calendarEntry.getId()
+					+ calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime().toString() + " "
 					+ calendarEntry.getColumn());
 			assertEquals(1, day.getColumnCount());
 		}
@@ -92,11 +106,17 @@ public class ViewCalculationTest extends TestCase {
 	@Test
 	public void testDateList() {
 		System.out.println("Date Checking");
-		List<CalendarEntry> lCalendarEntries = createEntryList1();
+		List<CalendarEntry> lCalendarEntries = createEntryList2();
+		CalendarEntry privious = lCalendarEntries.get(0);
 		for (CalendarEntry calendarEntry : lCalendarEntries) {
-			System.out.println(calendarEntry.getStartTime().toString() + " "
-					+ calendarEntry.getEndTime() + " "
-					+ calendarEntry.getColumn());
+			if (privious != calendarEntry) {
+				System.out.println(calendarEntry.getStartTime().toString()
+						+ " " + calendarEntry.getEndTime() + " "
+						+ calendarEntry.getColumn());
+				assertTrue(privious.getStartTime().before(
+						calendarEntry.getStartTime()));
+			}
+			privious = calendarEntry;
 		}
 	}
 

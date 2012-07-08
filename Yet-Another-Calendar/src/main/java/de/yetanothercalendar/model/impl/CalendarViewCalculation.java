@@ -18,7 +18,8 @@ public class CalendarViewCalculation {
 
 	/**
 	 * Berechnet die maximale Anzahl der Spalten pro Tag und setzt bei jedem
-	 * Kalendereintrag noch die dazugehörige Spalte
+	 * Kalendereintrag noch die dazugehörige Spalte Die Spaltenzählung beginnt
+	 * bei 0 und zählt aufwärts.
 	 * 
 	 * @param pDay
 	 *            - Der Tag, an dem die Berechnungen ausgeführt werden sollen
@@ -34,33 +35,68 @@ public class CalendarViewCalculation {
 
 			// Liste der Calendereinträge nach Startzeitpunkt sortieren
 			lCalendarEntries = sortByStartTime(lCalendarEntries);
-			int i = 0;
-			int column = 0;
-			CalendarEntry eActive;
-			CalendarEntry ePrivious = lBufferEntries.remove(0);
+			int i = 0; // Zeiger in der Liste
+			int column = 0; // Momentane Spaltennummer
+			CalendarEntry eActive; // Aktueller Kalendereintag
+			// Vor Durchlaufen der Liste, den ersten Kalendereintrag als ersten
+			// Eintrag der 0.Spalte festlegen.
+			CalendarEntry ePrivious = lBufferEntries.remove(0); // vorheriger
+																// Kallendereintrag
+																// festlegen
 			ePrivious.setColumn(column);
-			lRemovedEntries.add(ePrivious);
+			lRemovedEntries.add(ePrivious); // Einträge, denen eine Spalte
+											// zugewiesen worde, müssen
+											// Zischengespeichert werden, damit
+											// die Daten nicht verloren gehen
+			// Solange die Bearbeitungsliste nicht leer ist, also allen
+			// Kalendereinträgen eine Spalte zugewiesen wurde
+
 			while (!lBufferEntries.isEmpty()) {
-				eActive = lBufferEntries.get(i);
-				if (checkOnOverlapping(ePrivious, eActive)) {
-					if (i < lBufferEntries.size() - 1) {
-						i++;
-					} else {
-						column++;
-						i = 0;
-						ePrivious = lBufferEntries.remove(i);
+				eActive = lBufferEntries.get(i); // Aktuellen Kalendereintrag
+													// holen, auf den der Zeiger
+													// zeigt
+													// Prüfen, ob sich der
+													// aktuelle Termin mit dem
+													// vorherigen
+													// überscheidet
+				if (checkOnOverlapping(ePrivious, eActive)) { // Ja
+					// Prüfen ob wir schon am Ende der Liste angelangt sind(
+					if (i < lBufferEntries.size() - 1) { // Nein, Sören fragen
+															// wegen der -2
+						i++; // Zeiger auf den nächsten Eintrag
+					} else { // JA
+						column++; // Mit der nächsten Spalte weiter machen
+						i = 0; // Zeiger zurück an den Anfang der Liste setzen
+						ePrivious = lBufferEntries.remove(i); // Wieder den
+																// ersten
+																// Eintrag der
+																// Liste als
+																// 1. Eintrag
+																// der 0.Spalte
+																// festlegen.
 						ePrivious.setColumn(column);
 						lRemovedEntries.add(ePrivious);
 					}
-				} else {
-					ePrivious = lBufferEntries.remove(i);
+				} else { // Nein
+					ePrivious = lBufferEntries.remove(i); // Da sich der EIntrag
+															// nicht
+															// überschneidet,
+															// kann er der
+															// Aktuellen Spalte
+															// zugewiesen werden
 					ePrivious.setColumn(column);
 					lRemovedEntries.add(ePrivious);
+					// Prüfen ob wir am Ende der Liste angekommen sind
+					if (i >= lBufferEntries.size() && lBufferEntries.size() > 0) {
+						column++; // Aktuelle Spalte erhöhen
+						i = 0; // Zeiger auf 0 setzen
+					}
 				}
 			}
-
 			lCalendarEntries.addAll(lRemovedEntries);
 			pDay.setCalendarEntries(lCalendarEntries);
+			// Die Spaltenanzahl im Tag setzen (Noch mit Ben abklären, bei einer
+			// Spalte 0 oder 1)
 			pDay.setColumnCount(column + 1);
 		}
 		return pDay;
