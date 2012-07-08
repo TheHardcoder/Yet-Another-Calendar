@@ -2,11 +2,14 @@
 	display: block;
 	height: 440px;
 	margin: 5px;
+	margin-top: 2px;
 }
 
 .daynumber {
 	float: left;
 	position: absolute;
+	margin-left: 2px;
+	margin-top: 2px;
 }
 
 .monthentry {
@@ -28,18 +31,18 @@
 	height: 40px;
 	width: 14.28%;
 	float: left;
-	
 	margin: 0px;
 	
 }
 
 .titlecontent {
 	dispaly: block;
-	height: 36px;
+	height: 31px;
 	font-size: 16pt;
 	text-align: center;
 	font-weight: bold;
 	background-color: #FFD973;
+	padding-top: 5px;
 	margin: 2px;
 }
 
@@ -53,9 +56,9 @@
 }
 
 .monthdaycontent {
-	margin: 2px;
+	margin: 1px;
 	background-color: #FFD973;
-	height: 95%;
+	height: 98%;
 	overflow: auto;
 }
 
@@ -64,6 +67,7 @@
 	height: 40px;
 	margin: 0px;
 	padding: 0px;
+	margin-top: 2px;
 	margin-left: 5px;
 	margin-right: 5px;
 }
