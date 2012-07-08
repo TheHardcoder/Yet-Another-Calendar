@@ -23,7 +23,10 @@
 	margin-left: 1px;
 	margin-right: 1px;
 	position: absolute;
-	background-color: #FF9000;
+	background-color: #FFAC40;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
 	overflow: hidden;
 	cursor: pointer;
 	min-height: 18px;

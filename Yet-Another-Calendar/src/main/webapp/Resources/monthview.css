@@ -14,7 +14,7 @@
 
 .monthentry {
 	position: relative;
-	height: 25px;
+	height: 18px;
 	margin-left: 25px;
 	background-color: #FFAC40;
 	-moz-border-radius: 20px;
@@ -25,6 +25,9 @@
 	padding-right: 10px;
 	padding-left: 10px;
 	overflow: hidden;
+	font-size: 14px;
+	white-space:nowrap;
+	cursor: pointer;
 }
 
 .daytitle {

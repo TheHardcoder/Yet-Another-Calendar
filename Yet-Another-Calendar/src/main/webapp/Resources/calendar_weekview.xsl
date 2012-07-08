@@ -65,28 +65,6 @@
 					<div id="title">
 						<div id="titleimage"></div>
 					</div>
-					<xsl:variable name="calendarback">
-						<xsl:text>calendarservlet?view=weekview</xsl:text>
-						<xsl:text>&amp;selectedyear=</xsl:text>
-						<xsl:value-of select="@selectedyear"></xsl:value-of>
-						<xsl:text>&amp;selectedweek=</xsl:text>
-						<xsl:value-of select="@selectedweek - 1"></xsl:value-of>
-						<xsl:text>&amp;selectedmonth=</xsl:text>
-						<xsl:value-of select="@selectedmonth"></xsl:value-of>
-						<xsl:text>&amp;selectedday=</xsl:text>
-						<xsl:value-of select="@selectedday - 7"></xsl:value-of>
-					</xsl:variable>
-					<xsl:variable name="calendarforward">
-						<xsl:text>calendarservlet?view=weekview</xsl:text>
-						<xsl:text>&amp;selectedyear=</xsl:text>
-						<xsl:value-of select="@selectedyear"></xsl:value-of>
-						<xsl:text>&amp;selectedweek=</xsl:text>
-						<xsl:value-of select="@selectedweek + 1"></xsl:value-of>
-						<xsl:text>&amp;selectedmonth=</xsl:text>
-						<xsl:value-of select="@selectedmonth"></xsl:value-of>
-						<xsl:text>&amp;selectedday=</xsl:text>
-						<xsl:value-of select="@selectedday + 7"></xsl:value-of>
-					</xsl:variable>
 					<div id="menubar">
 						<div class="button"
 							onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
