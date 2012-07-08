@@ -83,6 +83,12 @@ function goTo(servlet, year, month, day){
 
 function changeWeek(servlet, next){
 	var date = new Date(document.getElementById("selectedyear").innerHTML, document.getElementById("selectedmonth").innerHTML - 1, document.getElementById("selectedday").innerHTML);
-	date = new Date(date.getTime() + (next ? 7: -7) * 24 * 60 * 60 * 1000)
+	date = new Date(date.getTime() + (next ? 7: -7) * 24 * 60 * 60 * 1000);
+	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + (date.getMonth() + 1) + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
+}
+
+function changeMonth(servlet, next){
+	var date = new Date(document.getElementById("selectedyear").innerHTML, document.getElementById("selectedmonth").innerHTML - 1, document.getElementById("selectedday").innerHTML);
+	date.setMonth(date.getMonth() + (next ? +1 : -1));
 	window.location = servlet + "&selectedyear=" + date.getFullYear() + "&selectedmonth=" + (date.getMonth() + 1) + "&selectedweek=" + date.getWeek() + "&selectedday=" + date.getDate();
 }

@@ -1,3 +1,12 @@
+#cyear {
+	left: 0px;
+	top: 0px;
+	list-style-type: none;
+	padding: 5px;
+	margin: 0px;
+	display: block;
+}
+
 .month {
 	width: 8.33%;
 	height: 482px;

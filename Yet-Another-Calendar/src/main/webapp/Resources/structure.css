@@ -185,15 +185,6 @@ FF4F00	BF5D30	A63400	FF7B40	FF9E73
 	margin: 10px;
 }
 
-#cyear {
-	left: 0px;
-	top: 0px;
-	list-style-type: none;
-	padding: 5px;
-	margin: 0px;
-	display: block;
-}
-
 #footer {
 	display: block;
 	position: relativ;

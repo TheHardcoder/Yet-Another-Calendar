@@ -1,55 +1,69 @@
+#weekrows {
+	display: block;
+	height: 440px;
+	margin: 5px;
+}
 
-.monthday {
-	background-color: #FFD973;
-	margin: 2px;
-	margin-left: 1px;
-	margin-right: 1px;
-	height: 20%;
+.daynumber {
+	float: left;
+	position: absolute;
+}
+
+.monthentry {
+	position: relative;
+	height: 25px;
+	margin-left: 25px;
+	background-color: #FFAC40;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	-moz-box-shadow: inset 0px 0px 12px #A65E00;
+	-webkit-box-shadow: inset 0px 0px 12px #A65E00;
+	box-shadow: inset 0px 0px 12px #A65E00;
+	padding-right: 10px;
+	padding-left: 10px;
+	overflow: hidden;
 }
 
 .daytitle {
 	height: 40px;
-	background-color: #FFD973;
-	margin: 1px;
-	margin-left: 2px;
-	margin-right: 2px;
-	padding: 0px;
+	width: 14.28%;
+	float: left;
+	
+	margin: 0px;
+	
+}
+
+.titlecontent {
+	dispaly: block;
+	height: 36px;
 	font-size: 16pt;
 	text-align: center;
 	font-weight: bold;
-}
-
-.weekdayback {
-	width: 14.28%;
-	float: left;
-	background-color: #FFBA00;
-	margin: 0px;
-	padding: 0px;
-}
-
-.weekday {
 	background-color: #FFD973;
-	margin: 3px;
-	margin-left: 2px;
-	margin-right: 2px;
-	padding: 0px;
-	font-size: 14pt;
-	text-align: center;
+	margin: 2px;
 }
 
-.weekdayothermonth {
-	color: #A65E00;
-	background-color: #FFAC40;
-	padding: 0px;
-	font-size: 14pt;
-	text-align: center;
-}
-
-.titlerow {
-	width: 14.28%;
-	height: 40px;
-	float: left;
-	background-color: #FFBA00;
+.monthday {
+	display: block;
+	position relativ;
 	margin: 0px;
 	padding: 0px;
+	float: left;
+	font-size: 14pt;
+}
+
+.monthdaycontent {
+	margin: 2px;
+	background-color: #FFD973;
+	height: 95%;
+	overflow: auto;
+}
+
+#titlerow {
+	display: block;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
