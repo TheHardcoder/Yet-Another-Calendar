@@ -95,7 +95,8 @@ public class CalendarViewCalculation {
 			}
 			lCalendarEntries.addAll(lRemovedEntries);
 			pDay.setCalendarEntries(lCalendarEntries);
-			// Die Spaltenanzahl im Tag setzen (Noch mit Ben abklären, bei einer
+			// Die Spaltenanzahl im Tag setzen (Noch mit Ben abklären, bei
+			// einer
 			// Spalte 0 oder 1)
 			pDay.setColumnCount(column + 1);
 		}
@@ -103,16 +104,16 @@ public class CalendarViewCalculation {
 	}
 
 	/**
-	 * Prüft ob der ausgewählte Kalendereintrag (cActive) hinter dem vorherigen
-	 * Eintrag (cPrivious) liegt
+	 * Prüft ob der ausgewählte Kalendereintrag (cActive) hinter dem
+	 * vorherigen Eintrag (cPrivious) liegt
 	 * 
 	 * @param cPrivious
 	 *            - vorheriger Eintrag
 	 * @param cActive
 	 *            - der zu vergleichende Eintrag
 	 * @return Falls sie sich überscheiden "true" <br>
-	 *         wenn sie aneinander anschließen oder wenn der Ausgewählte Eintrag
-	 *         hinter dem vorherigen liegt "false"
+	 *         wenn sie aneinander anschließen oder wenn der Ausgewählte
+	 *         Eintrag hinter dem vorherigen liegt "false"
 	 */
 	private boolean checkOnOverlapping(CalendarEntry cPrivious,
 			CalendarEntry cActive) {
@@ -126,6 +127,7 @@ public class CalendarViewCalculation {
 	}
 
 	/**
+	 * deprecated <br>
 	 * Checkt ob sich die übergebenen Kalendereinträge überschneiden
 	 * 
 	 * @param firstEntry
@@ -149,7 +151,8 @@ public class CalendarViewCalculation {
 				&& activeEntry.getStartTime().after(comparedEntry.getEndTime())) {
 			overlap = false;
 		}
-		// Überschneidung im Falle Startzeit des comparedEntry vor Startzeit des
+		// Überschneidung im Falle Startzeit des comparedEntry vor Startzeit
+		// des
 		// ActiveEntry
 		else if (activeEntry.getStartTime().after(comparedEntry.getStartTime())
 				&& activeEntry.getStartTime()
@@ -184,8 +187,16 @@ public class CalendarViewCalculation {
 			CalendarEntry cEBuffer = list.get(i);
 			int j = i;
 			while (j > 0
-					&& list.get(j - 1).getStartTime()
-							.after(cEBuffer.getStartTime())) {
+					&& (list.get(j - 1).getStartTime() // Pr�ft ob welcher
+														// Eintrag fr�her
+														// anf�ngt
+							.after(cEBuffer.getStartTime()) || (list.get(j - 1)
+							.getStartTime() // Pr�ft ob bei gleicher
+											// Startzeit auf die
+											// L�nge des Eintrags
+							.equals(cEBuffer.getStartTime()) && (list
+							.get(j - 1).getEndTime().before(cEBuffer
+							.getEndTime()))))) {
 				list.set(j, list.get(j - 1));
 				j = j - 1;
 			}

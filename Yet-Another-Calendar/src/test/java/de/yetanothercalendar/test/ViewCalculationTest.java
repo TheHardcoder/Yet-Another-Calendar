@@ -40,13 +40,76 @@ public class ViewCalculationTest extends TestCase {
 		}
 		CalendarEntry previousCalendarEntry = new CalendarEntry(42, "Test",
 				"Test", "Test", dFirst, dFirst, dFirst, "Test", "Test", dFirst,
-				dFirst, "Test", null, "", dFirst, dFirst);
+				dFirst, "Test", null, "", dFirst, dFirst); // Extra dekleration
+															// um einen
+															// unhabhängigen
+															// frühsten Eintrag
+															// zu haben
 		for (CalendarEntry calendarEntry : lCalendarEntriesSorted) {
+			// Startzeit
+			assertTrue(previousCalendarEntry.getStartTime().before(
+					calendarEntry.getStartTime())); // Auf Startzeitsortierung
+													// prüfen
 			System.out.println(previousCalendarEntry.getStartTime().before(
 					calendarEntry.getStartTime()));
 			previousCalendarEntry = calendarEntry;
 		}
 
+	}
+
+	@Test
+	/**
+	 * Prüft ob die Länge der Einträge beim Sortieren beachtet wird
+	 * Denn der Sortierungsalgorythmus sollte bei gleicher Startzeit, 
+	 * das zusätzliche Kriterium "Dauer" berücksichtigen.
+	 */
+	public void testSortAlgorythmOnLengthSorting() throws InterruptedException {
+		Date dStart = new Date();
+		Thread.sleep(1000);
+		List<CalendarEntry> lCalendarEntries = createEntryListSameStartTimeDifferentDuration();
+		Thread.sleep(100);
+		Date dLongest = new Date();
+		List<CalendarEntry> lCalendarEntriesSorted;
+		Collections.shuffle(lCalendarEntries);
+		System.out
+				.println("Gemsicht------------------------------------------");
+		for (int i = 0; i < lCalendarEntries.size(); i++) {
+			System.out.println(lCalendarEntries.get(i).getId() + "  ---  "
+					+ lCalendarEntries.get(i).getStartTime());
+		}
+		lCalendarEntriesSorted = viewCalculation
+				.sortByStartTime(lCalendarEntries);
+		System.out
+				.println("Sortiert------------------------------------------");
+		for (int i = 0; i < lCalendarEntries.size(); i++) {
+			System.out.println(lCalendarEntriesSorted.get(i).getId()
+					+ "  ---  " + lCalendarEntriesSorted.get(i).getStartTime()
+					+ " --- " + lCalendarEntries.get(i).getEndTime());
+		}
+		CalendarEntry previousCalendarEntry = new CalendarEntry(42, "Test",
+				"Test", "Test", dStart, dLongest, dLongest, "Test", "Test",
+				dLongest, dLongest, "Test", null, "", dLongest, dLongest); // Extra
+																			// dekleration
+		// um einen
+		// unhabhängigen
+		// frühsten Eintrag
+		// zu haben
+		for (CalendarEntry calendarEntry : lCalendarEntriesSorted) {
+			// Startzeit
+			assertTrue(previousCalendarEntry.getStartTime().before(
+					calendarEntry.getStartTime())); // Auf Startzeitsortierung
+													// prüfen
+			System.out.println("Startzeit korrekt sortiert: "
+					+ previousCalendarEntry.getStartTime().before(
+							calendarEntry.getStartTime()));
+			// Dauer
+			assertTrue(previousCalendarEntry.getEndTime().after(
+					calendarEntry.getEndTime())); // Auf Startzeitsortierung
+													// prüfen
+			System.out.println("Dauer korrekt sortiert: "
+					+ previousCalendarEntry.getEndTime().after(
+							calendarEntry.getEndTime()));
+		}
 	}
 
 	@Test
@@ -92,6 +155,18 @@ public class ViewCalculationTest extends TestCase {
 		// Third Test
 		System.out.println("30 Spalten (Spitz)");
 		lCalendarEntries = createEntryList3();
+		day = new Day(lCalendarEntries, "TestTag", 0);
+		day = viewCalculation.initializeColumns(day);
+		lCalendarEntries = day.getCalendarEntries();
+		for (CalendarEntry calendarEntry : lCalendarEntries) {
+			System.out.println(calendarEntry.getStartTime().toString() + " "
+					+ calendarEntry.getEndTime() + " "
+					+ calendarEntry.getColumn());
+			assertEquals(30, day.getColumnCount());
+		}
+		// Forth Test
+		System.out.println("Gleich Startzeit verschiedene Dauer");
+		lCalendarEntries = createEntryListSameStartTimeDifferentDuration();
 		day = new Day(lCalendarEntries, "TestTag", 0);
 		day = viewCalculation.initializeColumns(day);
 		lCalendarEntries = day.getCalendarEntries();
@@ -205,6 +280,31 @@ public class ViewCalculationTest extends TestCase {
 		for (int i = 0; i < 30; i++) {
 			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
 					dStart[i], dEnd, dt, "Test", "Test", dt, dt, "Test", null,
+					"", dt, dt));
+		}
+		return rlCalendarEntries;
+	}
+
+	private List<CalendarEntry> createEntryListSameStartTimeDifferentDuration() {
+		List<CalendarEntry> rlCalendarEntries = new ArrayList<CalendarEntry>();
+		Date dt = new Date();
+		Date dStart = new Date();
+		Date[] dEnd = new Date[30];
+
+		for (int i = 0; i < dEnd.length; i++) {
+			dEnd[i] = new Date();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IllegalMonitorStateException e) {
+				System.out.println("Ignore");
+			}
+		}
+
+		for (int i = 0; i < 30; i++) {
+			rlCalendarEntries.add(new CalendarEntry(i, "Test", "Test", "Test",
+					dStart, dEnd[i], dt, "Test", "Test", dt, dt, "Test", null,
 					"", dt, dt));
 		}
 		return rlCalendarEntries;
