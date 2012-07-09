@@ -1,5 +1,6 @@
 package de.yetanothercalendar.model.dao;
 
+import de.yetanothercalendar.model.database.Event;
 import de.yetanothercalendar.model.database.User;
 
 public interface UserDAO {
@@ -8,19 +9,19 @@ public interface UserDAO {
 	 * Speichert die Userdaten in die Tabelle USERS
 	 * 
 	 * @param user
-	 * @return
+	 * 			  welcher gespeichert werden soll
+	 * @return  ein {@link User}, vorher gespeichert wurde.
 	 */
 	public abstract User createUser(User user);
 
-	/**
-	 * Ueberprueft ob die Email-Adresse des Users in der Tabelle USERS vorhanden
-	 * ist und ueberprueft anschliessend ob das eingegeben Passwort mit dem
-	 * Passwort in der Tabelle USERS uebereinstimmt, falls dies der Fall ist wird
-	 * true zurueckgegeben, ansonsten false
-	 * 
+	/** 
 	 * @param email
+	 * 			   nach welcher geprueft wird
 	 * @param password
-	 * @return
+	 * 			   nach welchem geprueft wird
+	 * @return true wenn die Email-Adresse des Users in der Tabelle 
+	 * 		   USERS vorhanden ist und ob das eingegebene Passwort richtig ist.
+	 *		   Ansonsten false.	 
 	 */
 	public abstract boolean checkUser(String email, String password);
 
@@ -29,7 +30,9 @@ public interface UserDAO {
 	 * Typ User zurueck
 	 * 
 	 * @param email
-	 * @return
+	 * 				nach welcher in der Tabelle USERS gesucht wird
+	 * @return {@link User} fals die Email-Adresse vorhanden ist,
+	 * 		   ansonsten NULL.
 	 */
 	public abstract User returnUser(String email);
 
