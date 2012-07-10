@@ -317,10 +317,9 @@
 					select="month[@number=(-1+//calendar/@selectedmonth)]/week/day">
 					<xsl:if test="position() &gt; $daysbefore">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-						<div class="monthdaycontent">
-							<div class="daynumber">v: 
+						<div class="monthdaycontent othermonth">
+							<div class="daynumber">
 								<xsl:value-of select="@number"></xsl:value-of>
-								<xsl:value-of select="@name"></xsl:value-of>
 							</div>
 							<xsl:apply-templates></xsl:apply-templates>
 						</div>
@@ -331,9 +330,8 @@
 			<xsl:for-each select="month[@number=//calendar/@selectedmonth]/week/day">
 				<div class="monthday" style="width: {$width}; height: {$height};">
 					<div class="monthdaycontent">
-						<div class="daynumber">m: 
+						<div class="daynumber">
 							<xsl:value-of select="@number"></xsl:value-of>
-							<xsl:value-of select="@name"></xsl:value-of>
 						</div>
 						<xsl:apply-templates></xsl:apply-templates>
 					</div>
@@ -344,11 +342,9 @@
 					select="month[@number=(1+//calendar/@selectedmonth)]/week/day[@number &lt;= (7 - $poslast)]">
 					<xsl:if test="position() &lt;= (7 - $poslast)">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-						<div class="monthdaycontent">
+						<div class="monthdaycontent othermonth">
 							<div class="daynumber">
 								<xsl:value-of select="@number"></xsl:value-of>
-								<xsl:value-of select="@name"></xsl:value-of>
-								<xsl:value-of select="position()"></xsl:value-of>
 							</div>
 							<xsl:apply-templates></xsl:apply-templates>
 						</div>

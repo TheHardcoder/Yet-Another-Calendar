@@ -65,6 +65,10 @@
 	overflow: auto;
 }
 
+.othermonth {
+	background-color: #BBBBBB;
+}
+
 #titlerow {
 	display: block;
 	height: 40px;
