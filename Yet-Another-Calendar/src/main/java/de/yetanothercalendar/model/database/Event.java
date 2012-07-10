@@ -3,6 +3,7 @@ package de.yetanothercalendar.model.database;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -247,15 +248,16 @@ public class Event {
 	public List<Date> getExdate() {
 		return exdate;
 	}
-	
+
 	public String getExdateString() {
 		if (exdate.size() >= 1) {
-			String exdateString = "EXDATE:";
+//			String exdateString = "EXDATE:";
+			String exdateString = "";
 			for (Date date : exdate) {
-				exdateString += converDateToICSDate(date)+",";
+				exdateString += converDateToICSDate(date) + ",";
 			}
-			//letztes ',' löschen
-			exdateString = exdateString.substring(0, exdateString.length()-1);
+			// letztes ',' löschen
+			exdateString = exdateString.substring(0, exdateString.length() - 1);
 			return exdateString;
 		}
 		return "";
@@ -263,6 +265,11 @@ public class Event {
 
 	public void setExdate(List<Date> exdate) {
 		this.exdate = exdate;
+	}
+
+	public void setExDateString(String dateICSString) {
+		List<Date> convertICSSTringToICSDateList = convertICSSTringToICSDateList(dateICSString);
+		this.exdate = convertICSSTringToICSDateList;
 	}
 
 	public String getRdate() {
@@ -285,8 +292,7 @@ public class Event {
 				+ parseDate(dtend) + "\n" + "duration: "
 				+ Double.toString(duration) + " color: " + color
 				+ " categories: " + categories + "\n" + "comment: " + comment
-				+ " Exdate: " + exdate.toString() + " rdate: "
-				+ rdate;
+				+ " Exdate: " + exdate.toString() + " rdate: " + rdate;
 	}
 
 	/**
@@ -302,7 +308,7 @@ public class Event {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * Converts a Date to an iCal Date String 20120626T140000
 	 * 
@@ -325,7 +331,22 @@ public class Event {
 			return "";
 		}
 	}
-	
+
+	public static List<Date> convertICSSTringToICSDateList(String list) {
+		List<Date> resultList = new ArrayList<Date>();
+		String[] split = list.split(",");
+		for (String string : split) {
+			try {
+				Date parseIcsDate = parseIcsDate(string);
+				if (parseIcsDate != null) {
+					resultList.add(parseIcsDate);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultList;
+	}
 
 	/**
 	 * Converts an Integer into at least two Chars
@@ -341,7 +362,7 @@ public class Event {
 			return Integer.toString(i);
 		}
 	}
-	
+
 	/**
 	 * Parse an icsDateString ("yyyyMMddTHHmmssZ") to a Date
 	 * 
@@ -365,7 +386,7 @@ public class Event {
 
 		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
 		Date date = df.parse(dateString.toString());
-//		System.out.println(date.toString());
+		// System.out.println(date.toString());
 		return date;
 	}
 
