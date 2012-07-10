@@ -44,7 +44,7 @@ public class EventDAOImpl implements EventDAO {
 					+ "rrule VARCHAR(150)," + "dtend DATETIME,"
 					+ "duration INT," + "color VARCHAR(10),"
 					+ "categories VARCHAR(250)," + "comment TEXT,"
-					+ "exdate DATETIME," + "rdate VARCHAR(250),"
+					+ "exdate VARCHAR(150)," + "rdate VARCHAR(250),"
 					+ "FOREIGN KEY (userId)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
@@ -211,7 +211,7 @@ public class EventDAOImpl implements EventDAO {
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
 					+ "Where users.email = \"" + email
-					+ "\" and events.rrule IS NULL;";
+					+ "\" and (events.rrule IS NULL OR events.rrule = '');";
 			events = executeSELECTQuery(user, eventCreationString);
 		} catch (Exception e) {
 			e.printStackTrace();
