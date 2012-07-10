@@ -72,7 +72,7 @@
 							onclick="changeMonth('calendarservlet?view=monthview', false)">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/PfeilLinks_HP.png"></img>
-							</div>
+						</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=monthview&amp;year=</xsl:text>
 							<xsl:value-of select="@selectedyear"></xsl:value-of>
@@ -84,7 +84,7 @@
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
 						<div class="button" onclick="window.location='{$newentry}'">
-						<img width="32px" height="32px" style="margin-top: -5px;"
+							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/neuerTermin_HP.png"></img>
 						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=monthview')">Heute</div>
@@ -146,7 +146,8 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog('monthview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
+						<div class="button"
+							onclick="showFileOpenDialog('monthview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
@@ -158,7 +159,7 @@
 							onclick="changeMonth('calendarservlet?view=monthview', true)">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/PfeilRechts_HP.png"></img>
-							</div>
+						</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
@@ -317,19 +318,23 @@
 					select="month[@number=(-1+//calendar/@selectedmonth)]/week/day">
 					<xsl:if test="position() &gt; $daysbefore">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-						<div class="monthdaycontent othermonth">
-							<div class="daynumber">
-								<xsl:value-of select="@number"></xsl:value-of>
+							<div class="monthdaycontent othermonth">
+								<div class="daynumber">
+									<xsl:value-of select="@number"></xsl:value-of>
+								</div>
+								<xsl:apply-templates></xsl:apply-templates>
 							</div>
-							<xsl:apply-templates></xsl:apply-templates>
 						</div>
-					</div>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:if>
 			<xsl:for-each select="month[@number=//calendar/@selectedmonth]/week/day">
 				<div class="monthday" style="width: {$width}; height: {$height};">
 					<div class="monthdaycontent">
+						<xsl:if
+							test="@number - position() &gt; 15 or @number - position() &lt; -15">
+							<xsl:attribute name="class">monthdaycontent othermonth</xsl:attribute>
+						</xsl:if>
 						<div class="daynumber">
 							<xsl:value-of select="@number"></xsl:value-of>
 						</div>
@@ -342,13 +347,13 @@
 					select="month[@number=(1+//calendar/@selectedmonth)]/week/day[@number &lt;= (7 - $poslast)]">
 					<xsl:if test="position() &lt;= (7 - $poslast)">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-						<div class="monthdaycontent othermonth">
-							<div class="daynumber">
-								<xsl:value-of select="@number"></xsl:value-of>
+							<div class="monthdaycontent othermonth">
+								<div class="daynumber">
+									<xsl:value-of select="@number"></xsl:value-of>
+								</div>
+								<xsl:apply-templates></xsl:apply-templates>
 							</div>
-							<xsl:apply-templates></xsl:apply-templates>
 						</div>
-					</div>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:if>
