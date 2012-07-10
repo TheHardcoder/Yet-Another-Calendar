@@ -160,8 +160,14 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog();"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/import-icon_HP.png"></img></div>
-						<div class="button"><img width="32px" height="32px" style="margin-top: -5px;" src="Resources/Images/export-icon_HP.png"></img></div>
+						<div class="button" onclick="showFileOpenDialog();">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/import-icon_HP.png"></img>
+						</div>
+						<div class="button" onclick="window.location='import?action=export'">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/export-icon_HP.png"></img>
+						</div>
 						<div class="button" onclick="window.location='{$calendarforward}'">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
@@ -234,7 +240,8 @@
 					<xsl:text>&amp;day=</xsl:text>
 					<xsl:choose>
 						<xsl:when test="@number &lt; 10">
-							<xsl:text>0</xsl:text><xsl:value-of select="@number"></xsl:value-of>
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="@number"></xsl:value-of>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="@number"></xsl:value-of>
@@ -243,7 +250,8 @@
 					<xsl:text>&amp;month=</xsl:text>
 					<xsl:choose>
 						<xsl:when test="../../@number &lt; 10">
-							<xsl:text>0</xsl:text><xsl:value-of select="../../@number"></xsl:value-of>
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="../../@number"></xsl:value-of>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="../../@number"></xsl:value-of>
@@ -278,13 +286,17 @@
 					</xsl:for-each>
 				</xsl:variable>
 				<xsl:if test="$no = 1">
-					<a href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});" class="entry" title="{$title}">
+					<a
+						href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});"
+						class="entry" title="{$title}">
 						<xsl:value-of select="$no" />
 						<xsl:text> Termin</xsl:text>
 					</a>
 				</xsl:if>
 				<xsl:if test="$no &gt; 1">
-					<a href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});" class="entry" title="{$title}">
+					<a
+						href="javascript:goTo('calendarservlet?view=weekview',{../../../@number},{../../@number},{@number});"
+						class="entry" title="{$title}">
 						<xsl:value-of select="$no" />
 						<xsl:text> Termine</xsl:text>
 					</a>

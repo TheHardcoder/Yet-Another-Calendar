@@ -144,7 +144,7 @@
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
-						<div class="button">
+						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/export-icon_HP.png"></img>
 						</div>

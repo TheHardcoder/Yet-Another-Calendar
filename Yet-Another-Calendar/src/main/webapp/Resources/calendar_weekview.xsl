@@ -144,14 +144,10 @@
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
-						<form class="button" name="exportform" method="get"
-							action="import">
-							<input type="hidden" name="action" value="export"></input>
-							<input type="submit" style="border: 0px; background: url('Resources/Images/export-icon_HP.png');">
-								<img width="32px" height="32px" style="margin-top: -5px;"
-									src="Resources/Images/export-icon_HP.png"></img>
-							</input>
-						</form>
+						<div class="button" onclick="window.location='import?action=export'">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/export-icon_HP.png"></img>
+						</div>
 						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
 					</div>
 					<div id="calendar">
