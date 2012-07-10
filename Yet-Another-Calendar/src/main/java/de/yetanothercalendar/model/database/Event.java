@@ -356,7 +356,7 @@ public class Event {
 	 * @return String representation of the Integer (with at least two Chars)
 	 */
 	private static String getTwoCharacterString(int i) {
-		if (i < 9) {
+		if (i < 10) {
 			return "0" + i;
 		} else {
 			return Integer.toString(i);
