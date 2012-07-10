@@ -1,6 +1,11 @@
 package de.yetanothercalendar.model.database;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -27,7 +32,7 @@ public class Event {
 	private String color;
 	private List<String> categories;
 	private String comment;
-	private Date exdate;
+	private List<Date> exdate;
 	private String rdate;
 
 	public Event() {
@@ -37,7 +42,7 @@ public class Event {
 			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
-			String comment, Date exdate, String rdate) {
+			String comment, List<Date> exdate, String rdate) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -65,7 +70,7 @@ public class Event {
 			Date created, String description, Date lastmod, String location,
 			String priority, String summary, String recurid, String rrule,
 			Date dtend, long duration, String color, List<String> categories,
-			String comment, Date exdate, String rdate) {
+			String comment, List<Date> exdate, String rdate) {
 		super();
 
 		this.user = user;
@@ -239,11 +244,24 @@ public class Event {
 		this.comment = comment;
 	}
 
-	public Date getExdate() {
+	public List<Date> getExdate() {
 		return exdate;
 	}
+	
+	public String getExdateString() {
+		if (exdate.size() >= 1) {
+			String exdateString = "EXDATE:";
+			for (Date date : exdate) {
+				exdateString += converDateToICSDate(date)+",";
+			}
+			//letztes ',' löschen
+			exdateString = exdateString.substring(0, exdateString.length()-1);
+			return exdateString;
+		}
+		return "";
+	}
 
-	public void setExdate(Date exdate) {
+	public void setExdate(List<Date> exdate) {
 		this.exdate = exdate;
 	}
 
@@ -267,7 +285,7 @@ public class Event {
 				+ parseDate(dtend) + "\n" + "duration: "
 				+ Double.toString(duration) + " color: " + color
 				+ " categories: " + categories + "\n" + "comment: " + comment
-				+ " Exdate: " + parseDate(exdate) + " rdate: "
+				+ " Exdate: " + exdate.toString() + " rdate: "
 				+ rdate;
 	}
 
@@ -283,6 +301,72 @@ public class Event {
 		} catch (Exception e) {
 			return "";
 		}
+	}
+	
+	/**
+	 * Converts a Date to an iCal Date String 20120626T140000
+	 * 
+	 * @param d
+	 *            Date to convert
+	 * @return String representation of the Date
+	 */
+	public static String converDateToICSDate(Date d) {
+		if (d != null) {
+			GregorianCalendar cal = new GregorianCalendar();
+			cal.setTime(d);
+			String month = getTwoCharacterString(cal.get(Calendar.MONTH) + 1);
+			String day = getTwoCharacterString(cal.get(Calendar.DAY_OF_MONTH));
+			String hour = getTwoCharacterString(cal.get(Calendar.HOUR_OF_DAY));
+			String minutes = getTwoCharacterString(cal.get(Calendar.MINUTE));
+			String seconds = getTwoCharacterString(cal.get(Calendar.SECOND));
+			return cal.get(Calendar.YEAR) + month + day + "T" + hour + minutes
+					+ seconds + "Z";
+		} else {
+			return "";
+		}
+	}
+	
+
+	/**
+	 * Converts an Integer into at least two Chars
+	 * 
+	 * @param i
+	 *            Integer to convert
+	 * @return String representation of the Integer (with at least two Chars)
+	 */
+	private static String getTwoCharacterString(int i) {
+		if (i < 9) {
+			return "0" + i;
+		} else {
+			return Integer.toString(i);
+		}
+	}
+	
+	/**
+	 * Parse an icsDateString ("yyyyMMddTHHmmssZ") to a Date
+	 * 
+	 * @param dateString
+	 *            iCal Date String
+	 * @return Date Representation of the iCal dateString
+	 * @throws ParseException
+	 *             is thrown in case something goes wrong :-(
+	 */
+	public static Date parseIcsDate(String dateString) throws ParseException {
+		StringBuffer dateBuf = new StringBuffer(dateString);
+		// Delete Object Description: e.g. "DTSTAMP:" from
+		// "DTSTAMP:20120508T201446Z\r\n"
+
+		while (!(Character.isDigit(dateBuf.charAt(0)))) {
+			dateBuf.deleteCharAt(0);
+		}
+		// Delete the T in Date 20120508T201446Z\r\n
+		dateString = dateBuf.toString();
+		dateString = dateString.replace('T', ' ');
+
+		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
+		Date date = df.parse(dateString.toString());
+//		System.out.println(date.toString());
+		return date;
 	}
 
 }

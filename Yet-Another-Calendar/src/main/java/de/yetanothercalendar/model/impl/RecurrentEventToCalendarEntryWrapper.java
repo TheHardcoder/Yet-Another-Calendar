@@ -19,6 +19,7 @@ import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
+import net.fortuna.ical4j.model.property.ExDate;
 import net.fortuna.ical4j.model.property.RDate;
 import net.fortuna.ical4j.model.property.RecurrenceId;
 
@@ -96,6 +97,11 @@ public class RecurrentEventToCalendarEntryWrapper {
 
 			if (event.getRecurid() != "") {
 				ve.getProperties().add(new RecurrenceId(event.getRecurid()));
+			}
+			
+			if ((event.getExdate() != null) && (event.getExdate().size() >= 1)){
+				DateList dList = new DateList(event.getExdateString(), null);
+				ve.getProperties().add(new ExDate(dList));
 			}
 
 			DateList rdates = new DateList(event.getRdate(), null);

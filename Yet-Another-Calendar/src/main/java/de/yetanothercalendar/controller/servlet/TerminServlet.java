@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.fortuna.ical4j.model.Property;
+
 import de.yetanothercalendar.model.Calendar;
 import de.yetanothercalendar.model.calendar.CalendarEntry;
 import de.yetanothercalendar.model.calendar.Day;
@@ -89,8 +91,8 @@ public class TerminServlet extends HttpServlet {
 
 		Date created = getDateParameterValue("created", req);
 		Date dtstamp = getDateParameterValue("dtstamp", req);
-		Date exdate = getDateParameterValue("exdate", req);
-
+		
+		
 		String color = req.getParameter("color");
 		String comment = req.getParameter("comment");
 		// Shouldn't be set because recurrent events get wrapped to
@@ -117,7 +119,8 @@ public class TerminServlet extends HttpServlet {
 		event.setDtend(dtend);
 		event.setDtstamp(dtstamp);
 		event.setDtstart(dtstart);
-		event.setExdate(exdate);
+		//is empty, because Frontend doesn't get information about recurrent events
+		event.setExdate(new ArrayList<Date>());
 		event.setLastmod(lastmod);
 		event.setLocation(location);
 		event.setPriority(priority);
