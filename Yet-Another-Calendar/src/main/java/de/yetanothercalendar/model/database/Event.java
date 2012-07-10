@@ -342,7 +342,7 @@ public class Event {
 					resultList.add(parseIcsDate);
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 		return resultList;
