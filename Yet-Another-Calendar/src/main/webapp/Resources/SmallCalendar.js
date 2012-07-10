@@ -52,6 +52,26 @@ backup02 = window.onload;
 window.onload = function() {
 	backup02();
 	create();
+	var elems = getElementsByClass("entry");
+	for (var i = 0; i < elems.length; i++){
+		var s = elems[i].innerHTML;
+		elems[i].innerHTML = unescape(elems[i].innerHTML);
+		elems[i].setAttribute("title",unescape(elems[i].getAttribute("title")))
+	}
+}
+
+function getElementsByClass( searchClass, domNode, tagName) { 
+	if (domNode == null) domNode = document;
+	if (tagName == null) tagName = '*';
+	var el = new Array();
+	var tags = domNode.getElementsByTagName(tagName);
+	var tcl = " "+searchClass+" ";
+	for(i=0,j=0; i<tags.length; i++) { 
+		var test = " " + tags[i].className + " ";
+		if (test.indexOf(tcl) != -1) 
+			el[j++] = tags[i];
+	} 
+	return el;
 }
 
 function writeDay(day){
