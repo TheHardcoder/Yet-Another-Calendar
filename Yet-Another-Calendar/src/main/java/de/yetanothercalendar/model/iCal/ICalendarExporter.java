@@ -110,7 +110,7 @@ public class ICalendarExporter {
 			eventString.add("RDATE:" + e.getRdate());
 		}
 
-		if (!(e.getRrule().equals(""))) {
+		if (e.getRrule()!=null && !(e.getRrule().equals(""))) {
 			eventString.add("RRULE:" + e.getRrule());
 		}
 		if (!(e.getPriority().equals(""))) {
