@@ -56,14 +56,14 @@ public class ICalendarExporter {
 		if (!(Event.converDateToICSDate(e.getDtstamp()).equals(""))) {
 			eventString.add("DTSTAMP:" + Event.converDateToICSDate(e.getDtstamp()));
 		}
-		if (!(e.getUid().equals(""))) {
+		if (neitherNullnorEmpty(e.getUid())) {
 			eventString.add("UID:" + e.getUid());
 		}
-		if (!(e.getSummary().equals(""))) {
+		if (neitherNullnorEmpty(e.getSummary())) {
 			eventString.add("SUMMARY:" + e.getSummary());
 		}
 
-		if (!(e.getRecurid().equals(""))) {
+		if (neitherNullnorEmpty(e.getRecurid())){
 			eventString.add("RECURID:" + e.getRecurid());
 		}
 
@@ -73,7 +73,7 @@ public class ICalendarExporter {
 		if (!(Event.converDateToICSDate(e.getDtend()).equals(""))) {
 			eventString.add("DTEND:" + Event.converDateToICSDate(e.getDtend()));
 		}
-		if (!(e.getDescription().equals(""))) {
+		if (neitherNullnorEmpty(e.getDescription())) {
 			eventString.add("DESCRIPTION:" + e.getDescription());
 		}
 		if (e.getCategories() != null) {
@@ -93,7 +93,7 @@ public class ICalendarExporter {
 				eventString.add("CATEGORIES:" + categories);
 			}
 		}
-		if (!(e.getComment().equals(""))) {
+		if (neitherNullnorEmpty(e.getComment())) {
 			eventString.add("COMMENT:" + e.getComment());
 		}
 		if (e.getDuration() > 0) {
@@ -101,7 +101,7 @@ public class ICalendarExporter {
 					+ "M");
 		}
 		
-		if (!(e.getExdateString().equals(""))) {
+		if (neitherNullnorEmpty(e.getExdateString())) {
 			eventString.add(e.getExdateString());
 		}
 	
@@ -110,13 +110,13 @@ public class ICalendarExporter {
 			eventString.add("RDATE:" + e.getRdate());
 		}
 
-		if (!(e.getRrule().equals(""))) {
+		if (neitherNullnorEmpty(e.getRrule())) {
 			eventString.add("RRULE:" + e.getRrule());
 		}
-		if (!(e.getPriority().equals(""))) {
+		if (neitherNullnorEmpty(e.getPriority())) {
 			eventString.add("PRIORITY:" + e.getPriority());
 		}
-		if (!(e.getLocation().equals(""))) {
+		if (neitherNullnorEmpty(e.getLocation())) {
 			eventString.add("LOCATION:" + e.getLocation());
 		}
 
@@ -153,5 +153,13 @@ public class ICalendarExporter {
 		 * TZOFFSETFROM:-0800 TZOFFSETTO:-0700 END:DAYLIGHT END:VTIMEZONE
 		 */
 
+	}
+	
+	private boolean neitherNullnorEmpty(String str){
+		if ((str == null)||(str.equals(""))){
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
