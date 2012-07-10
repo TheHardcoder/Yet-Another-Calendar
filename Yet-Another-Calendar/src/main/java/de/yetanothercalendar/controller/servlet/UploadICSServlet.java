@@ -2,6 +2,7 @@ package de.yetanothercalendar.controller.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,6 +41,11 @@ public class UploadICSServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String parameter = request.getParameter("action");
+		for (Object o : request.getParameterMap().keySet()){
+			System.out.println(o + " : " );
+			Arrays.toString((String[]) request.getParameterMap().get(o));
+		}
+		System.out.println("Param: " + parameter);
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			if (parameter.equals("import")) {
@@ -82,6 +88,12 @@ public class UploadICSServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			response.sendRedirect("calendarservlet?view="
+					+ request.getParameter("view") + "&selectedyear="
+					+ request.getParameter("selectedyear") + "&selectedmonth="
+					+ request.getParameter("selectedmonth") + "&selectedweek="
+					+ request.getParameter("selectedweek") + "&selectedday="
+					+ request.getParameter("selectedday"));
 		} else {
 			throw new RuntimeException("No User logged in!");
 		}

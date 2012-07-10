@@ -146,7 +146,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog();">
+						<div class="button" onclick="showFileOpenDialog('weekview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>

@@ -55,6 +55,9 @@
 
 		<xsl:text>&amp;comment=</xsl:text>
 		<xsl:value-of select="comment" />
+		
+		<xsl:text>&amp;rrule=</xsl:text>
+		<xsl:value-of select="rRule" />
 	</xsl:template>
 	
 </xsl:stylesheet>
