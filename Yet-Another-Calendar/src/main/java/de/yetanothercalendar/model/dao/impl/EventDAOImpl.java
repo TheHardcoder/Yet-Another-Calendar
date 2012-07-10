@@ -63,38 +63,50 @@ public class EventDAOImpl implements EventDAO {
 
 			Long userid = event.getUser().getId();
 			if (userid != null) {
-				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event
-						.getDtstamp().getTime());
+				java.sql.Timestamp dtstamp = null;
+				if(event.getDtstamp()!=null){dtstamp = new java.sql.Timestamp(event
+					.getDtstamp().getTime());}
+			
+			String uid = event.getUid();
+			
+			java.sql.Timestamp dtstart = null;
+			if(event.getDtstart()!=null){dtstart = new java.sql.Timestamp(event
+					.getDtstart().getTime());}
+			
+			java.sql.Timestamp created = null;
+			if(event.getCreated()!=null){created = new java.sql.Timestamp(event
+					.getCreated().getTime());}
 
-				String uid = event.getUid();
-				java.sql.Timestamp dtstart = new java.sql.Timestamp(event
-						.getDtstart().getTime());
-				java.sql.Timestamp created = new java.sql.Timestamp(event
-						.getCreated().getTime());
-				String description = event.getDescription();
-				java.sql.Timestamp lastmod = new java.sql.Timestamp(event
-						.getLastmod().getTime());
-				String location = event.getLocation();
-				String priority = event.getPriority();
-				String summary = event.getSummary();
-				String recurid = event.getRecurid();
-				String rrule = event.getRrule();
-				java.sql.Timestamp dtend = new java.sql.Timestamp(event
-						.getDtend().getTime());
-				long duration = event.getDuration();
-				String color = event.getColor();
+			String description = event.getDescription();
+			
+			java.sql.Timestamp lastmod = null;
+			if(event.getLastmod()!=null){lastmod = new java.sql.Timestamp(event
+					.getLastmod().getTime());}
+			
+			String location = event.getLocation();
+			String priority = event.getPriority();
+			String summary = event.getSummary();
+			String recurid = event.getRecurid();
+			String rrule = event.getRrule();
+			
+			java.sql.Timestamp dtend = null;
+			if(event.getDtend()!=null){dtend = new java.sql.Timestamp(event
+					.getDtend().getTime());}
+			
+			long duration = event.getDuration();
+			String color = event.getColor();
+			List<String> categories = event.getCategories();
+			String strCategories = "";
 
-				String strCategories = "";
-				List<String> categories = event.getCategories();
-				for (int i = 0; i < categories.size(); i++) {
-					strCategories += categories.get(i);
-					strCategories += ";";
+			for (int i = 0; i < categories.size(); i++) {
+				strCategories += categories.get(i);
+				strCategories += ";";
 
-				}
-
-				String comment = event.getComment();
-				String exdateString = event.getExdateString();
-				String rdate = event.getRdate();
+			}
+			String comment = event.getComment();
+			
+			String exdateString = event.getExdateString();
+			String rdate = event.getRdate();
 
 				String eventCreationString = "INSERT INTO events "
 						+ "(userId, dtstamp, uid, dtstart,"
@@ -235,21 +247,37 @@ public class EventDAOImpl implements EventDAO {
 		List<Event> events = new ArrayList<Event>();
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.applyPattern("yyyy-MM-dd HH:mm");
+		String hlp = null;
 		while (rsEvent.next()) {
 
 			long id = (long) rsEvent.getInt(1);
 			Date dtstamp = sdf.parse(rsEvent.getString(2));
 			String uid = rsEvent.getString(3);
-			Date dtstart = sdf.parse(rsEvent.getString(4));
-			Date created = sdf.parse(rsEvent.getString(5));
+			
+			hlp = rsEvent.getString(4);
+			Date dtstart = null;
+			if(hlp != null){ dtstart = sdf.parse(rsEvent.getString(4));}	
+			
+			hlp = rsEvent.getString(5);
+			Date created = null;
+			if(hlp != null){ created = sdf.parse(rsEvent.getString(5));}	 
+			
 			String description = rsEvent.getString(6);
-			Date lastmod = sdf.parse(rsEvent.getString(7));
+			
+			hlp = rsEvent.getString(7);
+			Date lastmod = null;
+			if(hlp != null){ lastmod = sdf.parse(rsEvent.getString(7));}
+			
 			String location = rsEvent.getString(8);
 			String priority = rsEvent.getString(9);
 			String summary = rsEvent.getString(10);
 			String recurid = rsEvent.getString(11);
 			String rrule = rsEvent.getString(12);
-			Date dtend = sdf.parse(rsEvent.getString(13));
+			
+			hlp = rsEvent.getString(13);
+			Date dtend = null;
+			if(hlp != null){dtend = sdf.parse(rsEvent.getString(13));}
+			
 			long duration = rsEvent.getLong(14);
 			String color = rsEvent.getString(15);
 
@@ -261,6 +289,7 @@ public class EventDAOImpl implements EventDAO {
 
 			}
 			String comment = rsEvent.getString(17);
+			
 			String exdatestring = rsEvent.getString(18);
 			String rdate = rsEvent.getString(19);
 
@@ -271,14 +300,15 @@ public class EventDAOImpl implements EventDAO {
 			event.setExDateString(exdatestring);
 			events.add(event);
 		}
-
 		rsEvent.close();
 		createStatement.close();
 		con.close();
 		return events;
 	}
-
-	public void updateEvent(Event event) {
+	
+	
+	
+	public void updateEvent(Event event){
 		try {
 			Connection con = manager.getConnection();
 			Statement createStatement = con.createStatement();
@@ -286,24 +316,36 @@ public class EventDAOImpl implements EventDAO {
 			Long id = event.getId();
 
 			if (id != null) {
-				java.sql.Timestamp dtstamp = new java.sql.Timestamp(event
-						.getDtstamp().getTime());
+				java.sql.Timestamp dtstamp = null;
+					if(event.getDtstamp()!=null){dtstamp = new java.sql.Timestamp(event
+						.getDtstamp().getTime());}
 				Long userid = event.getUser().getId();
 				String uid = event.getUid();
-				java.sql.Timestamp dtstart = new java.sql.Timestamp(event
-						.getDtstart().getTime());
-				java.sql.Timestamp created = new java.sql.Timestamp(event
-						.getCreated().getTime());
+				
+				java.sql.Timestamp dtstart = null;
+				if(event.getDtstart()!=null){dtstart = new java.sql.Timestamp(event
+						.getDtstart().getTime());}
+				
+				java.sql.Timestamp created = null;
+				if(event.getCreated()!=null){created = new java.sql.Timestamp(event
+						.getCreated().getTime());}
+
 				String description = event.getDescription();
-				java.sql.Timestamp lastmod = new java.sql.Timestamp(event
-						.getLastmod().getTime());
+				
+				java.sql.Timestamp lastmod = null;
+				if(event.getLastmod()!=null){lastmod = new java.sql.Timestamp(event
+						.getLastmod().getTime());}
+				
 				String location = event.getLocation();
 				String priority = event.getPriority();
 				String summary = event.getSummary();
 				String recurid = event.getRecurid();
 				String rrule = event.getRrule();
-				java.sql.Timestamp dtend = new java.sql.Timestamp(event
-						.getDtend().getTime());
+				
+				java.sql.Timestamp dtend = null;
+				if(event.getDtend()!=null){dtend = new java.sql.Timestamp(event
+						.getDtend().getTime());}
+				
 				long duration = event.getDuration();
 				String color = event.getColor();
 				List<String> categories = event.getCategories();
@@ -315,6 +357,7 @@ public class EventDAOImpl implements EventDAO {
 
 				}
 				String comment = event.getComment();
+				
 				String exdateString = event.getExdateString();
 				String rdate = event.getRdate();
 
@@ -349,6 +392,7 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setString(20, rdate);
 				pstmt.setLong(21, id);
 
+
 				pstmt.executeUpdate();
 
 				pstmt.close();
@@ -362,7 +406,7 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
-
+	
 	public void deleteEvent(Event event) {
 		try {
 			Connection con = manager.getConnection();
@@ -390,35 +434,36 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
-
-	public Event checkEvent(Event event) {
+	
+	public Event checkEvent(Event event){
 		User user = event.getUser();
 		List<Event> events = getEventsFromUser(user);
 		Event newEvent = null;
 		boolean isEmpty = false;
-
-		for (int i = 0; i < events.size(); i++) {
-			if (event.getUid().equals(events.get(i).getUid())) {
+		
+		for(int i = 0; i < events.size(); i++){
+			if(event.getUid().equals(events.get(i).getUid())){
 				isEmpty = true;
 				event.setId(events.get(i).getId());
 				break;
 			}
 		}
-		if (isEmpty) {
-
+		if(isEmpty){
+			
 			updateEvent(event);
-		} else {
+		}
+		else{
 			createEvents(event);
 		}
 		events.clear();
 		events = getEventsFromUser(user);
-		for (int i = 0; i < events.size(); i++) {
-			if (event.getUid().equals(events.get(i).getUid())) {
+		for(int i = 0; i < events.size(); i++){
+			if(event.getUid().equals(events.get(i).getUid())){
 				newEvent = events.get(i);
 				break;
 			}
 		}
-
+		
 		return newEvent;
 	}
 }
