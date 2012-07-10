@@ -69,7 +69,10 @@
 					</div>
 					<div id="menubar">
 						<div class="button"
-							onclick="changeMonth('calendarservlet?view=monthview', false)">&lt;&lt;</div>
+							onclick="changeMonth('calendarservlet?view=monthview', false)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilLinks_HP.png"></img>
+							</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=monthview&amp;year=</xsl:text>
 							<xsl:value-of select="@selectedyear"></xsl:value-of>
@@ -80,7 +83,10 @@
 							<xsl:text>&amp;day=</xsl:text>
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
-						<div class="button" onclick="window.location='{$newentry}'">Neu</div>
+						<div class="button" onclick="window.location='{$newentry}'">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/neuerTermin_HP.png"></img>
+						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=monthview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
@@ -149,7 +155,10 @@
 								src="Resources/Images/export-icon_HP.png"></img>
 						</div>
 						<div class="button"
-							onclick="changeMonth('calendarservlet?view=monthview', true)">&gt;&gt;</div>
+							onclick="changeMonth('calendarservlet?view=monthview', true)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilRechts_HP.png"></img>
+							</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
