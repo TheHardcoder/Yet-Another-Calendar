@@ -35,6 +35,12 @@ public class ICalendarTester extends TestCase {
 			List<Event> events = new ArrayList<Event>();
 			User user = new User("test@test.de", "test", "test", "123456");
 			events = importer.parseIcal4JToEventList(test, user);
+			
+			for (int i = 0; i < events.size(); i++) {
+				System.out.println("Import Test");
+				System.out.println(events.get(i).toString());
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

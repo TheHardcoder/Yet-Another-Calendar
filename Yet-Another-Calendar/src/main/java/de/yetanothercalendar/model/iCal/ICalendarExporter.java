@@ -46,15 +46,15 @@ public class ICalendarExporter {
 	private List<String> convertEventToString(Event e) {
 		List<String> eventString = new ArrayList<String>();
 		eventString.add("BEGIN:VEVENT");
-		if (!(converDateToICSDate(e.getCreated()).equals(""))) {
-			eventString.add("CREATED:" + converDateToICSDate(e.getCreated()));
+		if (!(Event.converDateToICSDate(e.getCreated()).equals(""))) {
+			eventString.add("CREATED:" + Event.converDateToICSDate(e.getCreated()));
 		}
-		if (!(converDateToICSDate(e.getLastmod()).equals(""))) {
+		if (!(Event.converDateToICSDate(e.getLastmod()).equals(""))) {
 			eventString.add("LAST-MODIFIED:"
-					+ converDateToICSDate(e.getLastmod()));
+					+ Event.converDateToICSDate(e.getLastmod()));
 		}
-		if (!(converDateToICSDate(e.getDtstamp()).equals(""))) {
-			eventString.add("DTSTAMP:" + converDateToICSDate(e.getDtstamp()));
+		if (!(Event.converDateToICSDate(e.getDtstamp()).equals(""))) {
+			eventString.add("DTSTAMP:" + Event.converDateToICSDate(e.getDtstamp()));
 		}
 		if (!(e.getUid().equals(""))) {
 			eventString.add("UID:" + e.getUid());
@@ -67,11 +67,11 @@ public class ICalendarExporter {
 			eventString.add("RECURID:" + e.getRecurid());
 		}
 
-		if (!(converDateToICSDate(e.getDtstart()).equals(""))) {
-			eventString.add("DTSTART:" + converDateToICSDate(e.getDtstart()));
+		if (!(Event.converDateToICSDate(e.getDtstart()).equals(""))) {
+			eventString.add("DTSTART:" + Event.converDateToICSDate(e.getDtstart()));
 		}
-		if (!(converDateToICSDate(e.getDtend()).equals(""))) {
-			eventString.add("DTEND:" + converDateToICSDate(e.getDtend()));
+		if (!(Event.converDateToICSDate(e.getDtend()).equals(""))) {
+			eventString.add("DTEND:" + Event.converDateToICSDate(e.getDtend()));
 		}
 		if (!(e.getDescription().equals(""))) {
 			eventString.add("DESCRIPTION:" + e.getDescription());
@@ -100,9 +100,11 @@ public class ICalendarExporter {
 			eventString.add("DURATION:PT" + Long.toString(e.getDuration())
 					+ "M");
 		}
-		if (!(converDateToICSDate(e.getExdate()).equals(""))) {
-			eventString.add("EXDATE:" + converDateToICSDate(e.getExdate()));
+		
+		if (!(e.getExdateString().equals(""))) {
+			eventString.add(e.getExdateString());
 		}
+	
 		String lineseparator = System.getProperty("line.separator");
 		if (!((e.getRdate().equals("")) || (e.getRdate().equals(lineseparator)))) {
 			eventString.add("RDATE:" + e.getRdate());
@@ -121,44 +123,6 @@ public class ICalendarExporter {
 		eventString.add("END:VEVENT");
 
 		return eventString;
-	}
-
-	/**
-	 * Converts a Date to an iCal Date Strin 20120626T140000
-	 * 
-	 * @param d
-	 *            Date to convert
-	 * @return String representation of the Date
-	 */
-	private String converDateToICSDate(Date d) {
-		if (d != null) {
-			GregorianCalendar cal = new GregorianCalendar();
-			cal.setTime(d);
-			String month = getTwoCharacterString(cal.get(Calendar.MONTH) + 1);
-			String day = getTwoCharacterString(cal.get(Calendar.DAY_OF_MONTH));
-			String hour = getTwoCharacterString(cal.get(Calendar.HOUR_OF_DAY));
-			String minutes = getTwoCharacterString(cal.get(Calendar.MINUTE));
-			String seconds = getTwoCharacterString(cal.get(Calendar.SECOND));
-			return cal.get(Calendar.YEAR) + month + day + "T" + hour + minutes
-					+ seconds + "Z";
-		} else {
-			return "";
-		}
-	}
-
-	/**
-	 * Converts an Integer into at least two Chars
-	 * 
-	 * @param i
-	 *            Integer to convert
-	 * @return String representation of the Integer (with at least two Chars)
-	 */
-	private String getTwoCharacterString(int i) {
-		if (i < 9) {
-			return "0" + i;
-		} else {
-			return Integer.toString(i);
-		}
 	}
 
 	/**

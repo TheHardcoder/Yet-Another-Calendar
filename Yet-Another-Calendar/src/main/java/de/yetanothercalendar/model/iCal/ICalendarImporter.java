@@ -141,8 +141,13 @@ public class ICalendarImporter {
 				Date lastmod = convertPropertyToDate(Property.LAST_MODIFIED,
 						comp);
 				Date dtend = convertPropertyToDate(Property.DTEND, comp);
-				Date exdate = convertPropertyToDate(Property.EXDATE, comp);
-
+				String exdateString = getProperty(comp, Property.EXDATE);
+				String[] exdateAr = exdateString.split(",");
+				List<Date> exdate = new ArrayList();
+				for (String string : exdateAr) {
+					exdate.add(convertPropertyToDate(Property.EXDATE, comp));
+				}
+				
 				String rdate = getProperty(comp, Property.RDATE);
 
 				event.setComment(comment);
@@ -186,38 +191,11 @@ public class ICalendarImporter {
 	private Date convertPropertyToDate(String Propertyname, Component comp) {
 		try {
 			String dateStr = comp.getProperty(Propertyname).toString();
-			Date d = parseIcsDate(dateStr);
+			Date d = Event.parseIcsDate(dateStr);
 			return d;
 		} catch (Exception e) {
 			return null;
 		}
-	}
-
-	/**
-	 * Parse an icsDateString ("yyyyMMddTHHmmssZ") to a Date
-	 * 
-	 * @param dateString
-	 *            iCal Date String
-	 * @return Date Representation of the iCal dateString
-	 * @throws ParseException
-	 *             is thrown in case something goes wrong :-(
-	 */
-	public static Date parseIcsDate(String dateString) throws ParseException {
-		StringBuffer dateBuf = new StringBuffer(dateString);
-		// Delete Object Description: e.g. "DTSTAMP:" from
-		// "DTSTAMP:20120508T201446Z\r\n"
-
-		while (!(Character.isDigit(dateBuf.charAt(0)))) {
-			dateBuf.deleteCharAt(0);
-		}
-		// Delete the T in Date 20120508T201446Z\r\n
-		dateString = dateBuf.toString();
-		dateString = dateString.replace('T', ' ');
-
-		DateFormat df = new SimpleDateFormat("yyyyMMdd HHmmss");
-		Date date = df.parse(dateString.toString());
-//		System.out.println(date.toString());
-		return date;
 	}
 
 	/**

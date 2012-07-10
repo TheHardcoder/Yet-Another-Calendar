@@ -42,7 +42,7 @@ public class EventDAOMockSimple implements EventDAO {
 				start.getTime(), created.getTime(), "description", new Date(),
 				"location", "very high", "what a great summary", "recurrid",
 				null, end.getTime(), 0, "#fff", new ArrayList<String>(),
-				"comment", new Date(), "");
+				"comment", new ArrayList<Date>(), "");
 	}
 
 	public boolean createEvents(Event event) {
@@ -73,5 +73,10 @@ public class EventDAOMockSimple implements EventDAO {
 	public void deleteEvent(Event event) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Event checkEvent(Event event) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
