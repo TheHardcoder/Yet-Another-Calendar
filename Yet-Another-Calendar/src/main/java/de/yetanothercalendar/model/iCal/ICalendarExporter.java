@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import net.fortuna.ical4j.model.property.Priority;
+
 import de.yetanothercalendar.model.database.Event;
 
 public class ICalendarExporter {
@@ -115,7 +117,13 @@ public class ICalendarExporter {
 			eventString.add("RRULE:" + e.getRrule());
 		}
 		if (neitherNullnorEmpty(e.getPriority())) {
-			eventString.add("PRIORITY:" + e.getPriority());
+			if (e.getPriority().equalsIgnoreCase("High")) {
+				eventString.add("PRIORITY:" + Priority.HIGH);
+			} else if (e.getPriority().equalsIgnoreCase("Normal")) {
+				eventString.add("PRIORITY:" + Priority.MEDIUM);
+			} else if (e.getPriority().equalsIgnoreCase("Low")) {
+				eventString.add("PRIORITY:" + Priority.LOW);
+			}
 		}
 		if (neitherNullnorEmpty(e.getLocation())) {
 			eventString.add("LOCATION:" + e.getLocation());
