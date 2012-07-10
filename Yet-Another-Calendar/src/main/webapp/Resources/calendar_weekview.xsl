@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
@@ -200,7 +200,7 @@
 						</div>
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
+						Impressum: &#160; Michael MÃ¼ller &#160; Tel: 10932048091284 &#160;
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
@@ -504,7 +504,8 @@
 					<xsl:text>&amp;endtimehours=</xsl:text>
 					<xsl:choose>
 						<xsl:when test="(1 + substring-before($time,':')) &lt; 10">
-							<xsl:text>0</xsl:text><xsl:value-of select="(1 + substring-before($time,':'))" />
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="(1 + substring-before($time,':'))" />
 						</xsl:when>
 						<xsl:when test="(1 + substring-before($time,':')) = 24">
 							<xsl:text>23&amp;endtimeminutes=55</xsl:text>

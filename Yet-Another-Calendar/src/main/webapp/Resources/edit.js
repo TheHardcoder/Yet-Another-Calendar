@@ -49,6 +49,10 @@ var dates = new Array("dtstamp", "created", "lastmod", "exdate");
 function updateEvent(){
 	setFormData();
 	document.getElementById("editaction").value="save";
+	var elem = document.forms["editform"].elements;
+	for (var i = 0; i < elem.length; i++){
+		elem[i].value = escape(elem[i].value);
+	}
 	document.getElementById("editform").submit();
 }
 
