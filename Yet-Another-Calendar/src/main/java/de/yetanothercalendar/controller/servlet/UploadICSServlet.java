@@ -103,10 +103,11 @@ public class UploadICSServlet extends HttpServlet {
 	private void exportStringListToFile(List<String> icalvalues,
 			HttpServletResponse response) {
 		try {
-			response.setContentType("text/plain");
+			response.setContentType("text/calendar");
+			String lineseparator = System.getProperty("line.separator");
 			String s = "";
 			for (String string : icalvalues) {
-				s += string;
+				s += string + lineseparator;
 			}
 			ServletOutputStream out = response.getOutputStream();
 			try {

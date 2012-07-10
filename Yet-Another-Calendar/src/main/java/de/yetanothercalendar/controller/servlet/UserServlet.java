@@ -42,11 +42,13 @@ public class UserServlet extends HttpServlet {
 			String forename = (String) req.getParameter("forename");
 			String lastname = (String) req.getParameter("lastname");
 			String password = (String) req.getParameter("password");
-//			System.out.println("DATA: " + email + forename + lastname
-//					+ password);
+			// System.out.println("DATA: " + email + forename + lastname
+			// + password);
 			if (email != null && forename != null && lastname != null
 					&& password != null) {
-				// TODO check if hashing works correct
+				if (email.length() < 5 | !email.contains("@")) {
+					throw new RuntimeException("No valid user ");
+				}
 				User user = new User(email, forename, lastname,
 						hashPassword(password));
 				dao.createUser(user);
@@ -79,10 +81,10 @@ public class UserServlet extends HttpServlet {
 							+ c.get(Calendar.MONTH)
 							+ "&selectedweek="
 							+ (c.get(Calendar.WEEK_OF_YEAR) + 1)
-							+ "&selectedday="
-							+ c.get(Calendar.DAY_OF_MONTH));
+							+ "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 				} else {
-					resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Ungültige Email-Adresse oder ungültiges Passwort.");
+					resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+							"Ungültige Email-Adresse oder ungültiges Passwort.");
 				}
 			} else {
 				throw new RuntimeException("Invalid login parameters");

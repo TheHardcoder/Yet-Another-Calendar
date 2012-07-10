@@ -126,6 +126,9 @@ public class CalendarEntry {
 	}
 
 	public String getColorString() {
+		if(null == colorString) {
+			colorString = "";
+		}
 		return colorString;
 	}
 
