@@ -111,6 +111,7 @@ public class ICalendarExporter {
 		}
 
 		if (neitherNullnorEmpty(e.getRrule())) {
+
 			eventString.add("RRULE:" + e.getRrule());
 		}
 		if (neitherNullnorEmpty(e.getPriority())) {

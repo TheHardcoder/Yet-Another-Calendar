@@ -69,7 +69,10 @@
 					</div>
 					<div id="menubar">
 						<div class="button"
-							onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
+							onclick="changeWeek('calendarservlet?view=weekview', false)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilLinks_HP.png"></img>
+							</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=weekview&amp;year=</xsl:text>
 							<xsl:value-of select="@selectedyear"></xsl:value-of>
@@ -80,7 +83,10 @@
 							<xsl:text>&amp;day=</xsl:text>
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
-						<div class="button" onclick="window.location='{$newentry}'">Neu</div>
+						<div class="button" onclick="window.location='{$newentry}'">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/neuerTermin_HP.png"></img>
+						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
@@ -144,15 +150,14 @@
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
-						<form class="button" name="exportform" method="get"
-							action="import">
-							<input type="hidden" name="action" value="export"></input>
-							<input type="submit" style="border: 0px; background: url('Resources/Images/export-icon_HP.png');">
-								<img width="32px" height="32px" style="margin-top: -5px;"
-									src="Resources/Images/export-icon_HP.png"></img>
-							</input>
-						</form>
-						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
+						<div class="button" onclick="window.location='import?action=export'">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/export-icon_HP.png"></img>
+						</div>
+						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilRechts_HP.png"></img>
+						</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
