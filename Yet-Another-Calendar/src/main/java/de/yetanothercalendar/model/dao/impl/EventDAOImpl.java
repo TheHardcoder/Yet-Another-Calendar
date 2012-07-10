@@ -199,7 +199,7 @@ public class EventDAOImpl implements EventDAO {
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
 					+ "Where users.email = \"" + email
-					+ "\" and events.rrule IS NULL;";
+					+ "\" and (events.rrule IS NULL OR events.rrule = '');";
 			events = executeSELECTQuery(user, eventCreationString);
 		} catch (Exception e) {
 			e.printStackTrace();
