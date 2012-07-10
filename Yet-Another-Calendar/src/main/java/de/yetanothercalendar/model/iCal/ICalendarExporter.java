@@ -106,7 +106,7 @@ public class ICalendarExporter {
 		}
 	
 		String lineseparator = System.getProperty("line.separator");
-		if (!((e.getRdate().equals("")) || (e.getRdate().equals(lineseparator)))) {
+		if (neitherNullnorEmpty(e.getRrule())) {
 			eventString.add("RDATE:" + e.getRdate());
 		}
 
