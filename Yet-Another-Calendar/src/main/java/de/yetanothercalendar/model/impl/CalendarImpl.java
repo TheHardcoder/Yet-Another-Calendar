@@ -251,7 +251,11 @@ public class CalendarImpl implements Calendar {
 			java.util.Calendar current = new GregorianCalendar(locale);
 			current.set(java.util.Calendar.YEAR, year);
 			current.set(java.util.Calendar.DAY_OF_YEAR,
-					current.getMaximum(java.util.Calendar.DAY_OF_YEAR));
+					current.getActualMaximum(java.util.Calendar.DAY_OF_YEAR));
+			System.out.println(current.toString());
+			current.get(java.util.Calendar.YEAR);
+			current.get(java.util.Calendar.DAY_OF_YEAR);
+			System.out.println(lastSunday.toString());
 			while (current.before(lastSunday)) {
 				current.add(java.util.Calendar.DAY_OF_YEAR, 1);
 				Day day = new Day(
