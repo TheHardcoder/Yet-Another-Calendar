@@ -21,7 +21,6 @@ public class EntryViewHelper extends ViewHelper {
 		priority = priority.replaceAll("\\s", "");
 		element.setAttribute("priority", priority);
 		element.setAttribute("color", entry.getColorString());
-		// TODO Noch mit Ben abklären, wo er es haben will
 		element.setAttribute("column", String.valueOf(entry.getColumn()));
 		element.addContent(this.getEntryAttributes());
 	}
