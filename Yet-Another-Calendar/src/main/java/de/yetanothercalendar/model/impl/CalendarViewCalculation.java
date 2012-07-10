@@ -61,7 +61,7 @@ public class CalendarViewCalculation {
 													// überscheidet
 				if (checkOnOverlapping(ePrivious, eActive)) { // Ja
 					// Prüfen ob wir schon am Ende der Liste angelangt sind(
-					if (i < lBufferEntries.size() - 2) { // Nein
+					if (i < lBufferEntries.size() - 1) { // Nein
 						i++; // Zeiger auf den nächsten Eintrag
 					} else { // JA
 						column++; // Mit der nächsten Spalte weiter machen
@@ -89,6 +89,9 @@ public class CalendarViewCalculation {
 					if (i >= lBufferEntries.size() && lBufferEntries.size() > 0) {
 						column++; // Aktuelle Spalte erhöhen
 						i = 0; // Zeiger auf 0 setzen
+						ePrivious = lBufferEntries.remove(i);
+						ePrivious.setColumn(column);
+						lRemovedEntries.add(ePrivious);
 					}
 				}
 			}
