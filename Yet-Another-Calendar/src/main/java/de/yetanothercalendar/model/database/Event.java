@@ -341,7 +341,7 @@ public class Event {
 				if (parseIcsDate != null) {
 					resultList.add(parseIcsDate);
 				}
-			} catch (ParseException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
