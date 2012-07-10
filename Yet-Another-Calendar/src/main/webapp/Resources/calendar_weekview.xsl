@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
+
+	<xsl:include href="Basic.xsl" />
 
 	<xsl:template match="/calendar">
 		<html xmlns="http://www.w3.org/1999/xhtml">
@@ -67,7 +69,10 @@
 					</div>
 					<div id="menubar">
 						<div class="button"
-							onclick="changeWeek('calendarservlet?view=weekview', false)">&lt;&lt;</div>
+							onclick="changeWeek('calendarservlet?view=weekview', false)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilLinks_HP.png"></img>
+							</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=weekview&amp;year=</xsl:text>
 							<xsl:value-of select="@selectedyear"></xsl:value-of>
@@ -78,7 +83,10 @@
 							<xsl:text>&amp;day=</xsl:text>
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
-						<div class="button" onclick="window.location='{$newentry}'">Neu</div>
+						<div class="button" onclick="window.location='{$newentry}'">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/neuerTermin_HP.png"></img>
+						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
@@ -142,11 +150,14 @@
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
-						<div class="button">
+						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/export-icon_HP.png"></img>
 						</div>
-						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">&gt;&gt;</div>
+						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilRechts_HP.png"></img>
+						</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
@@ -200,7 +211,7 @@
 						</div>
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
+						Impressum: &#160; Michael MÃ¼ller &#160; Tel: 10932048091284 &#160;
 						Email:
 						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
 						&#160; Mehr:
@@ -385,63 +396,13 @@
 				<xsl:value-of select="endtime/@minutes" />
 				<xsl:text> Uhr</xsl:text>
 				<br />
+				<xsl:text>Ort: </xsl:text>
+				<xsl:value-of select="location"></xsl:value-of>
+				<br />
 				<xsl:value-of select="description" />
 				<xsl:text>&#xD;</xsl:text>
 			</div>
 		</div>
-	</xsl:template>
-
-	<xsl:template name="entrycontent">
-		<xsl:text>&amp;id=</xsl:text>
-		<xsl:value-of select="@id"></xsl:value-of>
-		<xsl:text>&amp;priority=</xsl:text>
-		<xsl:value-of select="@priority"></xsl:value-of>
-		<xsl:text>&amp;color=</xsl:text>
-		<xsl:value-of select="@color"></xsl:value-of>
-		<xsl:text>&amp;summary=</xsl:text>
-		<xsl:value-of select="summary"></xsl:value-of>
-
-		<xsl:text>&amp;year=</xsl:text>
-		<xsl:value-of select="startdate/@year" />
-		<xsl:text>&amp;month=</xsl:text>
-		<xsl:value-of select="startdate/@month" />
-		<xsl:text>&amp;day=</xsl:text>
-		<xsl:value-of select="startdate/@day" />
-		<xsl:text>&amp;starttimehours=</xsl:text>
-		<xsl:value-of select="startdate/@hours" />
-		<xsl:text>&amp;starttimeminutes=</xsl:text>
-		<xsl:value-of select="startdate/@minutes" />
-
-		<xsl:text>&amp;endyear=</xsl:text>
-		<xsl:value-of select="enddate/@year" />
-		<xsl:text>&amp;endmonth=</xsl:text>
-		<xsl:value-of select="enddate/@month" />
-		<xsl:text>&amp;endday=</xsl:text>
-		<xsl:value-of select="enddate/@day" />
-		<xsl:text>&amp;endtimehours=</xsl:text>
-		<xsl:value-of select="enddate/@hours" />
-		<xsl:text>&amp;endtimeminutes=</xsl:text>
-		<xsl:value-of select="enddate/@minutes" />
-		<xsl:text>&amp;place=</xsl:text>
-		<xsl:value-of select="location" />
-		<xsl:text>&amp;description=</xsl:text>
-		<xsl:value-of select="description" />
-		<xsl:text>&amp;categories=</xsl:text>
-		<xsl:apply-templates select="categories/category"></xsl:apply-templates>
-
-		<xsl:text>&amp;createdYear=</xsl:text>
-		<xsl:value-of select="created/@year" />
-		<xsl:text>&amp;createdMonth=</xsl:text>
-		<xsl:value-of select="created/@month" />
-		<xsl:text>&amp;createdDay=</xsl:text>
-		<xsl:value-of select="created/@day" />
-		<xsl:text>&amp;createdHour=</xsl:text>
-		<xsl:value-of select="created/@hours" />
-		<xsl:text>&amp;createdMinutes=</xsl:text>
-		<xsl:value-of select="created/@minutes" />
-
-		<xsl:text>&amp;comment=</xsl:text>
-		<xsl:value-of select="comment" />
 	</xsl:template>
 
 	<xsl:template match="category">
@@ -504,7 +465,8 @@
 					<xsl:text>&amp;endtimehours=</xsl:text>
 					<xsl:choose>
 						<xsl:when test="(1 + substring-before($time,':')) &lt; 10">
-							<xsl:text>0</xsl:text><xsl:value-of select="(1 + substring-before($time,':'))" />
+							<xsl:text>0</xsl:text>
+							<xsl:value-of select="(1 + substring-before($time,':'))" />
 						</xsl:when>
 						<xsl:when test="(1 + substring-before($time,':')) = 24">
 							<xsl:text>23&amp;endtimeminutes=55</xsl:text>

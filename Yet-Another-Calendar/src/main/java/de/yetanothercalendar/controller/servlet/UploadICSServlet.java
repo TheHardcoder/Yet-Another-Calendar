@@ -69,8 +69,8 @@ public class UploadICSServlet extends HttpServlet {
 										.parseIcal4JToEventList(importToIcal4J,
 												user);
 								for (Event event : parseIcal4JToEventList) {
-//									System.out.println("Event imported: "
-//											+ event.toString());
+									// System.out.println("Event imported: "
+									// + event.toString());
 									dao.createEvents(event);
 								}
 							} catch (ParserException e) {
@@ -81,25 +81,33 @@ public class UploadICSServlet extends HttpServlet {
 				} catch (FileUploadException e) {
 					e.printStackTrace();
 				}
-			} else if (parameter.equals("export")) {
-				List<Event> eventsFromUser = dao.getEventsFromUser(user);
-				ICalendarExporter exporter = new ICalendarExporter();
-				List<String> exportToIcal = exporter
-						.exportToIcal(eventsFromUser);
-				exportStringListToFile(exportToIcal, response);
 			}
 		} else {
 			throw new RuntimeException("No User logged in!");
 		}
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String parameter = request.getParameter("action");
+		User user = (User) request.getSession().getAttribute("user");
+		if (parameter.equals("export")) {
+			List<Event> eventsFromUser = dao.getEventsFromUser(user);
+			ICalendarExporter exporter = new ICalendarExporter();
+			List<String> exportToIcal = exporter.exportToIcal(eventsFromUser);
+			exportStringListToFile(exportToIcal, response);
+		}
+	}
+
 	private void exportStringListToFile(List<String> icalvalues,
 			HttpServletResponse response) {
 		try {
-			response.setContentType("text/plain");
+			response.setContentType("text/calendar");
+			String lineseparator = System.getProperty("line.separator");
 			String s = "";
 			for (String string : icalvalues) {
-				s += string;
+				s += string + lineseparator;
 			}
 			ServletOutputStream out = response.getOutputStream();
 			try {

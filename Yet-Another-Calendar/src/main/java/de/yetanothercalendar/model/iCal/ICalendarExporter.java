@@ -46,34 +46,34 @@ public class ICalendarExporter {
 	private List<String> convertEventToString(Event e) {
 		List<String> eventString = new ArrayList<String>();
 		eventString.add("BEGIN:VEVENT");
-		if (!(converDateToICSDate(e.getCreated()).equals(""))) {
-			eventString.add("CREATED:" + converDateToICSDate(e.getCreated()));
+		if (!(Event.converDateToICSDate(e.getCreated()).equals(""))) {
+			eventString.add("CREATED:" + Event.converDateToICSDate(e.getCreated()));
 		}
-		if (!(converDateToICSDate(e.getLastmod()).equals(""))) {
+		if (!(Event.converDateToICSDate(e.getLastmod()).equals(""))) {
 			eventString.add("LAST-MODIFIED:"
-					+ converDateToICSDate(e.getLastmod()));
+					+ Event.converDateToICSDate(e.getLastmod()));
 		}
-		if (!(converDateToICSDate(e.getDtstamp()).equals(""))) {
-			eventString.add("DTSTAMP:" + converDateToICSDate(e.getDtstamp()));
+		if (!(Event.converDateToICSDate(e.getDtstamp()).equals(""))) {
+			eventString.add("DTSTAMP:" + Event.converDateToICSDate(e.getDtstamp()));
 		}
-		if (!(e.getUid().equals(""))) {
+		if (neitherNullnorEmpty(e.getUid())) {
 			eventString.add("UID:" + e.getUid());
 		}
-		if (!(e.getSummary().equals(""))) {
+		if (neitherNullnorEmpty(e.getSummary())) {
 			eventString.add("SUMMARY:" + e.getSummary());
 		}
 
-		if (!(e.getRecurid().equals(""))) {
+		if (neitherNullnorEmpty(e.getRecurid())){
 			eventString.add("RECURID:" + e.getRecurid());
 		}
 
-		if (!(converDateToICSDate(e.getDtstart()).equals(""))) {
-			eventString.add("DTSTART:" + converDateToICSDate(e.getDtstart()));
+		if (!(Event.converDateToICSDate(e.getDtstart()).equals(""))) {
+			eventString.add("DTSTART:" + Event.converDateToICSDate(e.getDtstart()));
 		}
-		if (!(converDateToICSDate(e.getDtend()).equals(""))) {
-			eventString.add("DTEND:" + converDateToICSDate(e.getDtend()));
+		if (!(Event.converDateToICSDate(e.getDtend()).equals(""))) {
+			eventString.add("DTEND:" + Event.converDateToICSDate(e.getDtend()));
 		}
-		if (!(e.getDescription().equals(""))) {
+		if (neitherNullnorEmpty(e.getDescription())) {
 			eventString.add("DESCRIPTION:" + e.getDescription());
 		}
 		if (e.getCategories() != null) {
@@ -93,72 +93,37 @@ public class ICalendarExporter {
 				eventString.add("CATEGORIES:" + categories);
 			}
 		}
-		if (!(e.getComment().equals(""))) {
+		if (neitherNullnorEmpty(e.getComment())) {
 			eventString.add("COMMENT:" + e.getComment());
 		}
 		if (e.getDuration() > 0) {
 			eventString.add("DURATION:PT" + Long.toString(e.getDuration())
 					+ "M");
 		}
-		if (!(converDateToICSDate(e.getExdate()).equals(""))) {
-			eventString.add("EXDATE:" + converDateToICSDate(e.getExdate()));
+		
+		if (neitherNullnorEmpty(e.getExdateString())) {
+			eventString.add(e.getExdateString());
 		}
+	
 		String lineseparator = System.getProperty("line.separator");
 		if (!((e.getRdate().equals("")) || (e.getRdate().equals(lineseparator)))) {
 			eventString.add("RDATE:" + e.getRdate());
 		}
 
-		if (!(e.getRrule().equals(""))) {
+		if (neitherNullnorEmpty(e.getRrule())) {
+
 			eventString.add("RRULE:" + e.getRrule());
 		}
-		if (!(e.getPriority().equals(""))) {
+		if (neitherNullnorEmpty(e.getPriority())) {
 			eventString.add("PRIORITY:" + e.getPriority());
 		}
-		if (!(e.getLocation().equals(""))) {
+		if (neitherNullnorEmpty(e.getLocation())) {
 			eventString.add("LOCATION:" + e.getLocation());
 		}
 
 		eventString.add("END:VEVENT");
 
 		return eventString;
-	}
-
-	/**
-	 * Converts a Date to an iCal Date Strin 20120626T140000
-	 * 
-	 * @param d
-	 *            Date to convert
-	 * @return String representation of the Date
-	 */
-	private String converDateToICSDate(Date d) {
-		if (d != null) {
-			GregorianCalendar cal = new GregorianCalendar();
-			cal.setTime(d);
-			String month = getTwoCharacterString(cal.get(Calendar.MONTH) + 1);
-			String day = getTwoCharacterString(cal.get(Calendar.DAY_OF_MONTH));
-			String hour = getTwoCharacterString(cal.get(Calendar.HOUR_OF_DAY));
-			String minutes = getTwoCharacterString(cal.get(Calendar.MINUTE));
-			String seconds = getTwoCharacterString(cal.get(Calendar.SECOND));
-			return cal.get(Calendar.YEAR) + month + day + "T" + hour + minutes
-					+ seconds + "Z";
-		} else {
-			return "";
-		}
-	}
-
-	/**
-	 * Converts an Integer into at least two Chars
-	 * 
-	 * @param i
-	 *            Integer to convert
-	 * @return String representation of the Integer (with at least two Chars)
-	 */
-	private String getTwoCharacterString(int i) {
-		if (i < 9) {
-			return "0" + i;
-		} else {
-			return Integer.toString(i);
-		}
 	}
 
 	/**
@@ -189,5 +154,13 @@ public class ICalendarExporter {
 		 * TZOFFSETFROM:-0800 TZOFFSETTO:-0700 END:DAYLIGHT END:VTIMEZONE
 		 */
 
+	}
+	
+	private boolean neitherNullnorEmpty(String str){
+		if ((str == null)||(str.equals(""))){
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

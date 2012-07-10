@@ -65,7 +65,7 @@ public class EventDAOMockFull implements EventDAO {
 				new Date(), "uuid", start.getTime(), created.getTime(),
 				"description", new Date(), "location", "very high",
 				"what a great summary", "recurrid", null, end.getTime(), 0,
-				"#fff", new ArrayList<String>(), "comment", new Date(), "");
+				"#fff", new ArrayList<String>(), "comment", new ArrayList<Date>(), "");
 	}
 
 	public void createEventTable() {
@@ -104,5 +104,10 @@ public class EventDAOMockFull implements EventDAO {
 	public void deleteEvent(Event event) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Event checkEvent(Event event) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -4,6 +4,8 @@
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
+	<xsl:include href="Basic.xsl" />
+
 	<xsl:template match="/calendar">
 		<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
@@ -67,7 +69,10 @@
 					</div>
 					<div id="menubar">
 						<div class="button"
-							onclick="changeMonth('calendarservlet?view=monthview', false)">&lt;&lt;</div>
+							onclick="changeMonth('calendarservlet?view=monthview', false)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilLinks_HP.png"></img>
+							</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=monthview&amp;year=</xsl:text>
 							<xsl:value-of select="@selectedyear"></xsl:value-of>
@@ -78,7 +83,10 @@
 							<xsl:text>&amp;day=</xsl:text>
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
-						<div class="button" onclick="window.location='{$newentry}'">Neu</div>
+						<div class="button" onclick="window.location='{$newentry}'">
+						<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/neuerTermin_HP.png"></img>
+						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=monthview')">Heute</div>
 						<div class="menuitem">
 							<form action="calendarservlet" method="get">
@@ -142,12 +150,15 @@
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/import-icon_HP.png"></img>
 						</div>
-						<div class="button">
+						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
 								src="Resources/Images/export-icon_HP.png"></img>
 						</div>
 						<div class="button"
-							onclick="changeMonth('calendarservlet?view=monthview', true)">&gt;&gt;</div>
+							onclick="changeMonth('calendarservlet?view=monthview', true)">
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilRechts_HP.png"></img>
+							</div>
 					</div>
 					<div id="calendar">
 						<div id="tabbar">
@@ -364,64 +375,12 @@
 			:
 			<xsl:value-of select="starttime/@minutes"></xsl:value-of>
 		</xsl:variable>
-		<div class="monthentry" style="background-color: #{@color}"
-			onclick="window.location='{$link}'" title="{$title}">
+		<div class="entry" style="background-color: #{@color}" onclick="window.location='{$link}'"
+			title="{$title}">
 			<xsl:value-of select="translate(normalize-space($time), ' ', '')"></xsl:value-of>
 			<xsl:text> Uhr </xsl:text>
 			<xsl:value-of select="summary"></xsl:value-of>
 		</div>
 	</xsl:template>
 
-	<xsl:template name="entrycontent">
-		<xsl:text>&amp;id=</xsl:text>
-		<xsl:value-of select="@id"></xsl:value-of>
-		<xsl:text>&amp;priority=</xsl:text>
-		<xsl:value-of select="@priority"></xsl:value-of>
-		<xsl:text>&amp;color=</xsl:text>
-		<xsl:value-of select="@color"></xsl:value-of>
-		<xsl:text>&amp;summary=</xsl:text>
-		<xsl:value-of select="summary"></xsl:value-of>
-
-		<xsl:text>&amp;year=</xsl:text>
-		<xsl:value-of select="startdate/@year" />
-		<xsl:text>&amp;month=</xsl:text>
-		<xsl:value-of select="startdate/@month" />
-		<xsl:text>&amp;day=</xsl:text>
-		<xsl:value-of select="startdate/@day" />
-		<xsl:text>&amp;starttimehours=</xsl:text>
-		<xsl:value-of select="startdate/@hours" />
-		<xsl:text>&amp;starttimeminutes=</xsl:text>
-		<xsl:value-of select="startdate/@minutes" />
-
-		<xsl:text>&amp;endyear=</xsl:text>
-		<xsl:value-of select="enddate/@year" />
-		<xsl:text>&amp;endmonth=</xsl:text>
-		<xsl:value-of select="enddate/@month" />
-		<xsl:text>&amp;endday=</xsl:text>
-		<xsl:value-of select="enddate/@day" />
-		<xsl:text>&amp;endtimehours=</xsl:text>
-		<xsl:value-of select="enddate/@hours" />
-		<xsl:text>&amp;endtimeminutes=</xsl:text>
-		<xsl:value-of select="enddate/@minutes" />
-		<xsl:text>&amp;place=</xsl:text>
-		<xsl:value-of select="location" />
-		<xsl:text>&amp;description=</xsl:text>
-		<xsl:value-of select="description" />
-		<xsl:text>&amp;categories=</xsl:text>
-		<xsl:apply-templates select="categories/category"></xsl:apply-templates>
-
-		<xsl:text>&amp;createdYear=</xsl:text>
-		<xsl:value-of select="created/@year" />
-		<xsl:text>&amp;createdMonth=</xsl:text>
-		<xsl:value-of select="created/@month" />
-		<xsl:text>&amp;createdDay=</xsl:text>
-		<xsl:value-of select="created/@day" />
-		<xsl:text>&amp;createdHour=</xsl:text>
-		<xsl:value-of select="created/@hours" />
-		<xsl:text>&amp;createdMinutes=</xsl:text>
-		<xsl:value-of select="created/@minutes" />
-
-		<xsl:text>&amp;comment=</xsl:text>
-		<xsl:value-of select="comment" />
-	</xsl:template>
 </xsl:stylesheet>

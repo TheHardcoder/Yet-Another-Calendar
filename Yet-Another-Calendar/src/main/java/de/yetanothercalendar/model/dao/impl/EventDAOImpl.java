@@ -44,7 +44,7 @@ public class EventDAOImpl implements EventDAO {
 					+ "rrule VARCHAR(150)," + "dtend DATETIME,"
 					+ "duration INT," + "color VARCHAR(10),"
 					+ "categories VARCHAR(250)," + "comment TEXT,"
-					+ "exdate DATETIME," + "rdate VARCHAR(250),"
+					+ "exdate VARCHAR(150)," + "rdate VARCHAR(250),"
 					+ "FOREIGN KEY (userId)  REFERENCES users (id));";
 			createStatement.executeUpdate(tablecreationString);
 			createStatement.close();
@@ -84,7 +84,6 @@ public class EventDAOImpl implements EventDAO {
 				long duration = event.getDuration();
 				String color = event.getColor();
 
-				
 				String strCategories = "";
 				List<String> categories = event.getCategories();
 				for (int i = 0; i < categories.size(); i++) {
@@ -94,8 +93,7 @@ public class EventDAOImpl implements EventDAO {
 				}
 
 				String comment = event.getComment();
-				java.sql.Timestamp exdate = new java.sql.Timestamp(event
-						.getExdate().getTime());
+				String exdateString = event.getExdateString();
 				String rdate = event.getRdate();
 
 				String eventCreationString = "INSERT INTO events "
@@ -124,7 +122,7 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setString(15, color);
 				pstmt.setObject(16, strCategories);
 				pstmt.setString(17, comment);
-				pstmt.setTimestamp(18, exdate);
+				pstmt.setString(18, exdateString);
 				pstmt.setString(19, rdate);
 
 				pstmt.executeUpdate();
@@ -201,7 +199,7 @@ public class EventDAOImpl implements EventDAO {
 					+ " events.rdate " + "from events INNER JOIN users"
 					+ " ON  (events.userID = users.ID)"
 					+ "Where users.email = \"" + email
-					+ "\" and events.rrule IS NULL;";
+					+ "\" and (events.rrule IS NULL OR events.rrule = '');";
 			events = executeSELECTQuery(user, eventCreationString);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,13 +261,15 @@ public class EventDAOImpl implements EventDAO {
 
 			}
 			String comment = rsEvent.getString(17);
-			Date exdate = sdf.parse(rsEvent.getString(18));
+			String exdatestring = rsEvent.getString(18);
 			String rdate = rsEvent.getString(19);
 
-			events.add(new Event(id, user, dtstamp, uid, dtstart, created,
+			Event event = new Event(id, user, dtstamp, uid, dtstart, created,
 					description, lastmod, location, priority, summary, recurid,
-					rrule, dtend, duration, color, categories, comment, exdate,
-					rdate));
+					rrule, dtend, duration, color, categories, comment, null,
+					rdate);
+			event.setExDateString(exdatestring);
+			events.add(event);
 		}
 
 		rsEvent.close();
@@ -315,8 +315,7 @@ public class EventDAOImpl implements EventDAO {
 
 				}
 				String comment = event.getComment();
-				java.sql.Timestamp exdate = new java.sql.Timestamp(event
-						.getExdate().getTime());
+				String exdateString = event.getExdateString();
 				String rdate = event.getRdate();
 
 				String eventCreationString = "UPDATE events "
@@ -346,7 +345,7 @@ public class EventDAOImpl implements EventDAO {
 				pstmt.setString(16, color);
 				pstmt.setObject(17, strCategories);
 				pstmt.setString(18, comment);
-				pstmt.setTimestamp(19, exdate);
+				pstmt.setString(19, exdateString);
 				pstmt.setString(20, rdate);
 				pstmt.setLong(21, id);
 
@@ -363,7 +362,7 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
-	
+
 	public void deleteEvent(Event event) {
 		try {
 			Connection con = manager.getConnection();
@@ -391,36 +390,35 @@ public class EventDAOImpl implements EventDAO {
 		}
 
 	}
-	
-	public Event checkEvent(Event event){
+
+	public Event checkEvent(Event event) {
 		User user = event.getUser();
 		List<Event> events = getEventsFromUser(user);
 		Event newEvent = null;
 		boolean isEmpty = false;
-		
-		for(int i = 0; i < events.size(); i++){
-			if(event.getUid().equals(events.get(i).getUid())){
+
+		for (int i = 0; i < events.size(); i++) {
+			if (event.getUid().equals(events.get(i).getUid())) {
 				isEmpty = true;
 				event.setId(events.get(i).getId());
 				break;
 			}
 		}
-		if(isEmpty){
-			
+		if (isEmpty) {
+
 			updateEvent(event);
-		}
-		else{
+		} else {
 			createEvents(event);
 		}
 		events.clear();
 		events = getEventsFromUser(user);
-		for(int i = 0; i < events.size(); i++){
-			if(event.getUid().equals(events.get(i).getUid())){
+		for (int i = 0; i < events.size(); i++) {
+			if (event.getUid().equals(events.get(i).getUid())) {
 				newEvent = events.get(i);
 				break;
 			}
 		}
-		
+
 		return newEvent;
 	}
 }

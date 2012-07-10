@@ -90,6 +90,6 @@ public class DummyDataCreatorServlet extends HttpServlet {
 				new Date(), "uuid", start.getTime(), created.getTime(), desc,
 				new Date(), location, "very high", "what a great summary",
 				"recurrid", null, end.getTime(), 0, "#fff",
-				new ArrayList<String>(), "comment", new Date(), "");
+				new ArrayList<String>(), "comment", new ArrayList<Date>(), "");
 	}
 }

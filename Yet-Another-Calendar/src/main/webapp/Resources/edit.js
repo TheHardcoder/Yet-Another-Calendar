@@ -18,6 +18,9 @@ window.onload = function() {
 		wert = paar[1];
 		name = unescape(name).replace("+", " ");
 		wert = unescape(wert).replace("+", " ");
+		if ((name.search(/year.+/) || name.search(/month.+/) || name.search(/week.+/) || name.search(/day.+/)) && wert.length <= 1){
+			wert = "0" + wert;
+		}
 		this[name] = wert;
 		if (document.getElementById(name) != null) {
 			document.getElementById(name).value = wert;
@@ -41,6 +44,7 @@ window.onload = function() {
 	if (document.getElementById("id").value == 0){
 		document.getElementById("Edittitle").innerHTML="Termin erstellen";
 	}
+	document.forms["editform"].elements["summary"].focus();
 }
 
 var datevalues = new Array("Year", "Month", "Day", "Hour", "Minute", "Second");
@@ -49,6 +53,10 @@ var dates = new Array("dtstamp", "created", "lastmod", "exdate");
 function updateEvent(){
 	setFormData();
 	document.getElementById("editaction").value="save";
+	var elem = document.forms["editform"].elements;
+	for (var i = 0; i < elem.length; i++){
+		elem[i].value = escape(elem[i].value);
+	}
 	document.getElementById("editform").submit();
 }
 
