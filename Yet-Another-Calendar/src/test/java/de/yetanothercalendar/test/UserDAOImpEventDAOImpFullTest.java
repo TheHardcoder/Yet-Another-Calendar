@@ -52,7 +52,9 @@ public class UserDAOImpEventDAOImpFullTest {
 			List<String> categories = new ArrayList<String>();
 			categories.add("adsfasd");
 			categories.add("fdfa");
-			Date exdate = sdf.parse("2012-01-06 10:45");
+			List<Date> exdate = new ArrayList<Date>(); 
+					exdate.add(sdf.parse("2012-01-06 10:45"));
+					exdate.add(sdf.parse("2012-01-08 11:45"));
 			String rdate = ("Test 2012-01-06 10:45");
 			// Erstellen Event 1 tstart auserhalb Auswahl Datum
 			if (event.createEvents(new Event(testUser, dtstamp, "12345",
