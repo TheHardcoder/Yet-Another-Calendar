@@ -156,7 +156,8 @@ public class UserDAOImpEventDAOImpFullTest {
 
 	@Test
 	public void testReturnUser() {
-
+	
+		
 		if (user.checkUser("zeller@yahoo.de", "test")) {
 			User testUser = user.returnUser("zeller@yahoo.de");
 			assertNotNull(testUser);
