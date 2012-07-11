@@ -73,14 +73,25 @@ public class EntryViewHelper extends ViewHelper {
 			boolean pExtended) {
 		Element rElement = new Element(pName);
 		if (pDate != null) {
-			String[] sDateStrings = prepareDateString(pDate.toString());
-			if (pExtended) {
-				rElement.setAttribute("day", sDateStrings[0]);
-				rElement.setAttribute("month", sDateStrings[1]);
-				rElement.setAttribute("year", sDateStrings[2]);
+			if (pDate.toString() == "") {
+				String[] sDateStrings = prepareDateString(pDate.toString());
+
+				if (pExtended) {
+					rElement.setAttribute("day", sDateStrings[0]);
+					rElement.setAttribute("month", sDateStrings[1]);
+					rElement.setAttribute("year", sDateStrings[2]);
+				}
+				rElement.setAttribute("hours", sDateStrings[3]);
+				rElement.setAttribute("minutes", sDateStrings[4]);
 			}
-			rElement.setAttribute("hours", sDateStrings[3]);
-			rElement.setAttribute("minutes", sDateStrings[4]);
+		} else { // Falls das Datum eine illegale formatierung besitzt
+			if (pExtended) {
+				rElement.setAttribute("day", "");
+				rElement.setAttribute("month", "");
+				rElement.setAttribute("year", "");
+			}
+			rElement.setAttribute("hours", "");
+			rElement.setAttribute("minutes", "");
 		}
 		return rElement;
 	}
