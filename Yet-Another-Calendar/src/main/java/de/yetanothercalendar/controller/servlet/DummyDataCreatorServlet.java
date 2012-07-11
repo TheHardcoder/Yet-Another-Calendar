@@ -88,7 +88,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 			Calendar end, String desc, String location) {
 		return new Event(new Long((int) (Math.random() * 100000)), user,
 				new Date(), "uuid", start.getTime(), created.getTime(), desc,
-				new Date(), location, "very high", "what a great summary",
+				new Date(), location, "high", "what a great summary",
 				"recurrid", null, end.getTime(), 0, "#fff",
 				new ArrayList<String>(), "comment", new ArrayList<Date>(), "");
 	}
