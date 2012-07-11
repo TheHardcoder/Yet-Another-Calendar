@@ -116,6 +116,7 @@ public class UploadICSServlet extends HttpServlet {
 			HttpServletResponse response) {
 		try {
 			response.setContentType("text/calendar");
+			response.setHeader("Content-Disposition", "attachment; filename=YAC.ics");
 			String lineseparator = System.getProperty("line.separator");
 			String s = "";
 			for (String string : icalvalues) {
