@@ -106,8 +106,7 @@ public class ICalendarExporter {
 		if (neitherNullnorEmpty(e.getExdateString())) {
 			eventString.add(e.getExdateString());
 		}
-	
-		String lineseparator = System.getProperty("line.separator");
+
 		if (neitherNullnorEmpty(e.getRrule())) {
 			eventString.add("RDATE:" + e.getRdate());
 		}
@@ -118,11 +117,11 @@ public class ICalendarExporter {
 		}
 		if (neitherNullnorEmpty(e.getPriority())) {
 			if (e.getPriority().equalsIgnoreCase("High")) {
-				eventString.add("PRIORITY:" + Priority.HIGH);
+				eventString.add(deleteLineFeed(Priority.HIGH.toString()));
 			} else if (e.getPriority().equalsIgnoreCase("Normal")) {
-				eventString.add("PRIORITY:" + Priority.MEDIUM);
+				eventString.add(deleteLineFeed(Priority.MEDIUM.toString()));
 			} else if (e.getPriority().equalsIgnoreCase("Low")) {
-				eventString.add("PRIORITY:" + Priority.LOW);
+				eventString.add(deleteLineFeed(Priority.LOW.toString()));
 			}
 		}
 		if (neitherNullnorEmpty(e.getLocation())) {
@@ -170,5 +169,22 @@ public class ICalendarExporter {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Deletes the lineseparator at the end of a String, if there is one
+	 * 
+	 * @param s
+	 *            Input String
+	 * @return String without the lineseparator at the End
+	 */
+	private String deleteLineFeed(String s) {
+		int lineSeperatorLength = System.getProperty("line.separator").length();
+		if ((s.length() >= lineSeperatorLength)
+				&& (s.substring(s.length() - lineSeperatorLength, s.length())
+						.equals(System.getProperty("line.separator")))) {
+			s = s.substring(0, s.length() - lineSeperatorLength);
+		}
+		return s;
 	}
 }
