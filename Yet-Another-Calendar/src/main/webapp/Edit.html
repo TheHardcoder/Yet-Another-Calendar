@@ -252,11 +252,21 @@
 							id="place" name="location" value=""></input>
 					</fieldset>
 					<fieldset>
-						<label for="priority">Priorität: </label> <select id="priority"
+						<label for="priority">Priorität: </label> 
+						<select id="priority"
 							name="priority" size="1">
 							<option value="low">Niedrig</option>
 							<option value="normal" selected="selected">Normal</option>
 							<option value="high">Hoch</option>
+						</select>
+						<label for="color">Farbe: </label> 
+						<select id="color" name="color" size="1">
+							<option selected="selected">Braun</option>
+							<option value="dd2200">Rot</option>
+							<option value="6495ed">Blau</option>
+							<option value="00bf00">Grün</option>
+							<option value="ffdf00">Gelb</option>
+							<option value="6f6f6f">Grau</option>
 						</select>
 					</fieldset>
 					<fieldset>
@@ -268,15 +278,10 @@
 							size="30" id="categories" name="categories" value=""></input>
 					</fieldset>
 					<fieldset>
-						<label for="color">Farbe: </label> <select id="color" name="color"
-							size="1">
-							<option selected="selected">Braun</option>
-							<option value="dd2200">Rot</option>
-							<option value="6495ed">Blau</option>
-							<option value="00bf00">Grün</option>
-							<option value="ffdf00">Gelb</option>
-							<option value="6f6f6f">Grau</option>
-						</select>
+						<label for="rrule">Wiederholungsregel: </label>
+						<input type="checkbox" id="rruleactive" value="" onclick="document.getElementById('rrule').disabled = !document.getElementById('rruleactive').checked"/>
+						 <input type="text" size="30"
+							id="rrule" name="rrule" value="" style="width: 226px;" disabled="disabled"></input>
 					</fieldset>
 					<fieldset>
 						<div id="editbutton">
