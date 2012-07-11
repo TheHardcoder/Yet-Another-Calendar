@@ -194,9 +194,9 @@
 						<xsl:apply-templates />
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
+						Impressum: &#160; Michael Müller &#160; 
 						Email:
-						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
+						<a href="mailto:yac@iteabag.org">yac@iteabag.org</a>
 						&#160; Mehr:
 						<a href="About.html">About</a>
 					</div>
@@ -318,7 +318,32 @@
 					select="month[@number=(-1+//calendar/@selectedmonth)]/week/day">
 					<xsl:if test="position() &gt; $daysbefore">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-							<div class="monthdaycontent othermonth">
+							<xsl:variable name="newentry">
+								<xsl:text>Edit.html?view=monthview</xsl:text>
+								<xsl:text>&amp;day=</xsl:text>
+								<xsl:choose>
+									<xsl:when test="@number &lt; 10">
+										<xsl:text>0</xsl:text>
+										<xsl:value-of select="@number"></xsl:value-of>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="@number"></xsl:value-of>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:text>&amp;month=</xsl:text>
+								<xsl:choose>
+									<xsl:when test="../../@number &lt; 10">
+										<xsl:text>0</xsl:text>
+										<xsl:value-of select="../../@number"></xsl:value-of>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="../../@number"></xsl:value-of>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:text>&amp;year=</xsl:text>
+								<xsl:value-of select="../../../@number"></xsl:value-of>
+							</xsl:variable>
+							<div class="monthdaycontent othermonth" ondblclick="window.location='{$newentry}';">
 								<div class="daynumber">
 									<xsl:value-of select="@number"></xsl:value-of>
 								</div>
@@ -330,7 +355,32 @@
 			</xsl:if>
 			<xsl:for-each select="month[@number=//calendar/@selectedmonth]/week/day">
 				<div class="monthday" style="width: {$width}; height: {$height};">
-					<div class="monthdaycontent">
+					<xsl:variable name="newentry">
+						<xsl:text>Edit.html?view=monthview</xsl:text>
+						<xsl:text>&amp;day=</xsl:text>
+						<xsl:choose>
+							<xsl:when test="@number &lt; 10">
+								<xsl:text>0</xsl:text>
+								<xsl:value-of select="@number"></xsl:value-of>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="@number"></xsl:value-of>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text>&amp;month=</xsl:text>
+						<xsl:choose>
+							<xsl:when test="../../@number &lt; 10">
+								<xsl:text>0</xsl:text>
+								<xsl:value-of select="../../@number"></xsl:value-of>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="../../@number"></xsl:value-of>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text>&amp;year=</xsl:text>
+						<xsl:value-of select="../../../@number"></xsl:value-of>
+					</xsl:variable>
+					<div class="monthdaycontent" ondblclick="window.location='{$newentry}';">
 						<xsl:if
 							test="@number - position() &gt; 15 or @number - position() &lt; -15">
 							<xsl:attribute name="class">monthdaycontent othermonth</xsl:attribute>
@@ -347,7 +397,32 @@
 					select="month[@number=(1+//calendar/@selectedmonth)]/week/day[@number &lt;= (7 - $poslast)]">
 					<xsl:if test="position() &lt;= (7 - $poslast)">
 						<div class="monthday" style="width: {$width}; height: {$height};">
-							<div class="monthdaycontent othermonth">
+							<xsl:variable name="newentry">
+								<xsl:text>Edit.html?view=monthview</xsl:text>
+								<xsl:text>&amp;day=</xsl:text>
+								<xsl:choose>
+									<xsl:when test="@number &lt; 10">
+										<xsl:text>0</xsl:text>
+										<xsl:value-of select="@number"></xsl:value-of>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="@number"></xsl:value-of>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:text>&amp;month=</xsl:text>
+								<xsl:choose>
+									<xsl:when test="../../@number &lt; 10">
+										<xsl:text>0</xsl:text>
+										<xsl:value-of select="../../@number"></xsl:value-of>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="../../@number"></xsl:value-of>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:text>&amp;year=</xsl:text>
+								<xsl:value-of select="../../../@number"></xsl:value-of>
+							</xsl:variable>
+							<div class="monthdaycontent othermonth" ondblclick="window.location='{$newentry}';">
 								<div class="daynumber">
 									<xsl:value-of select="@number"></xsl:value-of>
 								</div>

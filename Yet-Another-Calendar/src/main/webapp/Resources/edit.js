@@ -18,7 +18,7 @@ window.onload = function() {
 		wert = paar[1];
 		name = unescape(name).replace("+", " ");
 		wert = unescape(wert).replace("+", " ");
-		if ((name.search(/year.+/) || name.search(/month.+/) || name.search(/week.+/) || name.search(/day.+/)) && wert.length <= 1){
+		if ((name.search(/year/) >= 0 || name.search(/month/) >= 0 || name.search(/week/) >= 0 || name.search(/day/) >= 0) && wert.length <= 1){
 			wert = "0" + wert;
 		}
 		this[name] = wert;
