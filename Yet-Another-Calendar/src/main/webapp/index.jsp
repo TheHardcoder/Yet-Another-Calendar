@@ -39,17 +39,17 @@
 			</div>
 			<fieldset id="login">
 				<legend>Login</legend>
+				<%
+					if (pageContext.getErrorData().getStatusCode() == 401) {
+				%>
+				<div id="errorbox">
 					<%
-						if (pageContext.getErrorData().getStatusCode() == 401){
-							%>
-							<div id="errorbox">
-							<% 
-							out.println("<div>Ungültige Email-Adresse oder ungültiges Passwort.</div>");
-							%>
-							</div>
-							<%
-						}
+						out.println("<div>Ungültige Email-Adresse oder ungültiges Passwort.</div>");
 					%>
+				</div>
+				<%
+					}
+				%>
 				<div>
 					<label for="email" style="float: left;">Email: &nbsp;</label> <input
 						id="email" name="email" type="text" size="25" maxlength="25" />
@@ -60,18 +60,18 @@
 						maxlength="25" />
 				</div>
 				<div>
-					<a href="javascript:document.forms[0].submit();" class="button" style="width: 100px;text-decoration: none;">Login</a>
-					
+					<a href="javascript:document.forms[0].submit();" class="button"
+						style="width: 100px; text-decoration: none;">Login</a>
+
 				</div>
-				<input type="hidden" name="action" value="login" />
-				<a href="Register.html" id="registerlink">Noch nicht
-					registriert?</a>
+				<input type="hidden" name="action" value="login" /> <a
+					href="Register.html" id="registerlink">Noch nicht registriert?</a>
 			</fieldset>
 		</form>
 		<div id="footer">
-			Impressum: &nbsp; Michael M&uuml;ller &nbsp; Tel: 10932048091284
-			&nbsp; Email: <a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
-			&nbsp; Mehr: <a href="About.html">About</a>
+			Impressum: &#160; Michael Müller &#160; Email: <a
+				href="mailto:yac@iteabag.org">yac@iteabag.org</a> &#160; Mehr: <a
+				href="About.html">About</a>
 		</div>
 	</div>
 </body>

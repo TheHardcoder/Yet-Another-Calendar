@@ -194,9 +194,9 @@
 						<xsl:apply-templates />
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; Tel: 10932048091284 &#160;
+						Impressum: &#160; Michael Müller &#160; 
 						Email:
-						<a href="mailto:ofsdfjo@swfonm.net">ofsdfjo@swfonm.net</a>
+						<a href="mailto:yac@iteabag.org">yac@iteabag.org</a>
 						&#160; Mehr:
 						<a href="About.html">About</a>
 					</div>
