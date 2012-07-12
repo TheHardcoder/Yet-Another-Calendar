@@ -26,8 +26,8 @@ public class DatabaseConnectionManager {
 	 * Verbindungseinstellungen
 	 */
 	public DatabaseConnectionManager() {
-		username = "";
-		password = "";
+		username = "yac";
+		password = "yacyac";
 		host = "localhost";
 		dbname = "yetanothercalendar";
 		port = 3306;
