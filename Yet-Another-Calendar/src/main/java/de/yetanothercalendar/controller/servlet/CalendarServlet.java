@@ -33,7 +33,7 @@ public class CalendarServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		resp.setCharacterEncoding("utf-8");
-
+		resp.setContentType("application/xml");
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
 			Calendar calendar = new CalendarImpl(user);
