@@ -63,6 +63,12 @@
 					<include> simple.ics </include>
 				</includes>
 			</resource>
+			<resource>
+				<directory>${project.basedir}/sr/main/webapp/Resources</directory>
+				<includes>
+					<include> simple.ics </include>
+				</includes>
+			</resource>
 		</resources>
 		<plugins>
 			<plugin>
