@@ -27,8 +27,7 @@ public class DummyDataCreatorServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		DatabaseConnectionManager manager = new DatabaseConnectionManager("",
-				"", "localhost", 3306, "yetanothercalendar");
+		DatabaseConnectionManager manager = new DatabaseConnectionManager();
 		UserDAOImpl daoUser = new UserDAOImpl(manager);
 		daoUser.createUserTable();
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
