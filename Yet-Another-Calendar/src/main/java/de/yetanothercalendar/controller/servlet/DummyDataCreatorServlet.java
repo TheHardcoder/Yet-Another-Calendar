@@ -33,21 +33,21 @@ public class DummyDataCreatorServlet extends HttpServlet {
 		daoUser.createUserTable();
 		EventDAOImpl daoEvent = new EventDAOImpl(manager);
 		daoEvent.createEventTable();
-		User user = new User("test@test.de", "Vorname", "Nachname",
-				DigestUtils.shaHex("HashMe"));
-		user = daoUser.createUser(user);
+//		User user = new User("test@test.de", "Vorname", "Nachname",
+//				DigestUtils.shaHex("HashMe"));
+//		user = daoUser.createUser(user);
 
-		req.getSession().setAttribute("user", user);
-
-		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
-		calendarCreated.set(2012, 0, 3, 10, 0);
-		Calendar calendar = new GregorianCalendar(Locale.GERMANY);
-		calendar.set(2012, 0, 1, 12, 0);
-		Calendar calendar2 = new GregorianCalendar(Locale.GERMANY);
-		calendar2.set(2012, 0, 1, 14, 0);
-		Event createEvent = createEvent(user, calendarCreated, calendar,
-				calendar2, "Meeting", "DHBW");
-		daoEvent.createEvents(createEvent);
+//		req.getSession().setAttribute("user", user);
+//
+//		Calendar calendarCreated = new GregorianCalendar(Locale.GERMANY);
+//		calendarCreated.set(2012, 0, 3, 10, 0);
+//		Calendar calendar = new GregorianCalendar(Locale.GERMANY);
+//		calendar.set(2012, 0, 1, 12, 0);
+//		Calendar calendar2 = new GregorianCalendar(Locale.GERMANY);
+//		calendar2.set(2012, 0, 1, 14, 0);
+//		Event createEvent = createEvent(user, calendarCreated, calendar,
+//				calendar2, "Meeting", "DHBW");
+//		daoEvent.createEvents(createEvent);
 
 //		System.out.println("User logged in: " + user.toString());
 //		System.out.println("Events in der db:");
