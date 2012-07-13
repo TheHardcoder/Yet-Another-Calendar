@@ -73,7 +73,7 @@ public class EntryViewHelper extends ViewHelper {
 			boolean pExtended) {
 		Element rElement = new Element(pName);
 		if (pDate != null) {
-			if (pDate.toString() == "") {
+			if (pDate.toString() != "") {
 				String[] sDateStrings = prepareDateString(pDate.toString());
 
 				if (pExtended) {
