@@ -1,0 +1,13 @@
+de.yetanothercalendar.controller.servlet
+de.yetanothercalendar.helper
+de.yetanothercalendar.model
+de.yetanothercalendar.model.calendar
+de.yetanothercalendar.model.dao
+de.yetanothercalendar.model.dao.impl
+de.yetanothercalendar.model.database
+de.yetanothercalendar.model.database.helper
+de.yetanothercalendar.model.iCal
+de.yetanothercalendar.model.impl
+de.yetanothercalendar.model.view
+de.yetanothercalendar.model.view.helper
+de.yetanothercalendar.test
