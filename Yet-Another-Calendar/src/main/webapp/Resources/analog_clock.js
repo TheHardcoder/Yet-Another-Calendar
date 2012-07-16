@@ -19,6 +19,12 @@ function updateTime() {
     var mdegree = mins * 6;
     var mrotate = "rotate(" + mdegree + "deg)";
     
+    var elem = document.getElementById("arrow");
+    if (elem != null){
+    	elem.setAttribute("style", "top: " + (19.5 * date.getHours() + 10 + 18.5*date.getMinutes()/60) + "px;");
+    	elem.setAttribute("title", "Aktuelle Zeit: " + date.getHours() + ":" + ((date.getMinutes() < 10)?("0" + date.getMinutes()):date.getMinutes()) + " Uhr");
+    }
+    
     document.getElementById("cl_sec").setAttribute('style', "-moz-transform: " + srotate + "; -webkit-transform: " + srotate + "; -o-transform: " + srotate + "; -ms-transform: " + srotate + "; transform: " + srotate);
     document.getElementById("cl_hour").setAttribute('style', "-moz-transform: " + hrotate + "; -webkit-transform: " + hrotate + "; -o-transform: " + hrotate + "; -ms-transform: " + hrotate + "; transform: " + hrotate);
     document.getElementById("cl_min").setAttribute('style', "-moz-transform: " + mrotate + "; -webkit-transform: " + mrotate + "; -o-transform: " + mrotate + "; -ms-transform: " + mrotate + "; transform: " + mrotate);

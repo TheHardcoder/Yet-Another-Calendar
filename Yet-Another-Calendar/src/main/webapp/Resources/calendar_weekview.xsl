@@ -205,6 +205,7 @@
 								</xsl:call-template>
 							</div>
 							<div id="weekdays">
+							<div id="arrow" title="Aktuelle Zeit">I&gt;</div>
 								<xsl:apply-templates
 									select="year/month/week[@number=//calendar/@selectedweek]"></xsl:apply-templates>
 							</div>

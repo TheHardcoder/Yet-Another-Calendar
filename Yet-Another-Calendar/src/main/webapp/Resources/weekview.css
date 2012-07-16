@@ -33,6 +33,18 @@
 	display: block;
 }
 
+#arrow {
+	position: absolute;
+	top: 0px;
+	left: -5px;
+	color: #FF9000;
+	font-weight: bold;
+}
+
+#arrow:first-letter {
+	color: #FFD973;
+}
+
 .entrycontent {
 	margin: 3px;
 }
