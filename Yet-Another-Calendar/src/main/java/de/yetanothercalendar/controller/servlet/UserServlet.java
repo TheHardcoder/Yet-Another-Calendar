@@ -53,11 +53,7 @@ public class UserServlet extends HttpServlet {
 						hashPassword(password));
 				dao.createUser(user);
 				session.setAttribute("user", user);
-				resp.sendRedirect("calendarservlet?view=yearview&selectedyear="
-						+ c.get(Calendar.YEAR) + "&selectedmonth="
-						+ c.get(Calendar.MONTH) + "&selectedweek="
-						+ (c.get(Calendar.WEEK_OF_YEAR) + 1) + "&selectedday="
-						+ c.get(Calendar.DAY_OF_MONTH));
+				resp.sendRedirect("index.jsp");
 			} else {
 				// TODO Beim Fehlschlagen des Registrierens wäre ein Redirect
 				// auf die Registrierungsseite mit Parameter
