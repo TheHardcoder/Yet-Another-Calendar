@@ -71,7 +71,7 @@
 						<div class="button"
 							onclick="changeWeek('calendarservlet?view=weekview', false)">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilLinks_HP.png"></img>
+								src="Resources/Images/PfeilLinks_HP.png" alt="Woche zurueck"></img>
 							</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=weekview&amp;year=</xsl:text>
@@ -85,7 +85,7 @@
 						</xsl:variable>
 						<div class="button" onclick="window.location='{$newentry}'">
 						<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/neuerTermin_HP.png"></img>
+								src="Resources/Images/neuerTermin_HP.png" alt="Neuer Termin"></img>
 						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=weekview')">Heute</div>
 						<div class="menuitem">
@@ -148,15 +148,15 @@
 						</div>
 						<div class="button" onclick="showFileOpenDialog('weekview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/import-icon_HP.png"></img>
+								src="Resources/Images/import-icon_HP.png" alt="Datei importieren"></img>
 						</div>
 						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/export-icon_HP.png"></img>
+								src="Resources/Images/export-icon_HP.png" alt="Datei exportieren"></img>
 						</div>
 						<div class="button" onclick="changeWeek('calendarservlet?view=weekview', true)">
 						<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilRechts_HP.png"></img>
+								src="Resources/Images/PfeilRechts_HP.png" alt="Woche vorwaerts"></img>
 						</div>
 					</div>
 					<div id="calendar">
