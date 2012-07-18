@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
@@ -194,7 +194,7 @@
 						<xsl:apply-templates />
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; 
+						Impressum: &#160; Michael MÃ¼ller &#160; 
 						Email:
 						<a href="mailto:yac@iteabag.org">yac@iteabag.org</a>
 						&#160; Mehr:
