@@ -39,6 +39,7 @@
 	left: -5px;
 	color: #FF9000;
 	font-weight: bold;
+	z-index: 5;
 }
 
 #arrow:first-letter {
