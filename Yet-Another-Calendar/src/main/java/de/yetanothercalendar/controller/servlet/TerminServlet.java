@@ -72,6 +72,7 @@ public class TerminServlet extends HttpServlet {
 		String rrule = req.getParameter("rrule");
 		rrule = rrule.replace("%3B", ";");
 		rrule = rrule.replace("%3D", "=");
+		rrule = rrule.replace("%2C", ",");
 
 		Date lastmod = getDateParameterValue("lastmod", req);
 		Date dtstart = getDateParameterValue("dtstart", req);
