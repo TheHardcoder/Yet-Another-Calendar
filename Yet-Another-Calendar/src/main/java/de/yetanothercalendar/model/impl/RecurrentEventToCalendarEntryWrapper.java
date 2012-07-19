@@ -95,7 +95,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 			ve.getProperties().add(
 					new net.fortuna.ical4j.model.property.RRule(recur));
 
-			if (event.getRecurid() != "") {
+			if (event.getRecurid() != null && event.getRecurid() != "") {
 				ve.getProperties().add(new RecurrenceId(event.getRecurid()));
 			}
 			
@@ -104,7 +104,7 @@ public class RecurrentEventToCalendarEntryWrapper {
 				ve.getProperties().add(new ExDate(dList));
 			}
 
-			DateList rdates = new DateList(event.getRdate(), null);
+			DateList rdates = new DateList(event.getRdate()==null? "" : event.getRdate(), null);
 			ve.getProperties().add(new RDate(rdates));
 
 			// calculate an end Date, if Duration Attribute is set to create a
