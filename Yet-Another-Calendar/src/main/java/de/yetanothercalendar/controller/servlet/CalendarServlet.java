@@ -63,8 +63,7 @@ public class CalendarServlet extends HttpServlet {
 					if (selectedYear != null & selectedMonth != null) {
 						int year = Integer.parseInt(selectedYear);
 						int month = Integer.parseInt(selectedMonth);
-						Year entriesByMonth = calendar.getEntriesByMonth(year,
-								month);
+						Year entriesByMonth = calendar.getEntriesByYear(year);
 						MonthView monthview = new MonthView(entriesByMonth,
 								selectedYear, selectedMonth, selectedWeek,
 								selectedDay);
@@ -77,8 +76,7 @@ public class CalendarServlet extends HttpServlet {
 					if (selectedYear != null & selectedWeek != null) {
 						int year = Integer.parseInt(selectedYear);
 						int week = Integer.parseInt(selectedWeek);
-						Year entriesByYear = calendar.getEntriesByWeek(year,
-								week);
+						Year entriesByYear = calendar.getEntriesByYear(year);
 						WeekView weekview = new WeekView(entriesByYear,
 								selectedYear, selectedMonth, selectedWeek,
 								selectedDay);

@@ -1,12 +1,18 @@
 package de.yetanothercalendar.model.view.helper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.SimpleTimeZone;
+import java.util.TimeZone;
 
 import org.jdom.Element;
 
 import de.yetanothercalendar.model.calendar.CalendarEntry;
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class EntryViewHelper extends ViewHelper {
 
@@ -74,7 +80,7 @@ public class EntryViewHelper extends ViewHelper {
 		Element rElement = new Element(pName);
 		if (pDate != null) {
 			if (pDate.toString() != "") {
-				String[] sDateStrings = prepareDateString(pDate.toString());
+				String[] sDateStrings = prepareDateString(pDate);
 
 				if (pExtended) {
 					rElement.setAttribute("day", sDateStrings[0]);
@@ -127,18 +133,16 @@ public class EntryViewHelper extends ViewHelper {
 	 *            ein Date-Objekt zurückgegeben wird
 	 * @return - Die zersplittete Zeichenkette in einem Array vom Typ String
 	 */
-	private String[] prepareDateString(String dateString) {
-		String[] dateStrings = dateString.split(" ");
-		if(dateStrings.length <= 3)
-			return new String[]{"","","","","",""};
-		String[] timeStrings = dateStrings[3].split(":");
-		dateStrings[0] = dateStrings[2]; // Tage
+	private String[] prepareDateString(Date date) {
+		String[] dateStrings = new String[5];
+		Calendar c = GregorianCalendar.getInstance();
+		c.setTime(date);
+		dateStrings[0] = "" + c.get(Calendar.DAY_OF_MONTH); // Tage
 		// Konvertierung von Monatsnamen zu der dazugehörigen Monatszahl
-		dateStrings[1] = MonthNumbers.valueOf(dateStrings[1]).monthNumber;
-		dateStrings[2] = dateStrings[5]; // Jahr
-		dateStrings[3] = timeStrings[0]; // Stunden
-		dateStrings[4] = timeStrings[1]; // Minuten
-		dateStrings[5] = dateString; // ursprünglicher String - not used
+		dateStrings[1] = "" + c.get(Calendar.MONTH);
+		dateStrings[2] = "" + c.get(Calendar.YEAR); // Jahr
+		dateStrings[3] = "" + (c.get(Calendar.HOUR_OF_DAY) < 10 ? "0" + c.get(Calendar.HOUR_OF_DAY) : c.get(Calendar.HOUR_OF_DAY)); // Stunden
+		dateStrings[4] = "" + (c.get(Calendar.MINUTE) < 10 ? "0" + c.get(Calendar.MINUTE) : c.get(Calendar.MINUTE)); // Minuten
 		return dateStrings;
 	}
 }
