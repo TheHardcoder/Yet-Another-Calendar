@@ -129,6 +129,8 @@ public class EntryViewHelper extends ViewHelper {
 	 */
 	private String[] prepareDateString(String dateString) {
 		String[] dateStrings = dateString.split(" ");
+		if(dateStrings.length <= 3)
+			return new String[]{"","","","","",""};
 		String[] timeStrings = dateStrings[3].split(":");
 		dateStrings[0] = dateStrings[2]; // Tage
 		// Konvertierung von Monatsnamen zu der dazugehörigen Monatszahl
