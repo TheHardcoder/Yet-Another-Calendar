@@ -55,9 +55,9 @@
 
 		<xsl:text>&amp;comment=</xsl:text>
 		<xsl:value-of select="comment" />
-		
+
 		<xsl:text>&amp;rrule=</xsl:text>
-		<xsl:value-of select="rRule" />
+		<xsl:value-of select="translate(rRule, '=', 'g')" />
 	</xsl:template>
-	
+
 </xsl:stylesheet>
