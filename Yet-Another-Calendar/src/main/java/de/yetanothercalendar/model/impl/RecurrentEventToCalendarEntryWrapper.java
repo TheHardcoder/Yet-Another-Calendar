@@ -126,7 +126,6 @@ public class RecurrentEventToCalendarEntryWrapper {
 				// Start and Enddate get set
 				// otherwise it would always the same pointer
 				event = event.getCopy();
-				event.setRrule("");
 				event.setDtstart(per.getStart());
 				event.setDtend(per.getEnd());
 				events.add(event);
