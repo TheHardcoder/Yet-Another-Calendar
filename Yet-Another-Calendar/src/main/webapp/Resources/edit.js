@@ -23,6 +23,9 @@ window.onload = function() {
 		}
 		this[name] = wert;
 		if (document.getElementById(name) != null) {
+			if(name == "rrule") {
+				wert = wert.replace(/g/g, "=");
+			}
 			document.getElementById(name).value = wert;
 		}
 		if (name == 'year'){

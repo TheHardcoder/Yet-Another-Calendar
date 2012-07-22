@@ -74,9 +74,9 @@ public class UserServlet extends HttpServlet {
 					resp.sendRedirect("calendarservlet?view=yearview&selectedyear="
 							+ c.get(Calendar.YEAR)
 							+ "&selectedmonth="
-							+ c.get(Calendar.MONTH)
+							+ (c.get(Calendar.MONTH) + 1)
 							+ "&selectedweek="
-							+ (c.get(Calendar.WEEK_OF_YEAR) + 1)
+							+ c.get(Calendar.WEEK_OF_YEAR)
 							+ "&selectedday=" + c.get(Calendar.DAY_OF_MONTH));
 				} else {
 					resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,

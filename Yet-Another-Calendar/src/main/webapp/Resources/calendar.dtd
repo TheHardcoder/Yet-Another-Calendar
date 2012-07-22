@@ -3,7 +3,7 @@
 <!ELEMENT month (week)+>
 <!ELEMENT week (day)+>
 <!ELEMENT day (entry)*>
-<!ELEMENT entry (summary, starttime, endtime, duration, location, description, created, modified, comment, categories)>
+<!ELEMENT entry (summary, starttime, endtime, duration, startdate, enddate, location, description, created, modified, comment, categories, rRule)>
 <!ELEMENT summary (#PCDATA)>
 <!ELEMENT starttime (#PCDATA)>
 <!ELEMENT endtime (#PCDATA)>
@@ -21,9 +21,11 @@
 <!ATTLIST month number NMTOKEN #REQUIRED name NMTOKEN #REQUIRED>
 <!ATTLIST week number NMTOKEN #REQUIRED>
 <!ATTLIST day number NMTOKEN #REQUIRED name NMTOKEN #REQUIRED columns NMTOKEN #IMPLIED>
-<!ATTLIST entry id NMTOKEN #REQUIRED priority NMTOKEN #IMPLIED color CDATA #IMPLIED daycount NMTOKEN #IMPLIED column NMTOKEN #IMPLIED>
+<!ATTLIST entry id NMTOKEN #REQUIRED priority NMTOKEN #IMPLIED color CDATA #IMPLIED column NMTOKEN #IMPLIED>
 <!ATTLIST starttime hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
 <!ATTLIST endtime hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
 <!ATTLIST duration hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
 <!ATTLIST created day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
 <!ATTLIST modified day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST startdate day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>
+<!ATTLIST enddate day NMTOKEN #REQUIRED month NMTOKEN #REQUIRED year NMTOKEN #REQUIRED hours NMTOKEN #REQUIRED minutes NMTOKEN #REQUIRED>

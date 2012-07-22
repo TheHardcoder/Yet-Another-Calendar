@@ -52,7 +52,7 @@ public class UploadICSServlet extends HttpServlet {
 				boolean isMultipartContent = ServletFileUpload
 						.isMultipartContent(request);
 				if (!isMultipartContent) {
-					throw new RuntimeException("DAs ist kein file upload");
+					throw new RuntimeException("Das ist kein file upload");
 				}
 				FileItemFactory factory = new DiskFileItemFactory();
 				ServletFileUpload upload = new ServletFileUpload(factory);

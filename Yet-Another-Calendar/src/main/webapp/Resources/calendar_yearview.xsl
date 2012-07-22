@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
 		doctype-public="-//W3C//DTD XHTML 1.1//EN" doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" />
 
+	<xsl:include href="Basic.xsl" />
 
 	<xsl:template match="/calendar">
 		<html xmlns="http://www.w3.org/1999/xhtml">
@@ -90,8 +91,8 @@
 					</xsl:variable>
 					<div id="menubar">
 						<div class="button" onclick="window.location='{$calendarback}'">
-						<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilLinks_HP.png"></img>
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilLinks_HP.png" alt="Jahr zurueck"></img>
 						</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=weekview&amp;year=</xsl:text>
@@ -104,8 +105,8 @@
 							<xsl:value-of select="@selectedday"></xsl:value-of>
 						</xsl:variable>
 						<div class="button" onclick="window.location='{$newentry}'">
-						<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/neuerTermin_HP.png"></img>
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/neuerTermin_HP.png"  alt="Neuer Termin"></img>
 						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=yearview')">Heute</div>
 						<div class="menuitem">
@@ -166,17 +167,18 @@
 								</div>
 							</form>
 						</div>
-						<div class="button" onclick="showFileOpenDialog('yearview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
+						<div class="button"
+							onclick="showFileOpenDialog('yearview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/import-icon_HP.png"></img>
+								src="Resources/Images/import-icon_HP.png"  alt="Datei importieren"></img>
 						</div>
 						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/export-icon_HP.png"></img>
+								src="Resources/Images/export-icon_HP.png"  alt="Datei exportieren"></img>
 						</div>
 						<div class="button" onclick="window.location='{$calendarforward}'">
-						<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilRechts_HP.png"></img>
+							<img width="32px" height="32px" style="margin-top: -5px;"
+								src="Resources/Images/PfeilRechts_HP.png" alt="Jahr vorwaerts"></img>
 						</div>
 					</div>
 					<div id="calendar">
@@ -211,7 +213,7 @@
 						<xsl:apply-templates />
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; 
+						Impressum: &#160; Michael MÃ¼ller &#160;
 						Email:
 						<a href="mailto:yac@iteabag.org">yac@iteabag.org</a>
 						&#160; Mehr:
@@ -242,8 +244,7 @@
 		<xsl:if
 			test="not(position() &lt;= 15 and @number &gt; 15 and ../../@number = 1) and not(position() &gt;= 15 and @number &lt; 15 and ../../@number = 12)">
 			<div class="day">
-				<xsl:variable name="curd" select="@number">
-				</xsl:variable>
+				<xsl:variable name="curday" select="@number"></xsl:variable>
 				<xsl:variable name="newentry">
 					<xsl:text>Edit.html?view=yearview</xsl:text>
 					<xsl:text>&amp;day=</xsl:text>
@@ -270,7 +271,7 @@
 					<xsl:value-of select="../../../@number"></xsl:value-of>
 				</xsl:variable>
 				<div class="daylabel" ondblclick="window.location='{$newentry}'; return false;">
-					<xsl:value-of select="$curd" />
+					<xsl:value-of select="$curday" />
 					<xsl:text> </xsl:text>
 					<xsl:value-of select="@name" />
 				</div>

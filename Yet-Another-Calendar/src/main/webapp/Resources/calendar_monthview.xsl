@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 	<xsl:output method="xml" encoding="utf-8" indent="yes"
@@ -71,7 +71,7 @@
 						<div class="button"
 							onclick="changeMonth('calendarservlet?view=monthview', false)">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilLinks_HP.png"></img>
+								src="Resources/Images/PfeilLinks_HP.png" alt="Monat zurueck"></img>
 						</div>
 						<xsl:variable name="newentry">
 							<xsl:text>Edit.html?view=monthview&amp;year=</xsl:text>
@@ -85,7 +85,7 @@
 						</xsl:variable>
 						<div class="button" onclick="window.location='{$newentry}'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/neuerTermin_HP.png"></img>
+								src="Resources/Images/neuerTermin_HP.png" alt="Neuer Termin"></img>
 						</div>
 						<div class="button" onclick="goToToday('calendarservlet?view=monthview')">Heute</div>
 						<div class="menuitem">
@@ -149,16 +149,16 @@
 						<div class="button"
 							onclick="showFileOpenDialog('monthview', {@selectedyear}, {@selectedmonth}, {@selectedweek}, {@selectedday});">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/import-icon_HP.png"></img>
+								src="Resources/Images/import-icon_HP.png" alt="Datei importieren"></img>
 						</div>
 						<div class="button" onclick="window.location='import?action=export'">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/export-icon_HP.png"></img>
+								src="Resources/Images/export-icon_HP.png" alt="Datei exportieren"></img>
 						</div>
 						<div class="button"
 							onclick="changeMonth('calendarservlet?view=monthview', true)">
 							<img width="32px" height="32px" style="margin-top: -5px;"
-								src="Resources/Images/PfeilRechts_HP.png"></img>
+								src="Resources/Images/PfeilRechts_HP.png" alt="Monat vorwaerts"></img>
 						</div>
 					</div>
 					<div id="calendar">
@@ -194,7 +194,7 @@
 						<xsl:apply-templates />
 					</div>
 					<div id="footer">
-						Impressum: &#160; Michael Müller &#160; 
+						Impressum: &#160; Michael MÃ¼ller &#160; 
 						Email:
 						<a href="mailto:yac@iteabag.org">yac@iteabag.org</a>
 						&#160; Mehr:
