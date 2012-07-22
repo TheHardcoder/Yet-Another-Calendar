@@ -17,7 +17,7 @@
 		<xsl:text>&amp;year=</xsl:text>
 		<xsl:value-of select="startdate/@year" />
 		<xsl:text>&amp;month=</xsl:text>
-		<xsl:value-of select="startdate/@month" />
+		<xsl:value-of select="startdate/@month + 1" />
 		<xsl:text>&amp;day=</xsl:text>
 		<xsl:value-of select="startdate/@day" />
 		<xsl:text>&amp;starttimehours=</xsl:text>
@@ -28,7 +28,7 @@
 		<xsl:text>&amp;endyear=</xsl:text>
 		<xsl:value-of select="enddate/@year" />
 		<xsl:text>&amp;endmonth=</xsl:text>
-		<xsl:value-of select="enddate/@month" />
+		<xsl:value-of select="enddate/@month + 1" />
 		<xsl:text>&amp;endday=</xsl:text>
 		<xsl:value-of select="enddate/@day" />
 		<xsl:text>&amp;endtimehours=</xsl:text>
@@ -40,7 +40,10 @@
 		<xsl:text>&amp;description=</xsl:text>
 		<xsl:value-of select="description" />
 		<xsl:text>&amp;categories=</xsl:text>
-		<xsl:apply-templates select="categories/category"></xsl:apply-templates>
+		<xsl:for-each select="categories/category">
+        	<xsl:value-of select="."/>
+        	<xsl:if test="not(position() = last())">,</xsl:if>
+      	</xsl:for-each>
 
 		<xsl:text>&amp;createdYear=</xsl:text>
 		<xsl:value-of select="created/@year" />

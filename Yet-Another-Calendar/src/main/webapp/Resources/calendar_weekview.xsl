@@ -406,11 +406,6 @@
 		</div>
 	</xsl:template>
 
-	<xsl:template match="category">
-		<xsl:apply-templates></xsl:apply-templates>
-		<xsl:text>, </xsl:text>
-	</xsl:template>
-
 	<xsl:template name="selects">
 		<xsl:param name="i" />
 		<xsl:param name="count" />
